@@ -1,4 +1,4 @@
-# ErxesSDK
+# erxes-ios-sdk
 
 [![CI Status](https://img.shields.io/travis/devpurevee/ErxesSDK.svg?style=flat)](https://travis-ci.org/devpurevee/ErxesSDK)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
@@ -13,17 +13,17 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-ErxesSDK is available through [CocoaPods](https://cocoapods.org). To install
+Erxes ios sdk is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ErxesSDK'
+pod 'erxes-ios-sdk'
 ```
 
 ## Author
 
-devpurevee, puujeedevdev@gmail.com
+erxes, info@erxes.io
 
 ## License
 
-ErxesSDK is available under the MIT license. See the LICENSE file for more info.
+erxes-ios-sdk is available under the MIT license. See the LICENSE file for more info.
