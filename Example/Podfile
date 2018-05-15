@@ -5,7 +5,6 @@ target 'ErxesSDK_Example' do
 
   target 'ErxesSDK_Tests' do
     inherit! :search_paths
-
     
   end
 end
