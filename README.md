@@ -18,10 +18,9 @@ pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
 ```
 
 ```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-Erxes.setBrandCode(brandCode: "YDEdKj")
-return true
-}
+Erxes.startWithUserEmail(email: "tester@test.com")
+or
+Erxes.start()
 ```
 
 ## Author
