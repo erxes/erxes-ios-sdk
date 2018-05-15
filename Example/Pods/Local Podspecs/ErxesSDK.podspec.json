@@ -1,0 +1,38 @@
+{
+  "name": "ErxesSDK",
+  "version": "0.1.0",
+  "summary": "A short description of ErxesSDK.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/devpurevee/ErxesSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "devpurevee": "puujeedevdev@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/devpurevee/ErxesSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "ErxesSDK/Classes/**/*",
+  "resource_bundles": {
+    "ErxesSDK": [
+      "ErxesSDK/Assets/*.{jpg,storyboard,png,ttf}"
+    ]
+  },
+  "dependencies": {
+    "Apollo": [
+      "~> 0.7.0"
+    ],
+    "SwiftyJSON": [
+      "~> 4.0.0"
+    ],
+    "LiveGQL": [
+      "~> 2.0.0"
+    ]
+  }
+}

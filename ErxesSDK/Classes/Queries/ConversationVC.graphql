@@ -1,0 +1,5 @@
+query Conversations($integrationId: String!, $customerId: String!) {
+    conversations(integrationId: $integrationId, customerId: $customerId) {
+        ...ConversationDetail
+    }
+}

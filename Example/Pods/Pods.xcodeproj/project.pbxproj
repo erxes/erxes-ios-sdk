@@ -1,0 +1,1914 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00B004271A3540F4A7497B083C7BEC43 /* ApolloStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393512BBD3CD8BDCD5F4EB395F67D2D8 /* ApolloStore.swift */; };
+		097083C009DC181784C062222020113F /* ResultOrPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81850118C0CE92D2B25B50EBE7A9E724 /* ResultOrPromise.swift */; };
+		0A66CFB9E97648610DE5248956A0DE0A /* ConversationVC.graphql in Sources */ = {isa = PBXBuildFile; fileRef = F58C1A8173EEC51E6BF5CB9287E64A6D /* ConversationVC.graphql */; };
+		0EDD0DF5FD76F7DAB05C1407917C2E1C /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6596A8895D539D06A24772C29C947456 /* SocketRocket-dummy.m */; };
+		0F55F645986549CC71562CA5F99351EB /* JSONSerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3ABC41DB6BF59C3582AFCE7A4018D18 /* JSONSerializationFormat.swift */; };
+		13B729BA74ABB71E69601AA3BBD6ADB2 /* LiveGQL-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AE1EA9CC3C57E7BAAB70F74C5D5690C /* LiveGQL-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		13D6F5E5618E95CC56D2009A1563E3C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		17298668FE5A325ACCC1BFE69279B8A8 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CF2946FE6575EF49839098CAB2146 /* avatar.png */; };
+		1953C50A215B3DDF6E3D2FF9FF0067A2 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16A383BAFD4417EE03E2197EF7C59E9 /* SwiftyJSON.swift */; };
+		19DCFFA2F0E93DD4F6B7FABA7A3AD9EA /* LiveGQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FF5A9E52246BE6A91D3913CC3B380C /* LiveGQL.framework */; };
+		1BB87AE935320FA10F49D5B405711383 /* LiveGQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8FEFDBC5F498D53D196ED7A25A5B6F /* LiveGQL.swift */; };
+		20E38E32A7DB892F88BC1421D4D6A03B /* GraphQLResponseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD02094B58E34690D682F9F337A706 /* GraphQLResponseGenerator.swift */; };
+		21710DE99D5491E39F8E0272D952FA16 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29014BA1929CA7137B412935CD9270B /* JSONHelper.swift */; };
+		232167849FB996B827F9473CE4495C1F /* ChatViewController.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 560ABE246DDC780C93189D5ED5550A2C /* ChatViewController.graphql */; };
+		24A0A688E5F0450FE1460E1830109EEB /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965BF6B9CFEE40EAED2FE5565A002803 /* DataLoader.swift */; };
+		2801AD97D8CF9F1FA4322C44917F4E9D /* ErxesSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8F34584ED6674D507B616CAA86EB411 /* ErxesSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2B7EB9B876C78CCD31F5AA733B60BA3B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EBAFF62475A482BAA3DB1FEA4B0728 /* Constants.swift */; };
+		2D1377F64EC27D44D821A9EF34EE862D /* GraphQLInputValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D324F3EF41F6C019C890E18B8C5D46 /* GraphQLInputValue.swift */; };
+		2D26043A1A95FE52D99B921BB46EA050 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		3334363611D795C848F8E771DDB1A1A5 /* GraphQLExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD32FA53B6707180BD3344700254968 /* GraphQLExecutor.swift */; };
+		34D574F4EBB018E313DB882FE584F86B /* PayloadMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBF757BA2B8B8889B623F80CF30B630 /* PayloadMessages.swift */; };
+		3945A29814E4B1E9C9A2DD1DE72522D4 /* JSONStandardTypeConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470970B60088FB7401C2E7BEAE6993AF /* JSONStandardTypeConversions.swift */; };
+		3B231E63A4AEC59C39C2C638C06B07CB /* ViewController.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 503271904F2135B9814FDE61F5156B21 /* ViewController.graphql */; };
+		3C7486C088BC221EA5E88192BA316DD4 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863196977A30A5066FA5FF282A42F36 /* GraphQLError.swift */; };
+		3FB11A9708614E901C97167958276AFC /* RecordSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C189EE5FAA977B1F493E5B05BFCBD30B /* RecordSet.swift */; };
+		41857BFD48AE608EB3555D97A4AF99A7 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D1AAC5DF8BF68C1D0608B70735618D61 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45567CF12FE4EE67842F4AB8B41C9138 /* NormalizedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103E75ECE7BB550A1BAD2200BB59F383 /* NormalizedCache.swift */; };
+		47AC0559B014EAA414214010F97BA4C6 /* GraphQLResultNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A70694C320041651DB686A50D0F13A /* GraphQLResultNormalizer.swift */; };
+		4816D84F99C335BD69510B3CBCB3BC06 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090A8EB117418F605ADD744E7AC399B1 /* JSON.swift */; };
+		48911AC3DD4B7418DF25770E32D42D6C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DF1F635339DF4BB739DE3C80631BF5 /* Utils.swift */; };
+		4A0EB5814435E932DC7DA439514950AB /* GraphQLSelectionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4292827349561D0335FD8741F620A33F /* GraphQLSelectionSet.swift */; };
+		4CFF32C9D5E00BD57FFFD66749D015B7 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30AEF6EA4CA4C5F77E2356F777E37B20 /* SwiftyJSON.framework */; };
+		51FD098E1100626DA2E2FB10E8628DEF /* erxes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 146CEB41184F171A292C55AF1561A665 /* erxes.jpg */; };
+		52136562E6B89417EF68F1337C94633A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CAF43851594AF2BE84C5E26C7FF820 /* Security.framework */; };
+		523EE2A1B005B8E6D51AA7FBA65EB4C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		610F600643A7EFADCCA2EA17FF9CAC3E /* RegisterVC.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 7D6659F0004C66430E87444726EF726A /* RegisterVC.graphql */; };
+		6472BDD504B3883BAAEC5F24E7027DA4 /* NetworkTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C776951A7F4397C060CDCD770E1533 /* NetworkTransport.swift */; };
+		67DE6074FE6B2720A07E938BFE062259 /* ErxesSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 756D0FF61D58C02E8579C97B4562A197 /* ErxesSDK-dummy.m */; };
+		683B4A38E91229A79781A0E759596603 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE4EAAC45201F1D63F421B0D2DA0B02 /* Apollo.framework */; };
+		685BE1522AA147E08E5BF3B8EA4BA771 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		69C6A08FE46B8ECC10C4F538A249EF79 /* Apollo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 09B569AA34296ED6E9057DF04A71F55A /* Apollo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BB1817B430C72BBE099D23B39CECE0D /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9931A63252C9B97F8DBD194D5F68F454 /* Record.swift */; };
+		6DB1B3C86D07ACD1237F55ED964C32D6 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB4F1CA6BA6BF2B1411B94C0E822A7 /* Promise.swift */; };
+		852AE1AE9762452D89E501B86806C3AB /* GraphQLResultAccumulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8101CFA650115702F3372D2EC2B941 /* GraphQLResultAccumulator.swift */; };
+		854AF80F5192170ADCCB069E6259FEEE /* GraphQLDependencyTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7074E9391108C61161AFE349C5550155 /* GraphQLDependencyTracker.swift */; };
+		87EE927D5EF8C81D260752B8E884E31B /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0391469AA59FEB573DCDBC9378245E62 /* ViewExtension.swift */; };
+		8BCC46513958FD53CE2B58908A878CB6 /* Locking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD7C6CF3E558CEF9FFA4483C1A722AF /* Locking.swift */; };
+		8C24337BEC1FECAAD6875ED27B57E9C1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61E379BE601F3AB8E08523406568D69 /* RegisterVC.swift */; };
+		9063EBC8F0041F29BC678DB6F6ED9000 /* Pods-ErxesSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A5884AF099FBE9BE1A79562219CCBC7E /* Pods-ErxesSDK_Example-dummy.m */; };
+		9082CA5D3EE9F3A514FE96C1DE70BB6C /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B47968C287810F1BFD5047B861BA1BA /* ConversationVC.swift */; };
+		9310969CDB65FF54249868E0E7765DD8 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 876A32A09131599A5BD5CE40908888E3 /* SocketRocket.framework */; };
+		9C9908801A8A59CDEBA9BF5F3A734B53 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7563179EDB28DA12D72270726C6356D /* CFNetwork.framework */; };
+		9E4F23BFA9B082F66DDE6CBF826350B4 /* ApolloClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DFD64A9DB7F0AA8176AAE4E20640B /* ApolloClient.swift */; };
+		9F49CE13A71C3E9806C1884E9E5EBE7F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF35AC87DC14477064BAB8709CD8F0 /* Result.swift */; };
+		A7F758E72285085E768B3196D47984A1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9284FC75658F8E40766B58E57EE8B /* AsynchronousOperation.swift */; };
+		B01E8A1EF876CD7778C2F99958E18889 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D824423AF71D10F70508BC3261117124 /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1E537611E9E400555866EE3CCE839CF /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37B35B03973E6B4FF80A1500D7CD303 /* ChatVC.swift */; };
+		B7EF762FF3731C4DCFEB4D2191CE557F /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC9BE3B8BBF3DBF41A60C43950E05B6 /* GraphQLResult.swift */; };
+		BA316C9B491B5BB21935838C81979007 /* Erxes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5001D084A399A61621E1F03DEB9B9D57 /* Erxes.storyboard */; };
+		BC1C82D8C94A6C209D100AC3AA449D38 /* GraphQLQueryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E3422EA584E58D523CDF856EA5B2D /* GraphQLQueryWatcher.swift */; };
+		BC29C2B0DC8755CF00E12C7C4AFBF695 /* check-and-run-apollo-codegen.sh in Resources */ = {isa = PBXBuildFile; fileRef = 1FB0BB2F5011CD3EB5F6768B5DEB7B66 /* check-and-run-apollo-codegen.sh */; };
+		C2309D01A3D237536CC3C74B1A36592F /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C30BA39EB6CCAA3B6C21A1CD370B423 /* GraphQLOperation.swift */; };
+		C33254D9FB9B4E679B2D778FE1BE0196 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 876A32A09131599A5BD5CE40908888E3 /* SocketRocket.framework */; };
+		C5A0C07491F9D94C99DE288D0159AB65 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128A8C3549D2B1570F557F62042A935E /* Collections.swift */; };
+		C696639B00BA085488BAF6BAC6D93BFA /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE758D05C69FA797F1EABCFE6277DCE /* Router.swift */; };
+		C7386CA0B7A4E7F8D3D58EBCBCCC78F2 /* GraphQLSelectionSetMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2D711812B9EE1019368219C3D7EE6 /* GraphQLSelectionSetMapper.swift */; };
+		C7B1CB3A575B874EA30378FCB55BB8DA /* Erxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E6168DE9E8882F963E41536391F94 /* Erxes.swift */; };
+		CF8DB86A8A45E2B8BA884FBFCA9D0D4C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		D066A410387CD904D2FC3E3F10FFEBA4 /* GraphQLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085399CF903FDF568C5F1352D3FFF3C2 /* GraphQLResponse.swift */; };
+		D29C59C4A893B250B3D238EEACFD05C6 /* Pods-ErxesSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CCD564D9698F8AB1AE1EEEF3BF6F0CFA /* Pods-ErxesSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D321AC15EF86060436BEA06A45C05590 /* Pods-ErxesSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */; };
+		D5A2588B5EEF1DABDE731AA89900EBBE /* SocketRocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F33429DE802F48372E422A3851DBEAA0 /* SocketRocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5C10AC2F8F2E57DADF31A02BB77D9E0 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D5621CA7F4D6A1945F8AE7332EC2E47C /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6619560A2A14BDF03BA4B6BE0A412B9 /* Pods-ErxesSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DAA83716BF7D10336995E2C130B47E1D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F1946BFEB14B41EEC65B57C2ED4F5 /* API.swift */; };
+		DB5EFB12F094F305290621BCDB541DD6 /* MessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C17CACA936B0CC38B1D4860C3DF981 /* MessageTypes.swift */; };
+		E23228102A48A7DD74631FACBE6D3A43 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8E2E5220DD7396BA363D0294978BFC9 /* fontello.ttf */; };
+		E5949F0C4BB0DB1C3D66F2B59E2C227C /* InMemoryNormalizedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F6ABED76EEB23919A8714AED52A19B /* InMemoryNormalizedCache.swift */; };
+		E6BC8F4160138CCB1FC1613A018AC319 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DCB95CFDDAF37551D5801EBB01C653 /* SwiftyJSON-dummy.m */; };
+		E7C52ED5F39B4EFA709D0F4927E6D2AB /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D03EE10CAC2D2B4FBE27CEB62AD70540 /* SRWebSocket.m */; };
+		EB31F7C05E4247DB1FAB104A815E7BCC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3725C903BCBB1821FCAFF9EE5EB266B0 /* Utilities.swift */; };
+		F00ACA4CF72B404017C79B34D9921343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		F4F618C77AEA44367B4A43D5C9B894BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */; };
+		F6E58345690D1BAD17BB1A399234DF01 /* HTTPNetworkTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A827F1274E598BB0B51B22D2575C7893 /* HTTPNetworkTransport.swift */; };
+		F8443B0C224312ED79FECFA39C145C96 /* Apollo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E28A95A85E1309B8B6AF058EBCEF3E47 /* Apollo-dummy.m */; };
+		FADFE2646779561CF4FF267D245BFB1F /* ErxesSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 158385FED0CCEF26A02ECE85168407CF /* ErxesSDK.bundle */; };
+		FBB12097106051A817D3F26C67BE7AF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C762C4EEAE2EA598F7D2A034609993 /* Extensions.swift */; };
+		FEA3382DEDB3A7F7E35F68A69A97A16E /* LiveGQL-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F98AA9A5F324067DB24B225F428A7C /* LiveGQL-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00B921F7C1C9104D3DE3E7D260E3CE06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B6D918CEDD15231B29D2CD37608E5E8;
+			remoteInfo = SwiftyJSON;
+		};
+		21E82DB3487A467BBFB602CE3404C1F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB627571EA0DE5DBBE89A5F79483181;
+			remoteInfo = SocketRocket;
+		};
+		473AE467C9A523237399586C1D8C6899 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 991230109448F6C63323D17A90CD9A71;
+			remoteInfo = ErxesSDK;
+		};
+		486818E61DA41DB21E034E8387DE467A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC8A6B254309DCB8C1CD7434E2BF9292;
+			remoteInfo = LiveGQL;
+		};
+		5392036FBE23C29C702CDDA7F0909247 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B6D918CEDD15231B29D2CD37608E5E8;
+			remoteInfo = SwiftyJSON;
+		};
+		6CC0AB4802972A39C220FF017E9BE23C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAECFE2E0F9D869EE7DAB35DFC2B9C5B;
+			remoteInfo = "Pods-ErxesSDK_Example";
+		};
+		800F1817A0769A68C41A199E13778A4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB627571EA0DE5DBBE89A5F79483181;
+			remoteInfo = SocketRocket;
+		};
+		8AB39B492F3103D6AEB9E9B408494458 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2010E78719F690490FE4CE58BC774303;
+			remoteInfo = Apollo;
+		};
+		953E8EECCA4F93016E0FDC297079E8D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AB627571EA0DE5DBBE89A5F79483181;
+			remoteInfo = SocketRocket;
+		};
+		B1DF85E18EE109525555B333D2F0F07C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC8A6B254309DCB8C1CD7434E2BF9292;
+			remoteInfo = LiveGQL;
+		};
+		BEC6791C46882FE38F7221CBCDCE94A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F71A3784C6B671F0043E934135FF7649;
+			remoteInfo = "ErxesSDK-ErxesSDK";
+		};
+		C526106952E4A7DF872689096DDE57C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2010E78719F690490FE4CE58BC774303;
+			remoteInfo = Apollo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01DF1F635339DF4BB739DE3C80631BF5 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		02F96B73944E2B20045D5AEBAED3C847 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		0391469AA59FEB573DCDBC9378245E62 /* ViewExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		03E26875E90983E9453D4CA950C74503 /* SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.xcconfig; sourceTree = "<group>"; };
+		06A63DB5BB342DC43C7BEDF6F145A31C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07734BAE0D28AE38D06C1E2E4B178517 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08149BB7A1C2FDCF03BC98F7E4DFF118 /* Pods-ErxesSDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		085399CF903FDF568C5F1352D3FFF3C2 /* GraphQLResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResponse.swift; path = Sources/Apollo/GraphQLResponse.swift; sourceTree = "<group>"; };
+		090A8EB117418F605ADD744E7AC399B1 /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/Apollo/JSON.swift; sourceTree = "<group>"; };
+		09B569AA34296ED6E9057DF04A71F55A /* Apollo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Apollo-umbrella.h"; sourceTree = "<group>"; };
+		103E75ECE7BB550A1BAD2200BB59F383 /* NormalizedCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NormalizedCache.swift; path = Sources/Apollo/NormalizedCache.swift; sourceTree = "<group>"; };
+		11AF35AC87DC14477064BAB8709CD8F0 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Apollo/Result.swift; sourceTree = "<group>"; };
+		11E2D711812B9EE1019368219C3D7EE6 /* GraphQLSelectionSetMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLSelectionSetMapper.swift; path = Sources/Apollo/GraphQLSelectionSetMapper.swift; sourceTree = "<group>"; };
+		12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		128A8C3549D2B1570F557F62042A935E /* Collections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Collections.swift; path = Sources/Apollo/Collections.swift; sourceTree = "<group>"; };
+		146B07C28C0E9A080C5429B92FE12572 /* LiveGQL.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LiveGQL.modulemap; sourceTree = "<group>"; };
+		146CEB41184F171A292C55AF1561A665 /* erxes.jpg */ = {isa = PBXFileReference; includeInIndex = 1; name = erxes.jpg; path = ErxesSDK/Assets/erxes.jpg; sourceTree = "<group>"; };
+		158385FED0CCEF26A02ECE85168407CF /* ErxesSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ErxesSDK.bundle; path = "ErxesSDK-ErxesSDK.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1863196977A30A5066FA5FF282A42F36 /* GraphQLError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLError.swift; path = Sources/Apollo/GraphQLError.swift; sourceTree = "<group>"; };
+		1B2E372AD398F2B70AF09884E59D681E /* Pods-ErxesSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		1B47968C287810F1BFD5047B861BA1BA /* ConversationVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		1E3A9A300C067318B3494A83DBE0D6D3 /* ErxesSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = ErxesSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		1F8101CFA650115702F3372D2EC2B941 /* GraphQLResultAccumulator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResultAccumulator.swift; path = Sources/Apollo/GraphQLResultAccumulator.swift; sourceTree = "<group>"; };
+		1FB0BB2F5011CD3EB5F6768B5DEB7B66 /* check-and-run-apollo-codegen.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = "check-and-run-apollo-codegen.sh"; path = "scripts/check-and-run-apollo-codegen.sh"; sourceTree = "<group>"; };
+		22C75EAF917D4DFA4033BD862D73D531 /* Pods-ErxesSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ErxesSDK_Example.modulemap"; sourceTree = "<group>"; };
+		24C3840A0F7976EFF0982DE6708C7C9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28910C446BC9F78815A61E28D86A68D2 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		2CE2B45F381FCF09A27A52BB998DC4B8 /* Pods-ErxesSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ErxesSDK_Tests.modulemap"; sourceTree = "<group>"; };
+		2DBB4F1CA6BA6BF2B1411B94C0E822A7 /* Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Sources/Apollo/Promise.swift; sourceTree = "<group>"; };
+		2F33E039729732C56AEDA5B6EDC96175 /* LiveGQL-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LiveGQL-prefix.pch"; sourceTree = "<group>"; };
+		30AEF6EA4CA4C5F77E2356F777E37B20 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35E62F19DA8F35EE9F1A572863D36EB5 /* Pods-ErxesSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Example-resources.sh"; sourceTree = "<group>"; };
+		3725C903BCBB1821FCAFF9EE5EB266B0 /* Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Sources/Apollo/Utilities.swift; sourceTree = "<group>"; };
+		393512BBD3CD8BDCD5F4EB395F67D2D8 /* ApolloStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApolloStore.swift; path = Sources/Apollo/ApolloStore.swift; sourceTree = "<group>"; };
+		39EBAFF62475A482BAA3DB1FEA4B0728 /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3DD7C6CF3E558CEF9FFA4483C1A722AF /* Locking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Locking.swift; path = Sources/Apollo/Locking.swift; sourceTree = "<group>"; };
+		4292827349561D0335FD8741F620A33F /* GraphQLSelectionSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLSelectionSet.swift; path = Sources/Apollo/GraphQLSelectionSet.swift; sourceTree = "<group>"; };
+		46E9284FC75658F8E40766B58E57EE8B /* AsynchronousOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsynchronousOperation.swift; path = Sources/Apollo/AsynchronousOperation.swift; sourceTree = "<group>"; };
+		470970B60088FB7401C2E7BEAE6993AF /* JSONStandardTypeConversions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONStandardTypeConversions.swift; path = Sources/Apollo/JSONStandardTypeConversions.swift; sourceTree = "<group>"; };
+		4AC7E75782A5C95E3BE0B7BD9BC0EA0C /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
+		5001D084A399A61621E1F03DEB9B9D57 /* Erxes.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = Erxes.storyboard; path = ErxesSDK/Assets/Erxes.storyboard; sourceTree = "<group>"; };
+		503271904F2135B9814FDE61F5156B21 /* ViewController.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = ViewController.graphql; sourceTree = "<group>"; };
+		5088D71C88F5091C3D0FD41917D9A86F /* Pods-ErxesSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		560ABE246DDC780C93189D5ED5550A2C /* ChatViewController.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = ChatViewController.graphql; sourceTree = "<group>"; };
+		651A74E3300439DA95739324411E38F6 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		6596A8895D539D06A24772C29C947456 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
+		65AB75E43BE8CDC0CD8853A675B48CBC /* Pods-ErxesSDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Tests-resources.sh"; sourceTree = "<group>"; };
+		65C776951A7F4397C060CDCD770E1533 /* NetworkTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkTransport.swift; path = Sources/Apollo/NetworkTransport.swift; sourceTree = "<group>"; };
+		6BE4EAAC45201F1D63F421B0D2DA0B02 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C30BA39EB6CCAA3B6C21A1CD370B423 /* GraphQLOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLOperation.swift; path = Sources/Apollo/GraphQLOperation.swift; sourceTree = "<group>"; };
+		6C49D8D6F798B80FE72A6304728A67F2 /* Pods-ErxesSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
+		6C5CF2946FE6575EF49839098CAB2146 /* avatar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = avatar.png; path = ErxesSDK/Assets/avatar.png; sourceTree = "<group>"; };
+		6D78570042C549696F4AE1E30C80FA72 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Apollo.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70363E132230A0C7F42C89AF26034418 /* Pods-ErxesSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		7074E9391108C61161AFE349C5550155 /* GraphQLDependencyTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLDependencyTracker.swift; path = Sources/Apollo/GraphQLDependencyTracker.swift; sourceTree = "<group>"; };
+		756D0FF61D58C02E8579C97B4562A197 /* ErxesSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ErxesSDK-dummy.m"; sourceTree = "<group>"; };
+		76C9B7AE2DDC73D1E5CB467644FC9145 /* Apollo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Apollo.modulemap; sourceTree = "<group>"; };
+		76F98AA9A5F324067DB24B225F428A7C /* LiveGQL-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LiveGQL-dummy.m"; sourceTree = "<group>"; };
+		77CEA8853913EEC8EA4E1CE99CDB5CFD /* Pods-ErxesSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ErxesSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		78D59BC23B03049C2FE6A338BCAF5100 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78F6ABED76EEB23919A8714AED52A19B /* InMemoryNormalizedCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InMemoryNormalizedCache.swift; path = Sources/Apollo/InMemoryNormalizedCache.swift; sourceTree = "<group>"; };
+		78FF5A9E52246BE6A91D3913CC3B380C /* LiveGQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LiveGQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A6F86A638478394AB5B218A3BD156D8 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		7CBC57C8DA1AFA91AE7FD550D575FCC3 /* ErxesSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ErxesSDK.modulemap; sourceTree = "<group>"; };
+		7D6659F0004C66430E87444726EF726A /* RegisterVC.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = RegisterVC.graphql; sourceTree = "<group>"; };
+		7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ErxesSDK_Example-umbrella.h"; sourceTree = "<group>"; };
+		81850118C0CE92D2B25B50EBE7A9E724 /* ResultOrPromise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultOrPromise.swift; path = Sources/Apollo/ResultOrPromise.swift; sourceTree = "<group>"; };
+		8716776827BBC56D2EB973343C9E4CA3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		876A32A09131599A5BD5CE40908888E3 /* SocketRocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketRocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87AA0DB6E51BAC0D91BCD0CD067CFF5A /* ErxesSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ErxesSDK.framework; path = ErxesSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AE1EA9CC3C57E7BAAB70F74C5D5690C /* LiveGQL-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LiveGQL-umbrella.h"; sourceTree = "<group>"; };
+		8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ErxesSDK_Tests-dummy.m"; sourceTree = "<group>"; };
+		91CAF43851594AF2BE84C5E26C7FF820 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		965BF6B9CFEE40EAED2FE5565A002803 /* DataLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataLoader.swift; path = Sources/Apollo/DataLoader.swift; sourceTree = "<group>"; };
+		9677A0CF3E563370373D5D9006004297 /* SocketRocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketRocket.framework; path = SocketRocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		990C007FD1AAAA44F74F8ABED1FD56A8 /* Apollo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Apollo.xcconfig; sourceTree = "<group>"; };
+		9931A63252C9B97F8DBD194D5F68F454 /* Record.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Sources/Apollo/Record.swift; sourceTree = "<group>"; };
+		9D0E6168DE9E8882F963E41536391F94 /* Erxes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Erxes.swift; sourceTree = "<group>"; };
+		A02EDF8E638C30006551D2FEFC2CC697 /* Apollo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Apollo-prefix.pch"; sourceTree = "<group>"; };
+		A0BFB1C7E4C1D71293A48C72F1931C8B /* ResourceBundle-ErxesSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ErxesSDK-Info.plist"; sourceTree = "<group>"; };
+		A15346536B77617932FA0376D025F307 /* Pods-ErxesSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ErxesSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A16A383BAFD4417EE03E2197EF7C59E9 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		A5884AF099FBE9BE1A79562219CCBC7E /* Pods-ErxesSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ErxesSDK_Example-dummy.m"; sourceTree = "<group>"; };
+		A827F1274E598BB0B51B22D2575C7893 /* HTTPNetworkTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPNetworkTransport.swift; path = Sources/Apollo/HTTPNetworkTransport.swift; sourceTree = "<group>"; };
+		A8F34584ED6674D507B616CAA86EB411 /* ErxesSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-umbrella.h"; sourceTree = "<group>"; };
+		ABD32FA53B6707180BD3344700254968 /* GraphQLExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLExecutor.swift; path = Sources/Apollo/GraphQLExecutor.swift; sourceTree = "<group>"; };
+		ABE2E72E6E3035E14B237E05B1A9FCA5 /* Pods-ErxesSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ErxesSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		AFBF757BA2B8B8889B623F80CF30B630 /* PayloadMessages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayloadMessages.swift; path = Source/Classes/PayloadMessages.swift; sourceTree = "<group>"; };
+		B1AB070C23F6D4E881926DCAEEAAA81A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1DCB95CFDDAF37551D5801EBB01C653 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		B6C36E222E2068D81E81CAFA3A7EF9A1 /* LiveGQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LiveGQL.framework; path = LiveGQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9C762C4EEAE2EA598F7D2A034609993 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BD730F78A4B93590B74080433DE84FC0 /* SocketRocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SocketRocket.modulemap; sourceTree = "<group>"; };
+		C189EE5FAA977B1F493E5B05BFCBD30B /* RecordSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordSet.swift; path = Sources/Apollo/RecordSet.swift; sourceTree = "<group>"; };
+		C29014BA1929CA7137B412935CD9270B /* JSONHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHelper.swift; path = Source/Classes/JSONHelper.swift; sourceTree = "<group>"; };
+		C37B35B03973E6B4FF80A1500D7CD303 /* ChatVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		C3ABC41DB6BF59C3582AFCE7A4018D18 /* JSONSerializationFormat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONSerializationFormat.swift; path = Sources/Apollo/JSONSerializationFormat.swift; sourceTree = "<group>"; };
+		C61E379BE601F3AB8E08523406568D69 /* RegisterVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		C7563179EDB28DA12D72270726C6356D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		C7DD02094B58E34690D682F9F337A706 /* GraphQLResponseGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResponseGenerator.swift; path = Sources/Apollo/GraphQLResponseGenerator.swift; sourceTree = "<group>"; };
+		CCD564D9698F8AB1AE1EEEF3BF6F0CFA /* Pods-ErxesSDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ErxesSDK_Tests-umbrella.h"; sourceTree = "<group>"; };
+		CF3E3422EA584E58D523CDF856EA5B2D /* GraphQLQueryWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLQueryWatcher.swift; path = Sources/Apollo/GraphQLQueryWatcher.swift; sourceTree = "<group>"; };
+		CF8FEFDBC5F498D53D196ED7A25A5B6F /* LiveGQL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveGQL.swift; path = Source/Classes/LiveGQL.swift; sourceTree = "<group>"; };
+		D03EE10CAC2D2B4FBE27CEB62AD70540 /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
+		D1AAC5DF8BF68C1D0608B70735618D61 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		D50733E8F3CA7F1A6B98E520DC514B4B /* Pods-ErxesSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ErxesSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D5621CA7F4D6A1945F8AE7332EC2E47C /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		D824423AF71D10F70508BC3261117124 /* SocketRocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SocketRocket.h; path = SocketRocket/SocketRocket.h; sourceTree = "<group>"; };
+		DA11D37036A8E8EBB6DD9DC216FA5F47 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		DA11F2583C767A6639F9DFE40E25907A /* LiveGQL.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LiveGQL.xcconfig; sourceTree = "<group>"; };
+		DA70B8BB7C069E2D3D7ECEB00278E5A0 /* Pods_ErxesSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ErxesSDK_Tests.framework; path = "Pods-ErxesSDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC2DFD64A9DB7F0AA8176AAE4E20640B /* ApolloClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApolloClient.swift; path = Sources/Apollo/ApolloClient.swift; sourceTree = "<group>"; };
+		DCD864A6300359DCF0FB3DA6BF3FDB08 /* Pods_ErxesSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ErxesSDK_Example.framework; path = "Pods-ErxesSDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ErxesSDK.xcconfig; sourceTree = "<group>"; };
+		E28A95A85E1309B8B6AF058EBCEF3E47 /* Apollo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Apollo-dummy.m"; sourceTree = "<group>"; };
+		E4D324F3EF41F6C019C890E18B8C5D46 /* GraphQLInputValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLInputValue.swift; path = Sources/Apollo/GraphQLInputValue.swift; sourceTree = "<group>"; };
+		E5C17CACA936B0CC38B1D4860C3DF981 /* MessageTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MessageTypes.swift; path = Source/Classes/MessageTypes.swift; sourceTree = "<group>"; };
+		E8E2E5220DD7396BA363D0294978BFC9 /* fontello.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = fontello.ttf; path = ErxesSDK/Assets/fontello.ttf; sourceTree = "<group>"; };
+		EC0F1946BFEB14B41EEC65B57C2ED4F5 /* API.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = API.swift; path = ErxesSDK/Classes/API.swift; sourceTree = "<group>"; };
+		ECE758D05C69FA797F1EABCFE6277DCE /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		EFC9BE3B8BBF3DBF41A60C43950E05B6 /* GraphQLResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResult.swift; path = Sources/Apollo/GraphQLResult.swift; sourceTree = "<group>"; };
+		F17414F63542E60EA307CFF9B653BAB7 /* ErxesSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-prefix.pch"; sourceTree = "<group>"; };
+		F33429DE802F48372E422A3851DBEAA0 /* SocketRocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-umbrella.h"; sourceTree = "<group>"; };
+		F58C1A8173EEC51E6BF5CB9287E64A6D /* ConversationVC.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = ConversationVC.graphql; sourceTree = "<group>"; };
+		F6C3229B209E9FFB128D231B176B26CF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8A70694C320041651DB686A50D0F13A /* GraphQLResultNormalizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResultNormalizer.swift; path = Sources/Apollo/GraphQLResultNormalizer.swift; sourceTree = "<group>"; };
+		FA6C75EADA9A3D580F74926837CC816D /* Pods-ErxesSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FAE1A3450F48471372807BDF328CC087 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		26A01EB0EB5CC66596ED3FD0ADB53A59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683B4A38E91229A79781A0E759596603 /* Apollo.framework in Frameworks */,
+				13D6F5E5618E95CC56D2009A1563E3C2 /* Foundation.framework in Frameworks */,
+				19DCFFA2F0E93DD4F6B7FABA7A3AD9EA /* LiveGQL.framework in Frameworks */,
+				C33254D9FB9B4E679B2D778FE1BE0196 /* SocketRocket.framework in Frameworks */,
+				4CFF32C9D5E00BD57FFFD66749D015B7 /* SwiftyJSON.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B0CB77FD4E972354F976853DB063F56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF8DB86A8A45E2B8BA884FBFCA9D0D4C /* Foundation.framework in Frameworks */,
+				9310969CDB65FF54249868E0E7765DD8 /* SocketRocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97CF03D97CCF53F03DEC2F01D8420C19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523EE2A1B005B8E6D51AA7FBA65EB4C5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5213405263DA595D991BBBDB67DA09F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C9908801A8A59CDEBA9BF5F3A734B53 /* CFNetwork.framework in Frameworks */,
+				F4F618C77AEA44367B4A43D5C9B894BE /* Foundation.framework in Frameworks */,
+				52136562E6B89417EF68F1337C94633A /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C37DD45E50D7583CBF08FA846BC0E21D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F00ACA4CF72B404017C79B34D9921343 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDA4DB5EC4E8C1F85B5C3DCAE5159087 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				685BE1522AA147E08E5BF3B8EA4BA771 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8F904C59FF6158CBE6B96C8C2988370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB64F85D289F131BADEF94D38DBCFCC4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D26043A1A95FE52D99B921BB46EA050 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14721A185F6334F0D49AEAFB47D02EFB /* LiveGQL */ = {
+			isa = PBXGroup;
+			children = (
+				C29014BA1929CA7137B412935CD9270B /* JSONHelper.swift */,
+				CF8FEFDBC5F498D53D196ED7A25A5B6F /* LiveGQL.swift */,
+				E5C17CACA936B0CC38B1D4860C3DF981 /* MessageTypes.swift */,
+				AFBF757BA2B8B8889B623F80CF30B630 /* PayloadMessages.swift */,
+				77C75F368983B79A2B4B82F72BFC2FA9 /* Support Files */,
+			);
+			name = LiveGQL;
+			path = LiveGQL;
+			sourceTree = "<group>";
+		};
+		2CC390C3EEC046C25A61AC072B408AFE /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C7563179EDB28DA12D72270726C6356D /* CFNetwork.framework */,
+				12609D688B2F524ED3C877F542F1C740 /* Foundation.framework */,
+				91CAF43851594AF2BE84C5E26C7FF820 /* Security.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		30E1C5A41FFECA60427ABE0D397FDAA4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				76C9B7AE2DDC73D1E5CB467644FC9145 /* Apollo.modulemap */,
+				990C007FD1AAAA44F74F8ABED1FD56A8 /* Apollo.xcconfig */,
+				E28A95A85E1309B8B6AF058EBCEF3E47 /* Apollo-dummy.m */,
+				A02EDF8E638C30006551D2FEFC2CC697 /* Apollo-prefix.pch */,
+				09B569AA34296ED6E9057DF04A71F55A /* Apollo-umbrella.h */,
+				78D59BC23B03049C2FE6A338BCAF5100 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Apollo";
+			sourceTree = "<group>";
+		};
+		3FC07B394E00A423AE99693840A31695 /* ErxesSDK */ = {
+			isa = PBXGroup;
+			children = (
+				EC0F1946BFEB14B41EEC65B57C2ED4F5 /* API.swift */,
+				DD5C2B016CC3D0045C72A037AFF5724E /* Global */,
+				F79B6749018EA1460ADD26D9C6F4B2EB /* Pod */,
+				A2879A26CEBCA034EEAFF3D181D4934D /* Queries */,
+				99D18D6D84AF148AA907E14DA38CC35E /* Resources */,
+				F12445F50A2957B47BFAAEBF71253971 /* Support Files */,
+				EB552746758237405FD502E50CE04361 /* Views */,
+			);
+			name = ErxesSDK;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		4434374A2A39C344924C94CEBA66FCBA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91BF29D9F9A0A5AF2A4D4FE91C3F3A65 /* Apollo */,
+				14721A185F6334F0D49AEAFB47D02EFB /* LiveGQL */,
+				9F4CE68F84A8B6A4B23D8C1062FEA0A2 /* SocketRocket */,
+				63A2824FD57D2798D455D2726353F627 /* SwiftyJSON */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4791731ADAA78D4A88AAB0DACD10D63D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A44A6863642FB45981FBCC016FE11B1D /* Pods-ErxesSDK_Example */,
+				5CAF53CDD6520A07436F7D6B02AA6354 /* Pods-ErxesSDK_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		50603B38723595DEA12E0CEC0F35F3A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D78570042C549696F4AE1E30C80FA72 /* Apollo.framework */,
+				158385FED0CCEF26A02ECE85168407CF /* ErxesSDK.bundle */,
+				87AA0DB6E51BAC0D91BCD0CD067CFF5A /* ErxesSDK.framework */,
+				B6C36E222E2068D81E81CAFA3A7EF9A1 /* LiveGQL.framework */,
+				DCD864A6300359DCF0FB3DA6BF3FDB08 /* Pods_ErxesSDK_Example.framework */,
+				DA70B8BB7C069E2D3D7ECEB00278E5A0 /* Pods_ErxesSDK_Tests.framework */,
+				9677A0CF3E563370373D5D9006004297 /* SocketRocket.framework */,
+				FAE1A3450F48471372807BDF328CC087 /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		512C9527144D00EC81DD6CF64C911155 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6BE4EAAC45201F1D63F421B0D2DA0B02 /* Apollo.framework */,
+				78FF5A9E52246BE6A91D3913CC3B380C /* LiveGQL.framework */,
+				876A32A09131599A5BD5CE40908888E3 /* SocketRocket.framework */,
+				30AEF6EA4CA4C5F77E2356F777E37B20 /* SwiftyJSON.framework */,
+				2CC390C3EEC046C25A61AC072B408AFE /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5CAF53CDD6520A07436F7D6B02AA6354 /* Pods-ErxesSDK_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				24C3840A0F7976EFF0982DE6708C7C9C /* Info.plist */,
+				2CE2B45F381FCF09A27A52BB998DC4B8 /* Pods-ErxesSDK_Tests.modulemap */,
+				A15346536B77617932FA0376D025F307 /* Pods-ErxesSDK_Tests-acknowledgements.markdown */,
+				ABE2E72E6E3035E14B237E05B1A9FCA5 /* Pods-ErxesSDK_Tests-acknowledgements.plist */,
+				8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */,
+				08149BB7A1C2FDCF03BC98F7E4DFF118 /* Pods-ErxesSDK_Tests-frameworks.sh */,
+				65AB75E43BE8CDC0CD8853A675B48CBC /* Pods-ErxesSDK_Tests-resources.sh */,
+				CCD564D9698F8AB1AE1EEEF3BF6F0CFA /* Pods-ErxesSDK_Tests-umbrella.h */,
+				FA6C75EADA9A3D580F74926837CC816D /* Pods-ErxesSDK_Tests.debug.xcconfig */,
+				70363E132230A0C7F42C89AF26034418 /* Pods-ErxesSDK_Tests.release.xcconfig */,
+			);
+			name = "Pods-ErxesSDK_Tests";
+			path = "Target Support Files/Pods-ErxesSDK_Tests";
+			sourceTree = "<group>";
+		};
+		63A2824FD57D2798D455D2726353F627 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				A16A383BAFD4417EE03E2197EF7C59E9 /* SwiftyJSON.swift */,
+				FC2D5CF7CD0E2325E3465B1DC37D59B8 /* Support Files */,
+			);
+			name = SwiftyJSON;
+			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		73B869C3AE6168A2D2687EC1649CE1E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1FB0BB2F5011CD3EB5F6768B5DEB7B66 /* check-and-run-apollo-codegen.sh */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		77C75F368983B79A2B4B82F72BFC2FA9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				06A63DB5BB342DC43C7BEDF6F145A31C /* Info.plist */,
+				146B07C28C0E9A080C5429B92FE12572 /* LiveGQL.modulemap */,
+				DA11F2583C767A6639F9DFE40E25907A /* LiveGQL.xcconfig */,
+				76F98AA9A5F324067DB24B225F428A7C /* LiveGQL-dummy.m */,
+				2F33E039729732C56AEDA5B6EDC96175 /* LiveGQL-prefix.pch */,
+				8AE1EA9CC3C57E7BAAB70F74C5D5690C /* LiveGQL-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/LiveGQL";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				D4C2E700B93C023C52B920FAA009DECD /* Development Pods */,
+				512C9527144D00EC81DD6CF64C911155 /* Frameworks */,
+				4434374A2A39C344924C94CEBA66FCBA /* Pods */,
+				50603B38723595DEA12E0CEC0F35F3A6 /* Products */,
+				4791731ADAA78D4A88AAB0DACD10D63D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		91BF29D9F9A0A5AF2A4D4FE91C3F3A65 /* Apollo */ = {
+			isa = PBXGroup;
+			children = (
+				ACE3190C6E3A32FA936397249E64B28D /* Core */,
+				30E1C5A41FFECA60427ABE0D397FDAA4 /* Support Files */,
+			);
+			name = Apollo;
+			path = Apollo;
+			sourceTree = "<group>";
+		};
+		99D18D6D84AF148AA907E14DA38CC35E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6C5CF2946FE6575EF49839098CAB2146 /* avatar.png */,
+				146CEB41184F171A292C55AF1561A665 /* erxes.jpg */,
+				5001D084A399A61621E1F03DEB9B9D57 /* Erxes.storyboard */,
+				E8E2E5220DD7396BA363D0294978BFC9 /* fontello.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9F4CE68F84A8B6A4B23D8C1062FEA0A2 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				D824423AF71D10F70508BC3261117124 /* SocketRocket.h */,
+				D1AAC5DF8BF68C1D0608B70735618D61 /* SRWebSocket.h */,
+				D03EE10CAC2D2B4FBE27CEB62AD70540 /* SRWebSocket.m */,
+				DE8D506C1A22E79CD6C39EB30E09E7D7 /* Support Files */,
+			);
+			name = SocketRocket;
+			path = SocketRocket;
+			sourceTree = "<group>";
+		};
+		A2879A26CEBCA034EEAFF3D181D4934D /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				560ABE246DDC780C93189D5ED5550A2C /* ChatViewController.graphql */,
+				F58C1A8173EEC51E6BF5CB9287E64A6D /* ConversationVC.graphql */,
+				7D6659F0004C66430E87444726EF726A /* RegisterVC.graphql */,
+				503271904F2135B9814FDE61F5156B21 /* ViewController.graphql */,
+			);
+			name = Queries;
+			path = ErxesSDK/Classes/Queries;
+			sourceTree = "<group>";
+		};
+		A44A6863642FB45981FBCC016FE11B1D /* Pods-ErxesSDK_Example */ = {
+			isa = PBXGroup;
+			children = (
+				F6C3229B209E9FFB128D231B176B26CF /* Info.plist */,
+				22C75EAF917D4DFA4033BD862D73D531 /* Pods-ErxesSDK_Example.modulemap */,
+				D50733E8F3CA7F1A6B98E520DC514B4B /* Pods-ErxesSDK_Example-acknowledgements.markdown */,
+				77CEA8853913EEC8EA4E1CE99CDB5CFD /* Pods-ErxesSDK_Example-acknowledgements.plist */,
+				A5884AF099FBE9BE1A79562219CCBC7E /* Pods-ErxesSDK_Example-dummy.m */,
+				6C49D8D6F798B80FE72A6304728A67F2 /* Pods-ErxesSDK_Example-frameworks.sh */,
+				35E62F19DA8F35EE9F1A572863D36EB5 /* Pods-ErxesSDK_Example-resources.sh */,
+				7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */,
+				5088D71C88F5091C3D0FD41917D9A86F /* Pods-ErxesSDK_Example.debug.xcconfig */,
+				1B2E372AD398F2B70AF09884E59D681E /* Pods-ErxesSDK_Example.release.xcconfig */,
+			);
+			name = "Pods-ErxesSDK_Example";
+			path = "Target Support Files/Pods-ErxesSDK_Example";
+			sourceTree = "<group>";
+		};
+		ACE3190C6E3A32FA936397249E64B28D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DC2DFD64A9DB7F0AA8176AAE4E20640B /* ApolloClient.swift */,
+				393512BBD3CD8BDCD5F4EB395F67D2D8 /* ApolloStore.swift */,
+				46E9284FC75658F8E40766B58E57EE8B /* AsynchronousOperation.swift */,
+				128A8C3549D2B1570F557F62042A935E /* Collections.swift */,
+				965BF6B9CFEE40EAED2FE5565A002803 /* DataLoader.swift */,
+				7074E9391108C61161AFE349C5550155 /* GraphQLDependencyTracker.swift */,
+				1863196977A30A5066FA5FF282A42F36 /* GraphQLError.swift */,
+				ABD32FA53B6707180BD3344700254968 /* GraphQLExecutor.swift */,
+				E4D324F3EF41F6C019C890E18B8C5D46 /* GraphQLInputValue.swift */,
+				6C30BA39EB6CCAA3B6C21A1CD370B423 /* GraphQLOperation.swift */,
+				CF3E3422EA584E58D523CDF856EA5B2D /* GraphQLQueryWatcher.swift */,
+				085399CF903FDF568C5F1352D3FFF3C2 /* GraphQLResponse.swift */,
+				C7DD02094B58E34690D682F9F337A706 /* GraphQLResponseGenerator.swift */,
+				EFC9BE3B8BBF3DBF41A60C43950E05B6 /* GraphQLResult.swift */,
+				1F8101CFA650115702F3372D2EC2B941 /* GraphQLResultAccumulator.swift */,
+				F8A70694C320041651DB686A50D0F13A /* GraphQLResultNormalizer.swift */,
+				4292827349561D0335FD8741F620A33F /* GraphQLSelectionSet.swift */,
+				11E2D711812B9EE1019368219C3D7EE6 /* GraphQLSelectionSetMapper.swift */,
+				A827F1274E598BB0B51B22D2575C7893 /* HTTPNetworkTransport.swift */,
+				78F6ABED76EEB23919A8714AED52A19B /* InMemoryNormalizedCache.swift */,
+				090A8EB117418F605ADD744E7AC399B1 /* JSON.swift */,
+				C3ABC41DB6BF59C3582AFCE7A4018D18 /* JSONSerializationFormat.swift */,
+				470970B60088FB7401C2E7BEAE6993AF /* JSONStandardTypeConversions.swift */,
+				3DD7C6CF3E558CEF9FFA4483C1A722AF /* Locking.swift */,
+				65C776951A7F4397C060CDCD770E1533 /* NetworkTransport.swift */,
+				103E75ECE7BB550A1BAD2200BB59F383 /* NormalizedCache.swift */,
+				2DBB4F1CA6BA6BF2B1411B94C0E822A7 /* Promise.swift */,
+				9931A63252C9B97F8DBD194D5F68F454 /* Record.swift */,
+				C189EE5FAA977B1F493E5B05BFCBD30B /* RecordSet.swift */,
+				11AF35AC87DC14477064BAB8709CD8F0 /* Result.swift */,
+				81850118C0CE92D2B25B50EBE7A9E724 /* ResultOrPromise.swift */,
+				3725C903BCBB1821FCAFF9EE5EB266B0 /* Utilities.swift */,
+				73B869C3AE6168A2D2687EC1649CE1E9 /* Resources */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D4C2E700B93C023C52B920FAA009DECD /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3FC07B394E00A423AE99693840A31695 /* ErxesSDK */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		DD5C2B016CC3D0045C72A037AFF5724E /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				39EBAFF62475A482BAA3DB1FEA4B0728 /* Constants.swift */,
+				9D0E6168DE9E8882F963E41536391F94 /* Erxes.swift */,
+				B9C762C4EEAE2EA598F7D2A034609993 /* Extensions.swift */,
+				ECE758D05C69FA797F1EABCFE6277DCE /* Router.swift */,
+				01DF1F635339DF4BB739DE3C80631BF5 /* Utils.swift */,
+				0391469AA59FEB573DCDBC9378245E62 /* ViewExtension.swift */,
+			);
+			name = Global;
+			path = ErxesSDK/Classes/Global;
+			sourceTree = "<group>";
+		};
+		DE8D506C1A22E79CD6C39EB30E09E7D7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8716776827BBC56D2EB973343C9E4CA3 /* Info.plist */,
+				BD730F78A4B93590B74080433DE84FC0 /* SocketRocket.modulemap */,
+				03E26875E90983E9453D4CA950C74503 /* SocketRocket.xcconfig */,
+				6596A8895D539D06A24772C29C947456 /* SocketRocket-dummy.m */,
+				4AC7E75782A5C95E3BE0B7BD9BC0EA0C /* SocketRocket-prefix.pch */,
+				F33429DE802F48372E422A3851DBEAA0 /* SocketRocket-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SocketRocket";
+			sourceTree = "<group>";
+		};
+		EB552746758237405FD502E50CE04361 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C37B35B03973E6B4FF80A1500D7CD303 /* ChatVC.swift */,
+				1B47968C287810F1BFD5047B861BA1BA /* ConversationVC.swift */,
+				C61E379BE601F3AB8E08523406568D69 /* RegisterVC.swift */,
+			);
+			name = Views;
+			path = ErxesSDK/Classes/Views;
+			sourceTree = "<group>";
+		};
+		F12445F50A2957B47BFAAEBF71253971 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CBC57C8DA1AFA91AE7FD550D575FCC3 /* ErxesSDK.modulemap */,
+				E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */,
+				756D0FF61D58C02E8579C97B4562A197 /* ErxesSDK-dummy.m */,
+				F17414F63542E60EA307CFF9B653BAB7 /* ErxesSDK-prefix.pch */,
+				A8F34584ED6674D507B616CAA86EB411 /* ErxesSDK-umbrella.h */,
+				B1AB070C23F6D4E881926DCAEEAAA81A /* Info.plist */,
+				A0BFB1C7E4C1D71293A48C72F1931C8B /* ResourceBundle-ErxesSDK-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/ErxesSDK";
+			sourceTree = "<group>";
+		};
+		F79B6749018EA1460ADD26D9C6F4B2EB /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A9A300C067318B3494A83DBE0D6D3 /* ErxesSDK.podspec */,
+				DA11D37036A8E8EBB6DD9DC216FA5F47 /* LICENSE */,
+				02F96B73944E2B20045D5AEBAED3C847 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		FC2D5CF7CD0E2325E3465B1DC37D59B8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				07734BAE0D28AE38D06C1E2E4B178517 /* Info.plist */,
+				651A74E3300439DA95739324411E38F6 /* SwiftyJSON.modulemap */,
+				28910C446BC9F78815A61E28D86A68D2 /* SwiftyJSON.xcconfig */,
+				B1DCB95CFDDAF37551D5801EBB01C653 /* SwiftyJSON-dummy.m */,
+				7A6F86A638478394AB5B218A3BD156D8 /* SwiftyJSON-prefix.pch */,
+				D5621CA7F4D6A1945F8AE7332EC2E47C /* SwiftyJSON-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0BD52D980335D4E27E9FE8EB729597B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B729BA74ABB71E69601AA3BBD6ADB2 /* LiveGQL-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CCABFACDB9C68527A570D0BAA04968C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2801AD97D8CF9F1FA4322C44917F4E9D /* ErxesSDK-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		448BAAFC7F7AD61FDAE0DA6437C209C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69C6A08FE46B8ECC10C4F538A249EF79 /* Apollo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C97D8809EE8B9B772B1B67DF26503F5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5A2588B5EEF1DABDE731AA89900EBBE /* SocketRocket-umbrella.h in Headers */,
+				B01E8A1EF876CD7778C2F99958E18889 /* SocketRocket.h in Headers */,
+				41857BFD48AE608EB3555D97A4AF99A7 /* SRWebSocket.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFC5DAF65BCEC8F58703343FE1BC1C8B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D29C59C4A893B250B3D238EEACFD05C6 /* Pods-ErxesSDK_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE66ECA78363BE5DEA2C69232AF9BA16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6619560A2A14BDF03BA4B6BE0A412B9 /* Pods-ErxesSDK_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D223FB506E1D19DF48E5416CD868EB30 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5C10AC2F8F2E57DADF31A02BB77D9E0 /* SwiftyJSON-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1AB627571EA0DE5DBBE89A5F79483181 /* SocketRocket */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79C46014900FAE1E3CD00BBA7B0D5D45 /* Build configuration list for PBXNativeTarget "SocketRocket" */;
+			buildPhases = (
+				95AE9EBE88E2FC14B43BA82D9678F4D1 /* Sources */,
+				B5213405263DA595D991BBBDB67DA09F /* Frameworks */,
+				9C97D8809EE8B9B772B1B67DF26503F5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SocketRocket;
+			productName = SocketRocket;
+			productReference = 9677A0CF3E563370373D5D9006004297 /* SocketRocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1B6D918CEDD15231B29D2CD37608E5E8 /* SwiftyJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 051A2CDDBCB4C5A2214CB1A18094A38C /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildPhases = (
+				6DA6649019C6DA477F456DD0B8ABBD87 /* Sources */,
+				97CF03D97CCF53F03DEC2F01D8420C19 /* Frameworks */,
+				D223FB506E1D19DF48E5416CD868EB30 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyJSON;
+			productName = SwiftyJSON;
+			productReference = FAE1A3450F48471372807BDF328CC087 /* SwiftyJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2010E78719F690490FE4CE58BC774303 /* Apollo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E2CE56DC643D5017563D19FFABFF064 /* Build configuration list for PBXNativeTarget "Apollo" */;
+			buildPhases = (
+				52CDDAB72D49A997CDED517908C05955 /* Sources */,
+				C37DD45E50D7583CBF08FA846BC0E21D /* Frameworks */,
+				914A0FCD43CDBEEFECD5F025FBDC1DE2 /* Resources */,
+				448BAAFC7F7AD61FDAE0DA6437C209C4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Apollo;
+			productName = Apollo;
+			productReference = 6D78570042C549696F4AE1E30C80FA72 /* Apollo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3934503BF0BA97137197DC6DE0720894 /* Pods-ErxesSDK_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEEA7BD7268DC43E409B691778AFE3A6 /* Build configuration list for PBXNativeTarget "Pods-ErxesSDK_Tests" */;
+			buildPhases = (
+				F00F38BA2D4E4D6B6961DC10AF6EFA84 /* Sources */,
+				CDA4DB5EC4E8C1F85B5C3DCAE5159087 /* Frameworks */,
+				AFC5DAF65BCEC8F58703343FE1BC1C8B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C037372B72188633FFC9C076C265393 /* PBXTargetDependency */,
+			);
+			name = "Pods-ErxesSDK_Tests";
+			productName = "Pods-ErxesSDK_Tests";
+			productReference = DA70B8BB7C069E2D3D7ECEB00278E5A0 /* Pods_ErxesSDK_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		991230109448F6C63323D17A90CD9A71 /* ErxesSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A97FF3A11BBDD2D3D9544323E5C9288 /* Build configuration list for PBXNativeTarget "ErxesSDK" */;
+			buildPhases = (
+				297A089A03D4EF3631304AB2E3FE5C6D /* Sources */,
+				26A01EB0EB5CC66596ED3FD0ADB53A59 /* Frameworks */,
+				E9094720D51273F8FDD5BB7E1EC89EF2 /* Resources */,
+				3CCABFACDB9C68527A570D0BAA04968C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				831E861333368422590451E0B50767DE /* PBXTargetDependency */,
+				263CD1E47007C2A00CC73503A69F5D28 /* PBXTargetDependency */,
+				C84AF4334AB935B3E679304C8867175C /* PBXTargetDependency */,
+				402C8C5FB4CBFB684FF061133479FC62 /* PBXTargetDependency */,
+				2DE4729737C4FCA41007523E65A0F398 /* PBXTargetDependency */,
+			);
+			name = ErxesSDK;
+			productName = ErxesSDK;
+			productReference = 87AA0DB6E51BAC0D91BCD0CD067CFF5A /* ErxesSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DC8A6B254309DCB8C1CD7434E2BF9292 /* LiveGQL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEB4B0F26AB9160A0EC7B57CEC65D067 /* Build configuration list for PBXNativeTarget "LiveGQL" */;
+			buildPhases = (
+				8332590688AC869BAFF371E940C4E054 /* Sources */,
+				7B0CB77FD4E972354F976853DB063F56 /* Frameworks */,
+				0BD52D980335D4E27E9FE8EB729597B8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				180EF67D449E10210B223DCDE277CE8D /* PBXTargetDependency */,
+			);
+			name = LiveGQL;
+			productName = LiveGQL;
+			productReference = B6C36E222E2068D81E81CAFA3A7EF9A1 /* LiveGQL.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EAECFE2E0F9D869EE7DAB35DFC2B9C5B /* Pods-ErxesSDK_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB4ADCEE99B86060DA3CA60DBBFCFD73 /* Build configuration list for PBXNativeTarget "Pods-ErxesSDK_Example" */;
+			buildPhases = (
+				6BA6F3FFF92D0686F3B2FD33649A8536 /* Sources */,
+				FB64F85D289F131BADEF94D38DBCFCC4 /* Frameworks */,
+				CE66ECA78363BE5DEA2C69232AF9BA16 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				16A4C248B9A875AB949E444D86D869AF /* PBXTargetDependency */,
+				0DA0EA2E7D8B4B37FEC68F7DCFF2D903 /* PBXTargetDependency */,
+				A275ACF7ED59901174D5E622F2FBCF16 /* PBXTargetDependency */,
+				F445CF6018A373EF1AE5E7A4B242CC36 /* PBXTargetDependency */,
+				1E33816FD0DF7788E06BD257603C3255 /* PBXTargetDependency */,
+			);
+			name = "Pods-ErxesSDK_Example";
+			productName = "Pods-ErxesSDK_Example";
+			productReference = DCD864A6300359DCF0FB3DA6BF3FDB08 /* Pods_ErxesSDK_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F71A3784C6B671F0043E934135FF7649 /* ErxesSDK-ErxesSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 95F1558F1119379B876706E9DBE5A508 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */;
+			buildPhases = (
+				23F3C9BCCE5C4F7AC780217C9C1BA73D /* Sources */,
+				E8F904C59FF6158CBE6B96C8C2988370 /* Frameworks */,
+				093E2ECC2F893E1F93D8100ACB95B1DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ErxesSDK-ErxesSDK";
+			productName = "ErxesSDK-ErxesSDK";
+			productReference = 158385FED0CCEF26A02ECE85168407CF /* ErxesSDK.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 50603B38723595DEA12E0CEC0F35F3A6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2010E78719F690490FE4CE58BC774303 /* Apollo */,
+				991230109448F6C63323D17A90CD9A71 /* ErxesSDK */,
+				F71A3784C6B671F0043E934135FF7649 /* ErxesSDK-ErxesSDK */,
+				DC8A6B254309DCB8C1CD7434E2BF9292 /* LiveGQL */,
+				EAECFE2E0F9D869EE7DAB35DFC2B9C5B /* Pods-ErxesSDK_Example */,
+				3934503BF0BA97137197DC6DE0720894 /* Pods-ErxesSDK_Tests */,
+				1AB627571EA0DE5DBBE89A5F79483181 /* SocketRocket */,
+				1B6D918CEDD15231B29D2CD37608E5E8 /* SwiftyJSON */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		093E2ECC2F893E1F93D8100ACB95B1DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17298668FE5A325ACCC1BFE69279B8A8 /* avatar.png in Resources */,
+				51FD098E1100626DA2E2FB10E8628DEF /* erxes.jpg in Resources */,
+				BA316C9B491B5BB21935838C81979007 /* Erxes.storyboard in Resources */,
+				E23228102A48A7DD74631FACBE6D3A43 /* fontello.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		914A0FCD43CDBEEFECD5F025FBDC1DE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC29C2B0DC8755CF00E12C7C4AFBF695 /* check-and-run-apollo-codegen.sh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9094720D51273F8FDD5BB7E1EC89EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FADFE2646779561CF4FF267D245BFB1F /* ErxesSDK.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		23F3C9BCCE5C4F7AC780217C9C1BA73D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		297A089A03D4EF3631304AB2E3FE5C6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAA83716BF7D10336995E2C130B47E1D /* API.swift in Sources */,
+				B1E537611E9E400555866EE3CCE839CF /* ChatVC.swift in Sources */,
+				232167849FB996B827F9473CE4495C1F /* ChatViewController.graphql in Sources */,
+				2B7EB9B876C78CCD31F5AA733B60BA3B /* Constants.swift in Sources */,
+				0A66CFB9E97648610DE5248956A0DE0A /* ConversationVC.graphql in Sources */,
+				9082CA5D3EE9F3A514FE96C1DE70BB6C /* ConversationVC.swift in Sources */,
+				C7B1CB3A575B874EA30378FCB55BB8DA /* Erxes.swift in Sources */,
+				67DE6074FE6B2720A07E938BFE062259 /* ErxesSDK-dummy.m in Sources */,
+				FBB12097106051A817D3F26C67BE7AF2 /* Extensions.swift in Sources */,
+				610F600643A7EFADCCA2EA17FF9CAC3E /* RegisterVC.graphql in Sources */,
+				8C24337BEC1FECAAD6875ED27B57E9C1 /* RegisterVC.swift in Sources */,
+				C696639B00BA085488BAF6BAC6D93BFA /* Router.swift in Sources */,
+				48911AC3DD4B7418DF25770E32D42D6C /* Utils.swift in Sources */,
+				3B231E63A4AEC59C39C2C638C06B07CB /* ViewController.graphql in Sources */,
+				87EE927D5EF8C81D260752B8E884E31B /* ViewExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52CDDAB72D49A997CDED517908C05955 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8443B0C224312ED79FECFA39C145C96 /* Apollo-dummy.m in Sources */,
+				9E4F23BFA9B082F66DDE6CBF826350B4 /* ApolloClient.swift in Sources */,
+				00B004271A3540F4A7497B083C7BEC43 /* ApolloStore.swift in Sources */,
+				A7F758E72285085E768B3196D47984A1 /* AsynchronousOperation.swift in Sources */,
+				C5A0C07491F9D94C99DE288D0159AB65 /* Collections.swift in Sources */,
+				24A0A688E5F0450FE1460E1830109EEB /* DataLoader.swift in Sources */,
+				854AF80F5192170ADCCB069E6259FEEE /* GraphQLDependencyTracker.swift in Sources */,
+				3C7486C088BC221EA5E88192BA316DD4 /* GraphQLError.swift in Sources */,
+				3334363611D795C848F8E771DDB1A1A5 /* GraphQLExecutor.swift in Sources */,
+				2D1377F64EC27D44D821A9EF34EE862D /* GraphQLInputValue.swift in Sources */,
+				C2309D01A3D237536CC3C74B1A36592F /* GraphQLOperation.swift in Sources */,
+				BC1C82D8C94A6C209D100AC3AA449D38 /* GraphQLQueryWatcher.swift in Sources */,
+				D066A410387CD904D2FC3E3F10FFEBA4 /* GraphQLResponse.swift in Sources */,
+				20E38E32A7DB892F88BC1421D4D6A03B /* GraphQLResponseGenerator.swift in Sources */,
+				B7EF762FF3731C4DCFEB4D2191CE557F /* GraphQLResult.swift in Sources */,
+				852AE1AE9762452D89E501B86806C3AB /* GraphQLResultAccumulator.swift in Sources */,
+				47AC0559B014EAA414214010F97BA4C6 /* GraphQLResultNormalizer.swift in Sources */,
+				4A0EB5814435E932DC7DA439514950AB /* GraphQLSelectionSet.swift in Sources */,
+				C7386CA0B7A4E7F8D3D58EBCBCCC78F2 /* GraphQLSelectionSetMapper.swift in Sources */,
+				F6E58345690D1BAD17BB1A399234DF01 /* HTTPNetworkTransport.swift in Sources */,
+				E5949F0C4BB0DB1C3D66F2B59E2C227C /* InMemoryNormalizedCache.swift in Sources */,
+				4816D84F99C335BD69510B3CBCB3BC06 /* JSON.swift in Sources */,
+				0F55F645986549CC71562CA5F99351EB /* JSONSerializationFormat.swift in Sources */,
+				3945A29814E4B1E9C9A2DD1DE72522D4 /* JSONStandardTypeConversions.swift in Sources */,
+				8BCC46513958FD53CE2B58908A878CB6 /* Locking.swift in Sources */,
+				6472BDD504B3883BAAEC5F24E7027DA4 /* NetworkTransport.swift in Sources */,
+				45567CF12FE4EE67842F4AB8B41C9138 /* NormalizedCache.swift in Sources */,
+				6DB1B3C86D07ACD1237F55ED964C32D6 /* Promise.swift in Sources */,
+				6BB1817B430C72BBE099D23B39CECE0D /* Record.swift in Sources */,
+				3FB11A9708614E901C97167958276AFC /* RecordSet.swift in Sources */,
+				9F49CE13A71C3E9806C1884E9E5EBE7F /* Result.swift in Sources */,
+				097083C009DC181784C062222020113F /* ResultOrPromise.swift in Sources */,
+				EB31F7C05E4247DB1FAB104A815E7BCC /* Utilities.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BA6F3FFF92D0686F3B2FD33649A8536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9063EBC8F0041F29BC678DB6F6ED9000 /* Pods-ErxesSDK_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DA6649019C6DA477F456DD0B8ABBD87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6BC8F4160138CCB1FC1613A018AC319 /* SwiftyJSON-dummy.m in Sources */,
+				1953C50A215B3DDF6E3D2FF9FF0067A2 /* SwiftyJSON.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8332590688AC869BAFF371E940C4E054 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21710DE99D5491E39F8E0272D952FA16 /* JSONHelper.swift in Sources */,
+				FEA3382DEDB3A7F7E35F68A69A97A16E /* LiveGQL-dummy.m in Sources */,
+				1BB87AE935320FA10F49D5B405711383 /* LiveGQL.swift in Sources */,
+				DB5EFB12F094F305290621BCDB541DD6 /* MessageTypes.swift in Sources */,
+				34D574F4EBB018E313DB882FE584F86B /* PayloadMessages.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95AE9EBE88E2FC14B43BA82D9678F4D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EDD0DF5FD76F7DAB05C1407917C2E1C /* SocketRocket-dummy.m in Sources */,
+				E7C52ED5F39B4EFA709D0F4927E6D2AB /* SRWebSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00F38BA2D4E4D6B6961DC10AF6EFA84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D321AC15EF86060436BEA06A45C05590 /* Pods-ErxesSDK_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0DA0EA2E7D8B4B37FEC68F7DCFF2D903 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ErxesSDK;
+			target = 991230109448F6C63323D17A90CD9A71 /* ErxesSDK */;
+			targetProxy = 473AE467C9A523237399586C1D8C6899 /* PBXContainerItemProxy */;
+		};
+		16A4C248B9A875AB949E444D86D869AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Apollo;
+			target = 2010E78719F690490FE4CE58BC774303 /* Apollo */;
+			targetProxy = 8AB39B492F3103D6AEB9E9B408494458 /* PBXContainerItemProxy */;
+		};
+		180EF67D449E10210B223DCDE277CE8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			target = 1AB627571EA0DE5DBBE89A5F79483181 /* SocketRocket */;
+			targetProxy = 21E82DB3487A467BBFB602CE3404C1F5 /* PBXContainerItemProxy */;
+		};
+		1E33816FD0DF7788E06BD257603C3255 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = 1B6D918CEDD15231B29D2CD37608E5E8 /* SwiftyJSON */;
+			targetProxy = 5392036FBE23C29C702CDDA7F0909247 /* PBXContainerItemProxy */;
+		};
+		263CD1E47007C2A00CC73503A69F5D28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ErxesSDK-ErxesSDK";
+			target = F71A3784C6B671F0043E934135FF7649 /* ErxesSDK-ErxesSDK */;
+			targetProxy = BEC6791C46882FE38F7221CBCDCE94A2 /* PBXContainerItemProxy */;
+		};
+		2DE4729737C4FCA41007523E65A0F398 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = 1B6D918CEDD15231B29D2CD37608E5E8 /* SwiftyJSON */;
+			targetProxy = 00B921F7C1C9104D3DE3E7D260E3CE06 /* PBXContainerItemProxy */;
+		};
+		402C8C5FB4CBFB684FF061133479FC62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			target = 1AB627571EA0DE5DBBE89A5F79483181 /* SocketRocket */;
+			targetProxy = 800F1817A0769A68C41A199E13778A4E /* PBXContainerItemProxy */;
+		};
+		4C037372B72188633FFC9C076C265393 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-ErxesSDK_Example";
+			target = EAECFE2E0F9D869EE7DAB35DFC2B9C5B /* Pods-ErxesSDK_Example */;
+			targetProxy = 6CC0AB4802972A39C220FF017E9BE23C /* PBXContainerItemProxy */;
+		};
+		831E861333368422590451E0B50767DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Apollo;
+			target = 2010E78719F690490FE4CE58BC774303 /* Apollo */;
+			targetProxy = C526106952E4A7DF872689096DDE57C8 /* PBXContainerItemProxy */;
+		};
+		A275ACF7ED59901174D5E622F2FBCF16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LiveGQL;
+			target = DC8A6B254309DCB8C1CD7434E2BF9292 /* LiveGQL */;
+			targetProxy = 486818E61DA41DB21E034E8387DE467A /* PBXContainerItemProxy */;
+		};
+		C84AF4334AB935B3E679304C8867175C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LiveGQL;
+			target = DC8A6B254309DCB8C1CD7434E2BF9292 /* LiveGQL */;
+			targetProxy = B1DF85E18EE109525555B333D2F0F07C /* PBXContainerItemProxy */;
+		};
+		F445CF6018A373EF1AE5E7A4B242CC36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			target = 1AB627571EA0DE5DBBE89A5F79483181 /* SocketRocket */;
+			targetProxy = 953E8EECCA4F93016E0FDC297079E8D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		019EECAE7FC816AC8DF379D89895E66E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70363E132230A0C7F42C89AF26034418 /* Pods-ErxesSDK_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ErxesSDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ErxesSDK_Tests/Pods-ErxesSDK_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		341E37A8017F564A07B4FE07B26B527D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ErxesSDK";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/ResourceBundle-ErxesSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		39C5F1DCF583DF41FDD5EBB0C22A44E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03E26875E90983E9453D4CA950C74503 /* SocketRocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SocketRocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SocketRocket/SocketRocket.modulemap";
+				PRODUCT_MODULE_NAME = SocketRocket;
+				PRODUCT_NAME = SocketRocket;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		63456760118155EEF69B950B321CE8A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA11F2583C767A6639F9DFE40E25907A /* LiveGQL.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
+				PRODUCT_MODULE_NAME = LiveGQL;
+				PRODUCT_NAME = LiveGQL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6F33E38A7DAE5BD9D05C6C740D4B949C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
+				PRODUCT_MODULE_NAME = ErxesSDK;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		735814C483167203E5915671301EF3F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ErxesSDK";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/ResourceBundle-ErxesSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		8164F6FDA668A18D2C89EDE82294A08A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03E26875E90983E9453D4CA950C74503 /* SocketRocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SocketRocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SocketRocket/SocketRocket.modulemap";
+				PRODUCT_MODULE_NAME = SocketRocket;
+				PRODUCT_NAME = SocketRocket;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		83E6A688EBE3ECBC12B5F8A98ACFBCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28910C446BC9F78815A61E28D86A68D2 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyJSON;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8917A420F23248B4E36B1C95183CB793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5088D71C88F5091C3D0FD41917D9A86F /* Pods-ErxesSDK_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ErxesSDK_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ErxesSDK_Example/Pods-ErxesSDK_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		97F3FC72DE144572D87BABC86CE7F232 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 990C007FD1AAAA44F74F8ABED1FD56A8 /* Apollo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Apollo/Apollo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Apollo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Apollo/Apollo.modulemap";
+				PRODUCT_MODULE_NAME = Apollo;
+				PRODUCT_NAME = Apollo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AE8B911EB6C00A53EB864D3835B3AA4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0353F7F652483241932E7F33F8DA6A9 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
+				PRODUCT_MODULE_NAME = ErxesSDK;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CAEECED4622DF7689DBFC9DB985F3DD7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA11F2583C767A6639F9DFE40E25907A /* LiveGQL.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
+				PRODUCT_MODULE_NAME = LiveGQL;
+				PRODUCT_NAME = LiveGQL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D0B7343CF22FFA0AD02976DB6C2DC537 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 990C007FD1AAAA44F74F8ABED1FD56A8 /* Apollo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Apollo/Apollo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Apollo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Apollo/Apollo.modulemap";
+				PRODUCT_MODULE_NAME = Apollo;
+				PRODUCT_NAME = Apollo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F34536581678B2BD0C19866452DBBE5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28910C446BC9F78815A61E28D86A68D2 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyJSON;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F4D03670628EEA7B4D76B85944BC6A57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA6C75EADA9A3D580F74926837CC816D /* Pods-ErxesSDK_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ErxesSDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ErxesSDK_Tests/Pods-ErxesSDK_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FDB2FC4A1E5891381CD9D922145497F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		FEE437082C56BF4EA409DA7B85DD28D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B2E372AD398F2B70AF09884E59D681E /* Pods-ErxesSDK_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ErxesSDK_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ErxesSDK_Example/Pods-ErxesSDK_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		051A2CDDBCB4C5A2214CB1A18094A38C /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83E6A688EBE3ECBC12B5F8A98ACFBCC3 /* Debug */,
+				F34536581678B2BD0C19866452DBBE5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
+				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A97FF3A11BBDD2D3D9544323E5C9288 /* Build configuration list for PBXNativeTarget "ErxesSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F33E38A7DAE5BD9D05C6C740D4B949C /* Debug */,
+				AE8B911EB6C00A53EB864D3835B3AA4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79C46014900FAE1E3CD00BBA7B0D5D45 /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39C5F1DCF583DF41FDD5EBB0C22A44E9 /* Debug */,
+				8164F6FDA668A18D2C89EDE82294A08A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		95F1558F1119379B876706E9DBE5A508 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				341E37A8017F564A07B4FE07B26B527D /* Debug */,
+				735814C483167203E5915671301EF3F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9E2CE56DC643D5017563D19FFABFF064 /* Build configuration list for PBXNativeTarget "Apollo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0B7343CF22FFA0AD02976DB6C2DC537 /* Debug */,
+				97F3FC72DE144572D87BABC86CE7F232 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEB4B0F26AB9160A0EC7B57CEC65D067 /* Build configuration list for PBXNativeTarget "LiveGQL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				63456760118155EEF69B950B321CE8A0 /* Debug */,
+				CAEECED4622DF7689DBFC9DB985F3DD7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEEA7BD7268DC43E409B691778AFE3A6 /* Build configuration list for PBXNativeTarget "Pods-ErxesSDK_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4D03670628EEA7B4D76B85944BC6A57 /* Debug */,
+				019EECAE7FC816AC8DF379D89895E66E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB4ADCEE99B86060DA3CA60DBBFCFD73 /* Build configuration list for PBXNativeTarget "Pods-ErxesSDK_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8917A420F23248B4E36B1C95183CB793 /* Debug */,
+				FEE437082C56BF4EA409DA7B85DD28D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

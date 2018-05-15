@@ -1,0 +1,44 @@
+query totalUnreadCount($integrationId: String!, $customerId: String!) {
+    totalUnreadCount(integrationId: $integrationId, customerId: $customerId)
+}
+
+query UnreadCount($conversationId:String!){
+    unreadCount(conversationId:$conversationId)
+}
+
+mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String) {
+    insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId){
+        _id
+        conversationId
+    }
+}
+
+
+query Messages($conversationId: String!) {
+    messages(conversationId: $conversationId) {
+        ...MessageDetail
+    }
+}
+
+fragment ConversationDetail on Conversation {
+    _id
+    content
+    createdAt
+    messages {
+        customerId
+        createdAt
+    }
+    status
+    readUserIds
+    participatedUsers {
+        _id
+        details {
+            fullName
+            avatar
+        }
+    }
+}
+
+mutation ReadMessage($conversationId: String!) {
+    readConversationMessages(conversationId: $conversationId)
+}

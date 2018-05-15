@@ -1,0 +1,37 @@
+PODS:
+  - Apollo (0.7.0):
+    - Apollo/Core (= 0.7.0)
+  - Apollo/Core (0.7.0)
+  - ErxesSDK (0.1.0):
+    - Apollo (~> 0.7.0)
+    - LiveGQL (~> 2.0.0)
+    - SwiftyJSON (~> 4.0.0)
+  - LiveGQL (2.0.0):
+    - SocketRocket
+  - SocketRocket (0.5.1)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - ErxesSDK (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Apollo
+    - LiveGQL
+    - SocketRocket
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  ErxesSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Apollo: d6649ac06168660e70c6226c4eadfc0770791ba5
+  ErxesSDK: fdadd260bb67d1ae678d67e9af7b2054c5439df3
+  LiveGQL: bc97d1f0c5d70e200f27126f863e0be62e732298
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 86d034309b9df440803ae1f2417cdddcdeb3be74
+
+COCOAPODS: 1.5.0
