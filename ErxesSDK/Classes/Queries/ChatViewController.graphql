@@ -1,0 +1,42 @@
+fragment MessageDetail on ConversationMessage {
+    _id
+    user {
+        details {
+            avatar
+            fullName
+        }
+    }
+    customerId
+    content
+    createdAt
+}
+    
+ query lastUnreadMessage($integrationId: String!, $customerId: String!) {
+     lastUnreadMessage(integrationId: $integrationId, customerId: $customerId) {
+         _id
+         conversationId
+         content
+         user {
+             details {
+                 fullName
+                 avatar
+             }
+         }
+         engageData {
+             messageId
+             content
+             kind
+             sentAs
+             fromUser {
+                 details {
+                     fullName
+                     avatar
+                 }
+             }
+         }
+     }
+ }
+
+mutation ReadConversationMessages($conversationId: String!) {
+    readConversationMessages(conversationId: $conversationId)
+}
