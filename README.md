@@ -18,9 +18,15 @@ pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
 ```
 
 ```swift
-Erxes.startWithUserEmail(email: "tester@test.com")
+@IBAction func btnClick(){
+    Erxes.startWithUserEmail(email: "tester@test.com")
+}
+```
 or
-Erxes.start()
+```swift
+@IBAction func btnClick(){
+    Erxes.start()
+}
 ```
 
 ## Author
