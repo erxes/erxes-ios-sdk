@@ -1,0 +1,8 @@
+mutation Connect($brandCode: String!, $email: String!, $isUser: Boolean!, $data: JSON!, $browserInfo: JSON!, $cachedCustomerId: String!) {
+    messengerConnect(brandCode: $brandCode, email: $email, isUser: $isUser, data: $data, browserInfo: $browserInfo, cachedCustomerId: $cachedCustomerId) {
+        integrationId
+        messengerData
+        uiOptions
+        customerId
+    }
+}
