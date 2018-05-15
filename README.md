@@ -13,11 +13,15 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-Erxes ios sdk is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
 ```ruby
-pod 'erxes-ios-sdk'
+pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
+```
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+Erxes.setBrandCode(brandCode: "YDEdKj")
+return true
+}
 ```
 
 ## Author
