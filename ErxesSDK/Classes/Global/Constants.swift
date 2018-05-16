@@ -8,8 +8,7 @@ enum defs:String{
     case email = "email"
 }
 
-let host = "192.168.86.247"
-let apiUrl = "http://\(host):3100/graphql"
-let subsUrl = "ws://\(host):3300/subscriptions"
+var apiUrl = ""
+var subsUrl = ""
 
 let apollo = ApolloClient(url: URL(string:apiUrl)!)

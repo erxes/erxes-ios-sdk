@@ -18,6 +18,14 @@ pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
 ```
 
 ```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    Erxes.setBrandCode(brandCode: "YOUR_BRAND_CODE")
+    Erxes.setHosts(apiHost: "ERXES_API_HOST", subsHost: "ERXES_SUBSCRIPTION_HOST")
+    return true
+}
+```
+
+```swift
 @IBAction func btnClick(){
     Erxes.startWithUserEmail(email: "tester@test.com")
 }
