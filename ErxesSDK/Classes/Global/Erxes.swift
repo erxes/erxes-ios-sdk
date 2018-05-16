@@ -69,4 +69,9 @@ import UIKit
         }
     }
     
+    @objc public static func setHosts(apiHost:String, subsHost:String){
+        apiUrl = apiHost
+        subsUrl = subsHost
+    }
+    
 }
