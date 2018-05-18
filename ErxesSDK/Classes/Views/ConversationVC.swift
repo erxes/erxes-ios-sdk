@@ -1,6 +1,8 @@
 
 import UIKit
 import Apollo
+import LiveGQL
+import SwiftyJSON
 
 class ConversationVC: UIViewController {
 
@@ -16,8 +18,14 @@ class ConversationVC: UIViewController {
     
     var inited:Bool! = false
     
+    let gql = LiveGQL(socket: subsUrl)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        setNavigationColor()
         
         let def = UserDefaults()
         
@@ -31,6 +39,8 @@ class ConversationVC: UIViewController {
         
         tv.delegate = self
         tv.dataSource = self
+        gql.delegate = self
+        subscribe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +73,12 @@ class ConversationVC: UIViewController {
                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
                 self?.navigationController?.pushViewController(vc, animated: true)
             }
+        }
+    }
+    
+    func setNavigationColor(){
+        if let color = Erxes.color{
+            self.navigationController?.navigationBar.barTintColor = color
         }
     }
     
@@ -103,4 +119,15 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension ConversationVC:LiveGQLDelegate{
+    
+    public func subscribe(){
+        gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(Erxes.customerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
+    }
+    
+    public func receivedRawMessage(text: String) {
+        refresh()
+    }
 }

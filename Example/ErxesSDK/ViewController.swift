@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnClick(){
-        Erxes.startWithUserEmail(email: "tester@test.com")
+        Erxes.startWithUserEmail(email: "test@test.com")
+//        Erxes.start()
     }
 
 }
