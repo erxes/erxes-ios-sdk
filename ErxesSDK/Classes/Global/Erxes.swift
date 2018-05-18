@@ -7,6 +7,12 @@ import UIKit
     static var integrationId:String!
     static var email:String!
     static var conversationId:String!
+    static var color:UIColor!
+    static var colorHex:String!
+    static var msgThankyou:String!
+    static var msgWelcome:String!
+    static var supporterName:String!
+    static var supporterAvatar:String!
     
     static func firstRun() -> Bool{
         let defaults = UserDefaults()
@@ -72,6 +78,27 @@ import UIKit
     @objc public static func setHosts(apiHost:String, subsHost:String){
         apiUrl = apiHost
         subsUrl = subsHost
+        getConfig()
+    }
+    
+    static func getConfig(){
+        let query = GetConfigQuery(brandCode: Erxes.brandCode!)
+        apollo.fetch(query: query){result, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            let data = result?.data?.getMessengerIntegration
+            let defaults = UserDefaults()
+            if let uiOptions = data?.uiOptions{
+                defaults.setValue(uiOptions, forKey: "uiOptions")
+            }
+            if let messengerData = data?.messengerData{
+                defaults.setValue(messengerData, forKey: "messengerData")
+            }
+            defaults.synchronize()
+        }
     }
     
 }

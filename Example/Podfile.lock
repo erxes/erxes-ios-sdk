@@ -1,15 +1,15 @@
 PODS:
-  - Apollo (0.7.0):
-    - Apollo/Core (= 0.7.0)
-  - Apollo/Core (0.7.0)
+  - Apollo (0.8.0):
+    - Apollo/Core (= 0.8.0)
+  - Apollo/Core (0.8.0)
   - ErxesSDK (0.1.0):
-    - Apollo (~> 0.7.0)
+    - Apollo (~> 0.8.0)
     - LiveGQL (~> 2.0.0)
-    - SwiftyJSON (~> 4.0.0)
+    - SwiftyJSON (~> 4.1.0)
   - LiveGQL (2.0.0):
     - SocketRocket
   - SocketRocket (0.5.1)
-  - SwiftyJSON (4.0.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - ErxesSDK (from `../`)
@@ -26,11 +26,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Apollo: d6649ac06168660e70c6226c4eadfc0770791ba5
-  ErxesSDK: 399f137abf735dae9cd647ac8d3af0c0d0939709
+  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
+  ErxesSDK: d316e7ec84b39fe850160dc0514949b5f7daaa65
   LiveGQL: bc97d1f0c5d70e200f27126f863e0be62e732298
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
-  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 
