@@ -11,20 +11,30 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var tv:UITableView!
     @IBOutlet weak var container:UIView!
     @IBOutlet weak var wvChat:UIWebView!
+    @IBOutlet weak var ivSupporterAvatar: UIImageView!
+    @IBOutlet weak var lblSupporterName: UILabel!
+    @IBOutlet weak var lblSupporterStatus: UILabel!
+    
+    
     var list = [JSON]()
     var containerHeight:CGFloat = 0.0
-    let brandCode = "YDEdKj"
     
     var integrationId = ""
     var customerId = ""
     var conversationId:String?
     var totalUnreadCountInt = 0
     var inited = false;
-    
-    let css = "<style>body{background:#faf9fb;}.root{background:#faf9fb}.row{overflow:hidden;margin-bottom:10px;font-family:'Helvetica Neue',Arial,sans-serif}.row .text a{float:left;padding:8px 10px;background:#fff;border-radius:5px;color:#444;margin-bottom:5px;font-size:14px;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2)}.row .text{overflow:hidden}.me .text a{float:right;background:#7754b3;color:#fff}.row .date{color:#686868;font-size:11px}.me .date{text-align:right}p{display:inline}.row .img{float:left;margin-right:8px}.row .img img{width:40px;height:40px}.me .img{float:right}.me .img img{margin-right:0;margin-left:8px}</style><script>document.body.innerHTML+=''</script>"
+    var bg = "#7754b3"
+    var css = ""
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.ivSupporterAvatar.downloadedFrom(link: Erxes.supporterAvatar)
+        self.lblSupporterName.text = Erxes.supporterName
+        initChat()
+        
         self.configLive()
 //        segment.addUnderlineForSelectedSegment()
         self.wvChat.scrollView.bounces = false
@@ -36,6 +46,23 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         if conversationId != nil{
             self.subscribe()
         }
+    }
+    
+    func initChat(){
+        
+        if let color = Erxes.colorHex{
+            bg = color
+        }
+        
+        var str = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let now = dateFormatter.string(from: Date())
+        str = "<div class=\"row\"><div class=\"img\"><img src=\"\(Erxes.supporterAvatar!)\"/></div><div class=\"text\"><a>\(Erxes.msgWelcome!)</a></div><div class=\"date\">\(now)</div></div>"
+//        str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
+//        self.wvChat.stringByEvaluatingJavaScript(from: str)
+        
+        css = "<style>body{background:#faf9fb;}.root{background:#faf9fb}.row{overflow:hidden;margin-bottom:10px;font-family:'Helvetica Neue',Arial,sans-serif}.row .text a{float:left;padding:8px 10px;background:#fff;border-radius:5px;color:#444;margin-bottom:5px;font-size:14px;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2)}.row .text{overflow:hidden}.me .text a{float:right;background:\(bg);color:#fff}.row .text img{max-width:100%; height:auto!; padding-top:3px;} .row .date{color:#686868;font-size:11px}.me .date{text-align:right}p{display:inline}.row .img{float:left;margin-right:8px}.row .img img{width:40px;height:40px;border-radius:20px;}.me .img{float:right}.me .img img{margin-right:0;margin-left:8px}</style>\(str)"
     }
     
     func appendToChat(_ item:JSON){
@@ -52,8 +79,20 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                     me = "me"
                 }
             }
+            
+            var avatar = "https://widgets.crm.nmma.co/static/images/default-avatar.svg"
+            
+            if let userAvatar = item["payload"]["data"]["conversationMessageInserted"]["user"]["details"]["avatar"].string{
+                avatar = userAvatar
+            }
+            
+            var image = ""
+            
+            if let img = item["payload"]["data"]["conversationMessageInserted"]["attachments"][0]["url"].string{
+                image = img
+            }
 
-            str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"https://widgets.crm.nmma.co/static/images/default-avatar.svg\"/></div><div class=\"text\"><a>\(str)</a></div><div class=\"date\">\(now)</div></div>"
+            str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(str)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now)</div></div>"
             str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
 
             self.wvChat.stringByEvaluatingJavaScript(from: str)
@@ -89,7 +128,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 
                     for item in messagesArray {
-                        var created:String! = item.createdAt
+                        let created:String! = item.createdAt
                         let tmp = Int64(created)
                         let date = Date(milliseconds:tmp!)
                         let now = dateFormatter.string(from: date)
@@ -97,11 +136,11 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                         
                         var avatar = "https://widgets.crm.nmma.co/static/images/default-avatar.svg"
                         
-//                        if let user = item.user{
-//                            if let userAvatar = item.user?.details?.avatar{
-//                                avatar = userAvatar
-//                            }
-//                        }
+                        if let user = item.user{
+                            if let userAvatar = item.user?.details?.avatar{
+                                avatar = userAvatar
+                            }
+                        }
 
                         me = ""
                         if let customerId = item.customerId{
@@ -110,8 +149,25 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                             }
                         }
                         
+                        var image = ""
+                        
+                        if let attachments = item.attachments{
+                            if attachments.count > 0{
+                                let attachment = attachments[0]
+                                if let dataFromString = attachment?.data(using: .utf8, allowLossyConversion: false) {
+                                    do{
+                                        let item = try JSON(data: dataFromString)
+                                        image = item["url"].string!
+                                    }
+                                    catch{
+                                        print("Error info: \(error)")
+                                    }
+                                }
+                            }
+                        }
+                        
                         let chat = item.content?.withoutHtml
-                        str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)</a></div><div class=\"date\">\(now)</div></div>"
+                        str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now)</div></div>"
                     }
 
                 self?.inited = true;
@@ -122,7 +178,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func subscribe(){
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(self.conversationId!)\"){content,userId,createdAt,customerId}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(self.conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
     }
     
     @IBAction func typeChanged(_ sender: Any) {
@@ -190,6 +246,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
 }
 
 extension ChatVC:LiveGQLDelegate{
+    
     public func receivedRawMessage(text: String) {
         do{
             print(text)

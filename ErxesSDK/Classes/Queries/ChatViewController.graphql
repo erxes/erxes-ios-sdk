@@ -9,6 +9,7 @@ fragment MessageDetail on ConversationMessage {
     customerId
     content
     createdAt
+    attachments
 }
     
  query lastUnreadMessage($integrationId: String!, $customerId: String!) {

@@ -830,6 +830,241 @@ public final class ConnectMutation: GraphQLMutation {
   }
 }
 
+public final class GetConfigQuery: GraphQLQuery {
+  public static let operationString =
+    "query GetConfig($brandCode: String!) {\n  getMessengerIntegration(brandCode: $brandCode) {\n    __typename\n    languageCode\n    uiOptions\n    messengerData\n  }\n}"
+
+  public var brandCode: String
+
+  public init(brandCode: String) {
+    self.brandCode = brandCode
+  }
+
+  public var variables: GraphQLMap? {
+    return ["brandCode": brandCode]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("getMessengerIntegration", arguments: ["brandCode": GraphQLVariable("brandCode")], type: .object(GetMessengerIntegration.selections)),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(getMessengerIntegration: GetMessengerIntegration? = nil) {
+      self.init(snapshot: ["__typename": "Query", "getMessengerIntegration": getMessengerIntegration.flatMap { $0.snapshot }])
+    }
+
+    public var getMessengerIntegration: GetMessengerIntegration? {
+      get {
+        return (snapshot["getMessengerIntegration"] as? Snapshot).flatMap { GetMessengerIntegration(snapshot: $0) }
+      }
+      set {
+        snapshot.updateValue(newValue?.snapshot, forKey: "getMessengerIntegration")
+      }
+    }
+
+    public struct GetMessengerIntegration: GraphQLSelectionSet {
+      public static let possibleTypes = ["Integration"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("languageCode", type: .scalar(String.self)),
+        GraphQLField("uiOptions", type: .scalar(String.self)),
+        GraphQLField("messengerData", type: .scalar(String.self)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(languageCode: String? = nil, uiOptions: String? = nil, messengerData: String? = nil) {
+        self.init(snapshot: ["__typename": "Integration", "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var languageCode: String? {
+        get {
+          return snapshot["languageCode"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "languageCode")
+        }
+      }
+
+      public var uiOptions: String? {
+        get {
+          return snapshot["uiOptions"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "uiOptions")
+        }
+      }
+
+      public var messengerData: String? {
+        get {
+          return snapshot["messengerData"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "messengerData")
+        }
+      }
+    }
+  }
+}
+
+public final class GetSupporterQuery: GraphQLQuery {
+  public static let operationString =
+    "query getSupporter($integrationId: String!) {\n  messengerSupporters(integrationId: $integrationId) {\n    __typename\n    _id\n    details {\n      __typename\n      avatar\n      fullName\n    }\n  }\n}"
+
+  public var integrationId: String
+
+  public init(integrationId: String) {
+    self.integrationId = integrationId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["integrationId": integrationId]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("messengerSupporters", arguments: ["integrationId": GraphQLVariable("integrationId")], type: .list(.object(MessengerSupporter.selections))),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(messengerSupporters: [MessengerSupporter?]? = nil) {
+      self.init(snapshot: ["__typename": "Query", "messengerSupporters": messengerSupporters.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
+    }
+
+    public var messengerSupporters: [MessengerSupporter?]? {
+      get {
+        return (snapshot["messengerSupporters"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { MessengerSupporter(snapshot: $0) } } }
+      }
+      set {
+        snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "messengerSupporters")
+      }
+    }
+
+    public struct MessengerSupporter: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+        GraphQLField("details", type: .object(Detail.selections)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(id: String, details: Detail? = nil) {
+        self.init(snapshot: ["__typename": "User", "_id": id, "details": details.flatMap { $0.snapshot }])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: String {
+        get {
+          return snapshot["_id"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "_id")
+        }
+      }
+
+      public var details: Detail? {
+        get {
+          return (snapshot["details"] as? Snapshot).flatMap { Detail(snapshot: $0) }
+        }
+        set {
+          snapshot.updateValue(newValue?.snapshot, forKey: "details")
+        }
+      }
+
+      public struct Detail: GraphQLSelectionSet {
+        public static let possibleTypes = ["UserDetails"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("avatar", type: .scalar(String.self)),
+          GraphQLField("fullName", type: .scalar(String.self)),
+        ]
+
+        public var snapshot: Snapshot
+
+        public init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        public init(avatar: String? = nil, fullName: String? = nil) {
+          self.init(snapshot: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
+        }
+
+        public var __typename: String {
+          get {
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var avatar: String? {
+          get {
+            return snapshot["avatar"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "avatar")
+          }
+        }
+
+        public var fullName: String? {
+          get {
+            return snapshot["fullName"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "fullName")
+          }
+        }
+      }
+    }
+  }
+}
+
 public final class TotalUnreadCountQuery: GraphQLQuery {
   public static let operationString =
     "query totalUnreadCount($integrationId: String!, $customerId: String!) {\n  totalUnreadCount(integrationId: $integrationId, customerId: $customerId)\n}"
@@ -1064,6 +1299,7 @@ public final class MessagesQuery: GraphQLQuery {
         GraphQLField("customerId", type: .scalar(String.self)),
         GraphQLField("content", type: .scalar(String.self)),
         GraphQLField("createdAt", type: .scalar(String.self)),
+        GraphQLField("attachments", type: .list(.scalar(String.self))),
       ]
 
       public var snapshot: Snapshot
@@ -1072,8 +1308,8 @@ public final class MessagesQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: String? = nil) {
-        self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt])
+      public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: String? = nil, attachments: [String?]? = nil) {
+        self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments])
       }
 
       public var __typename: String {
@@ -1127,6 +1363,15 @@ public final class MessagesQuery: GraphQLQuery {
         }
         set {
           snapshot.updateValue(newValue, forKey: "createdAt")
+        }
+      }
+
+      public var attachments: [String?]? {
+        get {
+          return snapshot["attachments"] as? [String?]
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "attachments")
         }
       }
 
@@ -1283,7 +1528,7 @@ public final class ReadMessageMutation: GraphQLMutation {
 
 public struct MessageDetail: GraphQLFragment {
   public static let fragmentString =
-    "fragment MessageDetail on ConversationMessage {\n  __typename\n  _id\n  user {\n    __typename\n    details {\n      __typename\n      avatar\n      fullName\n    }\n  }\n  customerId\n  content\n  createdAt\n}"
+    "fragment MessageDetail on ConversationMessage {\n  __typename\n  _id\n  user {\n    __typename\n    details {\n      __typename\n      avatar\n      fullName\n    }\n  }\n  customerId\n  content\n  createdAt\n  attachments\n}"
 
   public static let possibleTypes = ["ConversationMessage"]
 
@@ -1294,6 +1539,7 @@ public struct MessageDetail: GraphQLFragment {
     GraphQLField("customerId", type: .scalar(String.self)),
     GraphQLField("content", type: .scalar(String.self)),
     GraphQLField("createdAt", type: .scalar(String.self)),
+    GraphQLField("attachments", type: .list(.scalar(String.self))),
   ]
 
   public var snapshot: Snapshot
@@ -1302,8 +1548,8 @@ public struct MessageDetail: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: String? = nil) {
-    self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt])
+  public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: String? = nil, attachments: [String?]? = nil) {
+    self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments])
   }
 
   public var __typename: String {
@@ -1357,6 +1603,15 @@ public struct MessageDetail: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "createdAt")
+    }
+  }
+
+  public var attachments: [String?]? {
+    get {
+      return snapshot["attachments"] as? [String?]
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "attachments")
     }
   }
 

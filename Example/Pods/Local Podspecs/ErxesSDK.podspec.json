@@ -25,14 +25,15 @@
     ]
   },
   "pod_target_xcconfig": {
-    "DEFINES_MODULE": "YES"
+    "DEFINES_MODULE": "YES",
+    "SWIFT_VERSION": "4.0"
   },
   "dependencies": {
     "Apollo": [
-      "~> 0.7.0"
+      "~> 0.8.0"
     ],
     "SwiftyJSON": [
-      "~> 4.0.0"
+      "~> 4.1.0"
     ],
     "LiveGQL": [
       "~> 2.0.0"

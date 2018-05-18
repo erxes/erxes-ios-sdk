@@ -17,9 +17,9 @@ TODO: Add long description of the pod here.
    s.resource_bundles = {
        'ErxesSDK' => ['ErxesSDK/Assets/*.{jpg,storyboard,png,ttf}']
    }
-  s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES'}
+  s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES','SWIFT_VERSION' => '4.0'}
   
-  s.dependency 'Apollo', '~> 0.7.0'
-  s.dependency 'SwiftyJSON', '~> 4.0.0'
+  s.dependency 'Apollo', '~> 0.8.0'
+  s.dependency 'SwiftyJSON', '~> 4.1.0'
   s.dependency 'LiveGQL', '~> 2.0.0'
 end
