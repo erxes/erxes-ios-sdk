@@ -17,6 +17,12 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
 ```
 
+## Swift Instruction
+
+```swift
+import ErxesSDK
+```
+
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     Erxes.setBrandCode(brandCode: "YOUR_BRAND_CODE")
@@ -34,6 +40,32 @@ or
 ```swift
 @IBAction func btnClick(){
     Erxes.start()
+}
+```
+
+## Objective-C Instruction
+
+```objc
+@import ErxesSDK;
+```
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Erxes setBrandCodeWithBrandCode:@"YOUR_BRAND_CODE"];
+    [Erxes setHostsWithApiHost:@"ERXES_API_HOST" subsHost:@"ERXES_SUBSCRIPTION_HOST"];
+    return YES;
+}
+```
+
+```objc
+- (IBAction)btnClick:(id)sender {
+    [Erxes startWithUserEmailWithEmail:@"test@test.com"];
+}
+```
+or
+```objc
+- (IBAction)btnClick:(id)sender {
+    [Erxes start];
 }
 ```
 
