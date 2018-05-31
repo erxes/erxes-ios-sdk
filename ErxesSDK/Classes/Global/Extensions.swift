@@ -56,15 +56,15 @@ extension UIImage{
     }
 }
 
-extension Date {
-    var millisecondsSince1970:Int {
-        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds:Int64) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
-    }
-}
+//extension Date {
+//    var millisecondsSince1970:Int {
+//        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
+//    }
+//
+//    init(milliseconds:Int64) {
+//        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+//    }
+//}
 
 extension String {
     public var withoutHtml: String {
@@ -131,5 +131,68 @@ extension UIColor {
         }
         
         return nil
+    }
+}
+
+extension Data {
+    var html2AttributedString: NSAttributedString? {
+        do {
+            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        } catch {
+            print("error:", error)
+            return  nil
+        }
+    }
+    var html2String: String {
+        return html2AttributedString?.string ?? ""
+    }
+}
+
+extension String {
+    var html2AttributedString: NSAttributedString? {
+        return Data(utf8).html2AttributedString
+    }
+    var html2String: String {
+        return html2AttributedString?.string ?? ""
+    }
+}
+
+public extension UIFont {
+    
+    public static func registerFontWithFilenameString(filenameString: String, bundle: Bundle) {
+        
+        guard let pathForResourceString = bundle.path(forResource: filenameString, ofType: nil) else {
+            print("UIFont+:  Failed to register font - path for resource not found.")
+            return
+        }
+        
+        guard let fontData = NSData(contentsOfFile: pathForResourceString) else {
+            print("UIFont+:  Failed to register font - font data could not be loaded.")
+            return
+        }
+        
+        guard let dataProvider = CGDataProvider(data: fontData) else {
+            print("UIFont+:  Failed to register font - data provider could not be loaded.")
+            return
+        }
+        
+        guard let fontRef = CGFont(dataProvider) else {
+            print("UIFont+:  Failed to register font - font could not be loaded.")
+            return
+        }
+        
+        var errorRef: Unmanaged<CFError>? = nil
+        if (CTFontManagerRegisterGraphicsFont(fontRef, &errorRef) == false) {
+            print("UIFont+:  Failed to register font - register graphics font failed - this font may have already been registered in the main bundle.")
+        }
+    }
+    
+}
+
+extension String {
+    func isValidEmail() -> Bool {
+        // here, `try!` will always succeed because the pattern is valid
+        let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
     }
 }

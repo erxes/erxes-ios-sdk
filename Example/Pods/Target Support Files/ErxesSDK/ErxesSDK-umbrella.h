@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "NMFormatter.h"
 
 FOUNDATION_EXPORT double ErxesSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char ErxesSDKVersionString[];

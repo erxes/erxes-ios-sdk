@@ -2,7 +2,8 @@
 import UIKit
 import LiveGQL
 import WebKit
-import SwiftyJSON
+import Photos
+import Alamofire
 
 public class ChatVC: UIViewController, UITextFieldDelegate{
 
@@ -14,9 +15,19 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var ivSupporterAvatar: UIImageView!
     @IBOutlet weak var lblSupporterName: UILabel!
     @IBOutlet weak var lblSupporterStatus: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var lblStatus: UILabel!
     
+    @IBOutlet weak var progress: UIProgressView!
+    @IBOutlet weak var btnSend: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var uploadView: UIView!
+    @IBOutlet weak var ivPicked: UIImageView!
+    @IBOutlet weak var lblFilesize: UILabel!
+    @IBOutlet weak var loader: UIView!
     
-    var list = [JSON]()
+    var attachments = [JSON]()
+    
     var containerHeight:CGFloat = 0.0
     
     var integrationId = ""
@@ -26,25 +37,91 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     var inited = false;
     var bg = "#7754b3"
     var css = ""
+    var uploadUrl = ""
+    var uploaded = JSON()
+    
+    var sv:UIView?
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        checkOnline()
+        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.ivSupporterAvatar.downloadedFrom(link: Erxes.supporterAvatar)
-        self.lblSupporterName.text = Erxes.supporterName
+        if let supporterAvatar = Erxes.supporterAvatar{
+            self.ivSupporterAvatar.downloadedFrom(link: supporterAvatar)
+        }
+        else{
+            Erxes.supporterAvatar = "avatar.png"
+        }
+        if let supporterName = Erxes.supporterName{
+            self.lblSupporterName.text = supporterName
+        }
+        else{
+            Erxes.supporterAvatar = "Хэрэглэгчид туслах"
+        }
         initChat()
         
         self.configLive()
 //        segment.addUnderlineForSelectedSegment()
+        
+        let bundle = Bundle(for:RegisterVC.self)
+        let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
+        
         self.wvChat.scrollView.bounces = false
-        self.wvChat.loadHTMLString(self.css, baseURL: nil)
+        self.wvChat.loadHTMLString(self.css, baseURL: url)
+        
+        loading()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-//        self.connectMessenger()
         
         if conversationId != nil{
             self.subscribe()
+            readConversation()
+        }
+        
+//        self.attachments
+    }
+    
+    func loading(){
+        self.loader.isHidden = false;
+    }
+    
+    func loadEnd(){
+        self.loader.isHidden = true;
+    }
+    
+    func readConversation(){
+        if let conversationId = self.conversationId{
+            let mutation = ReadConversationMessagesMutation(conversationId: conversationId)
+            apollo.perform(mutation: mutation){result,error in
+                if let error = error{
+                    print(error)
+                    return
+                }
+                print(result)
+            }
+        }
+    }
+    
+    func checkOnline(){
+        let query = IsSupporterOnlineQuery(integrationId: Erxes.integrationId)
+        apollo.fetch(query: query){ [weak self] result, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let isOnline = result?.data?.isMessengerOnline{
+                if isOnline{
+                    self?.statusView.backgroundColor = UIColor(hexString: "#67B04F")
+                    self?.lblStatus.text = "Онлайн"
+                }
+                else{
+                    self?.statusView.backgroundColor = UIColor(hexString: "#DDDDDD")
+                    self?.lblStatus.text = "Оффлайн"
+                }
+            }
         }
     }
     
@@ -57,42 +134,51 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         var str = ""
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let now = dateFormatter.string(from: Date())
-        str = "<div class=\"row\"><div class=\"img\"><img src=\"\(Erxes.supporterAvatar!)\"/></div><div class=\"text\"><a>\(Erxes.msgWelcome!)</a></div><div class=\"date\">\(now)</div></div>"
+//        let now = dateFormatter.string(from: Date())
+        let now = NMFormatter.now()
+        str = "<div class=\"row\"><div class=\"img\"><img src=\"\(Erxes.supporterAvatar!)\"/></div><div class=\"text\"><a>\(Erxes.msgWelcome ?? "")</a></div><div class=\"date\">\(now!)</div></div>"
 //        str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
 //        self.wvChat.stringByEvaluatingJavaScript(from: str)
         
-        css = "<style>body{background:#faf9fb;}.root{background:#faf9fb}.row{overflow:hidden;margin-bottom:10px;font-family:'Helvetica Neue',Arial,sans-serif}.row .text a{float:left;padding:8px 10px;background:#fff;border-radius:5px;color:#444;margin-bottom:5px;font-size:14px;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2)}.row .text{overflow:hidden}.me .text a{float:right;background:\(bg);color:#fff}.row .text img{max-width:100%; height:auto!; padding-top:3px;} .row .date{color:#686868;font-size:11px}.me .date{text-align:right}p{display:inline}.row .img{float:left;margin-right:8px}.row .img img{width:40px;height:40px;border-radius:20px;}.me .img{float:right}.me .img img{margin-right:0;margin-left:8px}</style>\(str)"
+        css = "<style>body{background:url('bg-1.png');}.root{background:#faf9fb}.row{overflow:hidden;margin-bottom:10px;font-family:'Helvetica Neue',Arial,sans-serif}.row .text a{float:left;padding:8px 10px;background:#fff;border-radius:5px;color:#444;margin-bottom:5px;font-size:14px;box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2)}.row .text{overflow:hidden}.me .text a{float:right;background:\(bg);color:#fff}.row .text img{max-width:100%; height:auto!; padding-top:3px;} .row .date{color:#686868;font-size:11px}.me .date{text-align:right}p{display:inline}.row .img{float:left;margin-right:8px}.row .img img{width:40px;height:40px;border-radius:20px;}.me .img{float:right}.me .img img{margin-right:0;margin-left:8px}</style>\(str)"
     }
     
-    func appendToChat(_ item:JSON){
-        if var str = item["payload"]["data"]["conversationMessageInserted"]["content"].string{
-
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let now = dateFormatter.string(from: Date())
+    func appendToChat(_ item:MessageSubs){
+        
+        if let message = item.payload?.data?.conversationMessageInserted{
+            
+            var str = ""
+            
+            if let content = message.content{
+                str = content
+            }
+            
+            let now = NMFormatter.now()
 
             var me = ""
 
-            if let customerId = item["payload"]["data"]["conversationMessageInserted"]["customerId"].string{
+            if let customerId = message.customerId{
                 if customerId == Erxes.customerId{
                     me = "me"
                 }
             }
             
-            var avatar = "https://widgets.crm.nmma.co/static/images/default-avatar.svg"
+            var avatar = "avatar.png"
             
-            if let userAvatar = item["payload"]["data"]["conversationMessageInserted"]["user"]["details"]["avatar"].string{
+            if let userAvatar = message.user?.details?.avatar{
                 avatar = userAvatar
             }
             
             var image = ""
             
-            if let img = item["payload"]["data"]["conversationMessageInserted"]["attachments"][0]["url"].string{
-                image = img
+            if message.attachments.count > 0{
+                let attachment = message.attachments[0]
+                if let img = attachment!.url{
+                    image = img
+                }
             }
 
-            str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(str)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now)</div></div>"
+            str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(str)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
             str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
 
             self.wvChat.stringByEvaluatingJavaScript(from: str)
@@ -124,20 +210,15 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 var me = ""
                 var str = "";
 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-
                     for item in messagesArray {
                         let created:String! = item.createdAt
-                        let tmp = Int64(created)
-                        let date = Date(milliseconds:tmp!)
-                        let now = dateFormatter.string(from: date)
+                        let now = Utils.formatDate(time: created)
                         print("");
                         
-                        var avatar = "https://widgets.crm.nmma.co/static/images/default-avatar.svg"
+                        var avatar = "avatar.png"
                         
                         if let user = item.user{
-                            if let userAvatar = item.user?.details?.avatar{
+                            if let userAvatar = user.details?.avatar{
                                 avatar = userAvatar
                             }
                         }
@@ -154,20 +235,25 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                         if let attachments = item.attachments{
                             if attachments.count > 0{
                                 let attachment = attachments[0]
-                                if let dataFromString = attachment?.data(using: .utf8, allowLossyConversion: false) {
-                                    do{
-                                        let item = try JSON(data: dataFromString)
-                                        image = item["url"].string!
-                                    }
-                                    catch{
-                                        print("Error info: \(error)")
-                                    }
+                                
+                                if let url = attachment!["url"] as? String{
+                                    image = url
                                 }
+                                
+//                                if let dataFromString = attachment?.data(using: .utf8, allowLossyConversion: false) {
+//                                    do{
+//                                        let item = try JSONDecoder().decode(Attachment.self, from: dataFromString)
+//                                        image = item.url!
+//                                    }
+//                                    catch{
+//                                        print("Error info: \(error)")
+//                                    }
+//                                }
                             }
                         }
                         
                         let chat = item.content?.withoutHtml
-                        str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now)</div></div>"
+                        str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
                     }
 
                 self?.inited = true;
@@ -178,7 +264,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func subscribe(){
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(self.conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(self.conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
     }
     
     @IBAction func typeChanged(_ sender: Any) {
@@ -226,10 +312,11 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         var mutation  = InsertMessageMutation(integrationId: Erxes.integrationId, customerId: Erxes.customerId, message: msg)
         
         if conversationId != nil{
-            mutation  = InsertMessageMutation(integrationId: Erxes.integrationId, customerId: Erxes.customerId, message: msg, conversationId: self.conversationId)
+            mutation  = InsertMessageMutation(integrationId: Erxes.integrationId, customerId: Erxes.customerId, message: msg, conversationId: self.conversationId, attachments:attachments)
         }
 
         apollo.perform(mutation: mutation){[weak self] result,error in
+            self?.uploadView.isHidden = true
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -243,6 +330,109 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             }
         }
     }
+    
+    @IBAction func btnAttachClick(){
+        checkPermission()
+    }
+    
+    func checkPermission(){
+        
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    self.openGallery()
+                } else {
+                }
+            })
+        }
+        else{
+            self.openGallery()
+        }
+    }
+    
+    func uploadFile(image:UIImage){
+        
+        self.uploadView.isHidden = false;
+        
+        let url = "http://localhost:3300/upload-file"
+        let imgData = UIImageJPEGRepresentation(image, 0.5)!
+        let size = imgData.count
+        let bcf = ByteCountFormatter()
+        bcf.allowedUnits = [.useKB] // optional: restricts the units to MB only
+        bcf.countStyle = .file
+        self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
+        
+//        let parameters = ["name": rname] //Optional for extra parameter
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "file",fileName: "file.jpg", mimeType: "image/jpg")
+//            for (key, value) in parameters {
+//                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+//            } //Optional for extra parameters
+        },
+                         to:url)
+        { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                
+                upload.uploadProgress(closure: { (progress) in
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                    self.progress.progress = Float(progress.fractionCompleted)
+                })
+                
+                upload.responseString { response in
+                    print(response)
+                    self.uploadUrl = response.value!
+                    self.uploaded = ["url" : self.uploadUrl, "size" : size, "type" : "image/jpeg"]
+                }
+                
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        }
+        
+    }
+    
+    func sendAttachment(){
+        
+    }
+    
+    func openGallery()
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+//        imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnSendClick(_ sender: Any) {
+        self.uploadView.isHidden = false;
+        self.attachments = [JSON]()
+        self.attachments.append(self.uploaded)
+        sendMessage("")
+    }
+    
+    @IBAction func btnCancelClick(_ sender: Any) {
+        self.uploadView.isHidden = false;
+    }
+    
+}
+
+extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        print(info)
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        ivPicked.image = chosenImage
+        uploadFile(image: chosenImage)
+    }
+    
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ChatVC:LiveGQLDelegate{
@@ -251,12 +441,12 @@ extension ChatVC:LiveGQLDelegate{
         do{
             print(text)
             if let dataFromString = text.data(using: .utf8, allowLossyConversion: false) {
-                let item = try JSON(data: dataFromString)
-                self.list.append(item)
+                let item = try JSONDecoder().decode(MessageSubs.self, from: dataFromString)
                 self.appendToChat(item)
             }
         }
         catch{
+            print(error)
         }
     }
 }
@@ -267,7 +457,7 @@ extension ChatVC:UIWebViewDelegate{
         if request.url?.scheme == "inapp"{
             if request.url?.host == "scroll"{
                 let scrollPoint = CGPoint(x: 0, y: self.wvChat.scrollView.contentSize.height - self.wvChat.frame.size.height)
-                self.wvChat.scrollView.setContentOffset(scrollPoint, animated: true)//Set false if you doesn't want animation
+                self.wvChat.scrollView.setContentOffset(scrollPoint, animated: true)
                 return false
             }
         }
@@ -275,6 +465,9 @@ extension ChatVC:UIWebViewDelegate{
     }
 
     public func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+        loadEnd()
+        
         if(!inited){
             loadMessages();
         }
