@@ -1,12 +1,6 @@
-//
-//  MessengerOption.swift
-//  ErxesSDK
-//
-//  Created by purevee on 5/24/18.
-//
 
 import UIKit
 
-class MessengerOption: NSObject {
-
+struct MessengerOption: Codable {
+    var color:String?
 }

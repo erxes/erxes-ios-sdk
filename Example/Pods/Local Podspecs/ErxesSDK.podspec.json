@@ -21,22 +21,23 @@
   "source_files": "ErxesSDK/Classes/**/*",
   "resource_bundles": {
     "ErxesSDK": [
-      "ErxesSDK/Assets/*.{jpg,storyboard,png,ttf}"
+      "ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings}"
     ]
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",
     "SWIFT_VERSION": "4.0"
   },
+  "frameworks": "Photos",
   "dependencies": {
     "Apollo": [
       "~> 0.8.0"
     ],
-    "SwiftyJSON": [
-      "~> 4.1.0"
-    ],
     "LiveGQL": [
       "~> 2.0.0"
+    ],
+    "Alamofire": [
+      "~> 4.7"
     ]
   }
 }
