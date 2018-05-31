@@ -1,48 +1,35 @@
 
 import UIKit
-import SwiftyJSON
 
 public class RegisterVC: UIViewController {
 
+    @IBOutlet weak var segment:UISegmentedControl!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblDesc: UILabel!
+    
     @IBOutlet var tfEmail:UITextField!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-//        getConfig()
-        
         let defaults = UserDefaults()
         
-        if let uiOptions = defaults.string(forKey: "uiOptions") {
-            if let dataFromString = uiOptions.data(using: .utf8, allowLossyConversion: false) {
-                do{
-                    let item = try JSON(data: dataFromString)
-                    if let color = item["color"].string{
-                        Erxes.color = UIColor(hexString: color)
-                        Erxes.colorHex = color
-                    }
-                }
-                catch{
-                    print("Error info: \(error)")
-                }
+        if let uiOptions = defaults.dictionary(forKey: "uiOptions"){
+            print(uiOptions)
+            if let color = uiOptions["color"] as? String{
+                Erxes.color = UIColor(hexString: color)
+                Erxes.colorHex = color
             }
         }
         
-        if let messengerData = defaults.string(forKey: "messengerData"){
-            if let dataFromString = messengerData.data(using: .utf8, allowLossyConversion: false) {
-                do{
-                    let item = try JSON(data: dataFromString)
-                    if let msg = item["welcomeMessage"].string{
-                        Erxes.msgWelcome = msg
-                    }
-                }
-                catch{
-                    print("Error info: \(error)")
-                }
+        if let messengerData = defaults.dictionary(forKey: "messengerData"){
+            if let msg = messengerData["welcomeMessage"] as? String{
+                Erxes.msgWelcome = msg
             }
         }
+        
+        Erxes.restore()
         
         if !Erxes.firstRun() {
-            Erxes.restore()
             getSupporter()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
             self.navigationController?.pushViewController(vc!, animated: false)
@@ -53,13 +40,24 @@ public class RegisterVC: UIViewController {
                 connectMessenger()
             }
         }
+        
+        lblTitle.text = "RegVC_lblTitle".localized
+        lblDesc.text = "RegVC_lblDesc".localized
     }
     
     @IBAction public func register(){
         guard tfEmail.text != "" else {
             return
         }
+        
+        guard (tfEmail.text?.isValidEmail())! else {
+            return
+        }
         connectMessenger()
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     func getSupporter(){
@@ -82,7 +80,7 @@ public class RegisterVC: UIViewController {
     }
     
     public func connectMessenger() {
-        let connectMutation = ConnectMutation(brandCode: Erxes.brandCode, email: self.tfEmail.text!, isUser: true)
+        let connectMutation = ConnectMutation(brandCode: Erxes.brandCode, email: self.tfEmail.text!, isUser: false)
         apollo.perform(mutation: connectMutation) { [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -96,7 +94,7 @@ public class RegisterVC: UIViewController {
             self?.getSupporter()
             
             let vc = self?.storyboard?.instantiateViewController(withIdentifier: "conversations")
-            self?.navigationController?.pushViewController(vc!, animated: true)
+            self?.navigationController?.pushViewController(vc!, animated: false)
         }
     }
 }

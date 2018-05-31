@@ -91,14 +91,33 @@ import UIKit
             }
             let data = result?.data?.getMessengerIntegration
             let defaults = UserDefaults()
+            
+            
             if let uiOptions = data?.uiOptions{
                 defaults.setValue(uiOptions, forKey: "uiOptions")
             }
             if let messengerData = data?.messengerData{
                 defaults.setValue(messengerData, forKey: "messengerData")
             }
+            if let language = data?.languageCode{
+                defaults.setValue(language, forKey: "languageCode")
+            }
             defaults.synchronize()
         }
+    }
+    
+    @objc public static func changeLanguage(){
+        var selected = "en"
+        if let lang = UserDefaults.standard.string(forKey:"languageCode") {
+            if lang == "en"{
+                selected = "mn"
+            }
+            else{
+                selected = "en"
+            }
+        }
+        UserDefaults.standard.set(selected, forKey: "languageCode")
+        UserDefaults.standard.synchronize()
     }
     
 }

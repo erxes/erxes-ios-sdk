@@ -2,7 +2,6 @@
 import UIKit
 import Apollo
 import LiveGQL
-import SwiftyJSON
 
 class ConversationVC: UIViewController {
 
@@ -22,7 +21,6 @@ class ConversationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         setNavigationColor()
@@ -41,6 +39,8 @@ class ConversationVC: UIViewController {
         tv.dataSource = self
         gql.delegate = self
         subscribe()
+//        Erxes.changeLanguage()
+        self.title = "conversations".localized
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +71,17 @@ class ConversationVC: UIViewController {
 //            }
             if self?.list != nil && self?.list.count == 0{
                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.navigationController?.pushViewController(vc, animated: false)
             }
         }
+    }
+    
+    @IBAction func endConveration(_ sender: Any) {
+        let defaults = UserDefaults()
+        defaults.removeObject(forKey: "email")
+        defaults.synchronize()
+        close()
+        Erxes.email = nil
     }
     
     func setNavigationColor(){
@@ -104,10 +112,22 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
         let item = list[indexPath.row]
         
         let lbl = cell.viewWithTag(lblTitleTag) as! UILabel
-        lbl.text = item.content?.withoutHtml
+        lbl.text = item.content?.html2String
         
         let lblDate = cell.viewWithTag(lblDateTag) as! UILabel
         lblDate.text = Utils.formatDate(time:item.createdAt!)
+        
+        if let readUsers = item.readUserIds{
+            print(readUsers)
+            print(Erxes.customerId)
+            print(Erxes.userId)
+            if readUsers.contains(where:{$0 == Erxes.customerId}){
+                lbl.textColor = UIColor.darkGray
+            }
+            else{
+                lbl.textColor = UIColor.black
+            }
+        }
         
         return cell
     }
@@ -128,6 +148,8 @@ extension ConversationVC:LiveGQLDelegate{
     }
     
     public func receivedRawMessage(text: String) {
-        refresh()
+        if self.list != nil && self.list.count > 0{
+            refresh()
+        }
     }
 }

@@ -15,11 +15,11 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.source_files = 'ErxesSDK/Classes/**/*'
    s.resource_bundles = {
-       'ErxesSDK' => ['ErxesSDK/Assets/*.{jpg,storyboard,png,ttf}']
+       'ErxesSDK' => ['ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings}']
    }
   s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES','SWIFT_VERSION' => '4.0'}
-  
+  s.frameworks = 'Photos'
   s.dependency 'Apollo', '~> 0.8.0'
-  s.dependency 'SwiftyJSON', '~> 4.1.0'
   s.dependency 'LiveGQL', '~> 2.0.0'
+  s.dependency 'Alamofire', '~> 4.7'
 end
