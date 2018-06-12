@@ -50,14 +50,31 @@ public class RegisterVC: UIViewController {
             return
         }
         
-        guard (tfEmail.text?.isValidEmail())! else {
-            return
+        if segment.selectedSegmentIndex == 0{
+            guard (tfEmail.text?.isValidEmail())! else {
+                return
+            }
         }
+        else{
+            guard (tfEmail.text?.isValidPhone())! else {
+                return
+            }
+        }
+        
         connectMessenger()
     }
     
     @IBAction func close(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func changed(_ sender: Any) {
+        if segment.selectedSegmentIndex == 0{
+            tfEmail.placeholder = "email@domain.com"
+        }
+        else{
+            tfEmail.placeholder = "****-****"
+        }
     }
     
     func getSupporter(){
