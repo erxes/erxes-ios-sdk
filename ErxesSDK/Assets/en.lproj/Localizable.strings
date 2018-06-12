@@ -5,3 +5,5 @@
 "RegVC_lblDesc" = "Give us your contact information";
 "online" = "online";
 "offline" = "offline";
+"end conversation" = "End conversation";
+"loading" = "Loading...";

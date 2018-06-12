@@ -22,9 +22,11 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var btnSend: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var uploadView: UIView!
+    @IBOutlet weak var uploadLoader: UIActivityIndicatorView!
     @IBOutlet weak var ivPicked: UIImageView!
     @IBOutlet weak var lblFilesize: UILabel!
     @IBOutlet weak var loader: UIView!
+    @IBOutlet weak var lblLoader: UILabel!
     
     var attachments = [JSON]()
     
@@ -71,6 +73,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         self.wvChat.scrollView.bounces = false
         self.wvChat.loadHTMLString(self.css, baseURL: url)
         
+        self.lblLoader.text = "loading".localized
         loading()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
@@ -115,11 +118,11 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             if let isOnline = result?.data?.isMessengerOnline{
                 if isOnline{
                     self?.statusView.backgroundColor = UIColor(hexString: "#67B04F")
-                    self?.lblStatus.text = "Онлайн"
+                    self?.lblStatus.text = "online".localized
                 }
                 else{
                     self?.statusView.backgroundColor = UIColor(hexString: "#DDDDDD")
-                    self?.lblStatus.text = "Оффлайн"
+                    self?.lblStatus.text = "offline".localized
                 }
             }
         }
@@ -353,9 +356,12 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     
     func uploadFile(image:UIImage){
         
-        self.uploadView.isHidden = false;
+        self.uploadView.isHidden = false
+        self.btnSend.isEnabled = false
+        self.progress.progress = 0
+        self.uploadLoader.startAnimating()
         
-        let url = "http://localhost:3300/upload-file"
+        let url = "https://app-api.crm.nmma.co/upload-file"
         let imgData = UIImageJPEGRepresentation(image, 0.5)!
         let size = imgData.count
         let bcf = ByteCountFormatter()
@@ -385,16 +391,14 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                     print(response)
                     self.uploadUrl = response.value!
                     self.uploaded = ["url" : self.uploadUrl, "size" : size, "type" : "image/jpeg"]
+                    self.btnSend.isEnabled = true
+                    self.uploadLoader.stopAnimating()
                 }
                 
             case .failure(let encodingError):
                 print(encodingError)
             }
         }
-        
-    }
-    
-    func sendAttachment(){
         
     }
     
@@ -415,9 +419,9 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func btnCancelClick(_ sender: Any) {
-        self.uploadView.isHidden = false;
+        self.uploadView.isHidden = true;
+        self.attachments = [JSON]()
     }
-    
 }
 
 extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate{

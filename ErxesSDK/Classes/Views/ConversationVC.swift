@@ -6,7 +6,7 @@ import LiveGQL
 class ConversationVC: UIViewController {
 
     @IBOutlet weak var tv:UITableView!
-    
+    @IBOutlet weak var btnEndTitle: UILabel!
     var integrationId:String!
     var customerId:String!
     
@@ -41,23 +41,28 @@ class ConversationVC: UIViewController {
         subscribe()
 //        Erxes.changeLanguage()
         self.title = "conversations".localized
+        self.btnEndTitle.text = "end conversation".localized
+        self.tv.addSubview(self.refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.refreshControl.beginRefreshing()
         refresh()
     }
     
     var list:[ConversationsQuery.Data.Conversation] = [];
     
+    
+    
     func refresh(){
         let query = ConversationsQuery(integrationId: Erxes.integrationId, customerId: Erxes.customerId)
 
         apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData){[weak self] result,error in
+            self?.refreshControl.endRefreshing()
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
-            
             self?.list = (result?.data?.conversations)! as! [ConversationsQuery.Data.Conversation]
             self?.tv.reloadData()
             
@@ -74,6 +79,20 @@ class ConversationVC: UIViewController {
                 self?.navigationController?.pushViewController(vc, animated: false)
             }
         }
+    }
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(ConversationVC.handleRefresh(_:)),
+                                 for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        refresh()
     }
     
     @IBAction func endConveration(_ sender: Any) {
