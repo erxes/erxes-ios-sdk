@@ -10,12 +10,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        Erxes.setBrandCode(brandCode: "P6Cec9")
-//        Erxes.setHosts(apiHost: "https://api.crm.nmma.co/graphql", subsHost: "wss://app-api.crm.nmma.co/subscriptions")
+        Erxes.setBrandCode(brandCode: "P6Cec9")
+        Erxes.setHosts(apiHost: "https://api-mobile.crm.nmma.co/graphql", subsHost: "wss://app-api.crm.nmma.co/subscriptions")
         
-        Erxes.setBrandCode(brandCode: "YDEdKj")
-        let host = "192.168.86.29"
-        Erxes.setHosts(apiHost: "http://\(host):3100/graphql", subsHost: "ws://\(host):3300/subscriptions")
+//        Erxes.setBrandCode(brandCode: "YDEdKj")
+//        let host = "192.168.86.29"
+//        Erxes.setHosts(apiHost: "http://\(host):3100/graphql", subsHost: "ws://\(host):3300/subscriptions")
         
         let bundle = Bundle(for:RegisterVC.self)
         let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
