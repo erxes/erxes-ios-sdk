@@ -11,10 +11,21 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+- Minimum deployment target : iOS 9
+- Swift 4 compatible
+- Objective-C compatible
+
+
 ## Installation
 
 ```ruby
 pod 'ErxesSDK', :git => 'https://github.com/erxes/erxes-ios-sdk.git'
+```
+
+In Objective-C put this line at top of the Podfile
+
+```ruby
+use_modular_headers!
 ```
 
 ## Swift Instruction

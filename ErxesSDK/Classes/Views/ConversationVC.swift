@@ -7,6 +7,8 @@ class ConversationVC: UIViewController {
 
     @IBOutlet weak var tv:UITableView!
     @IBOutlet weak var btnEndTitle: UILabel!
+    @IBOutlet weak var header:UIView!;
+    @IBOutlet weak var headerTitle:UILabel!;
     var integrationId:String!
     var customerId:String!
     
@@ -40,8 +42,8 @@ class ConversationVC: UIViewController {
         gql.delegate = self
         subscribe()
 //        Erxes.changeLanguage()
-        self.title = "conversations".localized
-        self.btnEndTitle.text = "end conversation".localized
+        self.headerTitle.text = "conversations".localized
+//        self.btnEndTitle.text = "end conversation".localized
         self.tv.addSubview(self.refreshControl)
     }
     
@@ -64,6 +66,9 @@ class ConversationVC: UIViewController {
                 return
             }
             self?.list = (result?.data?.conversations)! as! [ConversationsQuery.Data.Conversation]
+            
+            self?.list = (self?.list.filter { $0.status == "open" })!
+            
             self?.tv.reloadData()
             
 //            if !(self?.inited)!{
@@ -95,17 +100,11 @@ class ConversationVC: UIViewController {
         refresh()
     }
     
-    @IBAction func endConveration(_ sender: Any) {
-        let defaults = UserDefaults()
-        defaults.removeObject(forKey: "email")
-        defaults.synchronize()
-        close()
-        Erxes.email = nil
-    }
-    
     func setNavigationColor(){
         if let color = Erxes.color{
-            self.navigationController?.navigationBar.barTintColor = color
+//            self.navigationController?.navigationBar.barTintColor = color
+            self.header.backgroundColor = color
+            self.view.viewWithTag(1)?.backgroundColor = color
         }
     }
     
@@ -130,22 +129,43 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
         let cell = self.tv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let item = list[indexPath.row]
         
-        let lbl = cell.viewWithTag(lblTitleTag) as! UILabel
-        lbl.text = item.content?.html2String
+        let lblDesc = cell.viewWithTag(lblLastTag) as! UILabel
+        lblDesc.text = item.content?.html2String
         
         let lblDate = cell.viewWithTag(lblDateTag) as! UILabel
         lblDate.text = Utils.formatDate(time:item.createdAt!)
         
-        if let readUsers = item.readUserIds{
-            print(readUsers)
-            print(Erxes.customerId)
-            print(Erxes.userId)
-            if readUsers.contains(where:{$0 == Erxes.customerId}){
-                lbl.textColor = UIColor.darkGray
-            }
-            else{
-                lbl.textColor = UIColor.black
-            }
+//        if let readUsers = item.readUserIds{
+//            print(readUsers)
+//            print(Erxes.customerId)
+//            print(Erxes.userId)
+//            if readUsers.contains(where:{$0 == Erxes.customerId}){
+//                lbl.textColor = UIColor.darkGray
+//            }
+//            else{
+//                lbl.textColor = UIColor.black
+//            }
+//        }
+        
+//        if let users = item.participatedUsers{
+//            if users.count > 0{
+//                let user = users[0]
+//                let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
+//
+//                if let avatar = user?.details?.avatar{
+//                    ivAvatar.downloadedFrom(link: avatar)
+//                }
+//            }
+//        }
+        
+        if let avatar = Erxes.supporterAvatar{
+            let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
+            ivAvatar.downloadedFrom(link: avatar)
+        }
+        
+        if let title = Erxes.supporterName{
+            let lbl = cell.viewWithTag(lblTitleTag) as! UILabel
+            lbl.text = title
         }
         
         return cell
