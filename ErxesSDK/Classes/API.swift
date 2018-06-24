@@ -410,6 +410,87 @@ public final class ReadConversationMessagesMutation: GraphQLMutation {
     }
 }
 
+public final class EndConversationMutation: GraphQLMutation {
+    public static let operationString =
+    "mutation EndConversation($customerId: String, $brandCode: String!) {\n  endConversation(customerId: $customerId, brandCode: $brandCode) {\n    __typename\n    customerId\n  }\n}"
+    
+    public var customerId: String?
+    public var brandCode: String
+    
+    public init(customerId: String? = nil, brandCode: String) {
+        self.customerId = customerId
+        self.brandCode = brandCode
+    }
+    
+    public var variables: GraphQLMap? {
+        return ["customerId": customerId, "brandCode": brandCode]
+    }
+    
+    public struct Data: GraphQLSelectionSet {
+        public static let possibleTypes = ["Mutation"]
+        
+        public static let selections: [GraphQLSelection] = [
+            GraphQLField("endConversation", arguments: ["customerId": GraphQLVariable("customerId"), "brandCode": GraphQLVariable("brandCode")], type: .object(EndConversation.selections)),
+            ]
+        
+        public var snapshot: Snapshot
+        
+        public init(snapshot: Snapshot) {
+            self.snapshot = snapshot
+        }
+        
+        public init(endConversation: EndConversation? = nil) {
+            self.init(snapshot: ["__typename": "Mutation", "endConversation": endConversation.flatMap { $0.snapshot }])
+        }
+        
+        public var endConversation: EndConversation? {
+            get {
+                return (snapshot["endConversation"] as? Snapshot).flatMap { EndConversation(snapshot: $0) }
+            }
+            set {
+                snapshot.updateValue(newValue?.snapshot, forKey: "endConversation")
+            }
+        }
+        
+        public struct EndConversation: GraphQLSelectionSet {
+            public static let possibleTypes = ["EndConversationResponse"]
+            
+            public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("customerId", type: .nonNull(.scalar(String.self))),
+                ]
+            
+            public var snapshot: Snapshot
+            
+            public init(snapshot: Snapshot) {
+                self.snapshot = snapshot
+            }
+            
+            public init(customerId: String) {
+                self.init(snapshot: ["__typename": "EndConversationResponse", "customerId": customerId])
+            }
+            
+            public var __typename: String {
+                get {
+                    return snapshot["__typename"]! as! String
+                }
+                set {
+                    snapshot.updateValue(newValue, forKey: "__typename")
+                }
+            }
+            
+            public var customerId: String {
+                get {
+                    return snapshot["customerId"]! as! String
+                }
+                set {
+                    snapshot.updateValue(newValue, forKey: "customerId")
+                }
+            }
+        }
+    }
+}
+
 public final class ConversationsQuery: GraphQLQuery {
     public static let operationString =
     "query Conversations($integrationId: String!, $customerId: String!) {\n  conversations(integrationId: $integrationId, customerId: $customerId) {\n    __typename\n    ...ConversationDetail\n  }\n}"
@@ -2028,4 +2109,3 @@ public struct ConversationDetail: GraphQLFragment {
         }
     }
 }
-
