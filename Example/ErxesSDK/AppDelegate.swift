@@ -16,14 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Erxes.setBrandCode(brandCode: "YDEdKj")
 //        let host = "192.168.86.29"
 //        Erxes.setHosts(apiHost: "http://\(host):3100/graphql", subsHost: "ws://\(host):3300/subscriptions")
-        
-        let bundle = Bundle(for:RegisterVC.self)
-        let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
-        let b = Bundle(url: url!)
-        UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b!)
-        UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
-         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b!)
-         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b!)
         return true
     }
 
