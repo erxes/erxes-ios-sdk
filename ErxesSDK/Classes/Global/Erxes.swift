@@ -13,6 +13,7 @@ import UIKit
     static var msgWelcome:String!
     static var supporterName:String!
     static var supporterAvatar:String!
+    static var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
     
     static func firstRun() -> Bool{
         let defaults = UserDefaults()

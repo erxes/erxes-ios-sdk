@@ -8,14 +8,14 @@
         NSTimeInterval _interval = [time doubleValue]/1000;
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
         
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *newDate = [dateFormatter stringFromDate:date];
         
         return newDate;
     }
     +(NSString *)now{
          NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *newDate = [dateFormatter stringFromDate:[NSDate date]];
         
         return newDate;

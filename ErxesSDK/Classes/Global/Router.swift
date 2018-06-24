@@ -7,6 +7,7 @@ public class Router: NSObject {
         let b = Bundle(url: url!)
         let storyboard = UIStoryboard(name: "Erxes", bundle: b)
         let vc = storyboard.instantiateViewController(withIdentifier: "start")
+        vc.modalPresentationStyle = .overCurrentContext
         target.present(vc, animated: true, completion: nil)
     }
 }

@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
         let b = Bundle(url: url!)
         UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b!)
+        UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
+         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b!)
+         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b!)
         return true
     }
 
