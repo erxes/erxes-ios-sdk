@@ -154,7 +154,7 @@ public class RegisterVC: UIViewController {
     
     func changeColor(){
         self.header.backgroundColor = Erxes.color
-        self.view.viewWithTag(11)?.layer.borderColor = Erxes.color.cgColor
+        self.view.viewWithTag(11)?.layer.borderColor = Erxes.color!.cgColor
         if emailSelected{
             self.view.viewWithTag(12)?.backgroundColor = .clear
             (self.view.viewWithTag(13) as! UILabel).textColor = Erxes.color

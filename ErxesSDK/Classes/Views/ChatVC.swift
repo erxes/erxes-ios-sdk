@@ -58,7 +58,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 let iv = self.view.viewWithTag(101 + n) as! UIImageView
                 if let avatar = user.details?.avatar{
                     iv.downloadedFrom(link: avatar)
-                    iv.layer.borderColor = Erxes.color.cgColor
+                    iv.layer.borderColor = Erxes.color!.cgColor
                     iv.layer.borderWidth = 1
                 }
                 if let names = user.details?.fullName?.split(separator: " "){

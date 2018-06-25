@@ -7,8 +7,8 @@ import UIKit
     static var integrationId:String!
     static var email:String!
     static var conversationId:String!
-    static var color:UIColor!
-    static var colorHex:String!
+    static var color = UIColor(hexString: "#5629B6")
+    static var colorHex = "#5629B6" as String!
     static var msgThankyou:String!
     static var msgWelcome:String!
     static var supporterName:String!
