@@ -8,6 +8,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NMFormatter : NSObject
-    +(NSString *)format:(NSString*)time;
+    +(NSString *)format:(int)time;
     +(NSString *)now;
 @end
