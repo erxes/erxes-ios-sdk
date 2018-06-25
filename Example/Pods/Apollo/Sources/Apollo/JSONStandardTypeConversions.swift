@@ -2,24 +2,9 @@ import Foundation
 
 extension String: JSONDecodable, JSONEncodable {
   public init(jsonValue value: JSONValue) throws {
-    
-    var string = ""
-    
-    if let str = value as? String{
-        string = str
+    guard let string = value as? String else {
+      throw JSONDecodingError.couldNotConvert(value: value, to: String.self)
     }
-    else if let str = value as? Int64{
-        string = String(describing:str)
-    }
-    else if let dict = value as? [String:Any]{
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-            string = String(bytes: jsonData, encoding: String.Encoding.utf8) ?? ""
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
     self = string
   }
 
