@@ -14,7 +14,6 @@ var subsUrl = ""
 let apollo = ApolloClient(url: URL(string:apiUrl)!)
 
 public typealias JSON = [String:Any?]
-public typealias Date = String
 
 extension Dictionary: JSONDecodable {
     public init(jsonValue value: JSONValue) throws {

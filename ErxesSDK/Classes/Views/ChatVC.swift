@@ -233,7 +233,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 var str = "";
 
                     for item in messagesArray {
-                        let created:String! = item.createdAt
+                        let created = item.createdAt!
                         let now = Utils.formatDate(time: created)
                         print("");
                         
