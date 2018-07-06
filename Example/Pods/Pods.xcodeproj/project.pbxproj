@@ -26,7 +26,6 @@
 		2D1377F64EC27D44D821A9EF34EE862D /* GraphQLInputValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748D74EB05A990680B99B35BA71222D /* GraphQLInputValue.swift */; };
 		2DC3EAECB474E37074D72AAE7E0D4767 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCB74556E3DA7A194B85B5CB993C421 /* bg-1.png */; };
 		3027730556DC28DA242F9AEADBF3E680 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ED9B9A57C9CDA6538DE7B21BBAB95B /* Router.swift */; };
-		317D097CA28901F3B56319A51060816F /* NMFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B43777D6F60EF4EA1A110463657A56A /* NMFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3230BDF7F02B7F51E6160FFB55F5A661 /* LiveGQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C509CA1CFA56F866B1C98265C2D25CD4 /* LiveGQL.framework */; };
 		3288C253F3E18A35D4D52F1A956959C3 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BD50B409C41BB317551879A29F92C9 /* Apollo.framework */; };
 		3334363611D795C848F8E771DDB1A1A5 /* GraphQLExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDE7F866B3A0EB2ADBBD4396880B7E /* GraphQLExecutor.swift */; };
@@ -114,7 +113,6 @@
 		DE1FCCAE8FAB9B80629F63DA01E8A880 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8014851CCB94B3C7D10E99FAD3C422B /* Constants.swift */; };
 		DEED889F584ED70B2E01208A40FB8942 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C629842790C5D69DA5D22F1B7EA4F3 /* Roboto-Medium.ttf */; };
 		E2BAD4E67A4BC44A60DE0F4E5E3CB9E4 /* bg-3.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2B3ECDEC686B1C31A16A62AE5C336E /* bg-3.png */; };
-		E5747F3748E6E0E33B30E1F7127D424B /* NMFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE11868F4AC06228ACABED7E3931205 /* NMFormatter.m */; };
 		E5949F0C4BB0DB1C3D66F2B59E2C227C /* InMemoryNormalizedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F469C6EEE1020367D1AED5F35AC8A /* InMemoryNormalizedCache.swift */; };
 		E6193FEF1302E3705E93BDA75A2210E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
 		EB31F7C05E4247DB1FAB104A815E7BCC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8681FB3984176C68804C221EA9603693 /* Utilities.swift */; };
@@ -263,7 +261,6 @@
 		46ED5AC787BA2CB4F2B598A4B470127A /* HTTPNetworkTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPNetworkTransport.swift; path = Sources/Apollo/HTTPNetworkTransport.swift; sourceTree = "<group>"; };
 		4778D34E35FCC62B52B43FC39C7216B0 /* ResourceBundle-ErxesSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ErxesSDK-Info.plist"; sourceTree = "<group>"; };
 		49A26AB6DD2D7BE059BD3E40D2BC8A14 /* GraphQLResultAccumulator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResultAccumulator.swift; path = Sources/Apollo/GraphQLResultAccumulator.swift; sourceTree = "<group>"; };
-		4B43777D6F60EF4EA1A110463657A56A /* NMFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NMFormatter.h; sourceTree = "<group>"; };
 		4CCECF864E3554DE18AC26C6AD312C2A /* ErxesSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ErxesSDK-dummy.m"; sourceTree = "<group>"; };
 		4D079FFA63C594EF47DEF58A05C47D83 /* GraphQLQueryWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLQueryWatcher.swift; path = Sources/Apollo/GraphQLQueryWatcher.swift; sourceTree = "<group>"; };
 		4D9BC4153C53BE01ED23D3BFD3FC70A0 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -375,7 +372,6 @@
 		F8014851CCB94B3C7D10E99FAD3C422B /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F9E82C9BA0B34A698B5EC70B5D47733A /* ConversationVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		FA6C75EADA9A3D580F74926837CC816D /* Pods-ErxesSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		FBE11868F4AC06228ACABED7E3931205 /* NMFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NMFormatter.m; sourceTree = "<group>"; };
 		FE2B3ECDEC686B1C31A16A62AE5C336E /* bg-3.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-3.png"; path = "ErxesSDK/Assets/bg-3.png"; sourceTree = "<group>"; };
 		FEFD61ACDF9753D52A0EFADD41BEABE0 /* LiveGQL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveGQL.swift; path = Source/Classes/LiveGQL.swift; sourceTree = "<group>"; };
 		FFCCE919B9A0C412E6793F1E34D15C61 /* bg-2.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-2.png"; path = "ErxesSDK/Assets/bg-2.png"; sourceTree = "<group>"; };
@@ -664,8 +660,6 @@
 				2DA8D373A19D05072AF950D89FCEE3DE /* Erxes.swift */,
 				6F3DFDE77257ECD3EF073D0D003A0EEA /* Extensions.swift */,
 				ECDE4C96F17111E53D36F14C81C13625 /* Language.swift */,
-				4B43777D6F60EF4EA1A110463657A56A /* NMFormatter.h */,
-				FBE11868F4AC06228ACABED7E3931205 /* NMFormatter.m */,
 				68ED9B9A57C9CDA6538DE7B21BBAB95B /* Router.swift */,
 				0520623685BA39F47F9CAB1A4A488B19 /* Utils.swift */,
 				91EAF450F87702CFB823626B01EFF45A /* ViewExtension.swift */,
@@ -871,7 +865,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6F59618A6BAB5501E1495F95B753359 /* ErxesSDK-umbrella.h in Headers */,
-				317D097CA28901F3B56319A51060816F /* NMFormatter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1151,7 +1144,6 @@
 				145A5275E53BEF09AAFFFCE67F9E9314 /* Language.swift in Sources */,
 				36AB87E49E84EF228F6B913D3E0CEF31 /* Message.swift in Sources */,
 				895E17038FC6E3D7E57B580784FF3CA8 /* MessengerOption.swift in Sources */,
-				E5747F3748E6E0E33B30E1F7127D424B /* NMFormatter.m in Sources */,
 				5B4DD6032503D629EDD44397D1C93867 /* RegisterVC.graphql in Sources */,
 				8BE20D00A7D7117D0C83B4C7A023A564 /* RegisterVC.swift in Sources */,
 				3027730556DC28DA242F9AEADBF3E680 /* Router.swift in Sources */,
