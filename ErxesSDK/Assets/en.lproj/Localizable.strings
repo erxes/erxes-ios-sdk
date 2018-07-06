@@ -1,10 +1,7 @@
-
-"hello" = "Hello";
 "conversations" = "Conversations";
 "RegVC_lblTitle" = "Contact";
 "RegVC_lblDesc" = "Give us your contact information";
 "online" = "online now";
 "offline" = "offline";
-"end conversation" = "End conversation";
 "loading" = "Loading...";
 "phone number" = "phone number";

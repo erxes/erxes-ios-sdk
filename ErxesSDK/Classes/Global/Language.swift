@@ -14,14 +14,8 @@ extension String {
             UserDefaults.standard.synchronize()
         }
         let lang = UserDefaults.standard.string(forKey: "languageCode")
-        
-        let bundle = Bundle(for:RegisterVC.self)
-        let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
-        let b = Bundle(url: url!)
-        
-        let path = b?.path(forResource: lang, ofType: "lproj")
-        let b2 = Bundle(path: path!)
-        
-        return NSLocalizedString(self, tableName: nil, bundle: b2!, value: "", comment: "")
+        let path = Router.erxesBundle()?.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
 }

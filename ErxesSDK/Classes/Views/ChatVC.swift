@@ -86,7 +86,6 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         initChat()
         
         self.configLive()
-//        segment.addUnderlineForSelectedSegment()
         
         let bundle = Bundle(for:RegisterVC.self)
         let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
@@ -108,7 +107,6 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         if let color = Erxes.color{
             self.header.backgroundColor = color
         }
-//        self.attachments
     }
     
     func loading(){
