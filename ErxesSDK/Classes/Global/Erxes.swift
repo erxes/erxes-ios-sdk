@@ -81,9 +81,8 @@ import UIKit
         subsUrl = subsHost
         getConfig()
     }
-    
-    static func getConfig(){
-        
+
+    static func registerFonts(){
         let bundle = Bundle(for:RegisterVC.self)
         let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
         let b = Bundle(url: url!)
@@ -91,7 +90,11 @@ import UIKit
         UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b!)
         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b!)
-        
+    }
+
+    static func getConfig(){
+
+        registerFonts()
         let query = GetConfigQuery(brandCode: Erxes.brandCode!)
         apollo.fetch(query: query){result, error in
             

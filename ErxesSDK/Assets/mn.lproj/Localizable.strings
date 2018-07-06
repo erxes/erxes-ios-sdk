@@ -1,10 +1,7 @@
-
-"hello" = "Сайн байна уу.";
 "conversations" = "Харилцан яриа";
 "RegVC_lblTitle" = "Харилцагч та";
 "RegVC_lblDesc" = "Дараах холбогдох мэдээллээ оруулна уу";
 "online" = "онлайн";
 "offline" = "оффлайн";
-"end conversation" = "Дуусгах";
 "loading" = "Та түр хүлээнэ үү.";
 "phone number" = "утасны дугаар";
