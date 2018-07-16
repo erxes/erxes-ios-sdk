@@ -974,10 +974,10 @@
             </objects>
             <point key="canvasLocation" x="1492" y="995.35232383808102"/>
         </scene>
-        <!--Erxes Navigator-->
+        <!--Navigation Controller-->
         <scene sceneID="rHi-Wt-PJf">
             <objects>
-                <navigationController storyboardIdentifier="start" navigationBarHidden="YES" id="rCO-ta-ob9" customClass="ErxesNavigator" customModule="ErxesSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="start" navigationBarHidden="YES" id="rCO-ta-ob9" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="JyQ-bT-PdI">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
