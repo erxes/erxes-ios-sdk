@@ -20,7 +20,6 @@ extension Dictionary: JSONDecodable {
         guard let dictionary = value as? Dictionary else {
             throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
         }
-        
         self = dictionary
     }
 }

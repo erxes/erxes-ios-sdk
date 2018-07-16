@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-- Minimum deployment target : iOS 9
+- Minimum deployment target : iOS 9.0
 - Swift 4 compatible
 - Objective-C compatible
 

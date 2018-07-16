@@ -35,7 +35,6 @@
 		37BAD61DCF463591106E0FB66F80D4CE /* PayloadMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759DCF5FE06B0B2B8EFC1FCA438E137E /* PayloadMessages.swift */; };
 		37F253C1FE95C9C18ED2977338D33186 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9BC4153C53BE01ED23D3BFD3FC70A0 /* Alamofire.framework */; };
 		3945A29814E4B1E9C9A2DD1DE72522D4 /* JSONStandardTypeConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34B8053423556EDD757E8B010E0EA9 /* JSONStandardTypeConversions.swift */; };
-		3B83BB9791726A3EF625C9037E64FD2E /* ViewController.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 896342FDD6AEE32F2E352747922AEABF /* ViewController.graphql */; };
 		3C7486C088BC221EA5E88192BA316DD4 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051F1ACBA27F9076CA432248037D3F11 /* GraphQLError.swift */; };
 		3FB11A9708614E901C97167958276AFC /* RecordSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD8676926E6A14CAE334F4102369B /* RecordSet.swift */; };
 		4009A84BCE3F29D6965727E637B8820B /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E82C9BA0B34A698B5EC70B5D47733A /* ConversationVC.swift */; };
@@ -48,7 +47,6 @@
 		52F7034B56736F62A41323BFE78B6F1A /* Pods-ErxesSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDB014C7CC850F7A6306505B67324E6 /* Request.swift */; };
 		554929A001A4B9B35BF3CCE249003890 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94593D7A8D4F82CAFEC7E6CDD5557476 /* JSONHelper.swift */; };
-		5B4DD6032503D629EDD44397D1C93867 /* RegisterVC.graphql in Sources */ = {isa = PBXBuildFile; fileRef = B5DA9A6FCAB309906816EBAD5152D8DA /* RegisterVC.graphql */; };
 		5DBD7ED8393A317D8B94F1D28F2E66A0 /* MessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592725F7A21C97BF58649474D44F8304 /* MessageTypes.swift */; };
 		5F1F940D86EDBAF335690D3C58B900AA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A9FCBE0198C84E14C90F696B9590EA /* Security.framework */; };
 		601AF86F736AEB5A527ADA71537A82B7 /* SocketRocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB748717E57684A1BFE23F8933375CE /* SocketRocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,7 +56,6 @@
 		65725A01088375F44A412B29035DE27B /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
 		685BE1522AA147E08E5BF3B8EA4BA771 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
 		69C6A08FE46B8ECC10C4F538A249EF79 /* Apollo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 79793736E23B783CA5E33B4C89FFA3BA /* Apollo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6AF8E295D9DA62892119732C60E8511C /* ChatViewController.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7D13479BD8AD975944925304E968 /* ChatViewController.graphql */; };
 		6B8A05D7F5A1EED49C13D2C64544BCD1 /* ErxesSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */; };
 		6BB1817B430C72BBE099D23B39CECE0D /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC4DBE0A58173C5DC20D26A3404FE6 /* Record.swift */; };
 		6DB1B3C86D07ACD1237F55ED964C32D6 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13AF6025EB7CE1FA0E4E4102766454 /* Promise.swift */; };
@@ -82,6 +79,8 @@
 		93F074B620FC8D7D0093E168 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B520FC8D7D0093E168 /* UIView.swift */; };
 		93F074B820FC8D890093E168 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B720FC8D890093E168 /* UIButton.swift */; };
 		93F074BC20FC8E2A0093E168 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074BB20FC8E2A0093E168 /* UIImageView.swift */; };
+		93F074C320FCA2F20093E168 /* mutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 93F074C120FCA2F10093E168 /* mutation.graphql */; };
+		93F074C420FCA2F20093E168 /* query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 93F074C220FCA2F10093E168 /* query.graphql */; };
 		962DA3377FCBA2700B894B61628599AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
 		98225956F989141AA227065BB6132F32 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0EAF4D03A74452B9B7F8B882439B22 /* Photos.framework */; };
 		9DB2E108C4ED13CAD76A816765647984 /* erxes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 71B6E9F41EBD6569DAD15993A8B5210E /* erxes.jpg */; };
@@ -130,7 +129,6 @@
 		F6E58345690D1BAD17BB1A399234DF01 /* HTTPNetworkTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ED5AC787BA2CB4F2B598A4B470127A /* HTTPNetworkTransport.swift */; };
 		F8443B0C224312ED79FECFA39C145C96 /* Apollo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C008C7239CB7A8E619FBA34AEDBFCC58 /* Apollo-dummy.m */; };
 		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF3CE5B28EE950B9D86D7B955D9186D /* Alamofire.swift */; };
-		FBDF8EB3D43F08A8C148F50260B48EC6 /* ConversationVC.graphql in Sources */ = {isa = PBXBuildFile; fileRef = D909DADC2E05F2B611254AAC042FBD12 /* ConversationVC.graphql */; };
 		FE7C8AAB62301D6056814D7252CF890D /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
 /* End PBXBuildFile section */
 
@@ -274,7 +272,6 @@
 		5088D71C88F5091C3D0FD41917D9A86F /* Pods-ErxesSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		592725F7A21C97BF58649474D44F8304 /* MessageTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MessageTypes.swift; path = Source/Classes/MessageTypes.swift; sourceTree = "<group>"; };
-		5E4E7D13479BD8AD975944925304E968 /* ChatViewController.graphql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ChatViewController.graphql; sourceTree = "<group>"; };
 		63BD50B409C41BB317551879A29F92C9 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64CC4DBE0A58173C5DC20D26A3404FE6 /* Record.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Sources/Apollo/Record.swift; sourceTree = "<group>"; };
 		651635EC2F19B289609890D88F82D3D2 /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
@@ -304,7 +301,6 @@
 		7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ErxesSDK_Example-umbrella.h"; sourceTree = "<group>"; };
 		82C879EEFCDE39C65D7E4C0EA3707F3F /* Message.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		8681FB3984176C68804C221EA9603693 /* Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Sources/Apollo/Utilities.swift; sourceTree = "<group>"; };
-		896342FDD6AEE32F2E352747922AEABF /* ViewController.graphql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ViewController.graphql; sourceTree = "<group>"; };
 		8DBDE7F866B3A0EB2ADBBD4396880B7E /* GraphQLExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLExecutor.swift; path = Sources/Apollo/GraphQLExecutor.swift; sourceTree = "<group>"; };
 		8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ErxesSDK_Tests-dummy.m"; sourceTree = "<group>"; };
 		910C6F15788E1FEC9396319F22C65AE0 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
@@ -320,6 +316,8 @@
 		93F074B520FC8D7D0093E168 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		93F074B720FC8D890093E168 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		93F074BB20FC8E2A0093E168 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		93F074C120FCA2F10093E168 /* mutation.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mutation.graphql; sourceTree = "<group>"; };
+		93F074C220FCA2F10093E168 /* query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query.graphql; sourceTree = "<group>"; };
 		94593D7A8D4F82CAFEC7E6CDD5557476 /* JSONHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHelper.swift; path = Source/Classes/JSONHelper.swift; sourceTree = "<group>"; };
 		947944379373593AF3F76B545B2E3015 /* GraphQLResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResult.swift; path = Sources/Apollo/GraphQLResult.swift; sourceTree = "<group>"; };
 		98C20C5080FB26E2A7C86BA01F39D51E /* Apollo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Apollo.modulemap; sourceTree = "<group>"; };
@@ -343,7 +341,6 @@
 		AFF3CE5B28EE950B9D86D7B955D9186D /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		B04FF70F3EF450DC976901066E127B77 /* ErxesSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ErxesSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EF1C1F8A639B4393F2853AC855BEB0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5DA9A6FCAB309906816EBAD5152D8DA /* RegisterVC.graphql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = RegisterVC.graphql; sourceTree = "<group>"; };
 		B6DCF0E1CE13A3A1FF7A1C54459BF96C /* Collections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Collections.swift; path = Sources/Apollo/Collections.swift; sourceTree = "<group>"; };
 		B7A10F681EF4D84AB0D483F8002CADC1 /* MessengerOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessengerOption.swift; sourceTree = "<group>"; };
 		BDDB014C7CC850F7A6306505B67324E6 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
@@ -358,7 +355,6 @@
 		D1C11F1A7C18C5C92280822936E996B7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D50733E8F3CA7F1A6B98E520DC514B4B /* Pods-ErxesSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ErxesSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LiveGQL.xcconfig; sourceTree = "<group>"; };
-		D909DADC2E05F2B611254AAC042FBD12 /* ConversationVC.graphql */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ConversationVC.graphql; sourceTree = "<group>"; };
 		D930855273B6523220B8B94D830EDC1C /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		DAFA75AEA80C237206F6A429885D7E36 /* LiveGQL-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LiveGQL-prefix.pch"; sourceTree = "<group>"; };
 		DBF36CEA8D7F822264B2F566AE676A8B /* avatar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = avatar.png; path = ErxesSDK/Assets/avatar.png; sourceTree = "<group>"; };
@@ -469,10 +465,8 @@
 		02BCACEC024CA1899B66F0A1F8B042CB /* Queries */ = {
 			isa = PBXGroup;
 			children = (
-				5E4E7D13479BD8AD975944925304E968 /* ChatViewController.graphql */,
-				D909DADC2E05F2B611254AAC042FBD12 /* ConversationVC.graphql */,
-				B5DA9A6FCAB309906816EBAD5152D8DA /* RegisterVC.graphql */,
-				896342FDD6AEE32F2E352747922AEABF /* ViewController.graphql */,
+				93F074C120FCA2F10093E168 /* mutation.graphql */,
+				93F074C220FCA2F10093E168 /* query.graphql */,
 			);
 			name = Queries;
 			path = ErxesSDK/Classes/Queries;
@@ -1136,6 +1130,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93F074C420FCA2F20093E168 /* query.graphql in Resources */,
+				93F074C320FCA2F20093E168 /* mutation.graphql in Resources */,
 				6B8A05D7F5A1EED49C13D2C64544BCD1 /* ErxesSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1159,9 +1155,7 @@
 				7C459513A320B8C8289F0DFD88BE179D /* ChatVC.swift in Sources */,
 				93F074AC20FC8AF20093E168 /* String.swift in Sources */,
 				93F074BC20FC8E2A0093E168 /* UIImageView.swift in Sources */,
-				6AF8E295D9DA62892119732C60E8511C /* ChatViewController.graphql in Sources */,
 				DE1FCCAE8FAB9B80629F63DA01E8A880 /* Constants.swift in Sources */,
-				FBDF8EB3D43F08A8C148F50260B48EC6 /* ConversationVC.graphql in Sources */,
 				4009A84BCE3F29D6965727E637B8820B /* ConversationVC.swift in Sources */,
 				93F074B620FC8D7D0093E168 /* UIView.swift in Sources */,
 				93F074A820FC8A820093E168 /* UIImage.swift in Sources */,
@@ -1171,7 +1165,6 @@
 				145A5275E53BEF09AAFFFCE67F9E9314 /* Language.swift in Sources */,
 				36AB87E49E84EF228F6B913D3E0CEF31 /* Message.swift in Sources */,
 				895E17038FC6E3D7E57B580784FF3CA8 /* MessengerOption.swift in Sources */,
-				5B4DD6032503D629EDD44397D1C93867 /* RegisterVC.graphql in Sources */,
 				8BE20D00A7D7117D0C83B4C7A023A564 /* RegisterVC.swift in Sources */,
 				93F074AE20FC8B000093E168 /* Dictionary.swift in Sources */,
 				93F074B020FC8B1D0093E168 /* Color.swift in Sources */,
@@ -1181,7 +1174,6 @@
 				F46ACB872E570F7F78EA5F55AC112474 /* Utils.swift in Sources */,
 				93F074B420FC8B4C0093E168 /* Font.swift in Sources */,
 				93F074AA20FC8AE20093E168 /* Date.swift in Sources */,
-				3B83BB9791726A3EF625C9037E64FD2E /* ViewController.graphql in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Current File" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Assets/en.lproj/Localizable.strings" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Assets/en.lproj/Localizable.strings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Assets/mn.lproj/Localizable.strings" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Assets/mn.lproj/Localizable.strings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extensions.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extensions.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Language.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Language.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/NMFormatter.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/NMFormatter.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,14 +18,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_8FB6F322-F504-4740-82DB-C8E8487DBD41" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
-            </state>
-          </provider>
+      <file leaf-file-name="Dictionary.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Dictionary.swift">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -46,13 +36,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extensions.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Language.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Assets/en.lproj/Localizable.strings" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Assets/mn.lproj/Localizable.strings" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" />
+        <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" />
+        <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" />
       </list>
     </option>
   </component>
@@ -66,9 +57,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="47" />
-    <option name="y" value="23" />
-    <option name="width" value="1873" />
+    <option name="y" value="321" />
+    <option name="width" value="1397" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -79,8 +69,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Cidr.FilesView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -115,6 +103,22 @@
               <item name="Pods" type="1d218c8b:XcodeProjectNode" />
               <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
               <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+              <item name="Global" type="fcab9f18:XcodeViewNode" />
+              <item name="Extension" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+              <item name="Global" type="fcab9f18:XcodeViewNode" />
+              <item name="Model" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
               <item name="Pod" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
@@ -142,6 +146,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Cidr.FilesView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -149,6 +155,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/ErxesSDK.xcworkspace" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -181,34 +188,34 @@
       <workItem from="1530783019287" duration="376000" />
       <workItem from="1530784122437" duration="3181000" />
       <workItem from="1530833880829" duration="256000" />
+      <workItem from="1531731844246" duration="2654000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3813000" />
+    <option name="totallyTimeSpent" value="6467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="47" y="23" width="1873" height="1057" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="321" width="1397" height="1057" extended-state="0" />
     <layout>
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20395088" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26055834" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32960325" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +225,14 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -253,9 +268,6 @@
     <entry file="appcode.project-settings://8abac4e6">
       <provider selected="true" editor-type-id="AppCode.ProjectSettings" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/NMFormatter.h" />
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/NMFormatter.m" />
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Language.swift">
@@ -265,43 +277,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="59" lean-forward="true" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/UIViewInspectable.swift" />
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/UIButtonInspectable.swift" />
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="886">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extensions.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
           <caret line="77" column="28" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/Message.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/MessengerOption.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/UIData.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="30" lean-forward="true" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -334,27 +315,6 @@
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Assets/erxes.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ConversationVC.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="40" lean-forward="true" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-589">
-          <caret line="306" column="4" selection-start-line="306" selection-start-column="4" selection-end-line="306" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="48" lean-forward="true" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/ViewExtension.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -365,7 +325,9 @@
     <entry file="file://$PROJECT_DIR$/../README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor />
+          <first_editor relative-caret-position="272">
+            <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          </first_editor>
           <second_editor />
         </state>
       </provider>
@@ -374,6 +336,116 @@
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="40" lean-forward="true" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ConversationVC.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2138">
+          <caret line="5" column="40" lean-forward="true" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4832">
+          <caret line="306" column="4" selection-start-line="306" selection-start-column="4" selection-end-line="306" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Data.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Font.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIView.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIButton.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIImageView.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="59" lean-forward="true" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="48" lean-forward="true" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/Message.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/MessengerOption.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/UIData.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="e#1#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="100" column="22" lean-forward="true" selection-start-line="100" selection-start-column="22" selection-end-line="100" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Date.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIImage.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="64" lean-forward="true" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/String.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Language.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Color.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Dictionary.swift">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
