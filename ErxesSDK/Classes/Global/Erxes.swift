@@ -83,9 +83,7 @@ import UIKit
     }
 
     static func registerFonts(){
-        let bundle = Bundle(for:RegisterVC.self)
-        let url = bundle.url(forResource: "ErxesSDK", withExtension: "bundle")
-        let b = Bundle(url: url!)
+        let b = Router.erxesBundle()
         UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b!)
         UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b!)
