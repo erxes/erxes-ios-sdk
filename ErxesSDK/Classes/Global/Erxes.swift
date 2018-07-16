@@ -15,26 +15,26 @@ import UIKit
     static var supporterAvatar:String!
     static var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
     
-    static func firstRun() -> Bool{
+    static func firstRun() -> Bool {
         let defaults = UserDefaults()
         return defaults.value(forKey: "email") == nil
     }
     
-    static func saveEmail( item:String){
+    static func saveEmail( item:String) {
         email = item
         let defaults = UserDefaults()
         defaults.set(email, forKey: "email")
         defaults.synchronize()
     }
     
-    static func saveCustomerId( item:String){
+    static func saveCustomerId( item:String) {
         customerId = item
         let defaults = UserDefaults()
         defaults.set(customerId, forKey: "customerId")
         defaults.synchronize()
     }
     
-    static func saveIntegrationId( item:String){
+    static func saveIntegrationId( item:String) {
         integrationId = item
         let defaults = UserDefaults()
         defaults.set(integrationId, forKey: "integrationId")
@@ -48,16 +48,16 @@ import UIKit
         customerId = defaults.string(forKey: "customerId")
     }
     
-    @objc public static func setBrandCode(brandCode:String){
+    @objc public static func setBrandCode(brandCode:String) {
         self.brandCode = brandCode
     }
     
-    @objc public static func startWithUserEmail(email:String){
+    @objc public static func startWithUserEmail(email:String) {
         Erxes.email = email
         start()
     }
     
-    @objc public static func start(){
+    @objc public static func start() {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
@@ -69,20 +69,20 @@ import UIKit
     @objc public static func setDeviceToken(token:String){
     }
     
-    @objc public static func notificationReceived(userInfo: [AnyHashable : Any]){
+    @objc public static func notificationReceived(userInfo: [AnyHashable : Any]) {
         if let conversationId = userInfo["conversationId"] as? String{
             Erxes.conversationId = conversationId
             Erxes.start()
         }
     }
     
-    @objc public static func setHosts(apiHost:String, subsHost:String){
+    @objc public static func setHosts(apiHost:String, subsHost:String) {
         apiUrl = apiHost
         subsUrl = subsHost
         getConfig()
     }
 
-    static func registerFonts(){
+    static func registerFonts() {
         let b = Router.erxesBundle()
         UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b!)
         UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
@@ -104,26 +104,26 @@ import UIKit
             let defaults = UserDefaults()
             
             
-            if let uiOptions = data?.uiOptions{
+            if let uiOptions = data?.uiOptions {
                 defaults.setValue(uiOptions, forKey: "uiOptions")
             }
-            if let messengerData = data?.messengerData{
+            if let messengerData = data?.messengerData {
                 defaults.setValue(messengerData, forKey: "messengerData")
             }
-            if let language = data?.languageCode{
+            if let language = data?.languageCode {
                 defaults.setValue(language, forKey: "languageCode")
             }
             defaults.synchronize()
         }
     }
     
-    @objc public static func changeLanguage(){
+    @objc public static func changeLanguage() {
         var selected = "en"
         if let lang = UserDefaults.standard.string(forKey:"languageCode") {
-            if lang == "en"{
+            if lang == "en" {
                 selected = "mn"
             }
-            else{
+            else {
                 selected = "en"
             }
         }

@@ -1,0 +1,104 @@
+fragment MessageDetail on ConversationMessage {
+    _id
+    user {
+        details {
+            avatar
+            fullName
+        }
+    }
+    customerId
+    content
+    createdAt
+    attachments
+}
+
+query lastUnreadMessage($integrationId: String!, $customerId: String!) {
+    lastUnreadMessage(integrationId: $integrationId, customerId: $customerId) {
+        _id
+        conversationId
+        content
+        user {
+            details {
+                fullName
+                avatar
+            }
+        }
+        engageData {
+            messageId
+            content
+            kind
+            sentAs
+            fromUser {
+                details {
+                    fullName
+                    avatar
+                }
+            }
+        }
+    }
+}
+
+query totalUnreadCount($integrationId: String!, $customerId: String!) {
+    totalUnreadCount(integrationId: $integrationId, customerId: $customerId)
+}
+
+query UnreadCount($conversationId:String!){
+    unreadCount(conversationId:$conversationId)
+}
+
+query Messages($conversationId: String!) {
+    messages(conversationId: $conversationId) {
+        ...MessageDetail
+    }
+}
+
+fragment ConversationDetail on Conversation {
+    _id
+    content
+    createdAt
+    messages {
+        customerId
+        createdAt
+    }
+    status
+    readUserIds
+    participatedUsers {
+        _id
+        details {
+            fullName
+            avatar
+        }
+    }
+}
+
+query Conversations($integrationId: String!, $customerId: String!) {
+    conversations(integrationId: $integrationId, customerId: $customerId) {
+        ...ConversationDetail
+    }
+}
+
+mutation readConversation($conversationId: String){
+    readConversationMessages(conversationId: $conversationId)
+}
+
+query GetConfig($brandCode: String!){
+    getMessengerIntegration(brandCode: $brandCode){
+        languageCode
+        uiOptions
+        messengerData
+    }
+}
+
+query getSupporter($integrationId: String!){
+    messengerSupporters(integrationId: $integrationId){
+        _id
+        details {
+            avatar
+            fullName
+        }
+    }
+}
+
+query isSupporterOnline($integrationId:String!){
+    isMessengerOnline(integrationId:$integrationId)
+}
