@@ -1,4 +1,12 @@
-extension ChatVC {
+public class SupporterVC:UIViewController {
+    
+    @IBOutlet weak var ivSupporterAvatar: UIImageView!
+    @IBOutlet weak var lblSupporterName: UILabel!
+    @IBOutlet weak var lblSupporterStatus: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var header:UIView!;
+    
     func checkOnline(){
         let query = IsSupporterOnlineQuery(integrationId: integrationId)
         apollo.fetch(query: query){ [weak self] result, error in
