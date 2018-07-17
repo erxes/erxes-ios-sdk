@@ -146,30 +146,7 @@ public class ChatVCMessage:UIViewController{
                             me = "me"
                         }
                     }
-
-                    var image = ""
-
-                    if let attachments = item.attachments{
-                        if attachments.count > 0{
-                            let attachment = attachments[0]
-
-                            if let url = attachment!["url"] as? String{
-                                image = url
-                                self?.attached = true
-                            }
-
-//                                if let dataFromString = attachment?.data(using: .utf8, allowLossyConversion: false) {
-//                                    do{
-//                                        let item = try JSONDecoder().decode(Attachment.self, from: dataFromString)
-//                                        image = item.url!
-//                                    }
-//                                    catch{
-//                                        print("Error info: \(error)")
-//                                    }
-//                                }
-                        }
-                    }
-
+                    let image = self?.extractAttachment(item: item)
                     let chat = item.content?.withoutHtml
                     str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
                 }
@@ -179,6 +156,21 @@ public class ChatVCMessage:UIViewController{
                 self?.wvChat.stringByEvaluatingJavaScript(from: str)
             }
         }
+    }
+
+    func extractAttachment(item:MessageDetail) -> String{
+        var image = ""
+        if let attachments = item.attachments{
+            if attachments.count > 0{
+                let attachment = attachments[0]
+                
+                if let url = attachment!["url"] as? String{
+                    image = url
+                    self.attached = true
+                }
+            }
+        }
+        return image
     }
 }
 
