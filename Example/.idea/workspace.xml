@@ -5,7 +5,9 @@
     <option name="CUSTOM_SCOPE_NAME" value="Current File" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="" />
+    <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +17,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ChatVCMessage.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift">
+      <file leaf-file-name="API.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="144" column="17" lean-forward="true" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="17" />
+            <state relative-caret-position="421">
+              <caret line="1495" column="35" lean-forward="true" selection-start-line="1495" selection-start-column="35" selection-end-line="1495" selection-end-column="35" />
+              <folding>
+                <element signature="e#5168#6135#0" />
+                <element signature="e#26635#30468#0" />
+                <element signature="e#28262#30450#0" />
+                <element signature="e#39862#41870#0" />
+                <element signature="e#51879#53887#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,12 +185,12 @@
       <workItem from="1530784122437" duration="3181000" />
       <workItem from="1530833880829" duration="256000" />
       <workItem from="1531731844246" duration="5877000" />
-      <workItem from="1531802655590" duration="7657000" />
+      <workItem from="1531802655590" duration="8932000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17347000" />
+    <option name="totallyTimeSpent" value="18622000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="23" width="1523" height="1057" extended-state="0" />
@@ -226,7 +235,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift</url>
+          <line>1513</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -363,13 +379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="1389" column="1" selection-start-line="1389" selection-start-column="1" selection-end-line="1389" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -476,8 +485,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="144" column="17" lean-forward="true" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="17" />
+        <state relative-caret-position="162">
+          <caret line="140" column="12" lean-forward="true" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="1495" column="35" lean-forward="true" selection-start-line="1495" selection-start-column="35" selection-end-line="1495" selection-end-column="35" />
+          <folding>
+            <element signature="e#5168#6135#0" />
+            <element signature="e#26635#30468#0" />
+            <element signature="e#28262#30450#0" />
+            <element signature="e#39862#41870#0" />
+            <element signature="e#51879#53887#0" />
+          </folding>
         </state>
       </provider>
     </entry>
