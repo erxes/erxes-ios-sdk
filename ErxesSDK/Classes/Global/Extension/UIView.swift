@@ -1,4 +1,6 @@
 
+private var stringTagHandle: UInt8 = 0
+
 extension UIView {
     
     @IBInspectable
@@ -83,5 +85,33 @@ extension UIView {
                 layer.shadowColor = nil
             }
         }
+    }
+
+    @IBInspectable public var stringTag:String? {
+        get {
+            if let object = objc_getAssociatedObject(self, &stringTagHandle) as? String {
+                return object
+            }
+            return nil
+        }
+        set {
+            objc_setAssociatedObject(self, &stringTagHandle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    //this should work in a similar way to viewWithTag:
+    public func viewWithStringTag(strTag:String) -> UIView? {
+
+        if stringTag == strTag {
+            return self
+        }
+
+        for view in subviews as! [UIView] {
+            if let matchingSubview = view.viewWithStringTag(strTag: strTag) {
+                return matchingSubview
+            }
+        }
+
+        return nil
     }
 }
