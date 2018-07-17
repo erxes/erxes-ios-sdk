@@ -8,150 +8,150 @@
 
 /* Begin PBXBuildFile section */
 		00B004271A3540F4A7497B083C7BEC43 /* ApolloStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43078664ADE071FD48FF8673631771BF /* ApolloStore.swift */; };
-		0328C31EAC488DBDED5A2B7950D0C294 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = DBF36CEA8D7F822264B2F566AE676A8B /* avatar.png */; };
 		097083C009DC181784C062222020113F /* ResultOrPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD1EAFAC11F23C8B9EC24C52A94334C /* ResultOrPromise.swift */; };
-		0C4ACFAA1170594414C28B86EB99176D /* erxes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 377EF83A59E5081DA3DD950F49359C9D /* erxes.ttf */; };
-		0CFC35C94C693998DF6D80B7EA8351D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4D3C67E011633D060548B116FDDEDA /* CFNetwork.framework */; };
+		0BE8E1C923252C2D02EF4B35CE66972E /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A861360E908E2E1B67C9E582CA552450 /* Dictionary.swift */; };
+		0DB4485E8B5EAFE3F6C6C12B7EE368E4 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 15091746D62B63155728554D1E13E759 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F55F645986549CC71562CA5F99351EB /* JSONSerializationFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDD3BFA9D835CAD82859DE1211C09F1 /* JSONSerializationFormat.swift */; };
 		0F91A5ACC8ED112F00D88C9BDACCE7E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
 		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B32EA6BA45AB343508BB1DDEBCC47 /* Timeline.swift */; };
-		145A5275E53BEF09AAFFFCE67F9E9314 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDE4C96F17111E53D36F14C81C13625 /* Language.swift */; };
+		113FB3D72F50E43A703CF049ED67CCA0 /* bg-3.png in Resources */ = {isa = PBXBuildFile; fileRef = D5587B8CF94F1CDED9B137449D9DAD73 /* bg-3.png */; };
+		12CEC4E4330A111B0773CDA3B75CE700 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
 		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2426F46A397B695CE4D0CDBFE0E22807 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1CC2AE3FDFCCDA331D98495331E909C8 /* Erxes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27CAD0E210A783B9E0653148F900A6DB /* Erxes.storyboard */; };
+		1CD7B42B80A45C225CDC4A9D6ED04870 /* ErxesSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */; };
 		20E38E32A7DB892F88BC1421D4D6A03B /* GraphQLResponseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B33E19FD37CAF1316B87011800AB24 /* GraphQLResponseGenerator.swift */; };
-		21686B228951EDBC85D085E1DE74245B /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 712C5F6CE079210BFF7008C4AEFFB61D /* SRWebSocket.m */; };
-		23E2FE176070FA7F4C45F3524EBCD158 /* LiveGQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFD61ACDF9753D52A0EFADD41BEABE0 /* LiveGQL.swift */; };
+		215B85FDD8695828EBDECB94FE51198B /* PayloadMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759DCF5FE06B0B2B8EFC1FCA438E137E /* PayloadMessages.swift */; };
+		23224FF94AC35A308855C39DE0B2522D /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84E4249D00D39C62699BD556EAEB42FC /* icomoon.ttf */; };
+		23E32CEA51248B1C097EBFF1968832BE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483416F61C890649108FFFF2BB39B4EE /* Router.swift */; };
 		24A0A688E5F0450FE1460E1830109EEB /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72836C5BD851E1A6807DD29344F993D7 /* DataLoader.swift */; };
-		2AEDEE659CE85871115343FDB38062D4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AD778C60E0E50B515B0A33987DDB86 /* API.swift */; };
 		2D1377F64EC27D44D821A9EF34EE862D /* GraphQLInputValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0748D74EB05A990680B99B35BA71222D /* GraphQLInputValue.swift */; };
-		2DC3EAECB474E37074D72AAE7E0D4767 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CCB74556E3DA7A194B85B5CB993C421 /* bg-1.png */; };
-		3027730556DC28DA242F9AEADBF3E680 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ED9B9A57C9CDA6538DE7B21BBAB95B /* Router.swift */; };
-		3230BDF7F02B7F51E6160FFB55F5A661 /* LiveGQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C509CA1CFA56F866B1C98265C2D25CD4 /* LiveGQL.framework */; };
-		3288C253F3E18A35D4D52F1A956959C3 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BD50B409C41BB317551879A29F92C9 /* Apollo.framework */; };
 		3334363611D795C848F8E771DDB1A1A5 /* GraphQLExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDE7F866B3A0EB2ADBBD4396880B7E /* GraphQLExecutor.swift */; };
-		342FC8C063DDADC6AD7C31BFBAA4204C /* Erxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA8D373A19D05072AF950D89FCEE3DE /* Erxes.swift */; };
+		335129F4448735AF2EBC9A0479D49CB9 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAC6C7606455CCE72B8B5A158B38E0C /* UIView.swift */; };
+		336E31D4F9B0E15660C6D24AF1BE7CA8 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B832C14E5296AFFDC137271C99C9B636 /* String.swift */; };
+		3532C395875D4B4CA5BDADCC27E911FB /* erxes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DA7C4BE811E7F95C9BEDACB2E3EBA8D1 /* erxes.jpg */; };
 		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA06203370AE181C7646EB746FB31B /* TaskDelegate.swift */; };
-		36AB87E49E84EF228F6B913D3E0CEF31 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C879EEFCDE39C65D7E4C0EA3707F3F /* Message.swift */; };
-		37BAD61DCF463591106E0FB66F80D4CE /* PayloadMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759DCF5FE06B0B2B8EFC1FCA438E137E /* PayloadMessages.swift */; };
-		37F253C1FE95C9C18ED2977338D33186 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9BC4153C53BE01ED23D3BFD3FC70A0 /* Alamofire.framework */; };
 		3945A29814E4B1E9C9A2DD1DE72522D4 /* JSONStandardTypeConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34B8053423556EDD757E8B010E0EA9 /* JSONStandardTypeConversions.swift */; };
 		3C7486C088BC221EA5E88192BA316DD4 /* GraphQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051F1ACBA27F9076CA432248037D3F11 /* GraphQLError.swift */; };
+		3C82BC5B1E7DBB2AD5EFF0C27970C04D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4765BC356FF738195D2453ADAF756AF /* RegisterVC.swift */; };
+		3E49BA49C5295F4C1C0DC8C1039F11DF /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3366275BCFB460CD878D9B31D66BE6E2 /* SocketRocket-dummy.m */; };
 		3FB11A9708614E901C97167958276AFC /* RecordSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3CD8676926E6A14CAE334F4102369B /* RecordSet.swift */; };
-		4009A84BCE3F29D6965727E637B8820B /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E82C9BA0B34A698B5EC70B5D47733A /* ConversationVC.swift */; };
 		45567CF12FE4EE67842F4AB8B41C9138 /* NormalizedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1B7339BDDD42C083686E660C52C29 /* NormalizedCache.swift */; };
 		47AC0559B014EAA414214010F97BA4C6 /* GraphQLResultNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14B2312092833DF2F3CE68C595B92C1 /* GraphQLResultNormalizer.swift */; };
 		4816D84F99C335BD69510B3CBCB3BC06 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F66ABFD0CA302BAB8BA4A5FC86DEC /* JSON.swift */; };
-		498FF7FD2BD5F8267A2F27F9D711A241 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F26A7B8B07DE19877DA110AB6DCD76 /* Localizable.strings */; };
 		4A0EB5814435E932DC7DA439514950AB /* GraphQLSelectionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDCE0FAC8D82244FD1EB856C96EE150 /* GraphQLSelectionSet.swift */; };
-		4EFAFB9EC6EC14208DF575A862E6297A /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 15091746D62B63155728554D1E13E759 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4C36AF3F8B30FF430B20C29E932BEEB4 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 471B066C88ABBC837EE4D146CA6C11D3 /* avatar.png */; };
 		52F7034B56736F62A41323BFE78B6F1A /* Pods-ErxesSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDB014C7CC850F7A6306505B67324E6 /* Request.swift */; };
-		554929A001A4B9B35BF3CCE249003890 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94593D7A8D4F82CAFEC7E6CDD5557476 /* JSONHelper.swift */; };
-		5DBD7ED8393A317D8B94F1D28F2E66A0 /* MessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592725F7A21C97BF58649474D44F8304 /* MessageTypes.swift */; };
-		5F1F940D86EDBAF335690D3C58B900AA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A9FCBE0198C84E14C90F696B9590EA /* Security.framework */; };
-		601AF86F736AEB5A527ADA71537A82B7 /* SocketRocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB748717E57684A1BFE23F8933375CE /* SocketRocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		586E7A08EBD91B158ABDC636853AF0B8 /* LiveGQL-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3E22CDABAC0F917AEF9A6B7E3BD4B60 /* LiveGQL-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C16E3C17710C7516C411C0218539291 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1A6BE00CB798D5BB0DEB9653921C9E /* ChatVC.swift */; };
 		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E1780A7984B8AFE4258C8BCD63145C /* DispatchQueue+Alamofire.swift */; };
 		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200E4DDE36A2E947F0EE959AA46CE5A /* ServerTrustPolicy.swift */; };
+		63A6D9A12E40709DF989730B89895F4C /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB1EBD9DE36A5B544244DEA88BAF4DB /* Color.swift */; };
 		6472BDD504B3883BAAEC5F24E7027DA4 /* NetworkTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE799D0D5CC3AE92414DC1D492C1CC1 /* NetworkTransport.swift */; };
-		65725A01088375F44A412B29035DE27B /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
+		67A98A8AB93A62497D675EA7190D30C9 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8FBD00842E96082B2328FC9E881E4A /* API.swift */; };
 		685BE1522AA147E08E5BF3B8EA4BA771 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		693FDBD856DD102A708F4F26715058D5 /* SocketRocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB748717E57684A1BFE23F8933375CE /* SocketRocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69C6A08FE46B8ECC10C4F538A249EF79 /* Apollo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 79793736E23B783CA5E33B4C89FFA3BA /* Apollo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6B8A05D7F5A1EED49C13D2C64544BCD1 /* ErxesSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */; };
+		69E02218C4B54EDA80D3FD045167FF14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		6A162991C12053B85D01BC623114051D /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63BD50B409C41BB317551879A29F92C9 /* Apollo.framework */; };
 		6BB1817B430C72BBE099D23B39CECE0D /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CC4DBE0A58173C5DC20D26A3404FE6 /* Record.swift */; };
 		6DB1B3C86D07ACD1237F55ED964C32D6 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13AF6025EB7CE1FA0E4E4102766454 /* Promise.swift */; };
+		6E5599F8BB552A7442CDDC4EC5BD07A8 /* MessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592725F7A21C97BF58649474D44F8304 /* MessageTypes.swift */; };
+		70547AE49491F0AEBB6D4508B2C861A7 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED33C7B4168F6A40028F9E036D003B /* Data.swift */; };
+		724ADD9137467982099CD34C0E8DAB86 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3936BCA991FF6E2F33904C89CD5736C /* bg-1.png */; };
+		736CE09DAF1F3743866CAD016DC06C88 /* ErxesSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A92B5335A103AD42E17C72AE1B3D2911 /* ErxesSDK-dummy.m */; };
 		73B9C996AED49ED7CF8EC2A6F1738059 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		77133DAF2F03B07273F24165E992FC4A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C20FEC6E859FAE620FD683BBCDA2DD31 /* Roboto-Regular.ttf */; };
+		79EFB5BE124191B0F69229C9E838FBAC /* ErxesSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0602CB98F351673D615282B2BA7B003B /* ErxesSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721834C85F68D1BF8BE71276CE4F547F /* SessionDelegate.swift */; };
-		7C459513A320B8C8289F0DFD88BE179D /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A55D73C0D3D42F03800BF0E9611E8CA /* ChatVC.swift */; };
 		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255D947E6FBDC82D0883CF9A1D406041 /* Result.swift */; };
+		7DC8380CF3D915CC581B51D36D29FC01 /* LiveGQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFD61ACDF9753D52A0EFADD41BEABE0 /* LiveGQL.swift */; };
+		82F34F40B7C407D9330C095741F3DF27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		83791F95614B1BD8AE715F9128C7ED18 /* bg-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 92BE2DB2E06B349C5C49B990CC6F86DF /* bg-2.png */; };
+		84E7185160273D35BFB457AE8949F200 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE338205473B874D8B13224AA3329455 /* Language.swift */; };
 		852AE1AE9762452D89E501B86806C3AB /* GraphQLResultAccumulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A26AB6DD2D7BE059BD3E40D2BC8A14 /* GraphQLResultAccumulator.swift */; };
 		854AF80F5192170ADCCB069E6259FEEE /* GraphQLDependencyTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC285B2E8C2B6926B63E0AAB7F27493 /* GraphQLDependencyTracker.swift */; };
-		856F4FAEDF37BC00DE8C3A28ECA755E3 /* UIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F31F897C570A15178611594CEA79B0 /* UIData.swift */; };
-		895E17038FC6E3D7E57B580784FF3CA8 /* MessengerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A10F681EF4D84AB0D483F8002CADC1 /* MessengerOption.swift */; };
+		865CAF9EB2CD8C628EE1DC12A42D6E55 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71B2075516F6ABCB0EC34700FAB97B4A /* Localizable.strings */; };
+		87E1B27D0A3A43D0F89CB6F511BEB373 /* query.graphql in Sources */ = {isa = PBXBuildFile; fileRef = C48CBB7E465A931A475332B938CA4D5E /* query.graphql */; };
+		882821637B7250A519F5FDD0BA13E6C2 /* bg-4.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B06A725B0B4110087C28F60F9161BB /* bg-4.png */; };
 		8BCC46513958FD53CE2B58908A878CB6 /* Locking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2243EF752286AD2FD75DC87D0EF4C94 /* Locking.swift */; };
-		8BE20D00A7D7117D0C83B4C7A023A564 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4208B1389999308FB9A32E67DF85AF9 /* RegisterVC.swift */; };
-		93F074A820FC8A820093E168 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074A720FC8A820093E168 /* UIImage.swift */; };
-		93F074AA20FC8AE20093E168 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074A920FC8AE20093E168 /* Date.swift */; };
-		93F074AC20FC8AF20093E168 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074AB20FC8AF20093E168 /* String.swift */; };
-		93F074AE20FC8B000093E168 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074AD20FC8B000093E168 /* Dictionary.swift */; };
-		93F074B020FC8B1D0093E168 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074AF20FC8B1D0093E168 /* Color.swift */; };
-		93F074B220FC8B260093E168 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B120FC8B260093E168 /* Data.swift */; };
-		93F074B420FC8B4C0093E168 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B320FC8B4C0093E168 /* Font.swift */; };
-		93F074B620FC8D7D0093E168 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B520FC8D7D0093E168 /* UIView.swift */; };
-		93F074B820FC8D890093E168 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074B720FC8D890093E168 /* UIButton.swift */; };
-		93F074BC20FC8E2A0093E168 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F074BB20FC8E2A0093E168 /* UIImageView.swift */; };
-		93F074C320FCA2F20093E168 /* mutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 93F074C120FCA2F10093E168 /* mutation.graphql */; };
-		93F074C420FCA2F20093E168 /* query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 93F074C220FCA2F10093E168 /* query.graphql */; };
-		962DA3377FCBA2700B894B61628599AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
-		98225956F989141AA227065BB6132F32 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0EAF4D03A74452B9B7F8B882439B22 /* Photos.framework */; };
-		9DB2E108C4ED13CAD76A816765647984 /* erxes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 71B6E9F41EBD6569DAD15993A8B5210E /* erxes.jpg */; };
+		9097593E991383ED39F43AF196E45D5E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761E57D7FBAF16EECB616071672676DC /* Constants.swift */; };
+		917D590EE000CE75727FDA0EE57D9F4B /* mutation.graphql in Sources */ = {isa = PBXBuildFile; fileRef = A1110B6ED0F6AC5753E68080AD30FF6E /* mutation.graphql */; };
+		95493CD88B35840CACAB2314497A19E1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DCA6F0E69718CDB994F76FAFB6EB6C /* Message.swift */; };
+		96E279E6CF61290593C64E80DC072BF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F95DC5729495CAF6C99E4626FF75CE /* Utils.swift */; };
+		9C1CAD03302A7FBC00E9A88F0B7B5E9D /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A7980804B163795A4D478F87DF63F755 /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D908E79C39E2A2C2FE9320D923E16A4 /* Erxes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FCF18448BFE199E6F04515FC54C0968 /* Erxes.storyboard */; };
 		9E4F23BFA9B082F66DDE6CBF826350B4 /* ApolloClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243F19163A172771FA660F745ABC67E5 /* ApolloClient.swift */; };
-		9E6ED98B5311013C2F4FDA9EA1703C67 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6844613A4285CB0B383B689F83D61973 /* Roboto-Regular.ttf */; };
 		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93E642E6696E7D8FA94AE73D33DAE54 /* AFError.swift */; };
 		9F49CE13A71C3E9806C1884E9E5EBE7F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67010FBA857F221E78FA12B2BE004340 /* Result.swift */; };
 		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708848E9A883FF67E2B39D748BDE3A6A /* NetworkReachabilityManager.swift */; };
-		A3BCDB82304966EB78BB9E1871565EC1 /* LiveGQL-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3E22CDABAC0F917AEF9A6B7E3BD4B60 /* LiveGQL-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A62FDA24ED457715B18F3CF34E45B6A6 /* LiveGQL-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E21960E7DEC264AEC2BEBE6181AD /* LiveGQL-dummy.m */; };
-		A6930A5FC3E0A9B51394BAA846EC8765 /* SocketRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A7980804B163795A4D478F87DF63F755 /* SocketRocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A65BA130CA8D8D8938949CC361C72703 /* LiveGQL-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C401E21960E7DEC264AEC2BEBE6181AD /* LiveGQL-dummy.m */; };
 		A7CC6D1B9D9B2B0539E5618E46225801 /* Pods-ErxesSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A5884AF099FBE9BE1A79562219CCBC7E /* Pods-ErxesSDK_Example-dummy.m */; };
 		A7F758E72285085E768B3196D47984A1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF69FA318DB9C4A9A1690A1CF938B830 /* AsynchronousOperation.swift */; };
+		A889AA92BF88DA1A5D77EE7C903B6D6B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EABC0C6F9B0CE7656E2DA107683392 /* Font.swift */; };
 		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C184B3D8CD96B8BD562DB395CC04BF /* Alamofire-dummy.m */; };
+		AA19F514DA865542BEF8162191BBB2CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		AAD01238C94ADC211FE528C3178E2045 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0EAF4D03A74452B9B7F8B882439B22 /* Photos.framework */; };
+		ABF2A2C038A0DAFE441C7AF91B466D76 /* erxes.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF151A986E62FA5F6B0000FA3098D797 /* erxes.ttf */; };
 		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CCE921C2477B1E24A00AF17A96994 /* SessionManager.swift */; };
-		B3BAD2F257688926C1B9CEAE58AEFD50 /* ErxesSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCECF864E3554DE18AC26C6AD312C2A /* ErxesSDK-dummy.m */; };
+		B5F89E831306EEC3BC0F1F68D48BDD25 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5158D0DAB47F46E56EAF235517D8F /* Date.swift */; };
 		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D930855273B6523220B8B94D830EDC1C /* MultipartFormData.swift */; };
+		B71212927536DD04CC234BBCDDA9340D /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
 		B7EF762FF3731C4DCFEB4D2191CE557F /* GraphQLResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947944379373593AF3F76B545B2E3015 /* GraphQLResult.swift */; };
+		B8634B0FC8DCB99FB6533924097D2D3B /* MessengerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2C64B1D9CD3078982157554BC5594 /* MessengerOption.swift */; };
+		B8DEC3DEB6AA4ED1230940BF19371C28 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 712C5F6CE079210BFF7008C4AEFFB61D /* SRWebSocket.m */; };
+		B92D4E5A7180BC31EAE33E52C118D78D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4D3C67E011633D060548B116FDDEDA /* CFNetwork.framework */; };
+		BBA725B87B383EA26AB87CDD9A24EBC7 /* UIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53F0CF989A20A861FB61525DC9F1B50 /* UIData.swift */; };
 		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CEEC5D38A24236484632E17D3DDB1C /* Validation.swift */; };
 		BC1C82D8C94A6C209D100AC3AA449D38 /* GraphQLQueryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D079FFA63C594EF47DEF58A05C47D83 /* GraphQLQueryWatcher.swift */; };
 		BC29C2B0DC8755CF00E12C7C4AFBF695 /* check-and-run-apollo-codegen.sh in Resources */ = {isa = PBXBuildFile; fileRef = 17A1E03C50793DFBB0D7AB89F9A7A419 /* check-and-run-apollo-codegen.sh */; };
+		BD9122626F2F394214CB69FA2164CA8F /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94593D7A8D4F82CAFEC7E6CDD5557476 /* JSONHelper.swift */; };
 		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE297B57AC4806F1387ACA3FB51AA00 /* ParameterEncoding.swift */; };
+		C19003B13BA37A8E19955A4D960DC54E /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7A8AFFF6F9853547D8304680AD749D /* UIButton.swift */; };
 		C2309D01A3D237536CC3C74B1A36592F /* GraphQLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAAB9712638313E2BB23448C9EFBB3 /* GraphQLOperation.swift */; };
-		C2FA56E55136CB9B99ACC11F26D297EF /* SocketRocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3366275BCFB460CD878D9B31D66BE6E2 /* SocketRocket-dummy.m */; };
-		C592CA8C81D7CA085CC756CD302C4888 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
+		C45EC94A4D9D3E2848DC2EB5EC025101 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BCB272169983955E73410B93677C19 /* ConversationVC.swift */; };
 		C5A0C07491F9D94C99DE288D0159AB65 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCF0E1CE13A3A1FF7A1C54459BF96C /* Collections.swift */; };
-		C706BB6AFC206858CE84CE96012BA4E9 /* bg-2.png in Resources */ = {isa = PBXBuildFile; fileRef = FFCCE919B9A0C412E6793F1E34D15C61 /* bg-2.png */; };
 		C7386CA0B7A4E7F8D3D58EBCBCCC78F2 /* GraphQLSelectionSetMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03C6BBBE29B0E96BE427B798D6E75C /* GraphQLSelectionSetMapper.swift */; };
-		C9FDBBCDA82719C4BF2373956E92A91E /* bg-4.png in Resources */ = {isa = PBXBuildFile; fileRef = EF91185490A65D6472C553407FE0030D /* bg-4.png */; };
+		CAEF301D65D21BEA460D405160736F1C /* LiveGQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C509CA1CFA56F866B1C98265C2D25CD4 /* LiveGQL.framework */; };
 		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9818A39F278A0DB89F8EB7578C126D8 /* Response.swift */; };
 		D066A410387CD904D2FC3E3F10FFEBA4 /* GraphQLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9A5D78F85B0411736250E1CD0CC4B3 /* GraphQLResponse.swift */; };
+		D2944E1C3D2800B1B504DBB6810B63DD /* Erxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8A6D0A31E9E631165F4FA28E55B177 /* Erxes.swift */; };
 		D29C59C4A893B250B3D238EEACFD05C6 /* Pods-ErxesSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CCD564D9698F8AB1AE1EEEF3BF6F0CFA /* Pods-ErxesSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D321AC15EF86060436BEA06A45C05590 /* Pods-ErxesSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */; };
-		D6F59618A6BAB5501E1495F95B753359 /* ErxesSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4FECBB7BC487166BDDF6DF99C4ED651 /* ErxesSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD8E2BA5F097BA51759B87EAF8DB6A6B /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D82CC729B4FABC5C5EC0E422FBB30E2 /* icomoon.ttf */; };
-		DE1FCCAE8FAB9B80629F63DA01E8A880 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8014851CCB94B3C7D10E99FAD3C422B /* Constants.swift */; };
-		DEED889F584ED70B2E01208A40FB8942 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C629842790C5D69DA5D22F1B7EA4F3 /* Roboto-Medium.ttf */; };
-		E2BAD4E67A4BC44A60DE0F4E5E3CB9E4 /* bg-3.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2B3ECDEC686B1C31A16A62AE5C336E /* bg-3.png */; };
+		D7B19E5625CF1E6B19282DEE4623F19D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2A0BA94E0CCCB1264E30AC47E3440 /* UIImage.swift */; };
+		DC66C51600B48B40CBC2426B9E310EBE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9BC4153C53BE01ED23D3BFD3FC70A0 /* Alamofire.framework */; };
+		DF11CF185E6C51001F37EF7170341002 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFA86E4D4A3DD9FAA697157AB88B0979 /* Roboto-Medium.ttf */; };
 		E5949F0C4BB0DB1C3D66F2B59E2C227C /* InMemoryNormalizedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176F469C6EEE1020367D1AED5F35AC8A /* InMemoryNormalizedCache.swift */; };
-		E6193FEF1302E3705E93BDA75A2210E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
 		EB31F7C05E4247DB1FAB104A815E7BCC /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8681FB3984176C68804C221EA9603693 /* Utilities.swift */; };
 		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C6F15788E1FEC9396319F22C65AE0 /* Notifications.swift */; };
 		F00ACA4CF72B404017C79B34D9921343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */; };
-		F46ACB872E570F7F78EA5F55AC112474 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520623685BA39F47F9CAB1A4A488B19 /* Utils.swift */; };
 		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC5E3523CEBC5FD9AF621416082BD8 /* ResponseSerialization.swift */; };
 		F6E58345690D1BAD17BB1A399234DF01 /* HTTPNetworkTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46ED5AC787BA2CB4F2B598A4B470127A /* HTTPNetworkTransport.swift */; };
 		F8443B0C224312ED79FECFA39C145C96 /* Apollo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C008C7239CB7A8E619FBA34AEDBFCC58 /* Apollo-dummy.m */; };
 		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF3CE5B28EE950B9D86D7B955D9186D /* Alamofire.swift */; };
-		FE7C8AAB62301D6056814D7252CF890D /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */; };
+		FE62E45906C7BC6F3D50110F9CAF09D6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1815277F6FDC1D5352DBC29D4BEBB1E /* UIImageView.swift */; };
+		FF9A66599BC7D3E8577F03CF22F56D99 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A9FCBE0198C84E14C90F696B9590EA /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		140C4050F17679BF3A575E598A628C23 /* PBXContainerItemProxy */ = {
+		2172B04D17A18D5DF1B328BD2A15B844 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 56890C0313FEA96FD2614AA88567919C;
+			remoteGlobalIDString = DA951FA6F63CD4A8D48F7441A3C42B2A;
 			remoteInfo = LiveGQL;
 		};
-		2B2351D2613F9E3BD131C1CD7D1270CB /* PBXContainerItemProxy */ = {
+		2794E5E91928B04FAEA3EB9861C9B517 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4C57CECEECE982A104D8AEF9889D9354;
-			remoteInfo = "ErxesSDK-ErxesSDK";
+			remoteGlobalIDString = 3B77C7B19F2294EBED0E47D3516ABD52;
+			remoteInfo = SocketRocket;
 		};
 		3EFE400EB13C95F433E0A521C032EE12 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 56890C0313FEA96FD2614AA88567919C;
+			remoteGlobalIDString = DA951FA6F63CD4A8D48F7441A3C42B2A;
 			remoteInfo = LiveGQL;
 		};
 		437E8ED593E9BA827D1CDB1E4419D245 /* PBXContainerItemProxy */ = {
@@ -165,7 +165,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 25CF1BD995D938BDB6FCD2D28EE228D7;
+			remoteGlobalIDString = 3B77C7B19F2294EBED0E47D3516ABD52;
 			remoteInfo = SocketRocket;
 		};
 		6CC0AB4802972A39C220FF017E9BE23C /* PBXContainerItemProxy */ = {
@@ -175,19 +175,26 @@
 			remoteGlobalIDString = 0E73B6922EB1A894D298240F413A9AE0;
 			remoteInfo = "Pods-ErxesSDK_Example";
 		};
+		BE555DF473D607B8118A711D75BC4262 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B77C7B19F2294EBED0E47D3516ABD52;
+			remoteInfo = SocketRocket;
+		};
+		C1BA13280537A8D12010EAE3013E17CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2010E78719F690490FE4CE58BC774303;
+			remoteInfo = Apollo;
+		};
 		DB1303B12CB2ABA0AD1233DBAFD57635 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 969A97725F5E35621508357E5BAA7095;
+			remoteGlobalIDString = 77E48F94F4C919496F1582D031D1FAAA;
 			remoteInfo = ErxesSDK;
-		};
-		DD6B951E3EAC5B3BCC32558BECDA86AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25CF1BD995D938BDB6FCD2D28EE228D7;
-			remoteInfo = SocketRocket;
 		};
 		EBACEA0D4AF6BE7D3DE5150D710E6B5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -196,215 +203,201 @@
 			remoteGlobalIDString = 2010E78719F690490FE4CE58BC774303;
 			remoteInfo = Apollo;
 		};
-		F2829E9F28374F1E0EEDA520FA6653A6 /* PBXContainerItemProxy */ = {
+		F615733C5859D3C032F2595682B5C02C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2010E78719F690490FE4CE58BC774303;
-			remoteInfo = Apollo;
+			remoteGlobalIDString = C246D4C2AC5400CF9EF7B0AD949D4C24;
+			remoteInfo = "ErxesSDK-ErxesSDK";
 		};
-		FA376CC5E02987DBF57C9D9AFDAE766B /* PBXContainerItemProxy */ = {
+		FD77C613F527CB710F679DF064A8B42C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
 			remoteInfo = Alamofire;
 		};
-		FB71196A71C3538BFBC7BCCA38FF4375 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 25CF1BD995D938BDB6FCD2D28EE228D7;
-			remoteInfo = SocketRocket;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00ED33C7B4168F6A40028F9E036D003B /* Data.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		051F1ACBA27F9076CA432248037D3F11 /* GraphQLError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLError.swift; path = Sources/Apollo/GraphQLError.swift; sourceTree = "<group>"; };
-		0520623685BA39F47F9CAB1A4A488B19 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		0535AD74362B3BBA3B351F69054B67B3 /* ErxesSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = ErxesSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0602CB98F351673D615282B2BA7B003B /* ErxesSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-umbrella.h"; sourceTree = "<group>"; };
 		0748D74EB05A990680B99B35BA71222D /* GraphQLInputValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLInputValue.swift; path = Sources/Apollo/GraphQLInputValue.swift; sourceTree = "<group>"; };
 		08149BB7A1C2FDCF03BC98F7E4DFF118 /* Pods-ErxesSDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		088B5438BABAF3766DEF2EA5616C6135 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		09444EBA295A73278A75335D35C67F25 /* SocketRocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketRocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A72052EA7CF8339F59344C9EF9B2BD4 /* LiveGQL.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LiveGQL.modulemap; sourceTree = "<group>"; };
-		0ABFF0BF66C89A735CBCC5389A6A075D /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = mn.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0C5B32EA6BA45AB343508BB1DDEBCC47 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
+		0CEB2D8E26F96BBDA769FAACC52F519B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		0E3CD8676926E6A14CAE334F4102369B /* RecordSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RecordSet.swift; path = Sources/Apollo/RecordSet.swift; sourceTree = "<group>"; };
-		0E765A04B99CE1ACACB142E894554504 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1079E8DFE7A592292D805F1BF180F32A /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		11AA06203370AE181C7646EB746FB31B /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
 		15091746D62B63155728554D1E13E759 /* SRWebSocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		15D2270B6F21F981AD6CEBACF69DD64A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		176F469C6EEE1020367D1AED5F35AC8A /* InMemoryNormalizedCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InMemoryNormalizedCache.swift; path = Sources/Apollo/InMemoryNormalizedCache.swift; sourceTree = "<group>"; };
 		17A1E03C50793DFBB0D7AB89F9A7A419 /* check-and-run-apollo-codegen.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = "check-and-run-apollo-codegen.sh"; path = "scripts/check-and-run-apollo-codegen.sh"; sourceTree = "<group>"; };
 		1B2E372AD398F2B70AF09884E59D681E /* Pods-ErxesSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
-		1F490958AE7DE4EFEFFBEC5B3DF0AA89 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F490958AE7DE4EFEFFBEC5B3DF0AA89 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		222BA09756AD12F112FD1F9B316824DF /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
-		22AD955E4CF6EA9E1D6412F438A005E3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22C75EAF917D4DFA4033BD862D73D531 /* Pods-ErxesSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ErxesSDK_Example.modulemap"; sourceTree = "<group>"; };
 		2426F46A397B695CE4D0CDBFE0E22807 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
 		243F19163A172771FA660F745ABC67E5 /* ApolloClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApolloClient.swift; path = Sources/Apollo/ApolloClient.swift; sourceTree = "<group>"; };
 		24C3840A0F7976EFF0982DE6708C7C9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255D947E6FBDC82D0883CF9A1D406041 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		27CAD0E210A783B9E0653148F900A6DB /* Erxes.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = Erxes.storyboard; path = ErxesSDK/Assets/Erxes.storyboard; sourceTree = "<group>"; };
 		28DAAB9712638313E2BB23448C9EFBB3 /* GraphQLOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLOperation.swift; path = Sources/Apollo/GraphQLOperation.swift; sourceTree = "<group>"; };
-		2906BEA2B9BCEB9032A666D5039CFECB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2A9A5D78F85B0411736250E1CD0CC4B3 /* GraphQLResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResponse.swift; path = Sources/Apollo/GraphQLResponse.swift; sourceTree = "<group>"; };
 		2CE2B45F381FCF09A27A52BB998DC4B8 /* Pods-ErxesSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ErxesSDK_Tests.modulemap"; sourceTree = "<group>"; };
-		2DA8D373A19D05072AF950D89FCEE3DE /* Erxes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Erxes.swift; sourceTree = "<group>"; };
-		2F3B1C599E12D77CD36813F08F66ECDF /* SocketRocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketRocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F3B1C599E12D77CD36813F08F66ECDF /* SocketRocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketRocket.framework; path = SocketRocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3200E4DDE36A2E947F0EE959AA46CE5A /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		3366275BCFB460CD878D9B31D66BE6E2 /* SocketRocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SocketRocket-dummy.m"; sourceTree = "<group>"; };
-		34AD778C60E0E50B515B0A33987DDB86 /* API.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = API.swift; path = ErxesSDK/Classes/API.swift; sourceTree = "<group>"; };
 		35E62F19DA8F35EE9F1A572863D36EB5 /* Pods-ErxesSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Example-resources.sh"; sourceTree = "<group>"; };
-		377EF83A59E5081DA3DD950F49359C9D /* erxes.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = erxes.ttf; path = ErxesSDK/Assets/erxes.ttf; sourceTree = "<group>"; };
-		3802035BF617405A38F597CB279EFF02 /* Pods_ErxesSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ErxesSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		38C629842790C5D69DA5D22F1B7EA4F3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "ErxesSDK/Assets/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		3802035BF617405A38F597CB279EFF02 /* Pods_ErxesSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ErxesSDK_Example.framework; path = "Pods-ErxesSDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CDCE0FAC8D82244FD1EB856C96EE150 /* GraphQLSelectionSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLSelectionSet.swift; path = Sources/Apollo/GraphQLSelectionSet.swift; sourceTree = "<group>"; };
 		3EB748717E57684A1BFE23F8933375CE /* SocketRocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-umbrella.h"; sourceTree = "<group>"; };
+		3F7A8AFFF6F9853547D8304680AD749D /* UIButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		43078664ADE071FD48FF8673631771BF /* ApolloStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ApolloStore.swift; path = Sources/Apollo/ApolloStore.swift; sourceTree = "<group>"; };
+		43F5158D0DAB47F46E56EAF235517D8F /* Date.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		45F2C64B1D9CD3078982157554BC5594 /* MessengerOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessengerOption.swift; sourceTree = "<group>"; };
 		46ED5AC787BA2CB4F2B598A4B470127A /* HTTPNetworkTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPNetworkTransport.swift; path = Sources/Apollo/HTTPNetworkTransport.swift; sourceTree = "<group>"; };
-		4778D34E35FCC62B52B43FC39C7216B0 /* ResourceBundle-ErxesSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ErxesSDK-Info.plist"; sourceTree = "<group>"; };
+		471B066C88ABBC837EE4D146CA6C11D3 /* avatar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = avatar.png; path = ErxesSDK/Assets/avatar.png; sourceTree = "<group>"; };
+		483416F61C890649108FFFF2BB39B4EE /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		49A26AB6DD2D7BE059BD3E40D2BC8A14 /* GraphQLResultAccumulator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResultAccumulator.swift; path = Sources/Apollo/GraphQLResultAccumulator.swift; sourceTree = "<group>"; };
-		4CCECF864E3554DE18AC26C6AD312C2A /* ErxesSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ErxesSDK-dummy.m"; sourceTree = "<group>"; };
 		4D079FFA63C594EF47DEF58A05C47D83 /* GraphQLQueryWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLQueryWatcher.swift; path = Sources/Apollo/GraphQLQueryWatcher.swift; sourceTree = "<group>"; };
 		4D9BC4153C53BE01ED23D3BFD3FC70A0 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EC285B2E8C2B6926B63E0AAB7F27493 /* GraphQLDependencyTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLDependencyTracker.swift; path = Sources/Apollo/GraphQLDependencyTracker.swift; sourceTree = "<group>"; };
 		5088D71C88F5091C3D0FD41917D9A86F /* Pods-ErxesSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		51DF3384C6D229FE5DFD34C1F6270C3B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57158CF6DF703C511FC0B2023668CE38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		592725F7A21C97BF58649474D44F8304 /* MessageTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MessageTypes.swift; path = Source/Classes/MessageTypes.swift; sourceTree = "<group>"; };
+		5BAC6C7606455CCE72B8B5A158B38E0C /* UIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		5C8FBD00842E96082B2328FC9E881E4A /* API.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = API.swift; path = ErxesSDK/Classes/API.swift; sourceTree = "<group>"; };
 		63BD50B409C41BB317551879A29F92C9 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64CC4DBE0A58173C5DC20D26A3404FE6 /* Record.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Record.swift; path = Sources/Apollo/Record.swift; sourceTree = "<group>"; };
 		651635EC2F19B289609890D88F82D3D2 /* SocketRocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-prefix.pch"; sourceTree = "<group>"; };
 		65AB75E43BE8CDC0CD8853A675B48CBC /* Pods-ErxesSDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Tests-resources.sh"; sourceTree = "<group>"; };
 		65B33E19FD37CAF1316B87011800AB24 /* GraphQLResponseGenerator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResponseGenerator.swift; path = Sources/Apollo/GraphQLResponseGenerator.swift; sourceTree = "<group>"; };
 		67010FBA857F221E78FA12B2BE004340 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Apollo/Result.swift; sourceTree = "<group>"; };
-		6844613A4285CB0B383B689F83D61973 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "ErxesSDK/Assets/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		68ED9B9A57C9CDA6538DE7B21BBAB95B /* Router.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		6AE471C8119D37D332DFD48405923BC6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C49D8D6F798B80FE72A6304728A67F2 /* Pods-ErxesSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ErxesSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
-		6CCB74556E3DA7A194B85B5CB993C421 /* bg-1.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-1.png"; path = "ErxesSDK/Assets/bg-1.png"; sourceTree = "<group>"; };
-		6D82CC729B4FABC5C5EC0E422FBB30E2 /* icomoon.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = icomoon.ttf; path = ErxesSDK/Assets/icomoon.ttf; sourceTree = "<group>"; };
+		6FCF18448BFE199E6F04515FC54C0968 /* Erxes.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = Erxes.storyboard; path = ErxesSDK/Assets/Erxes.storyboard; sourceTree = "<group>"; };
 		70363E132230A0C7F42C89AF26034418 /* Pods-ErxesSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		708848E9A883FF67E2B39D748BDE3A6A /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		70CEEC5D38A24236484632E17D3DDB1C /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ErxesSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = ErxesSDK.bundle; path = "ErxesSDK-ErxesSDK.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		712C5F6CE079210BFF7008C4AEFFB61D /* SRWebSocket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
-		71B6E9F41EBD6569DAD15993A8B5210E /* erxes.jpg */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.jpeg; name = erxes.jpg; path = ErxesSDK/Assets/erxes.jpg; sourceTree = "<group>"; };
 		721834C85F68D1BF8BE71276CE4F547F /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 		72836C5BD851E1A6807DD29344F993D7 /* DataLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataLoader.swift; path = Sources/Apollo/DataLoader.swift; sourceTree = "<group>"; };
-		7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ErxesSDK.xcconfig; sourceTree = "<group>"; };
 		759DCF5FE06B0B2B8EFC1FCA438E137E /* PayloadMessages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayloadMessages.swift; path = Source/Classes/PayloadMessages.swift; sourceTree = "<group>"; };
-		7690A81DE2F54DFCDCAA7D852036D61A /* Pods_ErxesSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ErxesSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		761E57D7FBAF16EECB616071672676DC /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7690A81DE2F54DFCDCAA7D852036D61A /* Pods_ErxesSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ErxesSDK_Tests.framework; path = "Pods-ErxesSDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77CEA8853913EEC8EA4E1CE99CDB5CFD /* Pods-ErxesSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ErxesSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		79793736E23B783CA5E33B4C89FFA3BA /* Apollo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Apollo-umbrella.h"; sourceTree = "<group>"; };
+		7C8A6D0A31E9E631165F4FA28E55B177 /* Erxes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Erxes.swift; sourceTree = "<group>"; };
 		7CC62F1F3817BBAB1CFDA028609989B5 /* SocketRocket.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SocketRocket.xcconfig; sourceTree = "<group>"; };
 		7F8CFC614182DCB3EF650BEF316461B8 /* Pods-ErxesSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ErxesSDK_Example-umbrella.h"; sourceTree = "<group>"; };
-		82C879EEFCDE39C65D7E4C0EA3707F3F /* Message.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		84BCB272169983955E73410B93677C19 /* ConversationVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		84E4249D00D39C62699BD556EAEB42FC /* icomoon.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = icomoon.ttf; path = ErxesSDK/Assets/icomoon.ttf; sourceTree = "<group>"; };
 		8681FB3984176C68804C221EA9603693 /* Utilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Sources/Apollo/Utilities.swift; sourceTree = "<group>"; };
+		87DCA6F0E69718CDB994F76FAFB6EB6C /* Message.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ErxesSDK.xcconfig; sourceTree = "<group>"; };
 		8DBDE7F866B3A0EB2ADBBD4396880B7E /* GraphQLExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLExecutor.swift; path = Sources/Apollo/GraphQLExecutor.swift; sourceTree = "<group>"; };
 		8FA8AB223A896A43894DA18716D93091 /* Pods-ErxesSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ErxesSDK_Tests-dummy.m"; sourceTree = "<group>"; };
 		910C6F15788E1FEC9396319F22C65AE0 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
-		92FDBCA7DE9313A3AAC669AF2DD9FE75 /* ErxesSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-prefix.pch"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93F074A720FC8A820093E168 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
-		93F074A920FC8AE20093E168 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		93F074AB20FC8AF20093E168 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		93F074AD20FC8B000093E168 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
-		93F074AF20FC8B1D0093E168 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		93F074B120FC8B260093E168 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		93F074B320FC8B4C0093E168 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
-		93F074B520FC8D7D0093E168 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		93F074B720FC8D890093E168 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
-		93F074BB20FC8E2A0093E168 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		93F074C120FCA2F10093E168 /* mutation.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mutation.graphql; sourceTree = "<group>"; };
-		93F074C220FCA2F10093E168 /* query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query.graphql; sourceTree = "<group>"; };
+		92BE2DB2E06B349C5C49B990CC6F86DF /* bg-2.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-2.png"; path = "ErxesSDK/Assets/bg-2.png"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94593D7A8D4F82CAFEC7E6CDD5557476 /* JSONHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHelper.swift; path = Source/Classes/JSONHelper.swift; sourceTree = "<group>"; };
 		947944379373593AF3F76B545B2E3015 /* GraphQLResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResult.swift; path = Sources/Apollo/GraphQLResult.swift; sourceTree = "<group>"; };
+		989943BE5B2E62290AB808B1A4DDDE42 /* ErxesSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = ErxesSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		98C20C5080FB26E2A7C86BA01F39D51E /* Apollo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Apollo.modulemap; sourceTree = "<group>"; };
-		9A55D73C0D3D42F03800BF0E9611E8CA /* ChatVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		9BD1B7339BDDD42C083686E660C52C29 /* NormalizedCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NormalizedCache.swift; path = Sources/Apollo/NormalizedCache.swift; sourceTree = "<group>"; };
 		9C7CCE921C2477B1E24A00AF17A96994 /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
+		9FA2A0BA94E0CCCB1264E30AC47E3440 /* UIImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		A1110B6ED0F6AC5753E68080AD30FF6E /* mutation.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = mutation.graphql; sourceTree = "<group>"; };
 		A15346536B77617932FA0376D025F307 /* Pods-ErxesSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ErxesSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A1B06A725B0B4110087C28F60F9161BB /* bg-4.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-4.png"; path = "ErxesSDK/Assets/bg-4.png"; sourceTree = "<group>"; };
 		A56825EACA9E43D3733F025FFFDBB4C4 /* Apollo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Apollo.xcconfig; sourceTree = "<group>"; };
 		A5884AF099FBE9BE1A79562219CCBC7E /* Pods-ErxesSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ErxesSDK_Example-dummy.m"; sourceTree = "<group>"; };
 		A6C184B3D8CD96B8BD562DB395CC04BF /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		A7980804B163795A4D478F87DF63F755 /* SocketRocket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SocketRocket.h; path = SocketRocket/SocketRocket.h; sourceTree = "<group>"; };
+		A861360E908E2E1B67C9E582CA552450 /* Dictionary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		A92B5335A103AD42E17C72AE1B3D2911 /* ErxesSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ErxesSDK-dummy.m"; sourceTree = "<group>"; };
 		A9818A39F278A0DB89F8EB7578C126D8 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		A9E1780A7984B8AFE4258C8BCD63145C /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		AA38AE47B663F9058D5AE6CF67EE0D1A /* SocketRocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SocketRocket.modulemap; sourceTree = "<group>"; };
 		AB34B8053423556EDD757E8B010E0EA9 /* JSONStandardTypeConversions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONStandardTypeConversions.swift; path = Sources/Apollo/JSONStandardTypeConversions.swift; sourceTree = "<group>"; };
 		ABE2E72E6E3035E14B237E05B1A9FCA5 /* Pods-ErxesSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ErxesSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		AC8F1FEECC4E2ADDACCCAEA0A280D946 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AC9AF69BCC854C1340BB0B4B9657133A /* LiveGQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LiveGQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC9AF69BCC854C1340BB0B4B9657133A /* LiveGQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LiveGQL.framework; path = LiveGQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE0EAF4D03A74452B9B7F8B882439B22 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
 		AF69FA318DB9C4A9A1690A1CF938B830 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AsynchronousOperation.swift; path = Sources/Apollo/AsynchronousOperation.swift; sourceTree = "<group>"; };
 		AFF3CE5B28EE950B9D86D7B955D9186D /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
-		B04FF70F3EF450DC976901066E127B77 /* ErxesSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ErxesSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B04FF70F3EF450DC976901066E127B77 /* ErxesSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ErxesSDK.framework; path = ErxesSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EF1C1F8A639B4393F2853AC855BEB0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6DCF0E1CE13A3A1FF7A1C54459BF96C /* Collections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Collections.swift; path = Sources/Apollo/Collections.swift; sourceTree = "<group>"; };
-		B7A10F681EF4D84AB0D483F8002CADC1 /* MessengerOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MessengerOption.swift; sourceTree = "<group>"; };
+		B832C14E5296AFFDC137271C99C9B636 /* String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BD1A6BE00CB798D5BB0DEB9653921C9E /* ChatVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		BDDB014C7CC850F7A6306505B67324E6 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		BE13AF6025EB7CE1FA0E4E4102766454 /* Promise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Promise.swift; path = Sources/Apollo/Promise.swift; sourceTree = "<group>"; };
+		BE338205473B874D8B13224AA3329455 /* Language.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		BFB1EBD9DE36A5B544244DEA88BAF4DB /* Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C008C7239CB7A8E619FBA34AEDBFCC58 /* Apollo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Apollo-dummy.m"; sourceTree = "<group>"; };
-		C27148061A7568B46C08FA2B195984C5 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20FEC6E859FAE620FD683BBCDA2DD31 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Roboto-Regular.ttf"; path = "ErxesSDK/Assets/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C27148061A7568B46C08FA2B195984C5 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Apollo.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C401E21960E7DEC264AEC2BEBE6181AD /* LiveGQL-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LiveGQL-dummy.m"; sourceTree = "<group>"; };
+		C48CBB7E465A931A475332B938CA4D5E /* query.graphql */ = {isa = PBXFileReference; includeInIndex = 1; path = query.graphql; sourceTree = "<group>"; };
+		C4DC6B6043F0EC05B1D94A1E55915803 /* ErxesSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ErxesSDK.modulemap; sourceTree = "<group>"; };
 		C509CA1CFA56F866B1C98265C2D25CD4 /* LiveGQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LiveGQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD564D9698F8AB1AE1EEEF3BF6F0CFA /* Pods-ErxesSDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ErxesSDK_Tests-umbrella.h"; sourceTree = "<group>"; };
 		CE03C6BBBE29B0E96BE427B798D6E75C /* GraphQLSelectionSetMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLSelectionSetMapper.swift; path = Sources/Apollo/GraphQLSelectionSetMapper.swift; sourceTree = "<group>"; };
+		CE1B3C5496BFE45816A0BB139586FAAA /* ResourceBundle-ErxesSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-ErxesSDK-Info.plist"; sourceTree = "<group>"; };
 		CEDD3BFA9D835CAD82859DE1211C09F1 /* JSONSerializationFormat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONSerializationFormat.swift; path = Sources/Apollo/JSONSerializationFormat.swift; sourceTree = "<group>"; };
+		CF151A986E62FA5F6B0000FA3098D797 /* erxes.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = erxes.ttf; path = ErxesSDK/Assets/erxes.ttf; sourceTree = "<group>"; };
 		D1C11F1A7C18C5C92280822936E996B7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3936BCA991FF6E2F33904C89CD5736C /* bg-1.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-1.png"; path = "ErxesSDK/Assets/bg-1.png"; sourceTree = "<group>"; };
+		D3F95DC5729495CAF6C99E4626FF75CE /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		D4765BC356FF738195D2453ADAF756AF /* RegisterVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D50733E8F3CA7F1A6B98E520DC514B4B /* Pods-ErxesSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ErxesSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D5587B8CF94F1CDED9B137449D9DAD73 /* bg-3.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-3.png"; path = "ErxesSDK/Assets/bg-3.png"; sourceTree = "<group>"; };
+		D7EABC0C6F9B0CE7656E2DA107683392 /* Font.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LiveGQL.xcconfig; sourceTree = "<group>"; };
 		D930855273B6523220B8B94D830EDC1C /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		DA7C4BE811E7F95C9BEDACB2E3EBA8D1 /* erxes.jpg */ = {isa = PBXFileReference; includeInIndex = 1; name = erxes.jpg; path = ErxesSDK/Assets/erxes.jpg; sourceTree = "<group>"; };
 		DAFA75AEA80C237206F6A429885D7E36 /* LiveGQL-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LiveGQL-prefix.pch"; sourceTree = "<group>"; };
-		DBF36CEA8D7F822264B2F566AE676A8B /* avatar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = avatar.png; path = ErxesSDK/Assets/avatar.png; sourceTree = "<group>"; };
-		DD3F13D9F2B1933676B545BA814DAC87 /* ErxesSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ErxesSDK.modulemap; sourceTree = "<group>"; };
-		DD5C2479C98EE3CA019E4E55342DB22E /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DE1273F32B6E4F6D141BE6834351EF1C /* Apollo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Apollo-prefix.pch"; sourceTree = "<group>"; };
 		E6FC5E3523CEBC5FD9AF621416082BD8 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		E93E642E6696E7D8FA94AE73D33DAE54 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
 		EA4D3C67E011633D060548B116FDDEDA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		ECDE4C96F17111E53D36F14C81C13625 /* Language.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		EDD1EAFAC11F23C8B9EC24C52A94334C /* ResultOrPromise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultOrPromise.swift; path = Sources/Apollo/ResultOrPromise.swift; sourceTree = "<group>"; };
 		EDEC534F196EC7DD50E3B22820D93035 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		EEE799D0D5CC3AE92414DC1D492C1CC1 /* NetworkTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkTransport.swift; path = Sources/Apollo/NetworkTransport.swift; sourceTree = "<group>"; };
-		EF91185490A65D6472C553407FE0030D /* bg-4.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-4.png"; path = "ErxesSDK/Assets/bg-4.png"; sourceTree = "<group>"; };
 		EFE297B57AC4806F1387ACA3FB51AA00 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		F14B2312092833DF2F3CE68C595B92C1 /* GraphQLResultNormalizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GraphQLResultNormalizer.swift; path = Sources/Apollo/GraphQLResultNormalizer.swift; sourceTree = "<group>"; };
+		F1815277F6FDC1D5352DBC29D4BEBB1E /* UIImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F2243EF752286AD2FD75DC87D0EF4C94 /* Locking.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Locking.swift; path = Sources/Apollo/Locking.swift; sourceTree = "<group>"; };
 		F3E22CDABAC0F917AEF9A6B7E3BD4B60 /* LiveGQL-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LiveGQL-umbrella.h"; sourceTree = "<group>"; };
-		F3F31F897C570A15178611594CEA79B0 /* UIData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIData.swift; sourceTree = "<group>"; };
-		F4208B1389999308FB9A32E67DF85AF9 /* RegisterVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F4A9FCBE0198C84E14C90F696B9590EA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		F4FECBB7BC487166BDDF6DF99C4ED651 /* ErxesSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-umbrella.h"; sourceTree = "<group>"; };
+		F53F0CF989A20A861FB61525DC9F1B50 /* UIData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIData.swift; sourceTree = "<group>"; };
 		F65F66ABFD0CA302BAB8BA4A5FC86DEC /* JSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSON.swift; path = Sources/Apollo/JSON.swift; sourceTree = "<group>"; };
 		F6C3229B209E9FFB128D231B176B26CF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8014851CCB94B3C7D10E99FAD3C422B /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F9E82C9BA0B34A698B5EC70B5D47733A /* ConversationVC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
+		F8D54EA894EA0E94DF35FAC8AD17DFE2 /* ErxesSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ErxesSDK-prefix.pch"; sourceTree = "<group>"; };
 		FA6C75EADA9A3D580F74926837CC816D /* Pods-ErxesSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ErxesSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		FE2B3ECDEC686B1C31A16A62AE5C336E /* bg-3.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-3.png"; path = "ErxesSDK/Assets/bg-3.png"; sourceTree = "<group>"; };
+		FEAE85C7B559A6F86860578DB98CE041 /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = mn.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FEFD61ACDF9753D52A0EFADD41BEABE0 /* LiveGQL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveGQL.swift; path = Source/Classes/LiveGQL.swift; sourceTree = "<group>"; };
-		FFCCE919B9A0C412E6793F1E34D15C61 /* bg-2.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "bg-2.png"; path = "ErxesSDK/Assets/bg-2.png"; sourceTree = "<group>"; };
+		FFA86E4D4A3DD9FAA697157AB88B0979 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Roboto-Medium.ttf"; path = "ErxesSDK/Assets/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		12D23CC01E713737993492C97EF25907 /* Frameworks */ = {
+		05A23B2E9496CCBC647B5670CBACF7BE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5432BC3B3ABACF9DF6C94C827A36C0EB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				37F253C1FE95C9C18ED2977338D33186 /* Alamofire.framework in Frameworks */,
-				3288C253F3E18A35D4D52F1A956959C3 /* Apollo.framework in Frameworks */,
-				E6193FEF1302E3705E93BDA75A2210E5 /* Foundation.framework in Frameworks */,
-				3230BDF7F02B7F51E6160FFB55F5A661 /* LiveGQL.framework in Frameworks */,
-				98225956F989141AA227065BB6132F32 /* Photos.framework in Frameworks */,
-				65725A01088375F44A412B29035DE27B /* SocketRocket.framework in Frameworks */,
+				DC66C51600B48B40CBC2426B9E310EBE /* Alamofire.framework in Frameworks */,
+				6A162991C12053B85D01BC623114051D /* Apollo.framework in Frameworks */,
+				AA19F514DA865542BEF8162191BBB2CE /* Foundation.framework in Frameworks */,
+				CAEF301D65D21BEA460D405160736F1C /* LiveGQL.framework in Frameworks */,
+				AAD01238C94ADC211FE528C3178E2045 /* Photos.framework in Frameworks */,
+				B71212927536DD04CC234BBCDDA9340D /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,16 +406,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F91A5ACC8ED112F00D88C9BDACCE7E1 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		93037076FFAA3E11977E3DC42E4A9BFF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CFC35C94C693998DF6D80B7EA8351D6 /* CFNetwork.framework in Frameworks */,
-				C592CA8C81D7CA085CC756CD302C4888 /* Foundation.framework in Frameworks */,
-				5F1F940D86EDBAF335690D3C58B900AA /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +425,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C42C4BC79BE8429BD8913CF7C642C8BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B92D4E5A7180BC31EAE33E52C118D78D /* CFNetwork.framework in Frameworks */,
+				82F34F40B7C407D9330C095741F3DF27 /* Foundation.framework in Frameworks */,
+				FF9A66599BC7D3E8577F03CF22F56D99 /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CDA4DB5EC4E8C1F85B5C3DCAE5159087 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -450,49 +443,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD4C00C05342FBC3A1511C65702A9C10 /* Frameworks */ = {
+		D2F46AC0F4F1A6318CCB97A23FAE2298 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				962DA3377FCBA2700B894B61628599AC /* Foundation.framework in Frameworks */,
-				FE7C8AAB62301D6056814D7252CF890D /* SocketRocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E73981FB4B79043FC3F1472121A0A72A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69E02218C4B54EDA80D3FD045167FF14 /* Foundation.framework in Frameworks */,
+				12CEC4E4330A111B0773CDA3B75CE700 /* SocketRocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02BCACEC024CA1899B66F0A1F8B042CB /* Queries */ = {
+		1635F5E9E62D0D3274B5525D66139928 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
-				93F074C120FCA2F10093E168 /* mutation.graphql */,
-				93F074C220FCA2F10093E168 /* query.graphql */,
+				A1110B6ED0F6AC5753E68080AD30FF6E /* mutation.graphql */,
+				C48CBB7E465A931A475332B938CA4D5E /* query.graphql */,
 			);
 			name = Queries;
 			path = ErxesSDK/Classes/Queries;
 			sourceTree = "<group>";
 		};
-		13D052A8CD7A14AA4084F5F514A0CCC6 /* Views */ = {
+		4078E9D1E301FE8083769596E47913A8 /* ErxesSDK */ = {
 			isa = PBXGroup;
 			children = (
-				9A55D73C0D3D42F03800BF0E9611E8CA /* ChatVC.swift */,
-				F9E82C9BA0B34A698B5EC70B5D47733A /* ConversationVC.swift */,
-				F4208B1389999308FB9A32E67DF85AF9 /* RegisterVC.swift */,
-			);
-			name = Views;
-			path = ErxesSDK/Classes/Views;
-			sourceTree = "<group>";
-		};
-		3F61AA951E683D4BF683C999E6468D8E /* ErxesSDK */ = {
-			isa = PBXGroup;
-			children = (
-				34AD778C60E0E50B515B0A33987DDB86 /* API.swift */,
-				87F4067469EF0427F022F26BBF865E1D /* Global */,
-				8FD2A9EA65C07B435F6714EB4981CB23 /* Pod */,
-				02BCACEC024CA1899B66F0A1F8B042CB /* Queries */,
-				5258E03029FD4F9ED349596CC264F4C9 /* Resources */,
-				51CFB253C6DD66E0B6C5B33AAB5191A3 /* Support Files */,
-				13D052A8CD7A14AA4084F5F514A0CCC6 /* Views */,
+				5C8FBD00842E96082B2328FC9E881E4A /* API.swift */,
+				F09CEF39945240638B332A9DCACA67D2 /* Global */,
+				79B82AF5706DFF4B4C5E32CC517660D4 /* Pod */,
+				1635F5E9E62D0D3274B5525D66139928 /* Queries */,
+				4B7690B5BF859B2779BF37959BEC1889 /* Resources */,
+				FEF6ABE43134964F63E13B6F4398302F /* Support Files */,
+				9730F6C57265C1AA30339B4348A0B9E8 /* Views */,
 			);
 			name = ErxesSDK;
 			path = ../..;
@@ -521,36 +510,21 @@
 			path = "../Target Support Files/Apollo";
 			sourceTree = "<group>";
 		};
-		51CFB253C6DD66E0B6C5B33AAB5191A3 /* Support Files */ = {
+		4B7690B5BF859B2779BF37959BEC1889 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD3F13D9F2B1933676B545BA814DAC87 /* ErxesSDK.modulemap */,
-				7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */,
-				4CCECF864E3554DE18AC26C6AD312C2A /* ErxesSDK-dummy.m */,
-				92FDBCA7DE9313A3AAC669AF2DD9FE75 /* ErxesSDK-prefix.pch */,
-				F4FECBB7BC487166BDDF6DF99C4ED651 /* ErxesSDK-umbrella.h */,
-				22AD955E4CF6EA9E1D6412F438A005E3 /* Info.plist */,
-				4778D34E35FCC62B52B43FC39C7216B0 /* ResourceBundle-ErxesSDK-Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/ErxesSDK";
-			sourceTree = "<group>";
-		};
-		5258E03029FD4F9ED349596CC264F4C9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				DBF36CEA8D7F822264B2F566AE676A8B /* avatar.png */,
-				6CCB74556E3DA7A194B85B5CB993C421 /* bg-1.png */,
-				FFCCE919B9A0C412E6793F1E34D15C61 /* bg-2.png */,
-				FE2B3ECDEC686B1C31A16A62AE5C336E /* bg-3.png */,
-				EF91185490A65D6472C553407FE0030D /* bg-4.png */,
-				71B6E9F41EBD6569DAD15993A8B5210E /* erxes.jpg */,
-				27CAD0E210A783B9E0653148F900A6DB /* Erxes.storyboard */,
-				377EF83A59E5081DA3DD950F49359C9D /* erxes.ttf */,
-				6D82CC729B4FABC5C5EC0E422FBB30E2 /* icomoon.ttf */,
-				04F26A7B8B07DE19877DA110AB6DCD76 /* Localizable.strings */,
-				38C629842790C5D69DA5D22F1B7EA4F3 /* Roboto-Medium.ttf */,
-				6844613A4285CB0B383B689F83D61973 /* Roboto-Regular.ttf */,
+				471B066C88ABBC837EE4D146CA6C11D3 /* avatar.png */,
+				D3936BCA991FF6E2F33904C89CD5736C /* bg-1.png */,
+				92BE2DB2E06B349C5C49B990CC6F86DF /* bg-2.png */,
+				D5587B8CF94F1CDED9B137449D9DAD73 /* bg-3.png */,
+				A1B06A725B0B4110087C28F60F9161BB /* bg-4.png */,
+				DA7C4BE811E7F95C9BEDACB2E3EBA8D1 /* erxes.jpg */,
+				6FCF18448BFE199E6F04515FC54C0968 /* Erxes.storyboard */,
+				CF151A986E62FA5F6B0000FA3098D797 /* erxes.ttf */,
+				84E4249D00D39C62699BD556EAEB42FC /* icomoon.ttf */,
+				71B2075516F6ABCB0EC34700FAB97B4A /* Localizable.strings */,
+				FFA86E4D4A3DD9FAA697157AB88B0979 /* Roboto-Medium.ttf */,
+				C20FEC6E859FAE620FD683BBCDA2DD31 /* Roboto-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -611,6 +585,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D8EBCB21004F03B91F733E2FADFE865 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				87DCA6F0E69718CDB994F76FAFB6EB6C /* Message.swift */,
+				45F2C64B1D9CD3078982157554BC5594 /* MessengerOption.swift */,
+				F53F0CF989A20A861FB61525DC9F1B50 /* UIData.swift */,
+			);
+			name = Model;
+			path = Model;
+			sourceTree = "<group>";
+		};
 		72EDC26C009A9C2EEB85F134F1F2E7ED /* SocketRocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,7 +604,18 @@
 				712C5F6CE079210BFF7008C4AEFFB61D /* SRWebSocket.m */,
 				AE86C53430C6F74E461D3848E32E7080 /* Support Files */,
 			);
+			name = SocketRocket;
 			path = SocketRocket;
+			sourceTree = "<group>";
+		};
+		79B82AF5706DFF4B4C5E32CC517660D4 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				989943BE5B2E62290AB808B1A4DDDE42 /* ErxesSDK.podspec */,
+				0CEB2D8E26F96BBDA769FAACC52F519B /* LICENSE */,
+				15D2270B6F21F981AD6CEBACF69DD64A /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -632,16 +628,6 @@
 				5845912B96CE2D77359A1837EB806B76 /* Products */,
 				4791731ADAA78D4A88AAB0DACD10D63D /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		820CBE9185AEEB9108D836EAC1FEB9A0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				82C879EEFCDE39C65D7E4C0EA3707F3F /* Message.swift */,
-				B7A10F681EF4D84AB0D483F8002CADC1 /* MessengerOption.swift */,
-				F3F31F897C570A15178611594CEA79B0 /* UIData.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		84F9271D92AF07758474ED7677D59179 /* Support Files */ = {
@@ -658,45 +644,22 @@
 			path = "../Target Support Files/Alamofire";
 			sourceTree = "<group>";
 		};
-		87F4067469EF0427F022F26BBF865E1D /* Global */ = {
+		8E33FAFD887D8409453D29A71C43FB62 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				93F074A620FC8A3D0093E168 /* Extension */,
-				F8014851CCB94B3C7D10E99FAD3C422B /* Constants.swift */,
-				2DA8D373A19D05072AF950D89FCEE3DE /* Erxes.swift */,
-				68ED9B9A57C9CDA6538DE7B21BBAB95B /* Router.swift */,
-				0520623685BA39F47F9CAB1A4A488B19 /* Utils.swift */,
-				820CBE9185AEEB9108D836EAC1FEB9A0 /* Model */,
+				BFB1EBD9DE36A5B544244DEA88BAF4DB /* Color.swift */,
+				00ED33C7B4168F6A40028F9E036D003B /* Data.swift */,
+				43F5158D0DAB47F46E56EAF235517D8F /* Date.swift */,
+				A861360E908E2E1B67C9E582CA552450 /* Dictionary.swift */,
+				D7EABC0C6F9B0CE7656E2DA107683392 /* Font.swift */,
+				BE338205473B874D8B13224AA3329455 /* Language.swift */,
+				B832C14E5296AFFDC137271C99C9B636 /* String.swift */,
+				3F7A8AFFF6F9853547D8304680AD749D /* UIButton.swift */,
+				9FA2A0BA94E0CCCB1264E30AC47E3440 /* UIImage.swift */,
+				F1815277F6FDC1D5352DBC29D4BEBB1E /* UIImageView.swift */,
+				5BAC6C7606455CCE72B8B5A158B38E0C /* UIView.swift */,
 			);
-			name = Global;
-			path = ErxesSDK/Classes/Global;
-			sourceTree = "<group>";
-		};
-		8FD2A9EA65C07B435F6714EB4981CB23 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				0535AD74362B3BBA3B351F69054B67B3 /* ErxesSDK.podspec */,
-				2906BEA2B9BCEB9032A666D5039CFECB /* LICENSE */,
-				0E765A04B99CE1ACACB142E894554504 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		93F074A620FC8A3D0093E168 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				93F074A720FC8A820093E168 /* UIImage.swift */,
-				93F074A920FC8AE20093E168 /* Date.swift */,
-				93F074AB20FC8AF20093E168 /* String.swift */,
-				ECDE4C96F17111E53D36F14C81C13625 /* Language.swift */,
-				93F074AD20FC8B000093E168 /* Dictionary.swift */,
-				93F074AF20FC8B1D0093E168 /* Color.swift */,
-				93F074B120FC8B260093E168 /* Data.swift */,
-				93F074B320FC8B4C0093E168 /* Font.swift */,
-				93F074B520FC8D7D0093E168 /* UIView.swift */,
-				93F074B720FC8D890093E168 /* UIButton.swift */,
-				93F074BB20FC8E2A0093E168 /* UIImageView.swift */,
-			);
+			name = Extension;
 			path = Extension;
 			sourceTree = "<group>";
 		};
@@ -706,7 +669,19 @@
 				E8FE5C8E0CEB4D6F2BE0E6641FE5187F /* Core */,
 				48052123481729CDD99099189924FFC0 /* Support Files */,
 			);
+			name = Apollo;
 			path = Apollo;
+			sourceTree = "<group>";
+		};
+		9730F6C57265C1AA30339B4348A0B9E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD1A6BE00CB798D5BB0DEB9653921C9E /* ChatVC.swift */,
+				84BCB272169983955E73410B93677C19 /* ConversationVC.swift */,
+				D4765BC356FF738195D2453ADAF756AF /* RegisterVC.swift */,
+			);
+			name = Views;
+			path = ErxesSDK/Classes/Views;
 			sourceTree = "<group>";
 		};
 		98ACF59DC17BE21B5C186B9D2E7FB97C /* Alamofire */ = {
@@ -731,6 +706,7 @@
 				70CEEC5D38A24236484632E17D3DDB1C /* Validation.swift */,
 				84F9271D92AF07758474ED7677D59179 /* Support Files */,
 			);
+			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -802,7 +778,7 @@
 		D4C2E700B93C023C52B920FAA009DECD /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3F61AA951E683D4BF683C999E6468D8E /* ErxesSDK */,
+				4078E9D1E301FE8083769596E47913A8 /* ErxesSDK */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -816,6 +792,7 @@
 				759DCF5FE06B0B2B8EFC1FCA438E137E /* PayloadMessages.swift */,
 				D2C030F78C52E89096E710D2312B4CA0 /* Support Files */,
 			);
+			name = LiveGQL;
 			path = LiveGQL;
 			sourceTree = "<group>";
 		};
@@ -859,6 +836,35 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
+		F09CEF39945240638B332A9DCACA67D2 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				761E57D7FBAF16EECB616071672676DC /* Constants.swift */,
+				7C8A6D0A31E9E631165F4FA28E55B177 /* Erxes.swift */,
+				483416F61C890649108FFFF2BB39B4EE /* Router.swift */,
+				D3F95DC5729495CAF6C99E4626FF75CE /* Utils.swift */,
+				8E33FAFD887D8409453D29A71C43FB62 /* Extension */,
+				6D8EBCB21004F03B91F733E2FADFE865 /* Model */,
+			);
+			name = Global;
+			path = ErxesSDK/Classes/Global;
+			sourceTree = "<group>";
+		};
+		FEF6ABE43134964F63E13B6F4398302F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC6B6043F0EC05B1D94A1E55915803 /* ErxesSDK.modulemap */,
+				8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */,
+				A92B5335A103AD42E17C72AE1B3D2911 /* ErxesSDK-dummy.m */,
+				F8D54EA894EA0E94DF35FAC8AD17DFE2 /* ErxesSDK-prefix.pch */,
+				0602CB98F351673D615282B2BA7B003B /* ErxesSDK-umbrella.h */,
+				51DF3384C6D229FE5DFD34C1F6270C3B /* Info.plist */,
+				CE1B3C5496BFE45816A0BB139586FAAA /* ResourceBundle-ErxesSDK-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/ErxesSDK";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -870,19 +876,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48C3A6240B32C35DF3C27E1EDD5609AF /* Headers */ = {
+		582F2932B4A811493AE510E69910B279 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3BCDB82304966EB78BB9E1871565EC1 /* LiveGQL-umbrella.h in Headers */,
+				79EFB5BE124191B0F69229C9E838FBAC /* ErxesSDK-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8FCD4DA77373AE3E067A7A43B3B72BC3 /* Headers */ = {
+		6172471CCB5B7937CDBB0A80E5F25CEA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6F59618A6BAB5501E1495F95B753359 /* ErxesSDK-umbrella.h in Headers */,
+				586E7A08EBD91B158ABDC636853AF0B8 /* LiveGQL-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A686A292F1030B9E4F52629BF01A6F33 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				693FDBD856DD102A708F4F26715058D5 /* SocketRocket-umbrella.h in Headers */,
+				9C1CAD03302A7FBC00E9A88F0B7B5E9D /* SocketRocket.h in Headers */,
+				0DB4485E8B5EAFE3F6C6C12B7EE368E4 /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -907,16 +923,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F7034B56736F62A41323BFE78B6F1A /* Pods-ErxesSDK_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD23446F129C347DEE96710F9A830B23 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				601AF86F736AEB5A527ADA71537A82B7 /* SocketRocket-umbrella.h in Headers */,
-				A6930A5FC3E0A9B51394BAA846EC8765 /* SocketRocket.h in Headers */,
-				4EFAFB9EC6EC14208DF575A862E6297A /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,23 +969,6 @@
 			productReference = C27148061A7568B46C08FA2B195984C5 /* Apollo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		25CF1BD995D938BDB6FCD2D28EE228D7 /* SocketRocket */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 045E63455C995114F799027D6B8135A1 /* Build configuration list for PBXNativeTarget "SocketRocket" */;
-			buildPhases = (
-				9285E8E99620EAF2B8A5A8C0DDD51FDA /* Sources */,
-				93037076FFAA3E11977E3DC42E4A9BFF /* Frameworks */,
-				DD23446F129C347DEE96710F9A830B23 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SocketRocket;
-			productName = SocketRocket;
-			productReference = 2F3B1C599E12D77CD36813F08F66ECDF /* SocketRocket.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		3934503BF0BA97137197DC6DE0720894 /* Pods-ErxesSDK_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEEA7BD7268DC43E409B691778AFE3A6 /* Build configuration list for PBXNativeTarget "Pods-ErxesSDK_Tests" */;
@@ -998,39 +987,44 @@
 			productReference = 7690A81DE2F54DFCDCAA7D852036D61A /* Pods_ErxesSDK_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4C57CECEECE982A104D8AEF9889D9354 /* ErxesSDK-ErxesSDK */ = {
+		3B77C7B19F2294EBED0E47D3516ABD52 /* SocketRocket */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C404C7DC97A4B8C588D6EBE3668CE797 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */;
+			buildConfigurationList = 5A0F121E62302C5D5459594FEE2A30FB /* Build configuration list for PBXNativeTarget "SocketRocket" */;
 			buildPhases = (
-				B2F48A2CA6A7B1B0CBA70647AB0DEA8C /* Sources */,
-				12D23CC01E713737993492C97EF25907 /* Frameworks */,
-				022D420A5BEFD66B20CC19DAD19D4D98 /* Resources */,
+				30E986E372A360A29CFA6D3399A45DAC /* Sources */,
+				C42C4BC79BE8429BD8913CF7C642C8BA /* Frameworks */,
+				A686A292F1030B9E4F52629BF01A6F33 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "ErxesSDK-ErxesSDK";
-			productName = "ErxesSDK-ErxesSDK";
-			productReference = 70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */;
-			productType = "com.apple.product-type.bundle";
+			name = SocketRocket;
+			productName = SocketRocket;
+			productReference = 2F3B1C599E12D77CD36813F08F66ECDF /* SocketRocket.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		56890C0313FEA96FD2614AA88567919C /* LiveGQL */ = {
+		77E48F94F4C919496F1582D031D1FAAA /* ErxesSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FDEF12C117298816DBE2D0DEEB505C33 /* Build configuration list for PBXNativeTarget "LiveGQL" */;
+			buildConfigurationList = E54A5DAD8B34C111A266F36BE42BAFB9 /* Build configuration list for PBXNativeTarget "ErxesSDK" */;
 			buildPhases = (
-				2AE25D064AE499E29F234259DAD44143 /* Sources */,
-				DD4C00C05342FBC3A1511C65702A9C10 /* Frameworks */,
-				48C3A6240B32C35DF3C27E1EDD5609AF /* Headers */,
+				DA3CB82429A5B1E2E61D64DC59AA47A8 /* Sources */,
+				05A23B2E9496CCBC647B5670CBACF7BE /* Frameworks */,
+				1429C34ECC7375927C072707210919CC /* Resources */,
+				582F2932B4A811493AE510E69910B279 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D08BEF8804739CCCF1A123CB99651667 /* PBXTargetDependency */,
+				FFEBFF9F7311FF64F62D3D9A11D23130 /* PBXTargetDependency */,
+				0B8EE98CFD6CE82257C889A1A844AC5B /* PBXTargetDependency */,
+				BAF0C4163E959D753457D86427C65185 /* PBXTargetDependency */,
+				7A6C1C49573C86FED748F90E3510F8A8 /* PBXTargetDependency */,
+				3C78BB5ECB85BDCD22F1C482C4C6E4AB /* PBXTargetDependency */,
 			);
-			name = LiveGQL;
-			productName = LiveGQL;
-			productReference = AC9AF69BCC854C1340BB0B4B9657133A /* LiveGQL.framework */;
+			name = ErxesSDK;
+			productName = ErxesSDK;
+			productReference = B04FF70F3EF450DC976901066E127B77 /* ErxesSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */ = {
@@ -1050,27 +1044,39 @@
 			productReference = 1F490958AE7DE4EFEFFBEC5B3DF0AA89 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		969A97725F5E35621508357E5BAA7095 /* ErxesSDK */ = {
+		C246D4C2AC5400CF9EF7B0AD949D4C24 /* ErxesSDK-ErxesSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EF4E5C1775BFF39D91E95013D61AA010 /* Build configuration list for PBXNativeTarget "ErxesSDK" */;
+			buildConfigurationList = 611B5C4E1699CA0FBB650BD5543E21C6 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */;
 			buildPhases = (
-				069157A9D9018FACF871489815E98917 /* Sources */,
-				5432BC3B3ABACF9DF6C94C827A36C0EB /* Frameworks */,
-				6254EC78099D3BE1C8BE55EEB18C1F66 /* Resources */,
-				8FCD4DA77373AE3E067A7A43B3B72BC3 /* Headers */,
+				5CECD167E33187E5A48882819B2B14B0 /* Sources */,
+				D2F46AC0F4F1A6318CCB97A23FAE2298 /* Frameworks */,
+				9D52B6080D3979AAB4D087E7FFA24DDE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0C890575967A516434B5C87C7066C2CB /* PBXTargetDependency */,
-				6058FFF97BBD0196395A0ABA7FE8F9B5 /* PBXTargetDependency */,
-				BCF6BA276382ED19404CC4BB3F82F460 /* PBXTargetDependency */,
-				DCEC2A4B5BE7E734A6F650BD20C6F03A /* PBXTargetDependency */,
-				11F3723BF52DC93E054AF12A84F49468 /* PBXTargetDependency */,
 			);
-			name = ErxesSDK;
-			productName = ErxesSDK;
-			productReference = B04FF70F3EF450DC976901066E127B77 /* ErxesSDK.framework */;
+			name = "ErxesSDK-ErxesSDK";
+			productName = "ErxesSDK-ErxesSDK";
+			productReference = 70FC5974F4FEDA5A33B29903B4BC8AA5 /* ErxesSDK.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		DA951FA6F63CD4A8D48F7441A3C42B2A /* LiveGQL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01E58619450D969F2A4840FE7780867C /* Build configuration list for PBXNativeTarget "LiveGQL" */;
+			buildPhases = (
+				E45D73943575E913ACDD30677100B4E6 /* Sources */,
+				E73981FB4B79043FC3F1472121A0A72A /* Frameworks */,
+				6172471CCB5B7937CDBB0A80E5F25CEA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56A716BDBEE856F267C9B257A4FC1789 /* PBXTargetDependency */,
+			);
+			name = LiveGQL;
+			productName = LiveGQL;
+			productReference = AC9AF69BCC854C1340BB0B4B9657133A /* LiveGQL.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1096,43 +1102,22 @@
 			targets = (
 				88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */,
 				2010E78719F690490FE4CE58BC774303 /* Apollo */,
-				969A97725F5E35621508357E5BAA7095 /* ErxesSDK */,
-				4C57CECEECE982A104D8AEF9889D9354 /* ErxesSDK-ErxesSDK */,
-				56890C0313FEA96FD2614AA88567919C /* LiveGQL */,
+				77E48F94F4C919496F1582D031D1FAAA /* ErxesSDK */,
+				C246D4C2AC5400CF9EF7B0AD949D4C24 /* ErxesSDK-ErxesSDK */,
+				DA951FA6F63CD4A8D48F7441A3C42B2A /* LiveGQL */,
 				0E73B6922EB1A894D298240F413A9AE0 /* Pods-ErxesSDK_Example */,
 				3934503BF0BA97137197DC6DE0720894 /* Pods-ErxesSDK_Tests */,
-				25CF1BD995D938BDB6FCD2D28EE228D7 /* SocketRocket */,
+				3B77C7B19F2294EBED0E47D3516ABD52 /* SocketRocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		022D420A5BEFD66B20CC19DAD19D4D98 /* Resources */ = {
+		1429C34ECC7375927C072707210919CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0328C31EAC488DBDED5A2B7950D0C294 /* avatar.png in Resources */,
-				2DC3EAECB474E37074D72AAE7E0D4767 /* bg-1.png in Resources */,
-				C706BB6AFC206858CE84CE96012BA4E9 /* bg-2.png in Resources */,
-				E2BAD4E67A4BC44A60DE0F4E5E3CB9E4 /* bg-3.png in Resources */,
-				C9FDBBCDA82719C4BF2373956E92A91E /* bg-4.png in Resources */,
-				9DB2E108C4ED13CAD76A816765647984 /* erxes.jpg in Resources */,
-				1CC2AE3FDFCCDA331D98495331E909C8 /* Erxes.storyboard in Resources */,
-				0C4ACFAA1170594414C28B86EB99176D /* erxes.ttf in Resources */,
-				DD8E2BA5F097BA51759B87EAF8DB6A6B /* icomoon.ttf in Resources */,
-				498FF7FD2BD5F8267A2F27F9D711A241 /* Localizable.strings in Resources */,
-				DEED889F584ED70B2E01208A40FB8942 /* Roboto-Medium.ttf in Resources */,
-				9E6ED98B5311013C2F4FDA9EA1703C67 /* Roboto-Regular.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6254EC78099D3BE1C8BE55EEB18C1F66 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				93F074C420FCA2F20093E168 /* query.graphql in Resources */,
-				93F074C320FCA2F20093E168 /* mutation.graphql in Resources */,
-				6B8A05D7F5A1EED49C13D2C64544BCD1 /* ErxesSDK.bundle in Resources */,
+				1CD7B42B80A45C225CDC4A9D6ED04870 /* ErxesSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,39 +1129,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		069157A9D9018FACF871489815E98917 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		9D52B6080D3979AAB4D087E7FFA24DDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AEDEE659CE85871115343FDB38062D4 /* API.swift in Sources */,
-				7C459513A320B8C8289F0DFD88BE179D /* ChatVC.swift in Sources */,
-				93F074AC20FC8AF20093E168 /* String.swift in Sources */,
-				93F074BC20FC8E2A0093E168 /* UIImageView.swift in Sources */,
-				DE1FCCAE8FAB9B80629F63DA01E8A880 /* Constants.swift in Sources */,
-				4009A84BCE3F29D6965727E637B8820B /* ConversationVC.swift in Sources */,
-				93F074B620FC8D7D0093E168 /* UIView.swift in Sources */,
-				93F074A820FC8A820093E168 /* UIImage.swift in Sources */,
-				342FC8C063DDADC6AD7C31BFBAA4204C /* Erxes.swift in Sources */,
-				93F074B820FC8D890093E168 /* UIButton.swift in Sources */,
-				B3BAD2F257688926C1B9CEAE58AEFD50 /* ErxesSDK-dummy.m in Sources */,
-				145A5275E53BEF09AAFFFCE67F9E9314 /* Language.swift in Sources */,
-				36AB87E49E84EF228F6B913D3E0CEF31 /* Message.swift in Sources */,
-				895E17038FC6E3D7E57B580784FF3CA8 /* MessengerOption.swift in Sources */,
-				8BE20D00A7D7117D0C83B4C7A023A564 /* RegisterVC.swift in Sources */,
-				93F074AE20FC8B000093E168 /* Dictionary.swift in Sources */,
-				93F074B020FC8B1D0093E168 /* Color.swift in Sources */,
-				3027730556DC28DA242F9AEADBF3E680 /* Router.swift in Sources */,
-				856F4FAEDF37BC00DE8C3A28ECA755E3 /* UIData.swift in Sources */,
-				93F074B220FC8B260093E168 /* Data.swift in Sources */,
-				F46ACB872E570F7F78EA5F55AC112474 /* Utils.swift in Sources */,
-				93F074B420FC8B4C0093E168 /* Font.swift in Sources */,
-				93F074AA20FC8AE20093E168 /* Date.swift in Sources */,
+				4C36AF3F8B30FF430B20C29E932BEEB4 /* avatar.png in Resources */,
+				724ADD9137467982099CD34C0E8DAB86 /* bg-1.png in Resources */,
+				83791F95614B1BD8AE715F9128C7ED18 /* bg-2.png in Resources */,
+				113FB3D72F50E43A703CF049ED67CCA0 /* bg-3.png in Resources */,
+				882821637B7250A519F5FDD0BA13E6C2 /* bg-4.png in Resources */,
+				3532C395875D4B4CA5BDADCC27E911FB /* erxes.jpg in Resources */,
+				9D908E79C39E2A2C2FE9320D923E16A4 /* Erxes.storyboard in Resources */,
+				ABF2A2C038A0DAFE441C7AF91B466D76 /* erxes.ttf in Resources */,
+				23224FF94AC35A308855C39DE0B2522D /* icomoon.ttf in Resources */,
+				865CAF9EB2CD8C628EE1DC12A42D6E55 /* Localizable.strings in Resources */,
+				DF11CF185E6C51001F37EF7170341002 /* Roboto-Medium.ttf in Resources */,
+				77133DAF2F03B07273F24165E992FC4A /* Roboto-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		14CECA6E5A764C75C7FC408B0999D313 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1185,15 +1159,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2AE25D064AE499E29F234259DAD44143 /* Sources */ = {
+		30E986E372A360A29CFA6D3399A45DAC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				554929A001A4B9B35BF3CCE249003890 /* JSONHelper.swift in Sources */,
-				A62FDA24ED457715B18F3CF34E45B6A6 /* LiveGQL-dummy.m in Sources */,
-				23E2FE176070FA7F4C45F3524EBCD158 /* LiveGQL.swift in Sources */,
-				5DBD7ED8393A317D8B94F1D28F2E66A0 /* MessageTypes.swift in Sources */,
-				37BAD61DCF463591106E0FB66F80D4CE /* PayloadMessages.swift in Sources */,
+				3E49BA49C5295F4C1C0DC8C1039F11DF /* SocketRocket-dummy.m in Sources */,
+				B8DEC3DEB6AA4ED1230940BF19371C28 /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1262,19 +1233,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9285E8E99620EAF2B8A5A8C0DDD51FDA /* Sources */ = {
+		5CECD167E33187E5A48882819B2B14B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2FA56E55136CB9B99ACC11F26D297EF /* SocketRocket-dummy.m in Sources */,
-				21686B228951EDBC85D085E1DE74245B /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2F48A2CA6A7B1B0CBA70647AB0DEA8C /* Sources */ = {
+		DA3CB82429A5B1E2E61D64DC59AA47A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67A98A8AB93A62497D675EA7190D30C9 /* API.swift in Sources */,
+				5C16E3C17710C7516C411C0218539291 /* ChatVC.swift in Sources */,
+				63A6D9A12E40709DF989730B89895F4C /* Color.swift in Sources */,
+				9097593E991383ED39F43AF196E45D5E /* Constants.swift in Sources */,
+				C45EC94A4D9D3E2848DC2EB5EC025101 /* ConversationVC.swift in Sources */,
+				70547AE49491F0AEBB6D4508B2C861A7 /* Data.swift in Sources */,
+				B5F89E831306EEC3BC0F1F68D48BDD25 /* Date.swift in Sources */,
+				0BE8E1C923252C2D02EF4B35CE66972E /* Dictionary.swift in Sources */,
+				D2944E1C3D2800B1B504DBB6810B63DD /* Erxes.swift in Sources */,
+				736CE09DAF1F3743866CAD016DC06C88 /* ErxesSDK-dummy.m in Sources */,
+				A889AA92BF88DA1A5D77EE7C903B6D6B /* Font.swift in Sources */,
+				84E7185160273D35BFB457AE8949F200 /* Language.swift in Sources */,
+				95493CD88B35840CACAB2314497A19E1 /* Message.swift in Sources */,
+				B8634B0FC8DCB99FB6533924097D2D3B /* MessengerOption.swift in Sources */,
+				917D590EE000CE75727FDA0EE57D9F4B /* mutation.graphql in Sources */,
+				87E1B27D0A3A43D0F89CB6F511BEB373 /* query.graphql in Sources */,
+				3C82BC5B1E7DBB2AD5EFF0C27970C04D /* RegisterVC.swift in Sources */,
+				23E32CEA51248B1C097EBFF1968832BE /* Router.swift in Sources */,
+				336E31D4F9B0E15660C6D24AF1BE7CA8 /* String.swift in Sources */,
+				C19003B13BA37A8E19955A4D960DC54E /* UIButton.swift in Sources */,
+				BBA725B87B383EA26AB87CDD9A24EBC7 /* UIData.swift in Sources */,
+				D7B19E5625CF1E6B19282DEE4623F19D /* UIImage.swift in Sources */,
+				FE62E45906C7BC6F3D50110F9CAF09D6 /* UIImageView.swift in Sources */,
+				335129F4448735AF2EBC9A0479D49CB9 /* UIView.swift in Sources */,
+				96E279E6CF61290593C64E80DC072BF0 /* Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E45D73943575E913ACDD30677100B4E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD9122626F2F394214CB69FA2164CA8F /* JSONHelper.swift in Sources */,
+				A65BA130CA8D8D8938949CC361C72703 /* LiveGQL-dummy.m in Sources */,
+				7DC8380CF3D915CC581B51D36D29FC01 /* LiveGQL.swift in Sources */,
+				6E5599F8BB552A7442CDDC4EC5BD07A8 /* MessageTypes.swift in Sources */,
+				215B85FDD8695828EBDECB94FE51198B /* PayloadMessages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1289,28 +1295,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0C890575967A516434B5C87C7066C2CB /* PBXTargetDependency */ = {
+		0B8EE98CFD6CE82257C889A1A844AC5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = FA376CC5E02987DBF57C9D9AFDAE766B /* PBXContainerItemProxy */;
-		};
-		11F3723BF52DC93E054AF12A84F49468 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket;
-			target = 25CF1BD995D938BDB6FCD2D28EE228D7 /* SocketRocket */;
-			targetProxy = FB71196A71C3538BFBC7BCCA38FF4375 /* PBXContainerItemProxy */;
+			name = Apollo;
+			target = 2010E78719F690490FE4CE58BC774303 /* Apollo */;
+			targetProxy = C1BA13280537A8D12010EAE3013E17CB /* PBXContainerItemProxy */;
 		};
 		35701F46648A81EB9F3D1FB3D8772629 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
-			target = 25CF1BD995D938BDB6FCD2D28EE228D7 /* SocketRocket */;
+			target = 3B77C7B19F2294EBED0E47D3516ABD52 /* SocketRocket */;
 			targetProxy = 4669F44B395B2476A0D5CA1DFF68191D /* PBXContainerItemProxy */;
+		};
+		3C78BB5ECB85BDCD22F1C482C4C6E4AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			target = 3B77C7B19F2294EBED0E47D3516ABD52 /* SocketRocket */;
+			targetProxy = BE555DF473D607B8118A711D75BC4262 /* PBXContainerItemProxy */;
 		};
 		49DBD1AF1AA976E8365A357FF9831295 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LiveGQL;
-			target = 56890C0313FEA96FD2614AA88567919C /* LiveGQL */;
+			target = DA951FA6F63CD4A8D48F7441A3C42B2A /* LiveGQL */;
 			targetProxy = 3EFE400EB13C95F433E0A521C032EE12 /* PBXContainerItemProxy */;
 		};
 		4C037372B72188633FFC9C076C265393 /* PBXTargetDependency */ = {
@@ -1319,29 +1325,23 @@
 			target = 0E73B6922EB1A894D298240F413A9AE0 /* Pods-ErxesSDK_Example */;
 			targetProxy = 6CC0AB4802972A39C220FF017E9BE23C /* PBXContainerItemProxy */;
 		};
-		6058FFF97BBD0196395A0ABA7FE8F9B5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Apollo;
-			target = 2010E78719F690490FE4CE58BC774303 /* Apollo */;
-			targetProxy = F2829E9F28374F1E0EEDA520FA6653A6 /* PBXContainerItemProxy */;
-		};
-		BCF6BA276382ED19404CC4BB3F82F460 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ErxesSDK-ErxesSDK";
-			target = 4C57CECEECE982A104D8AEF9889D9354 /* ErxesSDK-ErxesSDK */;
-			targetProxy = 2B2351D2613F9E3BD131C1CD7D1270CB /* PBXContainerItemProxy */;
-		};
-		D08BEF8804739CCCF1A123CB99651667 /* PBXTargetDependency */ = {
+		56A716BDBEE856F267C9B257A4FC1789 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket;
-			target = 25CF1BD995D938BDB6FCD2D28EE228D7 /* SocketRocket */;
-			targetProxy = DD6B951E3EAC5B3BCC32558BECDA86AB /* PBXContainerItemProxy */;
+			target = 3B77C7B19F2294EBED0E47D3516ABD52 /* SocketRocket */;
+			targetProxy = 2794E5E91928B04FAEA3EB9861C9B517 /* PBXContainerItemProxy */;
 		};
-		DCEC2A4B5BE7E734A6F650BD20C6F03A /* PBXTargetDependency */ = {
+		7A6C1C49573C86FED748F90E3510F8A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LiveGQL;
-			target = 56890C0313FEA96FD2614AA88567919C /* LiveGQL */;
-			targetProxy = 140C4050F17679BF3A575E598A628C23 /* PBXContainerItemProxy */;
+			target = DA951FA6F63CD4A8D48F7441A3C42B2A /* LiveGQL */;
+			targetProxy = 2172B04D17A18D5DF1B328BD2A15B844 /* PBXContainerItemProxy */;
+		};
+		BAF0C4163E959D753457D86427C65185 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ErxesSDK-ErxesSDK";
+			target = C246D4C2AC5400CF9EF7B0AD949D4C24 /* ErxesSDK-ErxesSDK */;
+			targetProxy = F615733C5859D3C032F2595682B5C02C /* PBXContainerItemProxy */;
 		};
 		E5DC9B38542D43FB5CCD2CC5C04BC929 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1352,7 +1352,7 @@
 		EFB2193516A447FE2B80E189A1E502B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ErxesSDK;
-			target = 969A97725F5E35621508357E5BAA7095 /* ErxesSDK */;
+			target = 77E48F94F4C919496F1582D031D1FAAA /* ErxesSDK */;
 			targetProxy = DB1303B12CB2ABA0AD1233DBAFD57635 /* PBXContainerItemProxy */;
 		};
 		F759781EA7642E48DD08EA132EFF0938 /* PBXTargetDependency */ = {
@@ -1361,14 +1361,20 @@
 			target = 2010E78719F690490FE4CE58BC774303 /* Apollo */;
 			targetProxy = EBACEA0D4AF6BE7D3DE5150D710E6B5E /* PBXContainerItemProxy */;
 		};
+		FFEBFF9F7311FF64F62D3D9A11D23130 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
+			targetProxy = FD77C613F527CB710F679DF064A8B42C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		04F26A7B8B07DE19877DA110AB6DCD76 /* Localizable.strings */ = {
+		71B2075516F6ABCB0EC34700FAB97B4A /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DD5C2479C98EE3CA019E4E55342DB22E /* Localizable.strings */,
-				0ABFF0BF66C89A735CBCC5389A6A075D /* Localizable.strings */,
+				1079E8DFE7A592292D805F1BF180F32A /* Localizable.strings */,
+				FEAE85C7B559A6F86860578DB98CE041 /* Localizable.strings */,
 			);
 			name = Localizable.strings;
 			path = ErxesSDK/Assets;
@@ -1474,9 +1480,42 @@
 			};
 			name = Debug;
 		};
-		3FECC23B50CFB6D6A0F2086500694042 /* Debug */ = {
+		349351D1C474C541A5E6E382EF210E58 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */;
+			baseConfigurationReference = D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
+				PRODUCT_MODULE_NAME = LiveGQL;
+				PRODUCT_NAME = LiveGQL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3939E129AAFED24BF0D70429CE4A83A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ErxesSDK";
@@ -1490,7 +1529,39 @@
 			};
 			name = Debug;
 		};
-		6E16D757029388964BAF6B8848F4DA10 /* Release */ = {
+		5584DF495334A5BAF6B977F6341AA922 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
+				PRODUCT_MODULE_NAME = ErxesSDK;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		946F04979EFAE4DCDF2636045906718E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7CC62F1F3817BBAB1CFDA028609989B5 /* SocketRocket.xcconfig */;
 			buildSettings = {
@@ -1521,38 +1592,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		75CA6FE43D02B862E6441106BAB15C31 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
-				PRODUCT_MODULE_NAME = ErxesSDK;
-				PRODUCT_NAME = ErxesSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		97F3FC72DE144572D87BABC86CE7F232 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1587,6 +1626,37 @@
 			};
 			name = Release;
 		};
+		A05C34F7AA500EFBD3EE2D594522E09F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CC62F1F3817BBAB1CFDA028609989B5 /* SocketRocket.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SocketRocket/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SocketRocket/SocketRocket.modulemap";
+				PRODUCT_MODULE_NAME = SocketRocket;
+				PRODUCT_NAME = SocketRocket;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		A18C9CC7E37563F2891E7DC87F2DE6CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 088B5438BABAF3766DEF2EA5616C6135 /* Alamofire.xcconfig */;
@@ -1619,6 +1689,54 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		A8332137BF5E6F0DA8C08288FAABF1A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ErxesSDK";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/ResourceBundle-ErxesSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = ErxesSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		B3E50E9357B276060137307C1C5D4CBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
+				PRODUCT_MODULE_NAME = LiveGQL;
+				PRODUCT_NAME = LiveGQL;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		B6DD9C1600DF5DF32CD318E4B635BC34 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1655,39 +1773,6 @@
 			};
 			name = Debug;
 		};
-		BD98C158608463CDCE37012461E9A6A6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
-				PRODUCT_MODULE_NAME = ErxesSDK;
-				PRODUCT_NAME = ErxesSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		BE7007463FDCB7A92866EDC45CF8601F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1B2E372AD398F2B70AF09884E59D681E /* Pods-ErxesSDK_Example.release.xcconfig */;
@@ -1723,25 +1808,9 @@
 			};
 			name = Release;
 		};
-		C22BDE701F2AEA31A6C73DE3BC74A3DD /* Release */ = {
+		C6436706693FF357D18AF91DAB15E5DB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7355F8256282F001A9D50173EED4014C /* ErxesSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ErxesSDK";
-				INFOPLIST_FILE = "Target Support Files/ErxesSDK/ResourceBundle-ErxesSDK-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PRODUCT_NAME = ErxesSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		C7BF53EBC0554B30846718A4BD0C386A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */;
+			baseConfigurationReference = 8C9FCCFB735DD66F4C3A67D3DC24EAD5 /* ErxesSDK.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1752,24 +1821,25 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/ErxesSDK/ErxesSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ErxesSDK/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
-				PRODUCT_MODULE_NAME = LiveGQL;
-				PRODUCT_NAME = LiveGQL;
+				MODULEMAP_FILE = "Target Support Files/ErxesSDK/ErxesSDK.modulemap";
+				PRODUCT_MODULE_NAME = ErxesSDK;
+				PRODUCT_NAME = ErxesSDK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		D0B7343CF22FFA0AD02976DB6C2DC537 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1796,37 +1866,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D18BE9146BA6F1552ED4AC970ED6A8F8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CC62F1F3817BBAB1CFDA028609989B5 /* SocketRocket.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SocketRocket/SocketRocket-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SocketRocket/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SocketRocket/SocketRocket.modulemap";
-				PRODUCT_MODULE_NAME = SocketRocket;
-				PRODUCT_NAME = SocketRocket;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1865,39 +1904,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		F04B125421DB26EB7103187B5B995D30 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8B0DE22A3564CFE953B1074D7107058 /* LiveGQL.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LiveGQL/LiveGQL-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LiveGQL/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LiveGQL/LiveGQL.modulemap";
-				PRODUCT_MODULE_NAME = LiveGQL;
-				PRODUCT_NAME = LiveGQL;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		F4D03670628EEA7B4D76B85944BC6A57 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1993,11 +1999,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		045E63455C995114F799027D6B8135A1 /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
+		01E58619450D969F2A4840FE7780867C /* Build configuration list for PBXNativeTarget "LiveGQL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D18BE9146BA6F1552ED4AC970ED6A8F8 /* Debug */,
-				6E16D757029388964BAF6B8848F4DA10 /* Release */,
+				B3E50E9357B276060137307C1C5D4CBB /* Debug */,
+				349351D1C474C541A5E6E382EF210E58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2020,20 +2026,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		5A0F121E62302C5D5459594FEE2A30FB /* Build configuration list for PBXNativeTarget "SocketRocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A05C34F7AA500EFBD3EE2D594522E09F /* Debug */,
+				946F04979EFAE4DCDF2636045906718E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		611B5C4E1699CA0FBB650BD5543E21C6 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3939E129AAFED24BF0D70429CE4A83A6 /* Debug */,
+				A8332137BF5E6F0DA8C08288FAABF1A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9E2CE56DC643D5017563D19FFABFF064 /* Build configuration list for PBXNativeTarget "Apollo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0B7343CF22FFA0AD02976DB6C2DC537 /* Debug */,
 				97F3FC72DE144572D87BABC86CE7F232 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C404C7DC97A4B8C588D6EBE3668CE797 /* Build configuration list for PBXNativeTarget "ErxesSDK-ErxesSDK" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3FECC23B50CFB6D6A0F2086500694042 /* Debug */,
-				C22BDE701F2AEA31A6C73DE3BC74A3DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2047,11 +2062,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EF4E5C1775BFF39D91E95013D61AA010 /* Build configuration list for PBXNativeTarget "ErxesSDK" */ = {
+		E54A5DAD8B34C111A266F36BE42BAFB9 /* Build configuration list for PBXNativeTarget "ErxesSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				75CA6FE43D02B862E6441106BAB15C31 /* Debug */,
-				BD98C158608463CDCE37012461E9A6A6 /* Release */,
+				5584DF495334A5BAF6B977F6341AA922 /* Debug */,
+				C6436706693FF357D18AF91DAB15E5DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2061,15 +2076,6 @@
 			buildConfigurations = (
 				B6DD9C1600DF5DF32CD318E4B635BC34 /* Debug */,
 				BE7007463FDCB7A92866EDC45CF8601F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FDEF12C117298816DBE2D0DEEB505C33 /* Build configuration list for PBXNativeTarget "LiveGQL" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C7BF53EBC0554B30846718A4BD0C386A /* Debug */,
-				F04B125421DB26EB7103187B5B995D30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
