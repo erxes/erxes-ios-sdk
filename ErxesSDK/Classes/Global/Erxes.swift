@@ -84,10 +84,10 @@ import UIKit
 
     static func registerFonts() {
         let b = Router.erxesBundle()
-        UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b!)
-        UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b!)
-        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b!)
-        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b!)
+        UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b)
+        UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b)
+        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b)
+        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b)
     }
 
     static func getConfig(){
@@ -122,7 +122,7 @@ import UIKit
         if let lang = UserDefaults.standard.string(forKey:"languageCode") {
             if lang == "en" {
                 selected = "mn"
-            }
+        }
             else {
                 selected = "en"
             }

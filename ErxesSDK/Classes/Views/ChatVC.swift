@@ -157,7 +157,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         }
         
         var str = ""
-        let now = NMFormatter.now()
+        let now = Utils.now()
         str = "<div class=\"row\"><div class=\"img\"><img src=\"\(Erxes.supporterAvatar!)\"/></div><div class=\"text\"><a>\(Erxes.msgWelcome ?? "")</a></div><div class=\"date\">\(now!)</div></div>"
         
         css = "<style>.row,.row .text{overflow:hidden}body{background:url(bg-1.png);background:#f4f4f4;padding:0;margin:0 20px}.row{position:relative;margin-bottom:10px;margin-top:15px;font-family:Roboto,Arial,sans-serif;font-weight:500}.row .text a{float:left;padding:12px 20px;background:#ebebeb;border-radius:20px 20px 20px 2px;color:#444;margin-bottom:5px;margin-left:38px;margin-right:40px;font-size:14px;box-shadow:0 1px 1px 0 rgba(0,0,0,.2)}.me .text a{float:right;background:\(bg);color:#fff;border-radius:20px 2px 20px 20px;margin-left:50px;margin-right:0}.row .text img{max-width:100%;padding-top:3px}.row .date{color:#cbcbcb;font-size:11px;margin-left:36px}.me .date{text-align:right}.row .img{float:left;position:absolute;bottom:17px;left:0;margin-right:8px}.row .img img{width:30px;height:30px;border-radius:15px;box-sizing:border-box;border:1px solid white;}.me .img{display:none}.me .img img{margin-right:0;margin-left:8px}p{display:inline}</style>\(str)"
@@ -173,7 +173,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 str = content
             }
             
-            let now = NMFormatter.now()
+            let now = Utils.now()
 
             var me = ""
 
@@ -293,8 +293,6 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func typeChanged(_ sender: Any) {
-        
-        segment.changeUnderlinePosition()
         if segment.selectedSegmentIndex == 0{
             tfInput.placeholder = "email@domain.com"
         }
