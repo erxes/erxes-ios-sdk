@@ -111,7 +111,6 @@ public class ChatVCMessage:UIViewController{
     }
 
     func loadMessages(){
-
         if conversationId == nil{
             return
         }
@@ -122,40 +121,44 @@ public class ChatVCMessage:UIViewController{
                 print(error.localizedDescription)
                 return
             }
-            if let allMessages = result?.data?.messages {
-                let messagesArray = allMessages.map { ($0?.fragments.messageDetail)! }
-                var me = ""
-                var str = "";
-
-                for item in messagesArray {
-                    let created = item.createdAt!
-                    let now = Utils.formatDate(time: created)
-                    print("");
-
-                    var avatar = "avatar.png"
-
-                    if let user = item.user{
-                        if let userAvatar = user.details?.avatar{
-                            avatar = userAvatar
-                        }
-                    }
-
-                    me = ""
-                    if let customerId = item.customerId{
-                        if customerId == erxesCustomerId {
-                            me = "me"
-                        }
-                    }
-                    let image = self?.extractAttachment(item: item)
-                    let chat = item.content?.withoutHtml
-                    str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
-                }
-
-                self?.inited = true;
-                str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
-                self?.wvChat.stringByEvaluatingJavaScript(from: str)
+            if let allMessages = result?.data?.messages as? [MessagesQuery.Data.Message]{
+                self?.processMessagesResult(messages: allMessages)
             }
         }
+    }
+    
+    func processMessagesResult(messages:[MessagesQuery.Data.Message]){
+        let messagesArray = messages.map { ($0.fragments.messageDetail) }
+        var me = ""
+        var str = "";
+        
+        for item in messagesArray {
+            let created = item.createdAt!
+            let now = Utils.formatDate(time: created)
+            print("");
+            
+            var avatar = "avatar.png"
+            
+            if let user = item.user{
+                if let userAvatar = user.details?.avatar{
+                    avatar = userAvatar
+                }
+            }
+            
+            me = ""
+            if let customerId = item.customerId{
+                if customerId == erxesCustomerId {
+                    me = "me"
+                }
+            }
+            let image = self.extractAttachment(item: item)
+            let chat = item.content?.withoutHtml
+            str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
+        }
+        
+        self.inited = true;
+        str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
+        self.wvChat.stringByEvaluatingJavaScript(from: str)
     }
 
     func extractAttachment(item:MessageDetail) -> String{
