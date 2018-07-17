@@ -1,3 +1,7 @@
+public protocol ChatVCConveration{
+    
+}
+
 extension ChatVC{
     func readConversation(){
         if let id = conversationId{

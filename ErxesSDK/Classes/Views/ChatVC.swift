@@ -3,32 +3,21 @@ import UIKit
 import LiveGQL
 import WebKit
 
-public class ChatVC: SupporterVC, UITextFieldDelegate{
-
-    @IBOutlet weak var tfInput:UITextField!
-    @IBOutlet weak var tv:UITableView!
-    @IBOutlet weak var container:UIView!
-    @IBOutlet weak var wvChat:UIWebView!
-    @IBOutlet weak var progress: UIProgressView!
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBOutlet weak var uploadView: UIView!
-    @IBOutlet weak var uploadLoader: UIActivityIndicatorView!
-    @IBOutlet weak var ivPicked: UIImageView!
-    @IBOutlet weak var lblFilesize: UILabel!
-    @IBOutlet weak var loader: UIView!
-    @IBOutlet weak var lblLoader: UILabel!
+public class ChatVC: ChatVCMessage, UITextFieldDelegate{
     
-    var attachments = [JSON]()
+    @IBOutlet weak var ivSupporterAvatar: UIImageView!
+    @IBOutlet weak var lblSupporterName: UILabel!
+    @IBOutlet weak var lblSupporterStatus: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var header:UIView!;
+    
     var containerHeight:CGFloat = 0.0
     var integrationId = ""
     var customerId = ""
     var totalUnreadCountInt = 0
-    var inited = false;
-    var bg = "#7754b3"
-    var css = ""
     var uploadUrl = ""
     var uploaded = JSON()
-    var attached = false
     var sv:UIView?
     var headerInited = false
     
@@ -62,16 +51,12 @@ public class ChatVC: SupporterVC, UITextFieldDelegate{
     func loadEnd(){
         self.loader.isHidden = true;
     }
-
-    let gql = LiveGQL(socket: subsUrl)
     
     func configLive(){
         gql.delegate = self
     }
     
-    @IBAction func subscribe(){
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
-    }
+    
     
     @IBAction func close(){
         self.navigationController?.dismiss(animated: true, completion: nil)

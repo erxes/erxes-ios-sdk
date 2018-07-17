@@ -1,7 +1,31 @@
 import LiveGQL
 
-extension ChatVC{
+public class ChatVCMessage:UIViewController{
 
+    @IBOutlet weak var tfInput:UITextField!
+    @IBOutlet weak var tv:UITableView!
+    @IBOutlet weak var container:UIView!
+    @IBOutlet weak var wvChat:UIWebView!
+    @IBOutlet weak var progress: UIProgressView!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var uploadView: UIView!
+    @IBOutlet weak var uploadLoader: UIActivityIndicatorView!
+    @IBOutlet weak var ivPicked: UIImageView!
+    @IBOutlet weak var lblFilesize: UILabel!
+    @IBOutlet weak var loader: UIView!
+    @IBOutlet weak var lblLoader: UILabel!
+    
+    var bg = "#7754b3"
+    var css = ""
+    var attachments = [JSON]()
+    var inited = false
+    var attached = false
+    let gql = LiveGQL(socket: subsUrl)
+    
+    func subscribe(){
+        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+    }
+    
     func initChat(){
 
         if let color = erxesColorHex {
