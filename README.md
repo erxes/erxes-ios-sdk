@@ -1,7 +1,7 @@
 # erxes-ios-sdk
 
 ## Status  <br> 
-[![CI Status](https://img.shields.io/travis/devpurevee/ErxesSDK.svg?style=flat)](https://travis-ci.org/devpurevee/ErxesSDK)
+[![CI Status](https://travis-ci.org/erxes/erxes-ios-sdk.svg?branch=develop)](https://travis-ci.org/erxes/erxes-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
