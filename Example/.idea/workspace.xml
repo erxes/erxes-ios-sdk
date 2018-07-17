@@ -7,7 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +23,8 @@
         <entry file="file://$PROJECT_DIR$/../README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="223">
-                <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+              <first_editor relative-caret-position="180">
+                <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               </first_editor>
               <second_editor />
             </state>
@@ -67,6 +67,7 @@
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCAttachment.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift" />
+        <option value="$PROJECT_DIR$/../.travis.yml" />
         <option value="$PROJECT_DIR$/../README.md" />
       </list>
     </option>
@@ -80,8 +81,8 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-12" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="12" />
     <option name="y" value="23" />
     <option name="width" value="1925" />
     <option name="height" value="1057" />
@@ -90,11 +91,21 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Cidr.FilesView" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Cidr.FilesView" />
+      <pane id="Cidr.FilesView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ErxesSDK" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ErxesSDK" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -157,15 +168,15 @@
       <workItem from="1530784122437" duration="3181000" />
       <workItem from="1530833880829" duration="256000" />
       <workItem from="1531731844246" duration="5877000" />
-      <workItem from="1531802655590" duration="10757000" />
+      <workItem from="1531802655590" duration="11389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20447000" />
+    <option name="totallyTimeSpent" value="21079000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-12" y="23" width="1925" height="1057" extended-state="0" />
+    <frame x="0" y="23" width="1925" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -459,6 +470,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -467,8 +485,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="223">
-            <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+          <first_editor relative-caret-position="180">
+            <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           </first_editor>
           <second_editor />
         </state>
