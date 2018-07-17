@@ -7,6 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,18 +18,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="API.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="1495" column="35" lean-forward="true" selection-start-line="1495" selection-start-column="35" selection-end-line="1495" selection-end-column="35" />
-              <folding>
-                <element signature="e#5168#6135#0" />
-                <element signature="e#26635#30468#0" />
-                <element signature="e#28262#30450#0" />
-                <element signature="e#39862#41870#0" />
-                <element signature="e#51879#53887#0" />
-              </folding>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="143">
+                <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -69,6 +66,7 @@
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCAttachment.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift" />
+        <option value="$PROJECT_DIR$/../README.md" />
       </list>
     </option>
   </component>
@@ -81,8 +79,8 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-4" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-5" />
     <option name="y" value="23" />
     <option name="width" value="1523" />
     <option name="height" value="1057" />
@@ -118,6 +116,13 @@
               <item name="Pods" type="1d218c8b:XcodeProjectNode" />
               <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
               <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+              <item name="Pod" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
@@ -185,15 +190,15 @@
       <workItem from="1530784122437" duration="3181000" />
       <workItem from="1530833880829" duration="256000" />
       <workItem from="1531731844246" duration="5877000" />
-      <workItem from="1531802655590" duration="8932000" />
+      <workItem from="1531802655590" duration="10316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18622000" />
+    <option name="totallyTimeSpent" value="20006000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="23" width="1523" height="1057" extended-state="0" />
+    <frame x="-5" y="23" width="1925" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -204,7 +209,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23900197" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18909091" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -238,7 +243,7 @@
       <breakpoints>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift</url>
-          <line>1513</line>
+          <line>1105</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -322,21 +327,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/ViewExtension.swift" />
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="272">
-            <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Data.swift">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -493,14 +483,27 @@
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
-          <caret line="1495" column="35" lean-forward="true" selection-start-line="1495" selection-start-column="35" selection-end-line="1495" selection-end-column="35" />
+          <caret line="1087" column="35" lean-forward="true" selection-start-line="1087" selection-start-column="35" selection-end-line="1087" selection-end-column="35" />
           <folding>
             <element signature="e#5168#6135#0" />
-            <element signature="e#26635#30468#0" />
-            <element signature="e#28262#30450#0" />
             <element signature="e#39862#41870#0" />
             <element signature="e#51879#53887#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="143">
+            <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
