@@ -1,36 +1,37 @@
 import UIKit
 
+var erxesUserId:String!
+var erxesCustomerId:String!
+var brandCode:String!
+var integrationId:String!
+var erxesEmail:String!
+var conversationId:String!
+var erxesColor = UIColor(hexString: "#5629B6")
+var erxesColorHex = "#5629B6" as String!
+var msgThankyou:String!
+var msgWelcome:String!
+var supporterName:String!
+var supporterAvatar:String!
+var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
+
 @objc public class Erxes: NSObject {
-    static var userId:String!
-    static var customerId:String!
-    static var brandCode:String!
-    static var integrationId:String!
-    static var email:String!
-    static var conversationId:String!
-    static var color = UIColor(hexString: "#5629B6")
-    static var colorHex = "#5629B6" as String!
-    static var msgThankyou:String!
-    static var msgWelcome:String!
-    static var supporterName:String!
-    static var supporterAvatar:String!
-    static var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
-    
+
     static func firstRun() -> Bool {
         let defaults = UserDefaults()
         return defaults.value(forKey: "email") == nil
     }
     
     static func saveEmail( item:String) {
-        email = item
+        erxesEmail = item
         let defaults = UserDefaults()
-        defaults.set(email, forKey: "email")
+        defaults.set(erxesEmail, forKey: "email")
         defaults.synchronize()
     }
     
     static func saveCustomerId( item:String) {
-        customerId = item
+        erxesCustomerId = item
         let defaults = UserDefaults()
-        defaults.set(customerId, forKey: "customerId")
+        defaults.set(erxesCustomerId, forKey: "customerId")
         defaults.synchronize()
     }
     
@@ -43,17 +44,17 @@ import UIKit
     
     static func restore(){
         let defaults = UserDefaults()
-        email = defaults.string(forKey: "email")
+        erxesEmail = defaults.string(forKey: "email")
         integrationId = defaults.string(forKey: "integrationId")
-        customerId = defaults.string(forKey: "customerId")
+        erxesCustomerId = defaults.string(forKey: "customerId")
     }
     
-    @objc public static func setBrandCode(brandCode:String) {
-        self.brandCode = brandCode
+    @objc public static func setBrandCode(code:String) {
+        brandCode = code
     }
     
     @objc public static func startWithUserEmail(email:String) {
-        Erxes.email = email
+        erxesEmail = email
         start()
     }
     
@@ -70,8 +71,8 @@ import UIKit
     }
     
     @objc public static func notificationReceived(userInfo: [AnyHashable : Any]) {
-        if let conversationId = userInfo["conversationId"] as? String{
-            Erxes.conversationId = conversationId
+        if let id = userInfo["conversationId"] as? String{
+            conversationId = id
             Erxes.start()
         }
     }
@@ -93,7 +94,7 @@ import UIKit
     static func getConfig(){
 
         registerFonts()
-        let query = GetConfigQuery(brandCode: Erxes.brandCode!)
+        let query = GetConfigQuery(brandCode: brandCode!)
         apollo.fetch(query: query){result, error in
             
             if let error = error {

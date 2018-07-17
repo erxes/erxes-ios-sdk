@@ -34,7 +34,6 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     
     var integrationId = ""
     var customerId = ""
-    var conversationId:String?
     var totalUnreadCountInt = 0
     var inited = false;
     var bg = "#7754b3"
@@ -51,20 +50,20 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        if Erxes.supporters.count>0{
+        if supporters.count>0{
             var title = ""
-            for n in 0...Erxes.supporters.count-1{
-                let user = Erxes.supporters[n]
+            for n in 0...supporters.count-1{
+                let user = supporters[n]
                 let iv = self.view.viewWithTag(101 + n) as! UIImageView
                 if let avatar = user.details?.avatar{
                     iv.downloadedFrom(link: avatar)
-                    iv.layer.borderColor = Erxes.color!.cgColor
+                    iv.layer.borderColor = erxesColor!.cgColor
                     iv.layer.borderWidth = 1
                 }
                 if let names = user.details?.fullName?.split(separator: " "){
                     if names.count > 0{
                         title += names[0]
-                        if n < Erxes.supporters.count - 1{
+                        if n < supporters.count - 1{
                             title += ", "
                         }
                     }
@@ -74,14 +73,14 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             self.lblSupporterName.text = title
         }
         else{
-            Erxes.supporterAvatar = "Хэрэглэгчид туслах"
+            supporterAvatar = "Хэрэглэгчид туслах"
         }
         
-        if let supporterAvatar = Erxes.supporterAvatar{
+        if let supporterAvatar = supporterAvatar{
             self.ivSupporterAvatar.downloadedFrom(link: supporterAvatar)
         }
         else{
-            Erxes.supporterAvatar = "avatar.png"
+            supporterAvatar = "avatar.png"
         }
         initChat()
         
@@ -104,7 +103,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             readConversation()
         }
         
-        if let color = Erxes.color{
+        if let color = erxesColor {
             self.header.backgroundColor = color
         }
     }
@@ -118,8 +117,8 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     func readConversation(){
-        if let conversationId = self.conversationId{
-            let mutation = ReadConversationMessagesMutation(conversationId: conversationId)
+        if let id = conversationId{
+            let mutation = ReadConversationMessagesMutation(conversationId: id)
             apollo.perform(mutation: mutation){result,error in
                 if let error = error{
                     print(error)
@@ -131,7 +130,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     func checkOnline(){
-        let query = IsSupporterOnlineQuery(integrationId: Erxes.integrationId)
+        let query = IsSupporterOnlineQuery(integrationId: integrationId)
         apollo.fetch(query: query){ [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -152,13 +151,13 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     
     func initChat(){
         
-        if let color = Erxes.colorHex{
+        if let color = erxesColorHex {
             bg = color
         }
         
         var str = ""
         let now = Utils.now()
-        str = "<div class=\"row\"><div class=\"img\"><img src=\"\(Erxes.supporterAvatar!)\"/></div><div class=\"text\"><a>\(Erxes.msgWelcome ?? "")</a></div><div class=\"date\">\(now!)</div></div>"
+        str = "<div class=\"row\"><div class=\"img\"><img src=\"\(supporterAvatar!)\"/></div><div class=\"text\"><a>\(msgWelcome ?? "")</a></div><div class=\"date\">\(now!)</div></div>"
         
         css = "<style>.row,.row .text{overflow:hidden}body{background:url(bg-1.png);background:#f4f4f4;padding:0;margin:0 20px}.row{position:relative;margin-bottom:10px;margin-top:15px;font-family:Roboto,Arial,sans-serif;font-weight:500}.row .text a{float:left;padding:12px 20px;background:#ebebeb;border-radius:20px 20px 20px 2px;color:#444;margin-bottom:5px;margin-left:38px;margin-right:40px;font-size:14px;box-shadow:0 1px 1px 0 rgba(0,0,0,.2)}.me .text a{float:right;background:\(bg);color:#fff;border-radius:20px 2px 20px 20px;margin-left:50px;margin-right:0}.row .text img{max-width:100%;padding-top:3px}.row .date{color:#cbcbcb;font-size:11px;margin-left:36px}.me .date{text-align:right}.row .img{float:left;position:absolute;bottom:17px;left:0;margin-right:8px}.row .img img{width:30px;height:30px;border-radius:15px;box-sizing:border-box;border:1px solid white;}.me .img{display:none}.me .img img{margin-right:0;margin-left:8px}p{display:inline}</style>\(str)"
     }
@@ -178,7 +177,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             var me = ""
 
             if let customerId = message.customerId{
-                if customerId == Erxes.customerId{
+                if customerId == erxesCustomerId {
                     me = "me"
                 }
             }
@@ -217,9 +216,8 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
         if conversationId == nil{
             return
         }
-        
-        Erxes.conversationId = conversationId
-        let messagesQuery = MessagesQuery(conversationId: self.conversationId!)
+
+        let messagesQuery = MessagesQuery(conversationId: conversationId!)
         apollo.fetch(query: messagesQuery, cachePolicy: .fetchIgnoringCacheData) { [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -245,7 +243,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
 
                         me = ""
                         if let customerId = item.customerId{
-                            if customerId == Erxes.customerId{
+                            if customerId == erxesCustomerId {
                                 me = "me"
                             }
                         }
@@ -285,7 +283,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func subscribe(){
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(self.conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
     }
     
     @IBAction func close(){
@@ -346,7 +344,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     
     @IBAction func reshapeHeader(){
         
-        let users = Erxes.supporters
+        let users = supporters
         let size = self.header.frame.size
         let width = size.width - 128
         let count = users.count
@@ -390,10 +388,10 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             return
         }
         
-        var mutation  = InsertMessageMutation(integrationId: Erxes.integrationId, customerId: Erxes.customerId, message: msg)
+        var mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg)
         
         if conversationId != nil{
-            mutation  = InsertMessageMutation(integrationId: Erxes.integrationId, customerId: Erxes.customerId, message: msg, conversationId: self.conversationId, attachments:attachments)
+            mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg, conversationId: conversationId, attachments:attachments)
         }
 
         apollo.perform(mutation: mutation){[weak self] result,error in
@@ -403,9 +401,8 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
                 return
             }
             self?.tfInput.text = ""
-            if self?.conversationId == nil{
-                self?.conversationId = result?.data?.insertMessage?.conversationId
-                Erxes.conversationId = self?.conversationId
+            if conversationId == nil{
+                conversationId = result?.data?.insertMessage?.conversationId
                 self?.subscribe()
                 self?.loadMessages()
             }
@@ -418,7 +415,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func endConversation(_ sender: Any) {
-        let mutation = EndConversationMutation(customerId: Erxes.customerId, brandCode: Erxes.brandCode)
+        let mutation = EndConversationMutation(customerId: erxesCustomerId, brandCode: brandCode)
         apollo.perform(mutation: mutation){[weak self] result,error in
             self?.uploadView.isHidden = true
             if let error = error {
@@ -429,7 +426,7 @@ public class ChatVC: UIViewController, UITextFieldDelegate{
             defaults.removeObject(forKey: "email")
             defaults.synchronize()
             self?.close()
-            Erxes.email = nil
+            erxesEmail = nil
         }
     }
     

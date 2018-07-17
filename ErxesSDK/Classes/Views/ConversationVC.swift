@@ -57,7 +57,7 @@ class ConversationVC: UIViewController {
     
     
     func refresh(){
-        let query = ConversationsQuery(integrationId: Erxes.integrationId, customerId: Erxes.customerId)
+        let query = ConversationsQuery(integrationId: integrationId, customerId: erxesCustomerId)
 
         apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData){[weak self] result,error in
             self?.refreshControl.endRefreshing()
@@ -101,7 +101,7 @@ class ConversationVC: UIViewController {
     }
     
     func setNavigationColor(){
-        if let color = Erxes.color{
+        if let color = erxesColor {
 //            self.navigationController?.navigationBar.barTintColor = color
             self.header.backgroundColor = color
             self.view.viewWithTag(1)?.backgroundColor = color
@@ -158,12 +158,12 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
 //            }
 //        }
         
-        if let avatar = Erxes.supporterAvatar{
+        if let avatar = supporterAvatar{
             let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
             ivAvatar.downloadedFrom(link: avatar)
         }
         
-        if let title = Erxes.supporterName{
+        if let title = supporterName{
             let lbl = cell.viewWithTag(lblTitleTag) as! UILabel
             lbl.text = title
         }
@@ -174,7 +174,7 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
         var item = list[indexPath.row]
-        vc.conversationId = item.id
+//        vc.conversationId = item.id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -183,11 +183,11 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
 extension ConversationVC:LiveGQLDelegate{
     
     public func subscribe(){
-        gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(Erxes.customerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
+        gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(erxesCustomerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
     }
     
     public func receivedRawMessage(text: String) {
-        if self.list != nil && self.list.count > 0{
+        if self.list.count > 0{
             refresh()
         }
     }

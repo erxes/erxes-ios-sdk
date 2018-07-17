@@ -21,14 +21,14 @@ public class RegisterVC: UIViewController {
         if let uiOptions = defaults.dictionary(forKey: "uiOptions"){
             print(uiOptions)
             if let color = uiOptions["color"] as? String{
-                Erxes.color = UIColor(hexString: color)
-                Erxes.colorHex = color
+                erxesColor = UIColor(hexString: color)
+                erxesColorHex = color
             }
         }
         
         if let messengerData = defaults.dictionary(forKey: "messengerData"){
             if let msg = messengerData["welcomeMessage"] as? String{
-                Erxes.msgWelcome = msg
+                msgWelcome = msg
             }
         }
         
@@ -40,8 +40,8 @@ public class RegisterVC: UIViewController {
             self.navigationController?.pushViewController(vc!, animated: false)
         }
         else{
-            if Erxes.email != nil{
-                self.tfEmail.text = Erxes.email
+            if erxesEmail != nil{
+                self.tfEmail.text = erxesEmail
                 connectMessenger()
             }
         }
@@ -86,7 +86,7 @@ public class RegisterVC: UIViewController {
     }
     
     func getSupporter(){
-        let query = GetSupporterQuery(integrationId: Erxes.integrationId)
+        let query = GetSupporterQuery(integrationId: integrationId)
         apollo.fetch(query: query){[weak self] result, error in
             
             if let error = error {
@@ -94,19 +94,19 @@ public class RegisterVC: UIViewController {
                 return
             }
             
-            if let supporters = result?.data?.messengerSupporters{
-                if supporters.count > 0{
-                    Erxes.supporters = supporters as! [GetSupporterQuery.Data.MessengerSupporter]
+            if let supportersResult = result?.data?.messengerSupporters{
+                if supportersResult.count > 0{
+                    supporters = supportersResult as! [GetSupporterQuery.Data.MessengerSupporter]
                     let supporter = supporters[0]
-                    Erxes.supporterName = supporter?.details?.fullName
-                    Erxes.supporterAvatar = supporter?.details?.avatar
+                    supporterName = supporter.details?.fullName
+                    supporterAvatar = supporter.details?.avatar
                 }
             }
         }
     }
     
     public func connectMessenger() {
-        let connectMutation = ConnectMutation(brandCode: Erxes.brandCode, email: self.tfEmail.text!, isUser: false)
+        let connectMutation = ConnectMutation(brandCode: brandCode, email: self.tfEmail.text!, isUser: false)
         apollo.perform(mutation: connectMutation) { [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -153,23 +153,23 @@ public class RegisterVC: UIViewController {
     var emailSelected = true
     
     func changeColor(){
-        self.header.backgroundColor = Erxes.color
-        self.view.viewWithTag(11)?.layer.borderColor = Erxes.color!.cgColor
+        self.header.backgroundColor = erxesColor
+        self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
         if emailSelected{
             self.view.viewWithTag(12)?.backgroundColor = .clear
-            (self.view.viewWithTag(13) as! UILabel).textColor = Erxes.color
-            (self.view.viewWithTag(14) as! UILabel).textColor = Erxes.color
-            self.view.viewWithTag(15)?.backgroundColor = Erxes.color
+            (self.view.viewWithTag(13) as! UILabel).textColor = erxesColor
+            (self.view.viewWithTag(14) as! UILabel).textColor = erxesColor
+            self.view.viewWithTag(15)?.backgroundColor = erxesColor
             (self.view.viewWithTag(16) as! UILabel).textColor = .white
             (self.view.viewWithTag(17) as! UILabel).textColor = .white
         }
         else{
-            self.view.viewWithTag(12)?.backgroundColor = Erxes.color
+            self.view.viewWithTag(12)?.backgroundColor = erxesColor
             (self.view.viewWithTag(13) as! UILabel).textColor = .white
             (self.view.viewWithTag(14) as! UILabel).textColor = .white
             self.view.viewWithTag(15)?.backgroundColor = .clear
-            (self.view.viewWithTag(16) as! UILabel).textColor = Erxes.color
-            (self.view.viewWithTag(17) as! UILabel).textColor = Erxes.color
+            (self.view.viewWithTag(16) as! UILabel).textColor = erxesColor
+            (self.view.viewWithTag(17) as! UILabel).textColor = erxesColor
         }
     }
     
