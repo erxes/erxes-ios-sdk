@@ -128,7 +128,7 @@ public class ChatVCMessage:UIViewController{
     }
     
     func processMessagesResult(messages:[MessagesQuery.Data.Message]){
-        let messagesArray = messages.map { ($0.fragments.messageDetail) }
+        let messagesArray = messages.map { ($0) }
         var me = ""
         var str = "";
         
@@ -161,7 +161,7 @@ public class ChatVCMessage:UIViewController{
         self.wvChat.stringByEvaluatingJavaScript(from: str)
     }
 
-    func extractAttachment(item:MessageDetail) -> String{
+    func extractAttachment(item:MessagesQuery.Data.Message) -> String{
         var image = ""
         if let attachments = item.attachments{
             if attachments.count > 0{
