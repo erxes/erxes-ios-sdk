@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        Erxes.setBrandCode(brandCode: "P6Cec9")
+        Erxes.setBrandCode(code: "P6Cec9")
         Erxes.setHosts(apiHost: "https://api-mobile.crm.nmma.co/graphql", subsHost: "wss://app-api.crm.nmma.co/subscriptions")
         
 //        Erxes.setBrandCode(brandCode: "YDEdKj")
