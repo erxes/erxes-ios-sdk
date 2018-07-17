@@ -6,7 +6,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/API.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/API.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Language.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Language.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ErxesSDK/ErxesSDK-umbrella.h" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ErxesSDK/ErxesSDK-umbrella.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,9 +28,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_8FB6F322-F504-4740-82DB-C8E8487DBD41" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Dictionary.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Dictionary.swift">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="Utils.swift" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -44,6 +58,7 @@
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" />
+        <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift" />
       </list>
     </option>
   </component>
@@ -56,8 +71,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="321" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="374" />
+    <option name="y" value="213" />
     <option name="width" value="1397" />
     <option name="height" value="1057" />
   </component>
@@ -97,50 +113,6 @@
               <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
               <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
               <item name="Global" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Global" type="fcab9f18:XcodeViewNode" />
-              <item name="Extension" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Global" type="fcab9f18:XcodeViewNode" />
-              <item name="Model" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Pod" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Queries" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Support Files" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
-              <item name="Views" type="fcab9f18:XcodeViewNode" />
             </path>
           </expand>
           <select />
@@ -188,23 +160,24 @@
       <workItem from="1530783019287" duration="376000" />
       <workItem from="1530784122437" duration="3181000" />
       <workItem from="1530833880829" duration="256000" />
-      <workItem from="1531731844246" duration="2654000" />
+      <workItem from="1531731844246" duration="4511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6467000" />
+    <option name="totallyTimeSpent" value="8324000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="321" width="1397" height="1057" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26055834" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18958333" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32960325" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.80061036" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
@@ -220,6 +193,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -380,13 +363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="48" lean-forward="true" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/Message.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -445,7 +421,25 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/Dictionary.swift">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="9" lean-forward="true" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/API.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="1389" column="1" selection-start-line="1389" selection-start-column="1" selection-end-line="1389" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
