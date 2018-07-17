@@ -14,7 +14,7 @@ extension String {
             UserDefaults.standard.synchronize()
         }
         let lang = UserDefaults.standard.string(forKey: "languageCode")
-        let path = Router.erxesBundle()?.path(forResource: lang, ofType: "lproj")
+        let path = Router.erxesBundle().path(forResource: lang, ofType: "lproj")
         let bundle = Bundle(path: path!)
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }

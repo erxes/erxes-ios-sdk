@@ -11,4 +11,12 @@ class Utils: NSObject {
         let now = dateFormatter.string(from: date)
         return now
     }
+
+    static func now() -> String! {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        let date = Date()
+        let now = dateFormatter.string(from: date)
+        return now
+    }
 }
