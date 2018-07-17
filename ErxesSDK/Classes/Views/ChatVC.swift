@@ -3,19 +3,12 @@ import UIKit
 import LiveGQL
 import WebKit
 
-public class ChatVC: UIViewController, UITextFieldDelegate{
+public class ChatVC: SupporterVC, UITextFieldDelegate{
 
-    @IBOutlet weak var segment:UISegmentedControl!
     @IBOutlet weak var tfInput:UITextField!
     @IBOutlet weak var tv:UITableView!
     @IBOutlet weak var container:UIView!
     @IBOutlet weak var wvChat:UIWebView!
-    @IBOutlet weak var ivSupporterAvatar: UIImageView!
-    @IBOutlet weak var lblSupporterName: UILabel!
-    @IBOutlet weak var lblSupporterStatus: UILabel!
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var lblStatus: UILabel!
-    @IBOutlet weak var header:UIView!;
     @IBOutlet weak var progress: UIProgressView!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var uploadView: UIView!
