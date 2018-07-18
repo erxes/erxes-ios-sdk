@@ -1,5 +1,4 @@
 extension ChatVC {
-    
     func checkOnline() {
         let query = IsSupporterOnlineQuery(integrationId: integrationId)
         apollo.fetch(query: query){ [weak self] result, error in
@@ -19,34 +18,30 @@ extension ChatVC {
     }
 
     func setSupporterState() {
-        if supporters.count > 0 {
-            var title = ""
-            for n in 0...supporters.count-1 {
-                let user = supporters[n]
-
-                if let iv = self.view.viewWithTag(101 + n) as? UIImageView {
-                    if let avatar = user.details?.avatar {
-                        iv.downloadedFrom(link: avatar)
-                        iv.layer.borderColor = erxesColor!.cgColor
-                        iv.layer.borderWidth = 1
-                    }
+        if supporters.count == 0 {
+            supporterAvatar = "Хэрэглэгчид туслах"
+            return
+        }
+        var title = ""
+        for n in 0...supporters.count-1 {
+            let user = supporters[n]
+            if let iv = self.view.viewWithTag(101 + n) as? UIImageView {
+                if let avatar = user.details?.avatar {
+                    iv.downloadedFrom(link: avatar)
+                    iv.layer.borderColor = erxesColor!.cgColor
+                    iv.layer.borderWidth = 1
                 }
-
-                if let names = user.details?.fullName?.split(separator: " ") {
-                    if names.count > 0 {
-                        title += names[0]
-                        if n < supporters.count - 1 {
-                            title += ", "
-                        }
+            }
+            if let names = user.details?.fullName?.split(separator: " ") {
+                if names.count > 0 {
+                    title += names[0]
+                    if n < supporters.count - 1 {
+                        title += ", "
                     }
                 }
             }
-            self.lblSupporterName.text = title
         }
-        else {
-            supporterAvatar = "Хэрэглэгчид туслах"
-        }
-
+        self.lblSupporterName.text = title
         if let supporterAvatar = supporterAvatar {
             self.ivSupporterAvatar.downloadedFrom(link: supporterAvatar)
         }

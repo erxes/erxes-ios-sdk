@@ -93,9 +93,9 @@ public class RegisterVC: UIViewController {
                 return
             }
             
-            if let supportersResult = result?.data?.messengerSupporters {
+            if let supportersResult = result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter]{
                 if supportersResult.count > 0 {
-                    supporters = supportersResult as! [GetSupporterQuery.Data.MessengerSupporter]
+                    supporters = supportersResult
                     let supporter = supporters[0]
                     supporterName = supporter.details?.fullName
                     supporterAvatar = supporter.details?.avatar
@@ -156,19 +156,19 @@ public class RegisterVC: UIViewController {
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
         if emailSelected {
             self.view.viewWithTag(12)?.backgroundColor = .clear
-            (self.view.viewWithTag(13) as! UILabel).textColor = erxesColor
-            (self.view.viewWithTag(14) as! UILabel).textColor = erxesColor
+            (self.view.viewWithTag(13) as? UILabel)?.textColor = erxesColor
+            (self.view.viewWithTag(14) as? UILabel)?.textColor = erxesColor
             self.view.viewWithTag(15)?.backgroundColor = erxesColor
-            (self.view.viewWithTag(16) as! UILabel).textColor = .white
-            (self.view.viewWithTag(17) as! UILabel).textColor = .white
+            (self.view.viewWithTag(16) as? UILabel)?.textColor = .white
+            (self.view.viewWithTag(17) as? UILabel)?.textColor = .white
         }
         else {
             self.view.viewWithTag(12)?.backgroundColor = erxesColor
-            (self.view.viewWithTag(13) as! UILabel).textColor = .white
-            (self.view.viewWithTag(14) as! UILabel).textColor = .white
+            (self.view.viewWithTag(13) as? UILabel)?.textColor = .white
+            (self.view.viewWithTag(14) as? UILabel)?.textColor = .white
             self.view.viewWithTag(15)?.backgroundColor = .clear
-            (self.view.viewWithTag(16) as! UILabel).textColor = erxesColor
-            (self.view.viewWithTag(17) as! UILabel).textColor = erxesColor
+            (self.view.viewWithTag(16) as? UILabel)?.textColor = erxesColor
+            (self.view.viewWithTag(17) as? UILabel)?.textColor = erxesColor
         }
     }
     
