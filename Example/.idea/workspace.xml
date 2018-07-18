@@ -6,23 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e81fa6c2-f272-4fae-b065-d23f552b6079" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Constants.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Erxes.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/String.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/String.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIImage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIImage.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/Message.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Model/Message.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Router.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Utils.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Queries/mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Queries/mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Queries/query.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Queries/query.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCAttachment.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCAttachment.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCConversation.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCConversation.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCSupporter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCSupporter.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ConversationVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ConversationVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +18,14 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RegisterVC.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="22" column="47" lean-forward="true" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="347">
+                <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -70,7 +57,6 @@
         <option value="$PROJECT_DIR$/../ErxesSDK/Assets/mn.lproj/Localizable.strings" />
         <option value="$PROJECT_DIR$/ErxesSDK/AppDelegate.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Global/Extension/UIView.swift" />
-        <option value="$PROJECT_DIR$/../README.md" />
         <option value="$PROJECT_DIR$/../.travis.yml" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCAttachment.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCMessage.swift" />
@@ -88,6 +74,7 @@
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ChatVCConversation.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/ConversationVC.swift" />
         <option value="$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift" />
+        <option value="$PROJECT_DIR$/../README.md" />
       </list>
     </option>
   </component>
@@ -135,6 +122,13 @@
               <item name="Pods" type="1d218c8b:XcodeProjectNode" />
               <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
               <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Development Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="ErxesSDK" type="fcab9f18:XcodeViewNode" />
+              <item name="Pod" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
@@ -201,12 +195,12 @@
       <workItem from="1530833880829" duration="256000" />
       <workItem from="1531731844246" duration="5877000" />
       <workItem from="1531802655590" duration="13815000" />
-      <workItem from="1531899797482" duration="2734000" />
+      <workItem from="1531899797482" duration="3054000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26239000" />
+    <option name="totallyTimeSpent" value="26559000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="24" width="1920" height="1057" extended-state="6" />
@@ -327,21 +321,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="21" column="68" lean-forward="true" selection-start-line="21" selection-start-column="68" selection-end-line="21" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="180">
-            <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -522,8 +501,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../ErxesSDK/Classes/Views/RegisterVC.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" column="47" lean-forward="true" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+        <state relative-caret-position="448">
+          <caret line="28" column="44" lean-forward="true" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="347">
+            <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
