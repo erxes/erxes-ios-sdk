@@ -1,6 +1,6 @@
 
-extension UIImage{
-    class func getColoredRectImageWith(color: CGColor, andSize size: CGSize) -> UIImage{
+extension UIImage {
+    class func getColoredRectImageWith(color: CGColor, andSize size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let graphicsContext = UIGraphicsGetCurrentContext()
         graphicsContext?.setFillColor(color)

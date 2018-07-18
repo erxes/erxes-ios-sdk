@@ -1,17 +1,17 @@
 
 import UIKit
 
-struct UserDetail:Codable{
+struct UserDetail:Codable {
     var avatar:String?
     var fullName:String?
 }
 
-struct User:Codable{
+struct User:Codable {
     var _id:String?
     var details:UserDetail?
 }
 
-struct Attachment:Codable{
+struct Attachment:Codable {
     var url:String?
     var type:String?
     var size:Int?
@@ -27,14 +27,14 @@ struct Message: Codable {
     var attachments:[Attachment?]
 }
 
-struct MessageSubsData: Codable{
+struct MessageSubsData: Codable {
     var conversationMessageInserted:Message?
 }
 
-struct MessageSubsPayload:Codable{
+struct MessageSubsPayload:Codable {
     var data:MessageSubsData?
 }
 
-struct MessageSubs:Codable{
+struct MessageSubs:Codable {
     var payload:MessageSubsPayload?
 }

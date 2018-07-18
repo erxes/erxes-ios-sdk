@@ -2,23 +2,23 @@ import Photos
 import Alamofire
 
 extension ChatVC {
-    func checkPermission(){
+    func checkPermission() {
 
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
-                if status == .authorized{
+                if status == .authorized {
                     self.openGallery()
                 } else {
                 }
             })
         }
-        else{
+        else {
             self.openGallery()
         }
     }
 
-    func uploadFile(image:UIImage){
+    func uploadFile(image:UIImage) {
 
         self.uploadView.isHidden = false
         self.progress.progress = 0
@@ -80,29 +80,29 @@ extension ChatVC {
         }
     }
 
-    @IBAction func reshapeHeader(){
+    @IBAction func reshapeHeader() {
 
         let users = supporters
         let size = self.header.frame.size
         let width = size.width - 128
         let count = users.count
 
-        if size.height == 64{
+        if size.height == 64 {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 100)
             self.view.viewWithTag(1)?.isHidden = true
             self.view.viewWithTag(2)?.isHidden = false
         }
-        else{
+        else {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 64)
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
         }
 
-        if count > 0 && !headerInited{
+        if count > 0 && !headerInited {
             headerInited = true
             let cellsize = width/CGFloat(count)
             var begin = (width - CGFloat(count) * cellsize)/2
-            for n in 1...count{
+            for n in 1...count {
                 let view = self.view.viewWithTag(10 * n)
                 view?.isHidden = false
                 view?.frame = CGRect(x: begin, y: 0, width: cellsize, height: 70)
@@ -110,7 +110,7 @@ extension ChatVC {
                 print(n)
                 begin += cellsize
                 let user = users[n-1]
-                if let avatar =  user.details?.avatar{
+                if let avatar =  user.details?.avatar {
                     (self.view.viewWithTag(10 * n + 1) as! UIImageView).downloadedFrom(link:avatar)
                 }
                 (self.view.viewWithTag(10 * n + 2) as! UILabel).text = user.details?.fullName
@@ -120,7 +120,7 @@ extension ChatVC {
 
     }
 
-    @IBAction func btnAttachClick(){
+    @IBAction func btnAttachClick() {
         checkPermission()
     }
 
@@ -130,7 +130,7 @@ extension ChatVC {
     }
 }
 
-extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)

@@ -2,7 +2,7 @@
 import UIKit
 import Apollo
 
-enum defs:String{
+enum defs:String {
     case integrationId = "integrationId"
     case customerId = "customerId"
     case email = "email"

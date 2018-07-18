@@ -11,14 +11,14 @@ mutation ReadConversationMessages($conversationId: String!) {
     readConversationMessages(conversationId: $conversationId)
 }
 
-mutation EndConversation($customerId: String,$brandCode: String!){
-    endConversation(customerId: $customerId,brandCode: $brandCode){
+mutation EndConversation($customerId: String,$brandCode: String!) {
+    endConversation(customerId: $customerId,brandCode: $brandCode) {
         customerId
     }
 }
 
 mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments:[JSON]) {
-    insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments:$attachments){
+    insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments:$attachments) {
         _id
         conversationId
     }

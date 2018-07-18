@@ -1,4 +1,3 @@
-
 import UIKit
 import Apollo
 import LiveGQL
@@ -29,11 +28,11 @@ class ConversationVC: UIViewController {
         
         let def = UserDefaults()
         
-        if let integrationId = def.string(forKey: defs.integrationId.rawValue){
+        if let integrationId = def.string(forKey: defs.integrationId.rawValue) {
             self.integrationId = integrationId
         }
         
-        if let customerId = def.string(forKey: defs.customerId.rawValue){
+        if let customerId = def.string(forKey: defs.customerId.rawValue) {
             self.customerId = customerId
         }
         
@@ -56,7 +55,7 @@ class ConversationVC: UIViewController {
     
     
     
-    func refresh(){
+    func refresh() {
         let query = ConversationsQuery(integrationId: integrationId, customerId: erxesCustomerId)
 
         apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData){[weak self] result,error in
@@ -79,7 +78,7 @@ class ConversationVC: UIViewController {
 //                }
 //                self?.navigationController?.pushViewController(vc, animated: true)
 //            }
-            if self?.list != nil && self?.list.count == 0{
+            if self?.list != nil && self?.list.count == 0 {
                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
                 self?.navigationController?.pushViewController(vc, animated: false)
             }
@@ -100,7 +99,7 @@ class ConversationVC: UIViewController {
         refresh()
     }
     
-    func setNavigationColor(){
+    func setNavigationColor() {
         if let color = erxesColor {
 //            self.navigationController?.navigationBar.barTintColor = color
             self.header.backgroundColor = color
@@ -108,17 +107,17 @@ class ConversationVC: UIViewController {
         }
     }
     
-    @IBAction func close(){
+    @IBAction func close() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func createConversation(){
+    @IBAction func createConversation() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
+extension ConversationVC:UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
@@ -158,12 +157,12 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
 //            }
 //        }
         
-        if let avatar = supporterAvatar{
+        if let avatar = supporterAvatar {
             let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
             ivAvatar.downloadedFrom(link: avatar)
         }
         
-        if let title = supporterName{
+        if let title = supporterName {
             let lbl = cell.viewWithTag(lblTitleTag) as! UILabel
             lbl.text = title
         }
@@ -180,14 +179,14 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate{
     
 }
 
-extension ConversationVC:LiveGQLDelegate{
+extension ConversationVC:LiveGQLDelegate {
     
-    public func subscribe(){
+    public func subscribe() {
         gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(erxesCustomerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
     }
     
     public func receivedRawMessage(text: String) {
-        if self.list.count > 0{
+        if self.list.count > 0 {
             refresh()
         }
     }

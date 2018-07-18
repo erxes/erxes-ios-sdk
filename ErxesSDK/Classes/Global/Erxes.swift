@@ -42,7 +42,7 @@ var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
         defaults.synchronize()
     }
     
-    static func restore(){
+    static func restore() {
         let defaults = UserDefaults()
         erxesEmail = defaults.string(forKey: "email")
         integrationId = defaults.string(forKey: "integrationId")
@@ -91,11 +91,11 @@ var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
         UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b)
     }
 
-    static func getConfig(){
+    static func getConfig() {
 
         registerFonts()
         let query = GetConfigQuery(brandCode: brandCode!)
-        apollo.fetch(query: query){result, error in
+        apollo.fetch(query: query) { result, error in
             
             if let error = error {
                 print(error.localizedDescription)
