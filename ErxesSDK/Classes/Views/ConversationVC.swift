@@ -6,8 +6,8 @@ class ConversationVC: UIViewController {
 
     @IBOutlet weak var tv:UITableView!
     @IBOutlet weak var btnEndTitle: UILabel!
-    @IBOutlet weak var header:UIView!;
-    @IBOutlet weak var headerTitle:UILabel!;
+    @IBOutlet weak var header:UIView!
+    @IBOutlet weak var headerTitle:UILabel!
     var integrationId:String!
     var customerId:String!
     
@@ -51,7 +51,7 @@ class ConversationVC: UIViewController {
         refresh()
     }
     
-    var list:[ConversationsQuery.Data.Conversation] = [];
+    var list:[ConversationsQuery.Data.Conversation] = []
     
     
     

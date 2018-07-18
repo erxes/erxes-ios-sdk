@@ -23,12 +23,15 @@ extension ChatVC {
             var title = ""
             for n in 0...supporters.count-1 {
                 let user = supporters[n]
-                let iv = self.view.viewWithTag(101 + n) as! UIImageView
-                if let avatar = user.details?.avatar {
-                    iv.downloadedFrom(link: avatar)
-                    iv.layer.borderColor = erxesColor!.cgColor
-                    iv.layer.borderWidth = 1
+
+                if let iv = self.view.viewWithTag(101 + n) as? UIImageView {
+                    if let avatar = user.details?.avatar {
+                        iv.downloadedFrom(link: avatar)
+                        iv.layer.borderColor = erxesColor!.cgColor
+                        iv.layer.borderWidth = 1
+                    }
                 }
+
                 if let names = user.details?.fullName?.split(separator: " ") {
                     if names.count > 0 {
                         title += names[0]

@@ -9,7 +9,7 @@ public class ChatVC: ChatVCMessage, UITextFieldDelegate {
     @IBOutlet weak var lblSupporterStatus: UILabel!
     @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var lblStatus: UILabel!
-    @IBOutlet weak var header:UIView!;
+    @IBOutlet weak var header:UIView!
     
     var containerHeight:CGFloat = 0.0
     var integrationId = ""
@@ -32,8 +32,8 @@ public class ChatVC: ChatVCMessage, UITextFieldDelegate {
         self.wvChat.loadHTMLString(self.css, baseURL: url)
         self.lblLoader.text = "loading".localized
         loading()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         if conversationId != nil {
             self.subscribe()
             readConversation()
@@ -44,19 +44,17 @@ public class ChatVC: ChatVCMessage, UITextFieldDelegate {
     }
     
     func loading() {
-        self.loader.isHidden = false;
+        self.loader.isHidden = false
     }
     
     func loadEnd() {
-        self.loader.isHidden = true;
+        self.loader.isHidden = true
     }
     
     func configLive() {
         gql.delegate = self
     }
-    
-    
-    
+
     @IBAction func close() {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -76,7 +74,15 @@ public class ChatVC: ChatVCMessage, UITextFieldDelegate {
     
     @objc func keyboardHandler(notification: NSNotification) {
         let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+
+        var keyboardFrame: CGRect
+        if let keyBoardInfo = info[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            keyboardFrame = keyBoardInfo.cgRectValue
+        }
+        else {
+            return
+        }
+
         if  containerHeight == 0 {
             self.containerHeight = self.container.frame.height
         }

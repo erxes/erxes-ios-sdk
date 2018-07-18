@@ -56,7 +56,7 @@ extension ChatVC {
                     self.uploaded = ["url" : self.uploadUrl, "size" : size, "type" : "image/jpeg"]
                     self.uploadLoader.stopAnimating()
 
-                    self.uploadView.isHidden = false;
+                    self.uploadView.isHidden = false
                     self.attachments = [JSON]()
                     self.attachments.append(self.uploaded)
                     self.sendMessage("")
@@ -110,14 +110,22 @@ extension ChatVC {
                 print(n)
                 begin += cellsize
                 let user = users[n-1]
+
                 if let avatar =  user.details?.avatar {
-                    (self.view.viewWithTag(10 * n + 1) as! UIImageView).downloadedFrom(link:avatar)
+                    if let iv = self.view.viewWithTag(10 * n + 1) as? UIImageView {
+                        iv.downloadedFrom(link:avatar)
+                    }
                 }
-                (self.view.viewWithTag(10 * n + 2) as! UILabel).text = user.details?.fullName
-                (self.view.viewWithTag(10 * n + 3) as! UILabel).text = self.lblStatus.text
+
+                if let lbl = self.view.viewWithTag(10 * n + 2) as? UILabel {
+                    lbl.text = user.details?.fullName
+                }
+
+                if let lbl = self.view.viewWithTag(10 * n + 3) as? UILabel {
+                    lbl.text = self.lblStatus.text
+                }
             }
         }
-
     }
 
     @IBAction func btnAttachClick() {
@@ -125,7 +133,7 @@ extension ChatVC {
     }
 
     @IBAction func btnCancelClick(_ sender: Any) {
-        self.uploadView.isHidden = true;
+        self.uploadView.isHidden = true
         self.attachments = [JSON]()
     }
 }
@@ -135,9 +143,11 @@ extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         print(info)
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        ivPicked.image = chosenImage
-        uploadFile(image: chosenImage)
+
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            ivPicked.image = chosenImage
+            uploadFile(image: chosenImage)
+        }
     }
 
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
