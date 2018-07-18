@@ -130,12 +130,12 @@ public class ChatVCMessage:UIViewController {
     func processMessagesResult(messages:[MessagesQuery.Data.Message]) {
         let messagesArray = messages.map { ($0) }
         var me = ""
-        var str = "";
+        var str = ""
         
         for item in messagesArray {
             let created = item.createdAt!
             let now = Utils.formatDate(time: created)
-            print("");
+            print("")
             
             var avatar = "avatar.png"
             
@@ -156,7 +156,7 @@ public class ChatVCMessage:UIViewController {
             str = str + "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat!)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
         }
         
-        self.inited = true;
+        self.inited = true
         str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
         self.wvChat.stringByEvaluatingJavaScript(from: str)
     }
@@ -220,7 +220,7 @@ extension ChatVC:UIWebViewDelegate {
         loadEnd()
 
         if(!inited) {
-            loadMessages();
+            loadMessages()
         }
     }
 }
