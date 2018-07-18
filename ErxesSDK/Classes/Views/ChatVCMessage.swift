@@ -1,6 +1,6 @@
 import LiveGQL
 
-public class ChatVCMessage:UIViewController{
+public class ChatVCMessage:UIViewController {
 
     @IBOutlet weak var tfInput:UITextField!
     @IBOutlet weak var tv:UITableView!
@@ -22,11 +22,11 @@ public class ChatVCMessage:UIViewController{
     var attached = false
     let gql = LiveGQL(socket: subsUrl)
     
-    func subscribe(){
+    func subscribe() {
         gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
     }
     
-    func initChat(){
+    func initChat() {
 
         if let color = erxesColorHex {
             bg = color
@@ -39,26 +39,26 @@ public class ChatVCMessage:UIViewController{
         css = "<style>.row,.row .text{overflow:hidden}body{background:url(bg-1.png);background:#f4f4f4;padding:0;margin:0 20px}.row{position:relative;margin-bottom:10px;margin-top:15px;font-family:Roboto,Arial,sans-serif;font-weight:500}.row .text a{float:left;padding:12px 20px;background:#ebebeb;border-radius:20px 20px 20px 2px;color:#444;margin-bottom:5px;margin-left:38px;margin-right:40px;font-size:14px;box-shadow:0 1px 1px 0 rgba(0,0,0,.2)}.me .text a{float:right;background:\(bg);color:#fff;border-radius:20px 2px 20px 20px;margin-left:50px;margin-right:0}.row .text img{max-width:100%;padding-top:3px}.row .date{color:#cbcbcb;font-size:11px;margin-left:36px}.me .date{text-align:right}.row .img{float:left;position:absolute;bottom:17px;left:0;margin-right:8px}.row .img img{width:30px;height:30px;border-radius:15px;box-sizing:border-box;border:1px solid white;}.me .img{display:none}.me .img img{margin-right:0;margin-left:8px}p{display:inline}</style>\(str)"
     }
 
-    func sendMessage(_ msg:String){
+    func sendMessage(_ msg:String) {
 
-        if attachments.count==0 && msg.count==0{
+        if attachments.count==0 && msg.count==0 {
             return
         }
 
         var mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg)
 
-        if conversationId != nil{
+        if conversationId != nil {
             mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg, conversationId: conversationId, attachments:attachments)
         }
 
-        apollo.perform(mutation: mutation){[weak self] result,error in
+        apollo.perform(mutation: mutation) { [weak self] result,error in
             self?.uploadView.isHidden = true
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             self?.tfInput.text = ""
-            if conversationId == nil{
+            if conversationId == nil {
                 conversationId = result?.data?.insertMessage?.conversationId
                 self?.subscribe()
                 self?.loadMessages()
@@ -67,13 +67,13 @@ public class ChatVCMessage:UIViewController{
         }
     }
 
-    func appendToChat(_ item:MessageSubs){
+    func appendToChat(_ item:MessageSubs) {
 
-        if let message = item.payload?.data?.conversationMessageInserted{
+        if let message = item.payload?.data?.conversationMessageInserted {
 
             var str = ""
 
-            if let content = message.content{
+            if let content = message.content {
                 str = content
             }
 
@@ -81,7 +81,7 @@ public class ChatVCMessage:UIViewController{
 
             var me = ""
 
-            if let customerId = message.customerId{
+            if let customerId = message.customerId {
                 if customerId == erxesCustomerId {
                     me = "me"
                 }
@@ -89,15 +89,15 @@ public class ChatVCMessage:UIViewController{
 
             var avatar = "avatar.png"
 
-            if let userAvatar = message.user?.details?.avatar{
+            if let userAvatar = message.user?.details?.avatar {
                 avatar = userAvatar
             }
 
             var image = ""
 
-            if message.attachments.count > 0{
+            if message.attachments.count > 0 {
                 let attachment = message.attachments[0]
-                if let img = attachment!.url{
+                if let img = attachment!.url {
                     image = img
                     attached = true
                 }
@@ -110,8 +110,8 @@ public class ChatVCMessage:UIViewController{
         }
     }
 
-    func loadMessages(){
-        if conversationId == nil{
+    func loadMessages() {
+        if conversationId == nil {
             return
         }
 
@@ -121,13 +121,13 @@ public class ChatVCMessage:UIViewController{
                 print(error.localizedDescription)
                 return
             }
-            if let allMessages = result?.data?.messages as? [MessagesQuery.Data.Message]{
+            if let allMessages = result?.data?.messages as? [MessagesQuery.Data.Message] {
                 self?.processMessagesResult(messages: allMessages)
             }
         }
     }
     
-    func processMessagesResult(messages:[MessagesQuery.Data.Message]){
+    func processMessagesResult(messages:[MessagesQuery.Data.Message]) {
         let messagesArray = messages.map { ($0) }
         var me = ""
         var str = "";
@@ -139,14 +139,14 @@ public class ChatVCMessage:UIViewController{
             
             var avatar = "avatar.png"
             
-            if let user = item.user{
-                if let userAvatar = user.details?.avatar{
+            if let user = item.user {
+                if let userAvatar = user.details?.avatar {
                     avatar = userAvatar
                 }
             }
             
             me = ""
-            if let customerId = item.customerId{
+            if let customerId = item.customerId {
                 if customerId == erxesCustomerId {
                     me = "me"
                 }
@@ -161,13 +161,13 @@ public class ChatVCMessage:UIViewController{
         self.wvChat.stringByEvaluatingJavaScript(from: str)
     }
 
-    func extractAttachment(item:MessagesQuery.Data.Message) -> String{
+    func extractAttachment(item:MessagesQuery.Data.Message) -> String {
         var image = ""
-        if let attachments = item.attachments{
-            if attachments.count > 0{
+        if let attachments = item.attachments {
+            if attachments.count > 0 {
                 let attachment = attachments[0]
                 
-                if let url = attachment!["url"] as? String{
+                if let url = attachment!["url"] as? String {
                     image = url
                     self.attached = true
                 }
@@ -177,31 +177,31 @@ public class ChatVCMessage:UIViewController{
     }
 }
 
-extension ChatVC:LiveGQLDelegate{
+extension ChatVC:LiveGQLDelegate {
 
     public func receivedRawMessage(text: String) {
-        do{
+        do {
             print(text)
             if let dataFromString = text.data(using: .utf8, allowLossyConversion: false) {
                 let item = try JSONDecoder().decode(MessageSubs.self, from: dataFromString)
                 self.appendToChat(item)
             }
         }
-        catch{
+        catch {
             print(error)
         }
     }
 }
 
-extension ChatVC:UIWebViewDelegate{
+extension ChatVC:UIWebViewDelegate {
 
     public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if request.url?.scheme == "inapp"{
-            if request.url?.host == "scroll"{
+        if request.url?.scheme == "inapp" {
+            if request.url?.host == "scroll" {
                 let scrollPoint = CGPoint(x: 0, y: self.wvChat.scrollView.contentSize.height - self.wvChat.frame.size.height)
                 self.wvChat.scrollView.setContentOffset(scrollPoint, animated: true)
 
-                if attached{
+                if attached {
                     attached = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                         let scrollPoint = CGPoint(x: 0, y: self.wvChat.scrollView.contentSize.height - self.wvChat.frame.size.height)
@@ -219,7 +219,7 @@ extension ChatVC:UIWebViewDelegate{
 
         loadEnd()
 
-        if(!inited){
+        if(!inited) {
             loadMessages();
         }
     }

@@ -3,7 +3,7 @@ import UIKit
 
 class Utils: NSObject {
     
-    static func formatDate(time:Int) -> String!{
+    static func formatDate(time:Int) -> String! {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         let tmp = Int64(time)

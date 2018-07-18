@@ -42,7 +42,7 @@ query totalUnreadCount($integrationId: String!, $customerId: String!) {
     totalUnreadCount(integrationId: $integrationId, customerId: $customerId)
 }
 
-query UnreadCount($conversationId:String!){
+query UnreadCount($conversationId:String!) {
     unreadCount(conversationId:$conversationId)
 }
 
@@ -77,20 +77,20 @@ query Conversations($integrationId: String!, $customerId: String!) {
     }
 }
 
-mutation readConversation($conversationId: String){
+mutation readConversation($conversationId: String) {
     readConversationMessages(conversationId: $conversationId)
 }
 
-query GetConfig($brandCode: String!){
-    getMessengerIntegration(brandCode: $brandCode){
+query GetConfig($brandCode: String!) {
+    getMessengerIntegration(brandCode: $brandCode) {
         languageCode
         uiOptions
         messengerData
     }
 }
 
-query getSupporter($integrationId: String!){
-    messengerSupporters(integrationId: $integrationId){
+query getSupporter($integrationId: String!) {
+    messengerSupporters(integrationId: $integrationId) {
         _id
         details {
             avatar
@@ -99,6 +99,6 @@ query getSupporter($integrationId: String!){
     }
 }
 
-query isSupporterOnline($integrationId:String!){
+query isSupporterOnline($integrationId:String!) {
     isMessengerOnline(integrationId:$integrationId)
 }

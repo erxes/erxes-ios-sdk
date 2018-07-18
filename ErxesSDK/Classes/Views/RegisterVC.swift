@@ -1,4 +1,3 @@
-
 import UIKit
 
 public class RegisterVC: UIViewController {
@@ -18,16 +17,16 @@ public class RegisterVC: UIViewController {
         
         let defaults = UserDefaults()
         
-        if let uiOptions = defaults.dictionary(forKey: "uiOptions"){
+        if let uiOptions = defaults.dictionary(forKey: "uiOptions") {
             print(uiOptions)
-            if let color = uiOptions["color"] as? String{
+            if let color = uiOptions["color"] as? String {
                 erxesColor = UIColor(hexString: color)
                 erxesColorHex = color
             }
         }
         
-        if let messengerData = defaults.dictionary(forKey: "messengerData"){
-            if let msg = messengerData["welcomeMessage"] as? String{
+        if let messengerData = defaults.dictionary(forKey: "messengerData") {
+            if let msg = messengerData["welcomeMessage"] as? String {
                 msgWelcome = msg
             }
         }
@@ -39,8 +38,8 @@ public class RegisterVC: UIViewController {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
             self.navigationController?.pushViewController(vc!, animated: false)
         }
-        else{
-            if erxesEmail != nil{
+        else {
+            if erxesEmail != nil {
                 self.tfEmail.text = erxesEmail
                 connectMessenger()
             }
@@ -55,21 +54,21 @@ public class RegisterVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
     }
     
-    @IBAction public func register(){
+    @IBAction public func register() {
         guard tfEmail.text != "" else {
             self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
             self.view.viewWithTag(101)?.layer.borderWidth = 1
             return
         }
         
-        if emailSelected{
+        if emailSelected {
             guard (tfEmail.text?.isValidEmail())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
                 return
             }
         }
-        else{
+        else {
             guard (tfEmail.text?.isValidPhone())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
@@ -85,17 +84,17 @@ public class RegisterVC: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func getSupporter(){
+    func getSupporter() {
         let query = GetSupporterQuery(integrationId: integrationId)
-        apollo.fetch(query: query){[weak self] result, error in
+        apollo.fetch(query: query) { [weak self] result, error in
             
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             
-            if let supportersResult = result?.data?.messengerSupporters{
-                if supportersResult.count > 0{
+            if let supportersResult = result?.data?.messengerSupporters {
+                if supportersResult.count > 0 {
                     supporters = supportersResult as! [GetSupporterQuery.Data.MessengerSupporter]
                     let supporter = supporters[0]
                     supporterName = supporter.details?.fullName
@@ -132,18 +131,18 @@ public class RegisterVC: UIViewController {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        if  containerHeight == 0{
+        if  containerHeight == 0 {
             self.containerHeight = self.container.frame.height
         }
         
-        if notification.name == NSNotification.Name.UIKeyboardWillShow{
+        if notification.name == NSNotification.Name.UIKeyboardWillShow {
             print("keyboardFrame: \(keyboardFrame)")
             let size = self.view.frame.size
             let frame = CGRect(x: 0, y: 0, width: size.width, height: self.containerHeight - keyboardFrame.size.height)
             self.container.frame = frame
         }
         
-        if notification.name == NSNotification.Name.UIKeyboardWillHide{
+        if notification.name == NSNotification.Name.UIKeyboardWillHide {
             let size = self.view.frame.size
             let frame = CGRect(x: 0, y: 0, width: size.width, height: self.containerHeight)
             self.container.frame = frame
@@ -152,10 +151,10 @@ public class RegisterVC: UIViewController {
     
     var emailSelected = true
     
-    func changeColor(){
+    func changeColor() {
         self.header.backgroundColor = erxesColor
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
-        if emailSelected{
+        if emailSelected {
             self.view.viewWithTag(12)?.backgroundColor = .clear
             (self.view.viewWithTag(13) as! UILabel).textColor = erxesColor
             (self.view.viewWithTag(14) as! UILabel).textColor = erxesColor
@@ -163,7 +162,7 @@ public class RegisterVC: UIViewController {
             (self.view.viewWithTag(16) as! UILabel).textColor = .white
             (self.view.viewWithTag(17) as! UILabel).textColor = .white
         }
-        else{
+        else {
             self.view.viewWithTag(12)?.backgroundColor = erxesColor
             (self.view.viewWithTag(13) as! UILabel).textColor = .white
             (self.view.viewWithTag(14) as! UILabel).textColor = .white
@@ -173,13 +172,13 @@ public class RegisterVC: UIViewController {
         }
     }
     
-    @IBAction func selectionChanged(){
+    @IBAction func selectionChanged() {
         emailSelected = !emailSelected
         changeColor()
-        if emailSelected{
+        if emailSelected {
             tfEmail.placeholder = "email@domain.com"
         }
-        else{
+        else {
             tfEmail.placeholder = "phone number".localized
         }
     }
