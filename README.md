@@ -1,5 +1,6 @@
 # erxes-ios-sdk
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9542c24949c04c5685262e1d316a703a)](https://app.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&utm_medium=referral&utm_content=erxes/erxes-ios-sdk&utm_campaign=badger)
 [![CI Status](https://img.shields.io/travis/devpurevee/ErxesSDK.svg?style=flat)](https://travis-ci.org/devpurevee/ErxesSDK)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
