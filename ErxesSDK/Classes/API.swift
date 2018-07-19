@@ -482,8 +482,8 @@ public final class MessagesQuery: GraphQLQuery {
                 self.snapshot = snapshot
             }
             
-            public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Int? = nil, attachments: [JSON?]? = nil) {
-                self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments])
+            public init( user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Int? = nil, attachments: [JSON?]? = nil) {
+                self.init(snapshot: ["__typename": "ConversationMessage", "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments])
             }
             
             public var __typename: String {
@@ -492,15 +492,6 @@ public final class MessagesQuery: GraphQLQuery {
                 }
                 set {
                     snapshot.updateValue(newValue, forKey: "__typename")
-                }
-            }
-            
-            public var id: String {
-                get {
-                    return snapshot["_id"]! as! String
-                }
-                set {
-                    snapshot.updateValue(newValue, forKey: "_id")
                 }
             }
             
