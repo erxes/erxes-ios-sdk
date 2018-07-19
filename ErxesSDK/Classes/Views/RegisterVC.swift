@@ -69,8 +69,8 @@ public class RegisterVC: UIViewController {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
                 return
-            } }
-        else {
+            }
+        } else {
             guard (tfEmail.text?.isValidPhone())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
@@ -95,7 +95,7 @@ public class RegisterVC: UIViewController {
                 return
             }
             
-            if let supportersResult = result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
+            if let supportersResult=result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
                 if supportersResult.count > 0 {
                     supporters = supportersResult
                     let supporter = supporters[0]
@@ -134,8 +134,9 @@ public class RegisterVC: UIViewController {
         
         var keyboardFrame: CGRect
         if let keyBoardInfo = info[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            keyboardFrame = keyBoardInfo.cgRectValue }
-        else {
+            keyboardFrame = keyBoardInfo.cgRectValue
+            
+        } else {
             return
         }
         
@@ -181,8 +182,8 @@ public class RegisterVC: UIViewController {
         self.header.backgroundColor = erxesColor
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
         if emailSelected {
-            selectEmail() }
-        else {
+            selectEmail()
+        } else {
             selectPhone()
         }
     }
@@ -190,11 +191,8 @@ public class RegisterVC: UIViewController {
     @IBAction func selectionChanged() {
         emailSelected = !emailSelected
         changeColor()
-        if emailSelected {
-            tfEmail.placeholder = "email@domain.com" }
-        else {
-            tfEmail.placeholder = "phone number".localized
-        }
+        if emailSelected { tfEmail.placeholder = "email@domain.com" }
+        else { tfEmail.placeholder = "phone number".localized }
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
