@@ -129,7 +129,14 @@ public class RegisterVC: UIViewController {
     @objc func keyboardHandler(notification: NSNotification) {
         
         let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        var keyboardFrame: CGRect
+        if let keyBoardInfo = info[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            keyboardFrame = keyBoardInfo.cgRectValue
+        }
+        else {
+            return
+        }
         
         if  containerHeight == 0 {
             self.containerHeight = self.container.frame.height
@@ -151,24 +158,32 @@ public class RegisterVC: UIViewController {
     
     var emailSelected = true
     
+    func selectEmail() {
+        self.view.viewWithTag(12)?.backgroundColor = .clear
+        (self.view.viewWithTag(13) as? UILabel)?.textColor = erxesColor
+        (self.view.viewWithTag(14) as? UILabel)?.textColor = erxesColor
+        self.view.viewWithTag(15)?.backgroundColor = erxesColor
+        (self.view.viewWithTag(16) as? UILabel)?.textColor = .white
+        (self.view.viewWithTag(17) as? UILabel)?.textColor = .white
+    }
+    
+    func selectPhone() {
+        self.view.viewWithTag(12)?.backgroundColor = erxesColor
+        (self.view.viewWithTag(13) as? UILabel)?.textColor = .white
+        (self.view.viewWithTag(14) as? UILabel)?.textColor = .white
+        self.view.viewWithTag(15)?.backgroundColor = .clear
+        (self.view.viewWithTag(16) as? UILabel)?.textColor = erxesColor
+        (self.view.viewWithTag(17) as? UILabel)?.textColor = erxesColor
+    }
+    
     func changeColor() {
         self.header.backgroundColor = erxesColor
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
         if emailSelected {
-            self.view.viewWithTag(12)?.backgroundColor = .clear
-            (self.view.viewWithTag(13) as? UILabel)?.textColor = erxesColor
-            (self.view.viewWithTag(14) as? UILabel)?.textColor = erxesColor
-            self.view.viewWithTag(15)?.backgroundColor = erxesColor
-            (self.view.viewWithTag(16) as? UILabel)?.textColor = .white
-            (self.view.viewWithTag(17) as? UILabel)?.textColor = .white
+            selectEmail()
         }
         else {
-            self.view.viewWithTag(12)?.backgroundColor = erxesColor
-            (self.view.viewWithTag(13) as? UILabel)?.textColor = .white
-            (self.view.viewWithTag(14) as? UILabel)?.textColor = .white
-            self.view.viewWithTag(15)?.backgroundColor = .clear
-            (self.view.viewWithTag(16) as? UILabel)?.textColor = erxesColor
-            (self.view.viewWithTag(17) as? UILabel)?.textColor = erxesColor
+            selectPhone()
         }
     }
     
