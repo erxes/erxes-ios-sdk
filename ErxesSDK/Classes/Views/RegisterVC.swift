@@ -15,6 +15,31 @@ public class RegisterVC: UIViewController {
             self.container.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         }, completion:nil)
         
+        fillValues()
+        
+        Erxes.restore()
+        
+        if !Erxes.firstRun() {
+            getSupporter()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
+            self.navigationController?.pushViewController(vc!, animated: false) }
+        else {
+            if erxesEmail != nil {
+                self.tfEmail.text = erxesEmail
+                connectMessenger()
+            }
+        }
+        changeColor()
+        
+        lblTitle.text = "RegVC_lblTitle".localized
+        lblDesc.text = "RegVC_lblDesc".localized
+        var name = NSNotification.Name.UIKeyboardWillShow
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:name, object: nil)
+        name = NSNotification.Name.UIKeyboardWillHide
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:name, object: nil)
+    }
+    
+    func fillValues() {
         let defaults = UserDefaults()
         
         if let uiOptions = defaults.dictionary(forKey: "uiOptions") {
@@ -30,28 +55,6 @@ public class RegisterVC: UIViewController {
                 msgWelcome = msg
             }
         }
-        
-        Erxes.restore()
-        
-        if !Erxes.firstRun() {
-            getSupporter()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
-            self.navigationController?.pushViewController(vc!, animated: false)
-        }
-        else {
-            if erxesEmail != nil {
-                self.tfEmail.text = erxesEmail
-                connectMessenger()
-            }
-        }
-        
-        changeColor()
-        
-        lblTitle.text = "RegVC_lblTitle".localized
-        lblDesc.text = "RegVC_lblDesc".localized
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     @IBAction public func register() {
@@ -66,8 +69,7 @@ public class RegisterVC: UIViewController {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
                 return
-            }
-        }
+            } }
         else {
             guard (tfEmail.text?.isValidPhone())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
@@ -93,7 +95,7 @@ public class RegisterVC: UIViewController {
                 return
             }
             
-            if let supportersResult = result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter]{
+            if let supportersResult = result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
                 if supportersResult.count > 0 {
                     supporters = supportersResult
                     let supporter = supporters[0]
@@ -132,8 +134,7 @@ public class RegisterVC: UIViewController {
         
         var keyboardFrame: CGRect
         if let keyBoardInfo = info[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            keyboardFrame = keyBoardInfo.cgRectValue
-        }
+            keyboardFrame = keyBoardInfo.cgRectValue }
         else {
             return
         }
@@ -180,8 +181,7 @@ public class RegisterVC: UIViewController {
         self.header.backgroundColor = erxesColor
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
         if emailSelected {
-            selectEmail()
-        }
+            selectEmail() }
         else {
             selectPhone()
         }
@@ -191,8 +191,7 @@ public class RegisterVC: UIViewController {
         emailSelected = !emailSelected
         changeColor()
         if emailSelected {
-            tfEmail.placeholder = "email@domain.com"
-        }
+            tfEmail.placeholder = "email@domain.com" }
         else {
             tfEmail.placeholder = "phone number".localized
         }
