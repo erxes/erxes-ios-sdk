@@ -584,54 +584,54 @@ public final class MessagesQuery: GraphQLQuery {
                         snapshot.updateValue(newValue?.snapshot, forKey: "details")
                     }
                 }
-                
-                public struct Detail: GraphQLSelectionSet {
-                    public static let possibleTypes = ["UserDetails"]
-                    
-                    public static let selections: [GraphQLSelection] = [
-                        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                        GraphQLField("avatar", type: .scalar(String.self)),
-                        GraphQLField("fullName", type: .scalar(String.self)),
-                        ]
-                    
-                    public var snapshot: Snapshot
-                    
-                    public init(snapshot: Snapshot) {
-                        self.snapshot = snapshot
-                    }
-                    
-                    public init(avatar: String? = nil, fullName: String? = nil) {
-                        self.init(snapshot: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
-                    }
-                    
-                    public var __typename: String {
-                        get {
-                            return snapshot["__typename"]! as! String
-                        }
-                        set {
-                            snapshot.updateValue(newValue, forKey: "__typename")
-                        }
-                    }
-                    
-                    public var avatar: String? {
-                        get {
-                            return snapshot["avatar"] as? String
-                        }
-                        set {
-                            snapshot.updateValue(newValue, forKey: "avatar")
-                        }
-                    }
-                    
-                    public var fullName: String? {
-                        get {
-                            return snapshot["fullName"] as? String
-                        }
-                        set {
-                            snapshot.updateValue(newValue, forKey: "fullName")
-                        }
-                    }
-                }
             }
+        }
+    }
+}
+
+public struct Detail: GraphQLSelectionSet {
+    public static let possibleTypes = ["UserDetails"]
+    
+    public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("avatar", type: .scalar(String.self)),
+        GraphQLField("fullName", type: .scalar(String.self)),
+        ]
+    
+    public var snapshot: Snapshot
+    
+    public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+    }
+    
+    public init(avatar: String? = nil, fullName: String? = nil) {
+        self.init(snapshot: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
+    }
+    
+    public var __typename: String {
+        get {
+            return snapshot["__typename"]! as! String
+        }
+        set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+        }
+    }
+    
+    public var avatar: String? {
+        get {
+            return snapshot["avatar"] as? String
+        }
+        set {
+            snapshot.updateValue(newValue, forKey: "avatar")
+        }
+    }
+    
+    public var fullName: String? {
+        get {
+            return snapshot["fullName"] as? String
+        }
+        set {
+            snapshot.updateValue(newValue, forKey: "fullName")
         }
     }
 }
@@ -1100,53 +1100,6 @@ public final class GetSupporterQuery: GraphQLQuery {
                 }
                 set {
                     snapshot.updateValue(newValue?.snapshot, forKey: "details")
-                }
-            }
-            
-            public struct Detail: GraphQLSelectionSet {
-                public static let possibleTypes = ["UserDetails"]
-                
-                public static let selections: [GraphQLSelection] = [
-                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("avatar", type: .scalar(String.self)),
-                    GraphQLField("fullName", type: .scalar(String.self)),
-                    ]
-                
-                public var snapshot: Snapshot
-                
-                public init(snapshot: Snapshot) {
-                    self.snapshot = snapshot
-                }
-                
-                public init(avatar: String? = nil, fullName: String? = nil) {
-                    self.init(snapshot: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
-                }
-                
-                public var __typename: String {
-                    get {
-                        return snapshot["__typename"]! as! String
-                    }
-                    set {
-                        snapshot.updateValue(newValue, forKey: "__typename")
-                    }
-                }
-                
-                public var avatar: String? {
-                    get {
-                        return snapshot["avatar"] as? String
-                    }
-                    set {
-                        snapshot.updateValue(newValue, forKey: "avatar")
-                    }
-                }
-                
-                public var fullName: String? {
-                    get {
-                        return snapshot["fullName"] as? String
-                    }
-                    set {
-                        snapshot.updateValue(newValue, forKey: "fullName")
-                    }
                 }
             }
         }
