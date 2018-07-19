@@ -9,8 +9,7 @@ extension ChatVCAttachment {
             if let isOnline = result?.data?.isMessengerOnline {
                 if isOnline {
                     self?.lblStatus.text = "online".localized
-                }
-                else {
+                } else {
                     self?.lblStatus.text = "offline".localized
                 }
             }

@@ -52,8 +52,9 @@ public class ChatVCAttachment:ChatVCMessage {
 //                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
 //            } //Optional for extra parameters
         },
-            to:url )
-        { (result) in
+            to:url ) {
+                (result) in
+                
             switch result {
             case .success(let upload, _, _):
                 self.processUpload(upload)
