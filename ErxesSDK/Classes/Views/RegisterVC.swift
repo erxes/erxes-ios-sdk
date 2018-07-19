@@ -97,12 +97,11 @@ public class RegisterVC: UIViewController {
             }
             
             if let supportersResult=result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
-                if supportersResult.count > 0 {
-                    supporters = supportersResult
-                    let supporter = supporters[0]
-                    supporterName = supporter.details?.fullName
-                    supporterAvatar = supporter.details?.avatar
-                }
+                if supportersResult.count == 0 { return }
+                supporters = supportersResult
+                let supporter = supporters[0]
+                supporterName = supporter.details?.fullName
+                supporterAvatar = supporter.details?.avatar
             }
         }
     }
@@ -162,21 +161,28 @@ public class RegisterVC: UIViewController {
     var emailSelected = true
     
     func selectEmail() {
-        self.view.viewWithTag(12)?.backgroundColor = .clear
-        (self.view.viewWithTag(13) as? UILabel)?.textColor = erxesColor
-        (self.view.viewWithTag(14) as? UILabel)?.textColor = erxesColor
-        self.view.viewWithTag(15)?.backgroundColor = erxesColor
-        (self.view.viewWithTag(16) as? UILabel)?.textColor = .white
-        (self.view.viewWithTag(17) as? UILabel)?.textColor = .white
+        lblWithTag(12).backgroundColor = .clear
+        lblWithTag(13).textColor = erxesColor
+        lblWithTag(14).textColor = erxesColor
+        lblWithTag(15).backgroundColor = erxesColor
+        lblWithTag(16).textColor = .white
+        lblWithTag(17).textColor = .white
     }
     
     func selectPhone() {
-        self.view.viewWithTag(12)?.backgroundColor = erxesColor
-        (self.view.viewWithTag(13) as? UILabel)?.textColor = .white
-        (self.view.viewWithTag(14) as? UILabel)?.textColor = .white
-        self.view.viewWithTag(15)?.backgroundColor = .clear
-        (self.view.viewWithTag(16) as? UILabel)?.textColor = erxesColor
-        (self.view.viewWithTag(17) as? UILabel)?.textColor = erxesColor
+        lblWithTag(12).backgroundColor = erxesColor
+        lblWithTag(13).textColor = .white
+        lblWithTag(14).textColor = .white
+        lblWithTag(15).backgroundColor = .clear
+        lblWithTag(16).textColor = erxesColor
+        lblWithTag(17).textColor = erxesColor
+    }
+    
+    func lblWithTag(_ tag:Int) -> UILabel {
+        if let lbl = self.view.viewWithTag(tag) as? UILabel {
+            return lbl
+        }
+        return UILabel()
     }
     
     func changeColor() {
