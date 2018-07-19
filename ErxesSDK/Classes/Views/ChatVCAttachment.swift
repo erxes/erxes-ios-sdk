@@ -1,7 +1,19 @@
 import Photos
 import Alamofire
 
-extension ChatVC {
+public class ChatVCAttachment:ChatVCMessage {
+    
+    @IBOutlet weak var ivSupporterAvatar: UIImageView!
+    @IBOutlet weak var lblSupporterName: UILabel!
+    @IBOutlet weak var lblSupporterStatus: UILabel!
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var header:UIView!
+    
+    var uploadUrl = ""
+    var uploaded = JSON()
+    var headerInited = false
+    
     func checkPermission() {
 
         let photos = PHPhotoLibrary.authorizationStatus()
@@ -138,7 +150,7 @@ extension ChatVC {
     }
 }
 
-extension ChatVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+extension ChatVCAttachment:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)

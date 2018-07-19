@@ -2,23 +2,13 @@ import UIKit
 import LiveGQL
 import WebKit
 
-public class ChatVC: ChatVCMessage, UITextFieldDelegate {
-    
-    @IBOutlet weak var ivSupporterAvatar: UIImageView!
-    @IBOutlet weak var lblSupporterName: UILabel!
-    @IBOutlet weak var lblSupporterStatus: UILabel!
-    @IBOutlet weak var statusView: UIView!
-    @IBOutlet weak var lblStatus: UILabel!
-    @IBOutlet weak var header:UIView!
+public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
     
     var containerHeight:CGFloat = 0.0
     var integrationId = ""
     var customerId = ""
     var totalUnreadCountInt = 0
-    var uploadUrl = ""
-    var uploaded = JSON()
     var sv:UIView?
-    var headerInited = false
     
     override public func viewDidLoad() {
         super.viewDidLoad()
