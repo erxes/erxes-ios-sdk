@@ -22,8 +22,9 @@ public class RegisterVC: UIViewController {
         if !Erxes.firstRun() {
             getSupporter()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
-            self.navigationController?.pushViewController(vc!, animated: false) }
-        else {
+            self.navigationController?.pushViewController(vc!, animated: false)
+            
+        } else {
             if erxesEmail != nil {
                 self.tfEmail.text = erxesEmail
                 connectMessenger()
@@ -191,8 +192,11 @@ public class RegisterVC: UIViewController {
     @IBAction func selectionChanged() {
         emailSelected = !emailSelected
         changeColor()
-        if emailSelected { tfEmail.placeholder = "email@domain.com" }
-        else { tfEmail.placeholder = "phone number".localized }
+        if emailSelected {
+            tfEmail.placeholder = "email@domain.com"
+        } else {
+            tfEmail.placeholder = "phone number".localized
+        }
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
