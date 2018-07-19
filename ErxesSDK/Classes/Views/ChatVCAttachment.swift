@@ -13,6 +13,7 @@ public class ChatVCAttachment:ChatVCMessage {
     var uploadUrl = ""
     var uploaded = JSON()
     var headerInited = false
+    var size = 0
     
     func checkPermission() {
 
@@ -24,8 +25,7 @@ public class ChatVCAttachment:ChatVCMessage {
                 } else {
                 }
             })
-        }
-        else {
+        } else {
             self.openGallery()
         }
     }
@@ -38,9 +38,9 @@ public class ChatVCAttachment:ChatVCMessage {
 
         let url = "https://app-api.crm.nmma.co/upload-file"
         let imgData = UIImageJPEGRepresentation(image, 0.2)!
-        let size = imgData.count
+        size = imgData.count
         let bcf = ByteCountFormatter()
-        bcf.allowedUnits = [.useKB] // optional: restricts the units to MB only
+        bcf.allowedUnits = [.useKB]
         bcf.countStyle = .file
         self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
 
@@ -52,37 +52,37 @@ public class ChatVCAttachment:ChatVCMessage {
 //                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
 //            } //Optional for extra parameters
         },
-            to:url)
+            to:url )
         { (result) in
             switch result {
             case .success(let upload, _, _):
-
-                upload.uploadProgress(closure: { (progress) in
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                    self.progress.progress = Float(progress.fractionCompleted)
-                })
-
-                upload.responseString { response in
-                    print(response)
-                    self.uploadUrl = response.value!
-                    self.uploaded = ["url" : self.uploadUrl, "size" : size, "type" : "image/jpeg"]
-                    self.uploadLoader.stopAnimating()
-
-                    self.uploadView.isHidden = false
-                    self.attachments = [JSON]()
-                    self.attachments.append(self.uploaded)
-                    self.sendMessage("")
-                }
-
+                self.processUpload(upload)
             case .failure(let encodingError):
                 print(encodingError)
             }
         }
-
+    }
+    
+    func processUpload(_ upload:UploadRequest) {
+        upload.uploadProgress(closure: { (progress) in
+            print("Upload Progress: \(progress.fractionCompleted)")
+            self.progress.progress = Float(progress.fractionCompleted)
+        })
+        
+        upload.responseString { response in
+            print(response)
+            self.uploadUrl = response.value!
+            self.uploaded = ["url" : self.uploadUrl, "size" : self.size, "type" : "image/jpeg"]
+            self.uploadLoader.stopAnimating()
+            
+            self.uploadView.isHidden = false
+            self.attachments = [JSON]()
+            self.attachments.append(self.uploaded)
+            self.sendMessage("")
+        }
     }
 
-    func openGallery()
-    {
+    func openGallery() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
@@ -102,7 +102,7 @@ public class ChatVCAttachment:ChatVCMessage {
         }
     }
     
-    func fillUserInfo(_ index:Int){
+    func fillUserInfo(_ index:Int) {
         let size = self.header.frame.size
         let width = size.width - 128
         let count = supporters.count
@@ -135,8 +135,7 @@ public class ChatVCAttachment:ChatVCMessage {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 100)
             self.view.viewWithTag(1)?.isHidden = true
             self.view.viewWithTag(2)?.isHidden = false
-        }
-        else {
+        } else {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 64)
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
@@ -155,7 +154,8 @@ public class ChatVCAttachment:ChatVCMessage {
 
 extension ChatVCAttachment:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController,
+                                      didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         print(info)
 
