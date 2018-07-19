@@ -638,7 +638,7 @@ public struct Detail: GraphQLSelectionSet {
 
 public final class ConversationsQuery: GraphQLQuery {
     public static let operationString =
-    "query Conversations($integrationId: String!, $customerId: String!) {\n  conversations(integrationId: $integrationId, customerId: $customerId) {\n    __typename\n    _id\n    content\n    createdAt\n    messages {\n      __typename\n      customerId\n      createdAt\n    }\n    status\n    readUserIds\n    participatedUsers {\n      __typename\n      _id\n      details {\n        __typename\n        fullName\n        avatar\n      }\n    }\n  }\n}"
+    "query Conversations($integrationId: String!, $customerId: String!) {\n  conversations(integrationId: $integrationId, customerId: $customerId) {\n    __typename\n    _id\n    content\n    createdAt {\n      __typename\n      customerId\n      createdAt\n    }\n    status\n    readUserIds\n    participatedUsers {\n      __typename\n      _id\n      details {\n        __typename\n        fullName\n        avatar\n      }\n    }\n  }\n}"
     
     public var integrationId: String
     public var customerId: String
@@ -686,7 +686,6 @@ public final class ConversationsQuery: GraphQLQuery {
                 GraphQLField("_id", type: .nonNull(.scalar(String.self))),
                 GraphQLField("content", type: .scalar(String.self)),
                 GraphQLField("createdAt", type: .scalar(Int.self)),
-                GraphQLField("messages", type: .list(.object(Message.selections))),
                 GraphQLField("status", type: .nonNull(.scalar(String.self))),
                 GraphQLField("readUserIds", type: .list(.scalar(String.self))),
                 GraphQLField("participatedUsers", type: .list(.object(ParticipatedUser.selections))),
@@ -698,8 +697,8 @@ public final class ConversationsQuery: GraphQLQuery {
                 self.snapshot = snapshot
             }
             
-            public init(id: String, content: String? = nil, createdAt: Int? = nil, messages: [Message?]? = nil, status: String, readUserIds: [String?]? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
-                self.init(snapshot: ["__typename": "Conversation", "_id": id, "content": content, "createdAt": createdAt, "messages": messages.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, "status": status, "readUserIds": readUserIds, "participatedUsers": participatedUsers.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
+            public init(id: String, content: String? = nil, createdAt: Int? = nil, status: String, readUserIds: [String?]? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
+                self.init(snapshot: ["__typename": "Conversation", "_id": id, "content": content, "createdAt": createdAt,"status": status, "readUserIds": readUserIds, "participatedUsers": participatedUsers.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
             }
             
             public var __typename: String {
@@ -735,15 +734,6 @@ public final class ConversationsQuery: GraphQLQuery {
                 }
                 set {
                     snapshot.updateValue(newValue, forKey: "createdAt")
-                }
-            }
-            
-            public var messages: [Message?]? {
-                get {
-                    return (snapshot["messages"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { Message(snapshot: $0) } } }
-                }
-                set {
-                    snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "messages")
                 }
             }
             
