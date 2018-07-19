@@ -18,7 +18,6 @@ struct Attachment:Codable {
 }
 
 struct Message: Codable {
-    var _id:String!
     var conversationId:String?
     var customerId:String?
     var user:User?
