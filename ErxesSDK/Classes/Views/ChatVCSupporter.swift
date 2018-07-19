@@ -1,7 +1,7 @@
 extension ChatVCAttachment {
     func checkOnline() {
         let query = IsSupporterOnlineQuery(integrationId: integrationId)
-        apollo.fetch(query: query){ [weak self] result, error in
+        apollo.fetch(query: query) { [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -33,19 +33,19 @@ extension ChatVCAttachment {
                 }
             }
             if let names = user.details?.fullName?.split(separator: " ") {
-                if names.count > 0 {
-                    title += names[0]
-                    if n < supporters.count - 1 {
-                        title += ", "
-                    }
+                if names.count == 0 {
+                    break
+                }
+                title += names[0]
+                if n < supporters.count - 1 {
+                    title += ", "
                 }
             }
         }
         self.lblSupporterName.text = title
         if let supporterAvatar = supporterAvatar {
             self.ivSupporterAvatar.downloadedFrom(link: supporterAvatar)
-        }
-        else {
+        } else {
             supporterAvatar = "avatar.png"
         }
     }
