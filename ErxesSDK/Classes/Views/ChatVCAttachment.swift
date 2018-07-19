@@ -93,12 +93,44 @@ public class ChatVCAttachment:ChatVCMessage {
     }
 
     @IBAction func reshapeHeader() {
-
-        let users = supporters
+        let count = supporters.count
+        if count > 0 && !headerInited {
+            headerInited = true
+            for n in 1...count {
+                fillUserInfo(n)
+            }
+        }
+    }
+    
+    func fillUserInfo(_ index:Int){
         let size = self.header.frame.size
         let width = size.width - 128
-        let count = users.count
-
+        let count = supporters.count
+        let cellsize = width/CGFloat(count)
+        var begin = (width - CGFloat(count) * cellsize)/2
+        begin += cellsize * CGFloat(index-1)
+        let user = supporters[index-1]
+        let view = self.view.viewWithTag(10 * index)
+        view?.isHidden = false
+        view?.frame = CGRect(x: begin, y: 0, width: cellsize, height: 70)
+        
+        if let avatar =  user.details?.avatar {
+            if let iv = self.view.viewWithTag(10 * index + 1) as? UIImageView {
+                iv.downloadedFrom(link:avatar)
+            }
+        }
+        
+        if let lbl = self.view.viewWithTag(10 * index + 2) as? UILabel {
+            lbl.text = user.details?.fullName
+        }
+        
+        if let lbl = self.view.viewWithTag(10 * index + 3) as? UILabel {
+            lbl.text = self.lblStatus.text
+        }
+    }
+    
+    func resizeHeader() {
+        let size = self.header.frame.size
         if size.height == 64 {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 100)
             self.view.viewWithTag(1)?.isHidden = true
@@ -108,35 +140,6 @@ public class ChatVCAttachment:ChatVCMessage {
             self.header.frame = CGRect(x: 0, y: 0, width: size.width, height: 64)
             self.view.viewWithTag(1)?.isHidden = false
             self.view.viewWithTag(2)?.isHidden = true
-        }
-
-        if count > 0 && !headerInited {
-            headerInited = true
-            let cellsize = width/CGFloat(count)
-            var begin = (width - CGFloat(count) * cellsize)/2
-            for n in 1...count {
-                let view = self.view.viewWithTag(10 * n)
-                view?.isHidden = false
-                view?.frame = CGRect(x: begin, y: 0, width: cellsize, height: 70)
-                print(view?.frame)
-                print(n)
-                begin += cellsize
-                let user = users[n-1]
-
-                if let avatar =  user.details?.avatar {
-                    if let iv = self.view.viewWithTag(10 * n + 1) as? UIImageView {
-                        iv.downloadedFrom(link:avatar)
-                    }
-                }
-
-                if let lbl = self.view.viewWithTag(10 * n + 2) as? UILabel {
-                    lbl.text = user.details?.fullName
-                }
-
-                if let lbl = self.view.viewWithTag(10 * n + 3) as? UILabel {
-                    lbl.text = self.lblStatus.text
-                }
-            }
         }
     }
 
