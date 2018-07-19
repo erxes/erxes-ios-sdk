@@ -1,4 +1,4 @@
-extension ChatVC {
+extension ChatVCAttachment {
     func checkOnline() {
         let query = IsSupporterOnlineQuery(integrationId: integrationId)
         apollo.fetch(query: query){ [weak self] result, error in
