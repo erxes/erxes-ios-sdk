@@ -20,8 +20,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Documentations
 
-* <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">swift installation</a>
-* <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">obj-c installation</a>
+* <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">Swift Installation Guide</a>
+* <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">Objective-C Installation Guide</a>
 
 ## Contributors
 
