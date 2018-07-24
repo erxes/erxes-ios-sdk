@@ -9,7 +9,7 @@ erxes is an AI meets open source messaging platform for sales and marketing
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
-[![codebeat badge](https://codebeat.co/badges/3f247de3-099b-4e50-a84a-9bfde51bfcff)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-develop)
+[![codebeat badge](https://codebeat.co/badges/44c86f3c-885c-4f7c-b003-35f49be94af0)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
 
 ## Documentation
