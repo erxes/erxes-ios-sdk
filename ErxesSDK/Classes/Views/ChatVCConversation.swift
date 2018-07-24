@@ -25,6 +25,7 @@ extension ChatVC {
             defaults.synchronize()
             self?.close()
             erxesEmail = nil
+            conversationId = nil
         }
     }
 }
