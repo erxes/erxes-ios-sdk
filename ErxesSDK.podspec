@@ -1,12 +1,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A short description of erxes-ios-sdk.'
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.swift_version = '4.0'
+  s.description      = 'erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'
 
   s.homepage         = 'https://github.com/erxes/erxes-ios-sdk'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
