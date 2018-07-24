@@ -10,6 +10,7 @@ enum defs:String {
 
 var apiUrl = ""
 var subsUrl = ""
+var uploadUrl = ""
 
 let apollo = ApolloClient(url: URL(string:apiUrl)!)
 

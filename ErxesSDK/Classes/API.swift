@@ -629,7 +629,7 @@ public struct Detail: GraphQLSelectionSet {
 
 public final class ConversationsQuery: GraphQLQuery {
     public static let operationString =
-    "query Conversations($integrationId: String!, $customerId: String!) {\n  conversations(integrationId: $integrationId, customerId: $customerId) {\n    __typename\n    _id\n    content\n    createdAt {\n      __typename\n      customerId\n      createdAt\n    }\n    status\n    readUserIds\n    participatedUsers {\n      __typename\n      _id\n      details {\n        __typename\n        fullName\n        avatar\n      }\n    }\n  }\n}"
+    "query Conversations($integrationId: String!, $customerId: String!) {\n  conversations(integrationId: $integrationId, customerId: $customerId) {\n    __typename\n    _id\n    content\n    createdAt\n    status\n    readUserIds\n    participatedUsers {\n      __typename\n      _id\n      details {\n        __typename\n        fullName\n        avatar\n      }\n    }\n  }\n}"
     
     public var integrationId: String
     public var customerId: String

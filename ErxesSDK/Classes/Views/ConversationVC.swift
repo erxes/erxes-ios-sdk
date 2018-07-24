@@ -113,6 +113,7 @@ class ConversationVC: UIViewController {
     
     @IBAction func createConversation() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
+        conversationId = nil
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -173,7 +174,7 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
         var item = list[indexPath.row]
-//        vc.conversationId = item.id
+        conversationId = item.id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

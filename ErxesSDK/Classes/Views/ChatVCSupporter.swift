@@ -18,7 +18,8 @@ extension ChatVCAttachment {
 
     func setSupporterState() {
         if supporters.count == 0 {
-            supporterAvatar = "Хэрэглэгчид туслах"
+            supporterAvatar = "avatar.png"
+            supporterName = "Хэрэглэгчид туслах"
             return
         }
         var title = ""
@@ -29,6 +30,9 @@ extension ChatVCAttachment {
                     iv.downloadedFrom(link: avatar)
                     iv.layer.borderColor = erxesColor!.cgColor
                     iv.layer.borderWidth = 1
+                    if n == 0 {
+                        supporterAvatar = avatar
+                    }
                 }
             }
             if let names = user.details?.fullName?.split(separator: " ") {
@@ -44,8 +48,6 @@ extension ChatVCAttachment {
         self.lblSupporterName.text = title
         if let supporterAvatar = supporterAvatar {
             self.ivSupporterAvatar.downloadedFrom(link: supporterAvatar)
-        } else {
-            supporterAvatar = "avatar.png"
         }
     }
 }

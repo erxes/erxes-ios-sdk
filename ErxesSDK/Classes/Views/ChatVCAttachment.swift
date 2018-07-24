@@ -10,7 +10,7 @@ public class ChatVCAttachment:ChatVCMessage {
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var header:UIView!
     
-    var uploadUrl = ""
+    var remoteUrl = ""
     var uploaded = JSON()
     var headerInited = false
     var size = 0
@@ -36,30 +36,34 @@ public class ChatVCAttachment:ChatVCMessage {
         self.progress.progress = 0
         self.uploadLoader.startAnimating()
 
-        let url = "https://app-api.crm.nmma.co/upload-file"
-        let imgData = UIImageJPEGRepresentation(image, 0.2)!
-        size = imgData.count
-        let bcf = ByteCountFormatter()
-        bcf.allowedUnits = [.useKB]
-        bcf.countStyle = .file
-        self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
-
-//        let parameters = ["name": rname] //Optional for extra parameter
-
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imgData, withName: "file",fileName: "file.jpg", mimeType: "image/jpg")
-//            for (key, value) in parameters {
-//                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-//            } //Optional for extra parameters
-        },
-            to:url ) {
-                (result) in
-                
-            switch result {
-            case .success(let upload, _, _):
-                self.processUpload(upload)
-            case .failure(let encodingError):
-                print(encodingError)
+        let url = uploadUrl
+//        let imgData = UIImageJPEGRepresentation(image, 0.2)!
+        
+        
+        if let imgData = UIImage.resize(image) as? Data{
+            size = imgData.count
+            let bcf = ByteCountFormatter()
+            bcf.allowedUnits = [.useKB]
+            bcf.countStyle = .file
+            self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
+            
+            //        let parameters = ["name": rname] //Optional for extra parameter
+            
+            Alamofire.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imgData, withName: "file",fileName: "file.jpg", mimeType: "image/jpg")
+                //            for (key, value) in parameters {
+                //                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                //            } //Optional for extra parameters
+            },
+                             to:url ) {
+                                (result) in
+                                
+                                switch result {
+                                case .success(let upload, _, _):
+                                    self.processUpload(upload)
+                                case .failure(let encodingError):
+                                    print(encodingError)
+                                }
             }
         }
     }
@@ -72,8 +76,8 @@ public class ChatVCAttachment:ChatVCMessage {
         
         upload.responseString { response in
             print(response)
-            self.uploadUrl = response.value!
-            self.uploaded = ["url" : self.uploadUrl, "size" : self.size, "type" : "image/jpeg"]
+            self.remoteUrl = response.value!
+            self.uploaded = ["url" : self.remoteUrl, "size" : self.size, "type" : "image/jpeg"]
             self.uploadLoader.stopAnimating()
             
             self.uploadView.isHidden = false
@@ -101,6 +105,7 @@ public class ChatVCAttachment:ChatVCMessage {
                 fillUserInfo(n)
             }
         }
+        resizeHeader()
     }
     
     func fillUserInfo(_ index:Int) {

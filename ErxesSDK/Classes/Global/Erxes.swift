@@ -77,9 +77,10 @@ var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
         }
     }
     
-    @objc public static func setHosts(apiHost:String, subsHost:String) {
+    @objc public static func setHosts(apiHost:String, subsHost:String, uploadUrl url: String) {
         apiUrl = apiHost
         subsUrl = subsHost
+        uploadUrl = url
         getConfig()
     }
 
