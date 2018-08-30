@@ -12,7 +12,7 @@ var msgThankyou:String!
 var msgWelcome:String!
 var supporterName:String!
 var supporterAvatar:String!
-var supporters:[GetSupporterQuery.Data.MessengerSupporter] = []
+var supporters:[User] = []
 
 @objc public class Erxes: NSObject {
 

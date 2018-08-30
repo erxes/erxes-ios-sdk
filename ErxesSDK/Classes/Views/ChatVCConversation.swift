@@ -13,19 +13,11 @@ extension ChatVC {
     }
 
     @IBAction func endConversation(_ sender: Any) {
-        let mutation = EndConversationMutation(customerId: erxesCustomerId, brandCode: brandCode)
-        apollo.perform(mutation: mutation) { [weak self] result,error in
-            self?.uploadView.isHidden = true
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            let defaults = UserDefaults()
-            defaults.removeObject(forKey: "email")
-            defaults.synchronize()
-            self?.close()
-            erxesEmail = nil
-            conversationId = nil
-        }
+        let defaults = UserDefaults()
+        defaults.removeObject(forKey: "email")
+        defaults.synchronize()
+        self.close()
+        erxesEmail = nil
+        conversationId = nil
     }
 }
