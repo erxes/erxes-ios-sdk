@@ -837,6 +837,191 @@ public final class ConversationsQuery: GraphQLQuery {
     }
 }
 
+public final class ConversationDetailQuery: GraphQLQuery {
+    public static let operationString =
+    "query ConversationDetail($id: String, $integrationId: String!) {\n  conversationDetail(_id: $id, integrationId: $integrationId) {\n    __typename\n    isOnline\n    supporters {\n      __typename\n      _id\n      details {\n        __typename\n        avatar\n        fullName\n      }\n    }\n  }\n}"
+    
+    public var id: String?
+    public var integrationId: String
+    
+    public init(id: String? = nil, integrationId: String) {
+        self.id = id
+        self.integrationId = integrationId
+    }
+    
+    public var variables: GraphQLMap? {
+        return ["id": id, "integrationId": integrationId]
+    }
+    
+    public struct Data: GraphQLSelectionSet {
+        public static let possibleTypes = ["Query"]
+        
+        public static let selections: [GraphQLSelection] = [
+            GraphQLField("conversationDetail", arguments: ["_id": GraphQLVariable("id"), "integrationId": GraphQLVariable("integrationId")], type: .object(ConversationDetail.selections)),
+            ]
+        
+        public var snapshot: Snapshot
+        
+        public init(snapshot: Snapshot) {
+            self.snapshot = snapshot
+        }
+        
+        public init(conversationDetail: ConversationDetail? = nil) {
+            self.init(snapshot: ["__typename": "Query", "conversationDetail": conversationDetail.flatMap { $0.snapshot }])
+        }
+        
+        public var conversationDetail: ConversationDetail? {
+            get {
+                return (snapshot["conversationDetail"] as? Snapshot).flatMap { ConversationDetail(snapshot: $0) }
+            }
+            set {
+                snapshot.updateValue(newValue?.snapshot, forKey: "conversationDetail")
+            }
+        }
+        
+        public struct ConversationDetail: GraphQLSelectionSet {
+            public static let possibleTypes = ["ConversationDetailResponse"]
+            
+            public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("isOnline", type: .scalar(Bool.self)),
+                GraphQLField("supporters", type: .list(.object(Supporter.selections))),
+                ]
+            
+            public var snapshot: Snapshot
+            
+            public init(snapshot: Snapshot) {
+                self.snapshot = snapshot
+            }
+            
+            public init(isOnline: Bool? = nil, supporters: [Supporter?]? = nil) {
+                self.init(snapshot: ["__typename": "ConversationDetailResponse", "isOnline": isOnline, "supporters": supporters.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
+            }
+            
+            public var __typename: String {
+                get {
+                    return snapshot["__typename"]! as! String
+                }
+                set {
+                    snapshot.updateValue(newValue, forKey: "__typename")
+                }
+            }
+            
+            public var isOnline: Bool? {
+                get {
+                    return snapshot["isOnline"] as? Bool
+                }
+                set {
+                    snapshot.updateValue(newValue, forKey: "isOnline")
+                }
+            }
+            
+            public var supporters: [Supporter?]? {
+                get {
+                    return (snapshot["supporters"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { Supporter(snapshot: $0) } } }
+                }
+                set {
+                    snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "supporters")
+                }
+            }
+            
+            public struct Supporter: GraphQLSelectionSet {
+                public static let possibleTypes = ["User"]
+                
+                public static let selections: [GraphQLSelection] = [
+                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("details", type: .object(Detail.selections)),
+                    ]
+                
+                public var snapshot: Snapshot
+                
+                public init(snapshot: Snapshot) {
+                    self.snapshot = snapshot
+                }
+                
+                public init(id: String, details: Detail? = nil) {
+                    self.init(snapshot: ["__typename": "User", "_id": id, "details": details.flatMap { $0.snapshot }])
+                }
+                
+                public var __typename: String {
+                    get {
+                        return snapshot["__typename"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "__typename")
+                    }
+                }
+                
+                public var id: String {
+                    get {
+                        return snapshot["_id"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "_id")
+                    }
+                }
+                
+                public var details: Detail? {
+                    get {
+                        return (snapshot["details"] as? Snapshot).flatMap { Detail(snapshot: $0) }
+                    }
+                    set {
+                        snapshot.updateValue(newValue?.snapshot, forKey: "details")
+                    }
+                }
+                
+                public struct Detail: GraphQLSelectionSet {
+                    public static let possibleTypes = ["UserDetails"]
+                    
+                    public static let selections: [GraphQLSelection] = [
+                        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                        GraphQLField("avatar", type: .scalar(String.self)),
+                        GraphQLField("fullName", type: .scalar(String.self)),
+                        ]
+                    
+                    public var snapshot: Snapshot
+                    
+                    public init(snapshot: Snapshot) {
+                        self.snapshot = snapshot
+                    }
+                    
+                    public init(avatar: String? = nil, fullName: String? = nil) {
+                        self.init(snapshot: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
+                    }
+                    
+                    public var __typename: String {
+                        get {
+                            return snapshot["__typename"]! as! String
+                        }
+                        set {
+                            snapshot.updateValue(newValue, forKey: "__typename")
+                        }
+                    }
+                    
+                    public var avatar: String? {
+                        get {
+                            return snapshot["avatar"] as? String
+                        }
+                        set {
+                            snapshot.updateValue(newValue, forKey: "avatar")
+                        }
+                    }
+                    
+                    public var fullName: String? {
+                        get {
+                            return snapshot["fullName"] as? String
+                        }
+                        set {
+                            snapshot.updateValue(newValue, forKey: "fullName")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 public final class GetConfigQuery: GraphQLQuery {
     public static let operationString =
     "query GetConfig($brandCode: String!) {\n  getMessengerIntegration(brandCode: $brandCode) {\n    __typename\n    languageCode\n    uiOptions\n    messengerData\n  }\n}"

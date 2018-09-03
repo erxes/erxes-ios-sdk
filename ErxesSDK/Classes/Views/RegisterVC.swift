@@ -88,22 +88,23 @@ public class RegisterVC: UIViewController {
     }
     
     func getSupporter() {
-//        let query = GetSupporterQuery(integrationId: integrationId)
-//        apollo.fetch(query: query) { [weak self] result, error in
-//            
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            
-//            if let supportersResult=result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
-//                if supportersResult.count == 0 { return }
-//                supporters = supportersResult
-//                let supporter = supporters[0]
-//                supporterName = supporter.details?.fullName
-//                supporterAvatar = supporter.details?.avatar
-//            }
-//        }
+        let query = ConversationDetailQuery(integrationId: integrationId)
+        apollo.fetch(query: query) { [weak self] result, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let supportersResult = result?.data?.conversationDetail?.supporters as? [ConversationDetailQuery.Data.ConversationDetail.Supporter] {
+                if supportersResult.count == 0 { return }
+                supporters = supportersResult
+                isOnline = (result?.data?.conversationDetail?.isOnline)!
+                let supporter = supporters[0]
+                supporterName = supporter.details?.fullName
+                supporterAvatar = supporter.details?.avatar
+            }
+        }
     }
     
     public func connectMessenger() {
