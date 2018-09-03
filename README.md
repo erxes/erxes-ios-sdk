@@ -5,12 +5,14 @@ erxes is an AI meets open source messaging platform for sales and marketing
 <a href="https://demohome.erxes.io/">View demo</a> <b>| </b> <a href="https://github.com/erxes/erxes-ios-sdk/archive/master.zip">Download ZIP </a> <b> | </b> <a href="https://gitter.im/erxes/Lobby">Join us on Gitter</a>
 
 ## Status  <br> 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/44c86f3c-885c-4f7c-b003-35f49be94af0)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-master)
 [![CI Status](https://travis-ci.org/erxes/erxes-ios-sdk.svg?branch=develop)](https://travis-ci.org/erxes/erxes-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
-[![codebeat badge](https://codebeat.co/badges/44c86f3c-885c-4f7c-b003-35f49be94af0)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
+
+
 
 ## Documentation
 
