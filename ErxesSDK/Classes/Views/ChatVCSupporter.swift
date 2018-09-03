@@ -1,19 +1,10 @@
 extension ChatVCAttachment {
     func checkOnline() {
-//        let query = IsSupporterOnlineQuery(integrationId: integrationId)
-//        apollo.fetch(query: query) { [weak self] result, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//            if let isOnline = result?.data?.isMessengerOnline {
-//                if isOnline {
-//                    self?.lblStatus.text = "online".localized
-//                } else {
-//                    self?.lblStatus.text = "offline".localized
-//                }
-//            }
-//        }
+        if isOnline {
+            self.lblStatus.text = "online".localized
+        } else {
+            self.lblStatus.text = "offline".localized
+        }
     }
 
     func setSupporterState() {

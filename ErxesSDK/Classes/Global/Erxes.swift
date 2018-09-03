@@ -12,7 +12,8 @@ var msgThankyou:String!
 var msgWelcome:String!
 var supporterName:String!
 var supporterAvatar:String!
-var supporters:[User] = []
+var supporters:[ConversationDetailQuery.Data.ConversationDetail.Supporter] = []
+var isOnline = false
 
 @objc public class Erxes: NSObject {
 
