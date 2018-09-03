@@ -88,7 +88,7 @@ public class RegisterVC: UIViewController {
     }
     
     func getSupporter() {
-        let query = GetSupporterQuery(integrationId: integrationId)
+        let query = ConversationDetailQuery(integrationId: integrationId)
         apollo.fetch(query: query) { [weak self] result, error in
             
             if let error = error {
@@ -96,9 +96,10 @@ public class RegisterVC: UIViewController {
                 return
             }
             
-            if let supportersResult=result?.data?.messengerSupporters as? [GetSupporterQuery.Data.MessengerSupporter] {
+            if let supportersResult = result?.data?.conversationDetail?.supporters as? [ConversationDetailQuery.Data.ConversationDetail.Supporter] {
                 if supportersResult.count == 0 { return }
                 supporters = supportersResult
+                isOnline = (result?.data?.conversationDetail?.isOnline)!
                 let supporter = supporters[0]
                 supporterName = supporter.details?.fullName
                 supporterAvatar = supporter.details?.avatar
@@ -161,19 +162,19 @@ public class RegisterVC: UIViewController {
     var emailSelected = true
     
     func selectEmail() {
-        lblWithTag(12).backgroundColor = .clear
+        self.view.viewWithTag(12)?.backgroundColor = .clear
         lblWithTag(13).textColor = erxesColor
         lblWithTag(14).textColor = erxesColor
-        lblWithTag(15).backgroundColor = erxesColor
+        self.view.viewWithTag(15)?.backgroundColor = erxesColor
         lblWithTag(16).textColor = .white
         lblWithTag(17).textColor = .white
     }
     
     func selectPhone() {
-        lblWithTag(12).backgroundColor = erxesColor
+        self.view.viewWithTag(12)?.backgroundColor = erxesColor
         lblWithTag(13).textColor = .white
         lblWithTag(14).textColor = .white
-        lblWithTag(15).backgroundColor = .clear
+        self.view.viewWithTag(15)?.backgroundColor = .clear
         lblWithTag(16).textColor = erxesColor
         lblWithTag(17).textColor = erxesColor
     }
