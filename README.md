@@ -9,8 +9,12 @@ erxes is an open source growth marketing platform. Marketing, sales, and custome
 [![codebeat badge](https://codebeat.co/badges/44c86f3c-885c-4f7c-b003-35f49be94af0)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-master)
 [![CI Status](https://travis-ci.org/erxes/erxes-ios-sdk.svg?branch=develop)](https://travis-ci.org/erxes/erxes-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
-[![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
+ [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/erxes/erxes-ios-sdk/blob/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
+
+<p align="center">
+  <img src="https://i.imgur.com/7vAnNhX.jpg">
+</p>
 
 
 
