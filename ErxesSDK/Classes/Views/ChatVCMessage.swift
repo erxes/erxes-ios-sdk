@@ -46,9 +46,14 @@ public class ChatVCMessage:UIViewController {
         }
 
         var mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg)
-
+        
         if conversationId != nil {
-            mutation  = InsertMessageMutation(integrationId: integrationId, customerId: erxesCustomerId, message: msg, conversationId: conversationId, attachments:attachments)
+            mutation.conversationId = conversationId
+        }
+        
+        if attachments.count > 0 {
+            mutation.attachments = attachments
+            mutation.message = "attachment"
         }
 
         apollo.perform(mutation: mutation) { [weak self] result,error in
