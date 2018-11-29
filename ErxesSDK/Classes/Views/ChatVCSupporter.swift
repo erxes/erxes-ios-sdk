@@ -5,8 +5,34 @@ extension ChatVCAttachment {
         } else {
             self.lblStatus.text = "offline".localized
         }
+        getSupporter()
     }
 
+    func getSupporter() {
+    
+        if supporters.count > 0 {
+            setSupporterState()
+            return
+        }
+        
+        let query = GetSupportersQuery(integrationId: integrationId)
+        apollo.fetch(query: query) { [weak self] result, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let list = result?.data?.messengerSupporters, list.count > 0 {
+                supporters = list as! [GetSupportersQuery.Data.MessengerSupporter]
+                let supporter = supporters[0]
+                supporterName = supporter.details?.fullName
+                supporterAvatar = supporter.details?.avatar
+                self?.setSupporterState()
+            }
+        }
+    }
+    
     func setSupporterState() {
         if supporters.count == 0 {
             supporterAvatar = "avatar.png"

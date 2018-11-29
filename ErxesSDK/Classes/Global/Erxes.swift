@@ -4,16 +4,22 @@ var erxesUserId:String!
 var erxesCustomerId:String!
 var brandCode:String!
 var integrationId:String!
-var erxesEmail:String!
+var erxesEmail = ""
+var erxesPhone = ""
+var erxesUserData = JSON()
+var isUser = false
+var emailFirst = true
 var conversationId:String!
 var erxesColor = UIColor(hexString: "#5629B6")
-var erxesColorHex = "#5629B6" as String!
-var msgThankyou:String!
-var msgWelcome:String!
+var erxesColorHex = "#5629B6"
+var msgThankyou = ""
+var msgWelcome = ""
+var msgGreetings = ""
 var supporterName:String!
 var supporterAvatar:String!
-var supporters:[ConversationDetailQuery.Data.ConversationDetail.Supporter] = []
-var isOnline = false
+var supporters:[GetSupportersQuery.Data.MessengerSupporter] = []
+var isOnline = true
+
 
 @objc public class Erxes: NSObject {
 
@@ -26,6 +32,13 @@ var isOnline = false
         erxesEmail = item
         let defaults = UserDefaults()
         defaults.set(erxesEmail, forKey: "email")
+        defaults.synchronize()
+    }
+    
+    static func savePhone( item:String) {
+        erxesEmail = item
+        let defaults = UserDefaults()
+        defaults.set(erxesEmail, forKey: "phone")
         defaults.synchronize()
     }
     
@@ -45,7 +58,15 @@ var isOnline = false
     
     static func restore() {
         let defaults = UserDefaults()
-        erxesEmail = defaults.string(forKey: "email")
+        
+        if let email = defaults.string(forKey: "email") {
+            erxesEmail = email
+        }
+        
+        if let phone = defaults.string(forKey: "phone") {
+            erxesPhone = phone
+        }
+        
         integrationId = defaults.string(forKey: "integrationId")
         erxesCustomerId = defaults.string(forKey: "customerId")
     }
@@ -59,7 +80,27 @@ var isOnline = false
         start()
     }
     
-    @objc public static func start() {
+    @objc public static func startWithUserPhone(phone:String) {
+        erxesPhone = phone
+        start()
+    }
+    
+    @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {
+        
+        if email.count > 0 {
+            erxesEmail = email
+            isUser = true
+        }
+        
+        if phone.count > 0 {
+            erxesPhone = phone
+            isUser = true
+        }
+        
+        if data.keys.count > 0 {
+            erxesUserData = data
+        }
+        
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
