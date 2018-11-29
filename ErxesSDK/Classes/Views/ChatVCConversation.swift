@@ -17,7 +17,7 @@ extension ChatVC {
         defaults.removeObject(forKey: "email")
         defaults.synchronize()
         self.close()
-        erxesEmail = nil
+        erxesEmail = ""
         conversationId = nil
     }
 }

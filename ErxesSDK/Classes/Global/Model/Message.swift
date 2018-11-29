@@ -23,7 +23,7 @@ struct Message: Codable {
     var user:User?
     var content:String?
     var createdAt:Int64?
-    var attachments:[Attachment?]
+    var attachments:[Attachment?]?
 }
 
 struct MessageSubsData: Codable {

@@ -51,6 +51,25 @@ class ConversationVC: UIViewController {
         refresh()
     }
     
+    func getSupporter() {
+        
+        let query = GetSupportersQuery(integrationId: integrationId)
+        apollo.fetch(query: query) { [weak self] result, error in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            if let list = result?.data?.messengerSupporters, list.count > 0 {
+                supporters = list as! [GetSupportersQuery.Data.MessengerSupporter]
+                let supporter = supporters[0]
+                supporterName = supporter.details?.fullName
+                supporterAvatar = supporter.details?.avatar
+            }
+        }
+    }
+    
     var list:[ConversationsQuery.Data.Conversation] = []
     
     

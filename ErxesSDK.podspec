@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'A short description of erxes-ios-sdk.'
 
   s.description      = <<-DESC

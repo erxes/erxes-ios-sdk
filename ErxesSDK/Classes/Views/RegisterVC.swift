@@ -20,12 +20,12 @@ public class RegisterVC: UIViewController {
         Erxes.restore()
         
         if !Erxes.firstRun() {
-            getSupporter()
+//            getSupporter()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
             self.navigationController?.pushViewController(vc!, animated: false)
             
         } else {
-            if erxesEmail != nil {
+            if erxesEmail.count > 0 || erxesPhone.count > 0 {
                 self.tfEmail.text = erxesEmail
                 connectMessenger()
             }
@@ -52,8 +52,18 @@ public class RegisterVC: UIViewController {
         }
         
         if let messengerData = defaults.dictionary(forKey: "messengerData") {
-            if let msg = messengerData["welcomeMessage"] as? String {
-                msgWelcome = msg
+            if let language = defaults.string(forKey: "languageCode"),
+                let messages = messengerData["messages"] as? JSON,
+                let msgData = messages[language] as? JSON{
+                if let welcome = msgData["welcome"] as? String {
+                    msgWelcome = welcome
+                }
+                
+                if let greetings = msgData["greetings"] as? JSON, let msg = greetings["message"] as? String {
+                    msgGreetings = msg
+                }
+                
+//                if let welcome = messengerData["messages"] as?
             }
         }
     }
@@ -65,18 +75,20 @@ public class RegisterVC: UIViewController {
             return
         }
         
-        if emailSelected {
+        if emailFirst {
             guard (tfEmail.text?.isValidEmail())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
                 return
             }
+            erxesEmail = tfEmail.text!
         } else {
             guard (tfEmail.text?.isValidPhone())! else {
                 self.view.viewWithTag(101)?.layer.borderColor = UIColor.red.cgColor
                 self.view.viewWithTag(101)?.layer.borderWidth = 1
                 return
             }
+            erxesPhone = tfEmail.text!
         }
         
         connectMessenger()
@@ -87,19 +99,39 @@ public class RegisterVC: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+//    func getSupporter() {
+//
+//        let query = ConversationDetailQuery(integrationId: integrationId)
+//        apollo.fetch(query: query) { [weak self] result, error in
+//
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//
+//            if let supportersResult = result?.data?.conversationDetail?.supporters as? [ConversationDetailQuery.Data.ConversationDetail.Supporter] {
+//                if supportersResult.count == 0 { return }
+//                supporters = supportersResult
+//                isOnline = (result?.data?.conversationDetail?.isOnline)!
+//                let supporter = supporters[0]
+//                supporterName = supporter.details?.fullName
+//                supporterAvatar = supporter.details?.avatar
+//            }
+//        }
+//    }
+    
     func getSupporter() {
-        let query = ConversationDetailQuery(integrationId: integrationId)
+
+        let query = GetSupportersQuery(integrationId: integrationId)
         apollo.fetch(query: query) { [weak self] result, error in
-            
+
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
-            
-            if let supportersResult = result?.data?.conversationDetail?.supporters as? [ConversationDetailQuery.Data.ConversationDetail.Supporter] {
-                if supportersResult.count == 0 { return }
-                supporters = supportersResult
-                isOnline = (result?.data?.conversationDetail?.isOnline)!
+
+            if let list = result?.data?.messengerSupporters, list.count > 0 {
+                supporters = list as! [GetSupportersQuery.Data.MessengerSupporter]
                 let supporter = supporters[0]
                 supporterName = supporter.details?.fullName
                 supporterAvatar = supporter.details?.avatar
@@ -108,8 +140,22 @@ public class RegisterVC: UIViewController {
     }
     
     public func connectMessenger() {
-        let connectMutation = ConnectMutation(brandCode: brandCode, email: self.tfEmail.text!, isUser: false)
-        apollo.perform(mutation: connectMutation) { [weak self] result, error in
+        
+        let mutation = ConnectMutation(brandCode: brandCode, isUser:false)
+        
+        if erxesEmail.count > 0 {
+            mutation.email = erxesEmail
+        }
+        
+        if erxesPhone.count > 0 {
+            mutation.phone = erxesPhone
+        }
+        
+        if erxesUserData.keys.count > 0 {
+            mutation.data = erxesUserData
+        }
+        
+        apollo.perform(mutation: mutation) { [weak self] result, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -159,8 +205,6 @@ public class RegisterVC: UIViewController {
         }
     }
     
-    var emailSelected = true
-    
     func selectEmail() {
         self.view.viewWithTag(12)?.backgroundColor = .clear
         lblWithTag(13).textColor = erxesColor
@@ -189,7 +233,7 @@ public class RegisterVC: UIViewController {
     func changeColor() {
         self.header.backgroundColor = erxesColor
         self.view.viewWithTag(11)?.layer.borderColor = erxesColor!.cgColor
-        if emailSelected {
+        if emailFirst {
             selectEmail()
         } else {
             selectPhone()
@@ -197,9 +241,9 @@ public class RegisterVC: UIViewController {
     }
     
     @IBAction func selectionChanged() {
-        emailSelected = !emailSelected
+        emailFirst = !emailFirst
         changeColor()
-        if emailSelected {
+        if emailFirst {
             tfEmail.placeholder = "email@domain.com"
         } else {
             tfEmail.placeholder = "phone number".localized
