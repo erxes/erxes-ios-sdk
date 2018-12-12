@@ -1,16 +1,22 @@
 # erxes Inc - erxes for IOS SDK
 
-erxes is an AI meets open source messaging platform for sales and marketing
+erxes is an open source growth marketing platform. Marketing, sales, and customer service platform designed to help your business attract more engaged customers. Replace Hubspot with the mission and community-driven ecosystem.
 
-<a href="https://demohome.erxes.io/">View demo</a> <b>| </b> <a href="https://github.com/erxes/erxes-ios-sdk/archive/master.zip">Download ZIP </a> <b> | </b> <a href="https://gitter.im/erxes/Lobby">Join us on Gitter</a>
+<a href="https://demohome.erxes.io/">View demo</a> <b>| </b> <a href="https://github.com/erxes/erxes-ios-sdk/archive/master.zip">Download ZIP </a> <b> | </b> <a href="https://erxes.slack.com">Join us on Slack</a>
 
 ## Status  <br> 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
+[![codebeat badge](https://codebeat.co/badges/44c86f3c-885c-4f7c-b003-35f49be94af0)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-master)
 [![CI Status](https://travis-ci.org/erxes/erxes-ios-sdk.svg?branch=develop)](https://travis-ci.org/erxes/erxes-ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
-[![License](https://img.shields.io/cocoapods/l/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
+ [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/erxes/erxes-ios-sdk/blob/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
-[![codebeat badge](https://codebeat.co/badges/3f247de3-099b-4e50-a84a-9bfde51bfcff)](https://codebeat.co/projects/github-com-erxes-erxes-ios-sdk-develop)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
+
+<p align="center">
+  <img src="https://i.imgur.com/7vAnNhX.jpg">
+</p>
+
+
 
 ## Documentation
 
