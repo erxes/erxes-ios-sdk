@@ -15,6 +15,7 @@ struct Attachment:Codable {
     var url:String?
     var type:String?
     var size:Int?
+    var name:String?
 }
 
 struct Message: Codable {

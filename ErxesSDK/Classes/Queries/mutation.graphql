@@ -1,29 +1,20 @@
-mutation Connect($brandCode: String!, $email: String, $phone:String $isUser: Boolean!) {
-    messengerConnect(brandCode: $brandCode, email: $email , phone:$phone, isUser: $isUser) {
-        integrationId
-        messengerData
-        uiOptions
-        customerId
-    }
+mutation Connect($brandCode: String!, $email: String, $phone:String, $isUser: Boolean!, $data:JSON) {
+messengerConnect(brandCode: $brandCode, email: $email , phone:$phone, isUser: $isUser, data:$data) {
+integrationId
+messengerData
+uiOptions
+customerId
+}
 }
 
 mutation ReadConversationMessages($conversationId: String!) {
-    readConversationMessages(conversationId: $conversationId)
+readConversationMessages(conversationId: $conversationId)
 }
 
-mutation EndConversation($customerId: String,$brandCode: String!) {
-    endConversation(customerId: $customerId,brandCode: $brandCode) {
-        customerId
-    }
+mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments:[AttachmentInput]) {
+insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments:$attachments){
+_id
+conversationId
+}
 }
 
-mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments:[JSON]) {
-    insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments:$attachments) {
-        _id
-        conversationId
-    }
-}
-
-mutation ReadMessage($conversationId: String!) {
-    readConversationMessages(conversationId: $conversationId)
-}
