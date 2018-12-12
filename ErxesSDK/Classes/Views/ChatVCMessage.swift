@@ -17,13 +17,13 @@ public class ChatVCMessage:UIViewController {
     
     var bg = "#7754b3"
     var css = ""
-    var attachments = [JSON]()
+    var attachments = [AttachmentInput]()
     var inited = false
     var attached = false
     let gql = LiveGQL(socket: subsUrl)
     
     func subscribe() {
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments{url,name,type,size}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
     }
     
     func initChat() {
@@ -69,7 +69,7 @@ public class ChatVCMessage:UIViewController {
                 self?.subscribe()
                 self?.loadMessages()
             }
-            self?.attachments = [JSON]()
+            self?.attachments = [AttachmentInput]()
         }
     }
 
@@ -173,7 +173,7 @@ public class ChatVCMessage:UIViewController {
             if attachments.count > 0 {
                 let attachment = attachments[0]
                 
-                if let url = attachment!["url"] as? String {
+                if let url = attachment?.url {
                     image = url
                     self.attached = true
                 }
