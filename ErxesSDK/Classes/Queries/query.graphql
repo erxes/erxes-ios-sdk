@@ -1,104 +1,84 @@
-fragment MessageDetail on ConversationMessage {
-    _id
-    user {
-        details {
-            avatar
-            fullName
-        }
-    }
-    customerId
-    content
-    createdAt
-    attachments
-}
-
-query lastUnreadMessage($integrationId: String!, $customerId: String!) {
-    lastUnreadMessage(integrationId: $integrationId, customerId: $customerId) {
-        _id
-        conversationId
-        content
-        user {
-            details {
-                fullName
-                avatar
-            }
-        }
-        engageData {
-            messageId
-            content
-            kind
-            sentAs
-            fromUser {
-                details {
-                    fullName
-                    avatar
-                }
-            }
-        }
-    }
-}
-
 query totalUnreadCount($integrationId: String!, $customerId: String!) {
-    totalUnreadCount(integrationId: $integrationId, customerId: $customerId)
+totalUnreadCount(integrationId: $integrationId, customerId: $customerId)
 }
 
-query UnreadCount($conversationId:String!) {
-    unreadCount(conversationId:$conversationId)
+query UnreadCount($conversationId:String!){
+unreadCount(conversationId:$conversationId)
 }
 
 query Messages($conversationId: String!) {
-    messages(conversationId: $conversationId) {
-        ...MessageDetail
-    }
+messages(conversationId: $conversationId) {
+_id
+user {
+details {
+avatar
+fullName
 }
-
-fragment ConversationDetail on Conversation {
-    _id
-    content
-    createdAt
-    messages {
-        customerId
-        createdAt
-    }
-    status
-    readUserIds
-    participatedUsers {
-        _id
-        details {
-            fullName
-            avatar
-        }
-    }
+}
+customerId
+content
+createdAt
+attachments {
+url
+name
+type
+size
+}
+}
 }
 
 query Conversations($integrationId: String!, $customerId: String!) {
-    conversations(integrationId: $integrationId, customerId: $customerId) {
-        ...ConversationDetail
-    }
+conversations(integrationId: $integrationId, customerId: $customerId) {
+_id
+content
+createdAt
+messages {
+customerId
+createdAt
+}
+status
+readUserIds
+participatedUsers {
+_id
+details {
+fullName
+avatar
+}
+}
+}
 }
 
-mutation readConversation($conversationId: String) {
-    readConversationMessages(conversationId: $conversationId)
+query ConversationDetail($id:String, $integrationId: String!) {
+conversationDetail(_id:$id, integrationId:$integrationId){
+isOnline
+supporters{
+_id
+details{
+avatar
+fullName
+}
+}
+}
 }
 
-query GetConfig($brandCode: String!) {
-    getMessengerIntegration(brandCode: $brandCode) {
-        languageCode
-        uiOptions
-        messengerData
-    }
+query GetConfig($brandCode: String!){
+getMessengerIntegration(brandCode: $brandCode){
+languageCode
+uiOptions
+messengerData
+}
 }
 
-query getSupporter($integrationId: String!) {
-    messengerSupporters(integrationId: $integrationId) {
-        _id
-        details {
-            avatar
-            fullName
-        }
-    }
+query GetSupporters($integrationId:String!) {
+messengerSupporters(integrationId:$integrationId) {
+_id
+details {
+avatar
+shortName
+position
+location
+description
+fullName
 }
-
-query isSupporterOnline($integrationId:String!) {
-    isMessengerOnline(integrationId:$integrationId)
+}
 }

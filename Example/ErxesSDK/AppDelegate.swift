@@ -10,8 +10,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        Erxes.setBrandCode(code: "YDEdKj")
-        let host = "192.168.86.48"
+        Erxes.setBrandCode(code: "xD6qgj")
+        let host = "192.168.86.57"
         Erxes.setHosts(apiHost: "http://\(host):3100/graphql",
             subsHost: "ws://\(host):3300/subscriptions",
             uploadUrl: "http://\(host):3300/upload-file")

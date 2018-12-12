@@ -11,7 +11,7 @@ public class ChatVCAttachment:ChatVCMessage {
     @IBOutlet weak var header:UIView!
     
     var remoteUrl = ""
-    var uploaded = JSON()
+    var uploaded = AttachmentInput(url: "", name: "", type: "")
     var headerInited = false
     var size = 0
     
@@ -40,7 +40,7 @@ public class ChatVCAttachment:ChatVCMessage {
 //        let imgData = UIImageJPEGRepresentation(image, 0.2)!
         
         
-        if let imgData = UIImage.resize(image) as? Data{
+        if let imgData = UIImage.resize(image) {
             size = imgData.count
             let bcf = ByteCountFormatter()
             bcf.allowedUnits = [.useKB]
@@ -77,11 +77,12 @@ public class ChatVCAttachment:ChatVCMessage {
         upload.responseString { response in
             print(response)
             self.remoteUrl = response.value!
-            self.uploaded = ["url" : self.remoteUrl, "size" : self.size, "type" : "image/jpeg"]
+            
+            self.uploaded = AttachmentInput(url: self.remoteUrl, name: "name", type: "image/jpeg", size: Double(exactly: self.size))
             self.uploadLoader.stopAnimating()
             
             self.uploadView.isHidden = false
-            self.attachments = [JSON]()
+            self.attachments = [AttachmentInput]()
             self.attachments.append(self.uploaded)
             self.sendMessage("")
         }
@@ -154,7 +155,7 @@ public class ChatVCAttachment:ChatVCMessage {
 
     @IBAction func btnCancelClick(_ sender: Any) {
         self.uploadView.isHidden = true
-        self.attachments = [JSON]()
+        self.attachments = [AttachmentInput]()
     }
 }
 

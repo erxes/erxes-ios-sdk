@@ -27,7 +27,8 @@ class ViewController: UIViewController {
         data["lastName"] = "Purev-Yondon"
         
 //        Erxes.startWithUserEmail(email: "test@test.com")
-        Erxes.start(email: "purevyondon.a@nmma.co", phone: "88019634", data: data)
+//        Erxes.start(email: "purevyondon.a@nmma.co", phone: "88019634", data: data)
+        Erxes.start()
     }
 
 }

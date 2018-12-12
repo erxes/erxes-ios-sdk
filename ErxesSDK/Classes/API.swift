@@ -2,6 +2,50 @@
 
 import Apollo
 
+public struct AttachmentInput: GraphQLMapConvertible {
+    public var graphQLMap: GraphQLMap
+    
+    public init(url: String, name: String, type: String, size: Optional<Double?> = nil) {
+        graphQLMap = ["url": url, "name": name, "type": type, "size": size]
+    }
+    
+    public var url: String {
+        get {
+            return graphQLMap["url"] as! String
+        }
+        set {
+            graphQLMap.updateValue(newValue, forKey: "url")
+        }
+    }
+    
+    public var name: String {
+        get {
+            return graphQLMap["name"] as! String
+        }
+        set {
+            graphQLMap.updateValue(newValue, forKey: "name")
+        }
+    }
+    
+    public var type: String {
+        get {
+            return graphQLMap["type"] as! String
+        }
+        set {
+            graphQLMap.updateValue(newValue, forKey: "type")
+        }
+    }
+    
+    public var size: Optional<Double?> {
+        get {
+            return graphQLMap["size"] as! Optional<Double?>
+        }
+        set {
+            graphQLMap.updateValue(newValue, forKey: "size")
+        }
+    }
+}
+
 public final class ConnectMutation: GraphQLMutation {
     public static let operationString =
     "mutation Connect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean!, $data: JSON) {\n  messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data) {\n    __typename\n    integrationId\n    messengerData\n    uiOptions\n    customerId\n  }\n}"
@@ -163,15 +207,15 @@ public final class ReadConversationMessagesMutation: GraphQLMutation {
 
 public final class InsertMessageMutation: GraphQLMutation {
     public static let operationString =
-    "mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments: [JSON]) {\n  insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments: $attachments) {\n    __typename\n    _id\n    conversationId\n  }\n}"
+    "mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments: [AttachmentInput]) {\n  insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments: $attachments) {\n    __typename\n    _id\n    conversationId\n  }\n}"
     
     public var integrationId: String
     public var customerId: String
     public var message: String?
     public var conversationId: String?
-    public var attachments: [JSON?]?
+    public var attachments: [AttachmentInput?]?
     
-    public init(integrationId: String, customerId: String, message: String? = nil, conversationId: String? = nil, attachments: [JSON?]? = nil) {
+    public init(integrationId: String, customerId: String, message: String? = nil, conversationId: String? = nil, attachments: [AttachmentInput?]? = nil) {
         self.integrationId = integrationId
         self.customerId = customerId
         self.message = message
@@ -346,7 +390,7 @@ public final class UnreadCountQuery: GraphQLQuery {
 
 public final class MessagesQuery: GraphQLQuery {
     public static let operationString =
-    "query Messages($conversationId: String!) {\n  messages(conversationId: $conversationId) {\n    __typename\n    _id\n    user {\n      __typename\n      details {\n        __typename\n        avatar\n        fullName\n      }\n    }\n    customerId\n    content\n    createdAt\n    attachments\n  }\n}"
+    "query Messages($conversationId: String!) {\n  messages(conversationId: $conversationId) {\n    __typename\n    _id\n    user {\n      __typename\n      details {\n        __typename\n        avatar\n        fullName\n      }\n    }\n    customerId\n    content\n    createdAt\n    attachments {\n      __typename\n      url\n      name\n      type\n      size\n    }\n  }\n}"
     
     public var conversationId: String
     
@@ -394,7 +438,7 @@ public final class MessagesQuery: GraphQLQuery {
                 GraphQLField("customerId", type: .scalar(String.self)),
                 GraphQLField("content", type: .scalar(String.self)),
                 GraphQLField("createdAt", type: .scalar(Int.self)),
-                GraphQLField("attachments", type: .list(.scalar(JSON.self))),
+                GraphQLField("attachments", type: .list(.object(Attachment.selections))),
                 ]
             
             public var snapshot: Snapshot
@@ -403,8 +447,8 @@ public final class MessagesQuery: GraphQLQuery {
                 self.snapshot = snapshot
             }
             
-            public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Int? = nil, attachments: [JSON?]? = nil) {
-                self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments])
+            public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Int? = nil, attachments: [Attachment?]? = nil) {
+                self.init(snapshot: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { $0.snapshot }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
             }
             
             public var __typename: String {
@@ -461,12 +505,12 @@ public final class MessagesQuery: GraphQLQuery {
                 }
             }
             
-            public var attachments: [JSON?]? {
+            public var attachments: [Attachment?]? {
                 get {
-                    return snapshot["attachments"] as? [JSON?]
+                    return (snapshot["attachments"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { Attachment(snapshot: $0) } } }
                 }
                 set {
-                    snapshot.updateValue(newValue, forKey: "attachments")
+                    snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "attachments")
                 }
             }
             
@@ -550,6 +594,73 @@ public final class MessagesQuery: GraphQLQuery {
                         set {
                             snapshot.updateValue(newValue, forKey: "fullName")
                         }
+                    }
+                }
+            }
+            
+            public struct Attachment: GraphQLSelectionSet {
+                public static let possibleTypes = ["Attachment"]
+                
+                public static let selections: [GraphQLSelection] = [
+                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("url", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("type", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("size", type: .scalar(Double.self)),
+                    ]
+                
+                public var snapshot: Snapshot
+                
+                public init(snapshot: Snapshot) {
+                    self.snapshot = snapshot
+                }
+                
+                public init(url: String, name: String, type: String, size: Double? = nil) {
+                    self.init(snapshot: ["__typename": "Attachment", "url": url, "name": name, "type": type, "size": size])
+                }
+                
+                public var __typename: String {
+                    get {
+                        return snapshot["__typename"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "__typename")
+                    }
+                }
+                
+                public var url: String {
+                    get {
+                        return snapshot["url"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "url")
+                    }
+                }
+                
+                public var name: String {
+                    get {
+                        return snapshot["name"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "name")
+                    }
+                }
+                
+                public var type: String {
+                    get {
+                        return snapshot["type"]! as! String
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "type")
+                    }
+                }
+                
+                public var size: Double? {
+                    get {
+                        return snapshot["size"] as? Double
+                    }
+                    set {
+                        snapshot.updateValue(newValue, forKey: "size")
                     }
                 }
             }
