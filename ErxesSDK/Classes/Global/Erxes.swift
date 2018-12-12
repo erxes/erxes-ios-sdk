@@ -85,6 +85,16 @@ var isOnline = true
         start()
     }
     
+    @objc public static func start() {
+        
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            Router.toRegister(target: topController)
+        }
+    }
+    
     @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {
         
         if email.count > 0 {
