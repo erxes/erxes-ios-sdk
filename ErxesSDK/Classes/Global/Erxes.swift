@@ -108,7 +108,11 @@ var isOnline = true
         }
         
         if data.keys.count > 0 {
-            erxesUserData = data
+            var processed = [String:Any]()
+            for (key, value) in data {
+                processed[key] = forceBridgeFromObjectiveC(value)
+            }
+            erxesUserData = processed
         }
         
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -116,6 +120,34 @@ var isOnline = true
                 topController = presentedViewController
             }
             Router.toRegister(target: topController)
+        }
+    }
+    
+    static func forceBridgeFromObjectiveC(_ value: Any) -> Any {
+        
+        if value == nil {
+            return value
+        }
+        
+        switch value {
+            
+        case is NSString:
+            return value as! String
+            
+        case is Bool:
+            return value as! Bool
+        case is Int:
+            return value as! Int
+        case is Int64:
+            return value as! Int64
+        case is Double:
+            return value as! Double
+        case is NSDictionary:
+            return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeFromObjectiveC($0.value)) })
+        case is NSArray:
+            return (value as? NSArray).map { forceBridgeFromObjectiveC($0) }
+        default:
+            return value
         }
     }
     
