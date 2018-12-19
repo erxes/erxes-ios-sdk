@@ -145,10 +145,12 @@ public class RegisterVC: UIViewController {
         
         if erxesEmail.count > 0 {
             mutation.email = erxesEmail
+            mutation.isUser = true
         }
         
         if erxesPhone.count > 0 {
             mutation.phone = erxesPhone
+            mutation.isUser = true
         }
         
         if erxesUserData.keys.count > 0 {
