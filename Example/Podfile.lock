@@ -3,7 +3,7 @@ PODS:
   - Apollo (0.8.0):
     - Apollo/Core (= 0.8.0)
   - Apollo/Core (0.8.0)
-  - ErxesSDK (0.1.0):
+  - ErxesSDK (0.1.7):
     - Alamofire (~> 4.7)
     - Apollo (~> 0.8.0)
     - LiveGQL (~> 2.0.0)
@@ -28,7 +28,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
-  ErxesSDK: 8e176f1815bff4ad355e84bb8b1fb653c63b13cf
+  ErxesSDK: 572a4d0d1f0c11fec96f7ecc9f70d262528db451
   LiveGQL: bc97d1f0c5d70e200f27126f863e0be62e732298
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 

@@ -31,6 +31,8 @@ public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
         if let color = erxesColor {
             self.header.backgroundColor = color
         }
+        sendButton.isEnabled = false
+        tfInput.addTarget(self, action: #selector(textfieldChanged(sender:)), for: .editingChanged)
     }
     
     func loading() {
@@ -53,10 +55,20 @@ public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func textfieldChanged(sender:UITextField) {
+        if sender.text?.count == 0 {
+            sendButton.isEnabled = false
+        }else {
+            sendButton.isEnabled = true
+        }
+    }
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.sendMessage(self.tfInput.text!)
         return true
     }
+    
+    
     
     @IBAction func sendTxt() {
         self.sendMessage(self.tfInput.text!)

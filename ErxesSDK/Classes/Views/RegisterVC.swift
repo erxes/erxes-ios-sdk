@@ -44,7 +44,7 @@ public class RegisterVC: UIViewController {
         let defaults = UserDefaults()
         
         if let uiOptions = defaults.dictionary(forKey: "uiOptions") {
-            print(uiOptions)
+          
             if let color = uiOptions["color"] as? String {
                 erxesColor = UIColor(hexString: color)
                 erxesColorHex = color
@@ -62,8 +62,6 @@ public class RegisterVC: UIViewController {
                 if let greetings = msgData["greetings"] as? JSON, let msg = greetings["message"] as? String {
                     msgGreetings = msg
                 }
-                
-//                if let welcome = messengerData["messages"] as?
             }
         }
     }
@@ -99,26 +97,7 @@ public class RegisterVC: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
-//    func getSupporter() {
-//
-//        let query = ConversationDetailQuery(integrationId: integrationId)
-//        apollo.fetch(query: query) { [weak self] result, error in
-//
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return
-//            }
-//
-//            if let supportersResult = result?.data?.conversationDetail?.supporters as? [ConversationDetailQuery.Data.ConversationDetail.Supporter] {
-//                if supportersResult.count == 0 { return }
-//                supporters = supportersResult
-//                isOnline = (result?.data?.conversationDetail?.isOnline)!
-//                let supporter = supporters[0]
-//                supporterName = supporter.details?.fullName
-//                supporterAvatar = supporter.details?.avatar
-//            }
-//        }
-//    }
+
     
     func getSupporter() {
 
@@ -194,7 +173,7 @@ public class RegisterVC: UIViewController {
         }
         
         if notification.name == NSNotification.Name.UIKeyboardWillShow {
-            print("keyboardFrame: \(keyboardFrame)")
+     
             let size = self.view.frame.size
             let frame = CGRect(x: 0, y: 0, width: size.width, height: self.containerHeight - keyboardFrame.size.height)
             self.container.frame = frame

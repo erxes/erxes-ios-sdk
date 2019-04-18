@@ -15,9 +15,11 @@ extension ChatVC {
     @IBAction func endConversation(_ sender: Any) {
         let defaults = UserDefaults()
         defaults.removeObject(forKey: "email")
+        defaults.removeObject(forKey: "phone")
         defaults.synchronize()
         self.close()
         erxesEmail = ""
+        erxesPhone = ""
         conversationId = nil
     }
 }

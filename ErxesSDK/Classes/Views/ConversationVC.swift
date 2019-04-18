@@ -120,7 +120,7 @@ class ConversationVC: UIViewController {
     
     func setNavigationColor() {
         if let color = erxesColor {
-//            self.navigationController?.navigationBar.barTintColor = color
+
             self.header.backgroundColor = color
             self.view.viewWithTag(1)?.backgroundColor = color
         }
@@ -154,28 +154,7 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate {
         let lblDate = cell.viewWithTag(lblDateTag) as! UILabel
         lblDate.text = Utils.formatDate(time:item.createdAt!)
         
-//        if let readUsers = item.readUserIds{
-//            print(readUsers)
-//            print(Erxes.customerId)
-//            print(Erxes.userId)
-//            if readUsers.contains(where:{$0 == Erxes.customerId}){
-//                lbl.textColor = UIColor.darkGray
-//            }
-//            else{
-//                lbl.textColor = UIColor.black
-//            }
-//        }
-        
-//        if let users = item.participatedUsers{
-//            if users.count > 0{
-//                let user = users[0]
-//                let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
-//
-//                if let avatar = user?.details?.avatar{
-//                    ivAvatar.downloadedFrom(link: avatar)
-//                }
-//            }
-//        }
+
         
         if let avatar = supporterAvatar {
             let ivAvatar = cell.viewWithTag(ivTag) as! UIImageView
@@ -206,8 +185,10 @@ extension ConversationVC:LiveGQLDelegate {
     }
     
     public func receivedRawMessage(text: String) {
+       
         if self.list.count > 0 {
             refresh()
         }
     }
+    
 }
