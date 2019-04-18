@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rCO-ta-ob9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rCO-ta-ob9">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -515,6 +515,7 @@
                         <outlet property="lblSupporterStatus" destination="r6a-R9-gub" id="O2d-mY-qHD"/>
                         <outlet property="loader" destination="f62-uL-Bag" id="Gr7-D8-Kws"/>
                         <outlet property="progress" destination="dpj-O2-J6n" id="iAB-Ex-oZ5"/>
+                        <outlet property="sendButton" destination="4SU-ug-qMt" id="feV-VP-Vc9"/>
                         <outlet property="tfInput" destination="XAx-NO-XSs" id="OL8-6D-6Pq"/>
                         <outlet property="uploadLoader" destination="jPO-uc-HX1" id="glL-lV-Sfw"/>
                         <outlet property="uploadView" destination="L4G-Ef-jTe" id="cL5-xG-G3A"/>

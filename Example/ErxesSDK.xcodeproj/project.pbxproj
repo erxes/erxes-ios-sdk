@@ -216,7 +216,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 994F5XNXMN;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -491,8 +491,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ErxesSDK_Example.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mend-Orshikh Amartaivan (994F5XNXMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mend-Orshikh Amartaivan (994F5XNXMN)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 994F5XNXMN;
 				INFOPLIST_FILE = ErxesSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -501,7 +502,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.nmma.erxessdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "erxes ios sdk";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -513,8 +514,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ErxesSDK_Example.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mend-Orshikh Amartaivan (994F5XNXMN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mend-Orshikh Amartaivan (994F5XNXMN)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 994F5XNXMN;
 				INFOPLIST_FILE = ErxesSDK/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -523,7 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.nmma.erxessdk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "erxes ios sdk";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};

@@ -73,6 +73,7 @@ var isOnline = true
     
     @objc public static func setBrandCode(code:String) {
         brandCode = code
+        
     }
     
     @objc public static func startWithUserEmail(email:String) {

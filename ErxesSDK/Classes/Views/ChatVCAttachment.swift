@@ -37,23 +37,17 @@ public class ChatVCAttachment:ChatVCMessage {
         self.uploadLoader.startAnimating()
 
         let url = uploadUrl
-//        let imgData = UIImageJPEGRepresentation(image, 0.2)!
-        
-        
+
         if let imgData = UIImage.resize(image) {
             size = imgData.count
             let bcf = ByteCountFormatter()
             bcf.allowedUnits = [.useKB]
             bcf.countStyle = .file
             self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
-            
-            //        let parameters = ["name": rname] //Optional for extra parameter
-            
+
             Alamofire.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(imgData, withName: "file",fileName: "file.jpg", mimeType: "image/jpg")
-                //            for (key, value) in parameters {
-                //                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-                //            } //Optional for extra parameters
+
             },
                              to:url ) {
                                 (result) in
@@ -75,24 +69,41 @@ public class ChatVCAttachment:ChatVCMessage {
         })
         
         upload.responseString { response in
-            print(response)
-            self.remoteUrl = response.value!
+           
             
-            self.uploaded = AttachmentInput(url: self.remoteUrl, name: "name", type: "image/jpeg", size: Double(exactly: self.size))
-            self.uploadLoader.stopAnimating()
+            if self.isValidUrl(url: response.value!) {
+                self.remoteUrl = response.value!
+                self.uploaded = AttachmentInput(url: self.remoteUrl, name: "name", type: "image/jpeg", size: Double(exactly: self.size))
+                self.uploadLoader.stopAnimating()
+                self.uploadView.isHidden = false
+                self.attachments = [AttachmentInput]()
+                self.attachments.append(self.uploaded)
+                self.sendMessage("")
+            }else {
+                let alertController = UIAlertController(title: "Upload failed", message: "Check your configuration", preferredStyle: .alert)
+                let closeAction = UIAlertAction(title: "Close", style: .cancel, handler: { action in
+                    self.uploadLoader.stopAnimating()
+                    self.uploadView.isHidden = true
+                })
+                alertController.addAction(closeAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
             
-            self.uploadView.isHidden = false
-            self.attachments = [AttachmentInput]()
-            self.attachments.append(self.uploaded)
-            self.sendMessage("")
+            
         }
+    }
+    
+    func isValidUrl(url: String) -> Bool {
+        let urlRegEx = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+        let urlTest = NSPredicate(format:"SELF MATCHES %@", urlRegEx)
+        let result = urlTest.evaluate(with: url)
+        return result
     }
 
     func openGallery() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-//        imagePicker.allowsEditing = true
         DispatchQueue.main.async {
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -161,7 +172,7 @@ public class ChatVCAttachment:ChatVCMessage {
 
 extension ChatVCAttachment:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
-    public func imagePickerController(_ picker: UIImagePickerController,
+   @objc public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         print(info)
