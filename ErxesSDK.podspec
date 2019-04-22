@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.1.8'
+  s.version          = '0.1.9'
   s.summary          = 'A short description of erxes-ios-sdk.'
   s.swift_version = '4.0'
   s.description      = 'erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'
@@ -10,14 +10,14 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'erxes' => 'info@erxes.io' }
   s.source           = { :git => 'https://github.com/erxes/erxes-ios-sdk.git', :tag => s.version.to_s }
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
   s.source_files = 'ErxesSDK/Classes/**/*'
    s.resource_bundles = {
        'ErxesSDK' => ['ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings}']
    }
   s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES','SWIFT_VERSION' => '4.0'}
   s.frameworks = 'Photos'
-  s.dependency 'Apollo', '~> 0.8.0'
+  s.dependency 'Apollo', '~> 0.10.1'
   s.dependency 'LiveGQL', '~> 2.0.0'
   s.dependency 'Alamofire', '~> 4.7'
 end
