@@ -12,9 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Erxes.setBrandCode(code: "asC5MG")
         let host = "localhost"
-        Erxes.setHosts(apiHost: "https://wapi.crm.nmma.co/graphql",
-            subsHost: "wss://api.crm.nmma.co/subscriptions",
-            uploadUrl: "https:crm.nmma.co/upload-file")
+        Erxes.setHosts(apiHost: "https://\(host)/graphql",
+            subsHost: "wss://\(host)/subscriptions",
+            uploadUrl: "https:\(host)/upload-file")
         return true
     }
 
