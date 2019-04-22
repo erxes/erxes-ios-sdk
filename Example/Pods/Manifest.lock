@@ -1,11 +1,11 @@
 PODS:
-  - Alamofire (4.7.2)
-  - Apollo (0.8.0):
-    - Apollo/Core (= 0.8.0)
-  - Apollo/Core (0.8.0)
-  - ErxesSDK (0.1.7):
+  - Alamofire (4.8.2)
+  - Apollo (0.10.1):
+    - Apollo/Core (= 0.10.1)
+  - Apollo/Core (0.10.1)
+  - ErxesSDK (0.1.8):
     - Alamofire (~> 4.7)
-    - Apollo (~> 0.8.0)
+    - Apollo (~> 0.10.1)
     - LiveGQL (~> 2.0.0)
   - LiveGQL (2.0.0):
     - SocketRocket
@@ -26,12 +26,12 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
-  ErxesSDK: 572a4d0d1f0c11fec96f7ecc9f70d262528db451
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Apollo: 4d690a9b2e48e8820182df4b988d7a253e1ee589
+  ErxesSDK: a69c4850ae13fbde285091081e3823217c75aa63
   LiveGQL: bc97d1f0c5d70e200f27126f863e0be62e732298
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1
