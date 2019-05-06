@@ -89,8 +89,6 @@ public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
             self.containerHeight = self.container.frame.height
         }
         if notification.name == NSNotification.Name.UIKeyboardWillShow {
-            
-            print("keyboardFrame: \(keyboardFrame)")
             let size = self.view.frame.size
             let frame = CGRect(x: 0, y: 0, width: size.width, height: self.containerHeight - keyboardFrame.size.height)
             self.container.frame = frame

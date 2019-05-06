@@ -10,7 +10,5 @@ extension Dictionary {
         }
     }
     
-    func printJson() {
-        print(json)
-    }
+ 
 }
