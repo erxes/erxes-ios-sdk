@@ -2,6 +2,7 @@
 public extension UIFont {
     public static func registerFontWithFilenameString(filenameString: String, bundle: Bundle) {
         
+        _ = UIFont.familyNames
         guard let pathForResourceString = bundle.path(forResource: filenameString, ofType: nil) else {
             print("UIFont+:  Failed to register font - path for resource not found.")
             return

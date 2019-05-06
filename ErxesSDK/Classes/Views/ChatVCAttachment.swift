@@ -64,7 +64,6 @@ public class ChatVCAttachment:ChatVCMessage {
     
     func processUpload(_ upload:UploadRequest) {
         upload.uploadProgress(closure: { (progress) in
-            print("Upload Progress: \(progress.fractionCompleted)")
             self.progress.progress = Float(progress.fractionCompleted)
         })
         
@@ -175,7 +174,7 @@ extension ChatVCAttachment:UIImagePickerControllerDelegate,UINavigationControlle
    @objc public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        print(info)
+    
 
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             ivPicked.image = chosenImage
