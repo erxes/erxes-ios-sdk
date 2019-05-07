@@ -6,7 +6,7 @@ var brandCode:String!
 var integrationId:String!
 var erxesEmail = ""
 var erxesPhone = ""
-var erxesUserData = JSON()
+var erxesUserData = Scalar_JSON()
 var isUser = false
 var emailFirst = true
 var conversationId:String!
@@ -19,7 +19,7 @@ var supporterName:String!
 var supporterAvatar:String!
 var supporters:[GetSupportersQuery.Data.MessengerSupporter] = []
 var isOnline = true
-
+var isSaas = false
 
 @objc public class Erxes: NSObject {
 
@@ -163,6 +163,15 @@ var isOnline = true
     }
     
     @objc public static func setHosts(apiHost:String, subsHost:String, uploadUrl url: String) {
+        
+        let hostString = URL(string: apiHost)?.host
+        let hostSeperated = hostString?.components(separatedBy: ".")
+        if hostSeperated![1] == "app" && hostSeperated![2] == "erxes" && hostSeperated![3] == "io" {
+            isSaas = true
+        }else {
+            isSaas = false
+        }
+        
         apiUrl = apiHost
         subsUrl = subsHost
         uploadUrl = url

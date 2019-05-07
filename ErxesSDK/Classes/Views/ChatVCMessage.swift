@@ -26,7 +26,13 @@ public class ChatVCMessage: UIViewController {
     var receivedMessage = ""
 
     func subscribe() {
-        gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments{url,name,type,size}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        
+        if isSaas {
+            gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user,attachments{url,name,type,size}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        }else {
+            gql.subscribe(graphql: "subscription{conversationMessageInserted(_id:\"\(conversationId!)\"){content,userId,createdAt,customerId,user{details{avatar}},attachments{url,name,type,size}}}", variables: nil, operationName: nil, identifier: "conversationMessageInserted")
+        }
+        
     }
 
     func initChat() {
@@ -67,54 +73,49 @@ public class ChatVCMessage: UIViewController {
                 return
             }
             self?.tfInput.text = ""
+            
+            
+            
             if conversationId == nil {
-                conversationId = result?.data?.insertMessage?.conversationId
+                conversationId = result?.data?.insertMessage?.fragments.messageObject.conversationId
                 self?.subscribe()
                 self?.loadMessages()
+            }else {
+                if let item = result?.data?.insertMessage?.fragments.messageObject {
+//                    self!.appendToChat(item)
+                }
+                
             }
             self?.attachments = [AttachmentInput]()
         }
     }
 
-    func appendToChat(_ item: MessageSubs) {
-
-        if let message = item.payload?.data?.conversationMessageInserted {
-
+    func appendToChat(_ item: MessageObject) {
+        if let message:MessageObject = item {
             var str = ""
-
             if let content = message.content {
                 str = content
             }
-
             let now = Utils.now()
-
             var me = ""
-
             if let customerId = message.customerId {
                 if customerId == erxesCustomerId {
                     me = "me"
                 }
             }
-
             var avatar = "avatar.png"
-
             if let userAvatar = message.user?.details?.avatar {
                 avatar = userAvatar
             }
-
             var image = ""
-
             if let attachments = message.attachments, attachments.count > 0 {
                 let attachment = attachments[0]
-                if let img = attachment!.url {
-                    image = img
+                if ((attachment?.url) != nil) && attachment?.url.count != 0 {
+                    image = attachment!.url
                     attached = true
                 }
             }
-
-
             var chat = message.content!.withoutHtml
-
             if chat.contains("http") {
                 let types: NSTextCheckingResult.CheckingType = .link
 
@@ -136,13 +137,80 @@ public class ChatVCMessage: UIViewController {
 
             }
             str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
-
             str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
-
+            self.wvChat.stringByEvaluatingJavaScript(from: str)
+        }
+    }
+    
+    func insertAdminMessage(_ item: MessageSubs) {
+        if let message = item.payload?.data?.conversationMessageInserted {
+            
+            var str = ""
+            
+            if let content = message.content {
+                str = content
+            }
+            
+            let now = Utils.now()
+            
+            var me = ""
+            
+            if let customerId = message.customerId {
+                if customerId == erxesCustomerId {
+                    me = "me"
+                }
+            }
+            
+            var avatar = "avatar.png"
+            
+            if let userAvatar = message.user?.details?.avatar {
+                avatar = userAvatar
+            }
+            
+            var image = ""
+            
+            if let attachments = message.attachments, attachments.count > 0 {
+                let attachment = attachments[0]
+                if let img = attachment!.url {
+                    image = img
+                    attached = true
+                }
+            }
+            
+            
+            var chat = message.content!.withoutHtml
+            
+            if chat.contains("http") {
+                let types: NSTextCheckingResult.CheckingType = .link
+                
+                let detector = try! NSDataDetector(types: types.rawValue)
+                let matches = detector.matches(in: message.content!, options: [], range: NSMakeRange(0, message.content!.utf16.count))
+                if matches.count != 0 {
+                    for match in matches {
+                        let host = match.url?.host
+                        let url = match.url?.absoluteString
+                        
+                        if (chat.contains(url!)) {
+                            chat = chat.replacingOccurrences(of: url!, with: "<a href=\(url!)>\(host!)</a><a>")
+                        }else {
+                            let decodedUrl = url?.removingPercentEncoding?.withoutHtml
+                            chat = chat.replacingOccurrences(of: decodedUrl!, with: "<a href=\(decodedUrl!)>\(host!)</a><a>")
+                        }
+                    }
+                }
+                
+            }
+            str = "<div class=\"row \(me)\"><div class=\"img\"><img src=\"\(avatar)\"/></div><div class=\"text\"><a>\(chat)<img src=\"\(image)\"/></a></div><div class=\"date\">\(now!)</div></div>"
+            
+            str = "document.body.innerHTML += '\(str)';window.location.href = \"inapp://scroll\""
+            
             self.wvChat.stringByEvaluatingJavaScript(from: str)
             
         }
     }
+    
+    
+    
 
     func loadMessages() {
         if conversationId == nil {
@@ -162,11 +230,12 @@ public class ChatVCMessage: UIViewController {
     }
 
     func processMessagesResult(messages: [MessagesQuery.Data.Message]) {
-        let messagesArray = messages.map { ($0) }
+        let messagesArray = messages.map { ($0.fragments.messageObject) }
         var me = ""
         var str = ""
 
         for item in messagesArray {
+            
             let created = item.createdAt!
             let now = Utils.formatDate(time: created)
    
@@ -216,7 +285,7 @@ public class ChatVCMessage: UIViewController {
         self.wvChat.stringByEvaluatingJavaScript(from: str)
     }
 
-    func extractAttachment(item: MessagesQuery.Data.Message) -> String {
+    func extractAttachment(item: MessageObject) -> String {
         var image = ""
         if let attachments = item.attachments {
             if attachments.count > 0 {
@@ -235,25 +304,23 @@ public class ChatVCMessage: UIViewController {
 extension ChatVC: LiveGQLDelegate {
 
     public func receivedRawMessage(text: String) {
-
-        do {
-            if receivedMessage != text {
-                receivedMessage = text
-
-                if let dataFromString = receivedMessage.data(using: .utf8, allowLossyConversion: false) {
-                    let item = try JSONDecoder().decode(MessageSubs.self, from: dataFromString)
-
-                    self.appendToChat(item)
+      
+            
+            do {
+                if receivedMessage != text {
+                    receivedMessage = text
+                
+                    if let dataFromString = receivedMessage.data(using: .utf8, allowLossyConversion: false) {
+                        let item = try JSONDecoder().decode(MessageSubs.self, from: dataFromString)
+                        self.insertAdminMessage(item)
+                    }
                 }
             }
-
-
-
-
-        }
-        catch {
-            print(error)
-        }
+            catch {
+                print(error)
+            }
+        
+       
     }
 
 
