@@ -3,13 +3,18 @@ PODS:
   - Apollo (0.10.1):
     - Apollo/Core (= 0.10.1)
   - Apollo/Core (0.10.1)
-  - ErxesSDK (0.1.8):
+  - Apollo/WebSocket (0.10.1):
+    - Apollo/Core
+    - Starscream (~> 3.1.0)
+  - ErxesSDK (0.1.9):
     - Alamofire (~> 4.7)
     - Apollo (~> 0.10.1)
+    - Apollo/WebSocket
     - LiveGQL (~> 2.0.0)
   - LiveGQL (2.0.0):
     - SocketRocket
   - SocketRocket (0.5.1)
+  - Starscream (3.1.0)
 
 DEPENDENCIES:
   - ErxesSDK (from `../`)
@@ -20,6 +25,7 @@ SPEC REPOS:
     - Apollo
     - LiveGQL
     - SocketRocket
+    - Starscream
 
 EXTERNAL SOURCES:
   ErxesSDK:
@@ -28,9 +34,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Apollo: 4d690a9b2e48e8820182df4b988d7a253e1ee589
-  ErxesSDK: a69c4850ae13fbde285091081e3823217c75aa63
+  ErxesSDK: 83be27b02b52d0277d1a22dcadda84bf7d346d05
   LiveGQL: bc97d1f0c5d70e200f27126f863e0be62e732298
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 

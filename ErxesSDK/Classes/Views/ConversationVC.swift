@@ -181,8 +181,11 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate {
 extension ConversationVC:LiveGQLDelegate {
     
     public func subscribe() {
-        gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(erxesCustomerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
+//        gql.subscribe(graphql: "subscription{conversationChanged(_id:\"\(erxesCustomerId!)\"){type,conversationId}}", variables: nil, operationName: nil, identifier: "conversationChanged")
+        gql.subscribe(graphql: "subscription{conversationAdminMessageInserted(customerId:\"\(erxesCustomerId!)\"){content}}", variables: nil, operationName: nil, identifier: "conversationAdminMessageInserted")
     }
+    
+    
     
     public func receivedRawMessage(text: String) {
        

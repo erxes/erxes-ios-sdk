@@ -20,10 +20,8 @@ public class RegisterVC: UIViewController {
         Erxes.restore()
         
         if !Erxes.firstRun() {
-//            getSupporter()
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
             self.navigationController?.pushViewController(vc!, animated: false)
-            
         } else {
             if erxesEmail.count > 0 || erxesPhone.count > 0 {
                 self.tfEmail.text = erxesEmail
@@ -53,13 +51,13 @@ public class RegisterVC: UIViewController {
         
         if let messengerData = defaults.dictionary(forKey: "messengerData") {
             if let language = defaults.string(forKey: "languageCode"),
-                let messages = messengerData["messages"] as? JSON,
-                let msgData = messages[language] as? JSON{
+                let messages = messengerData["messages"] as? Scalar_JSON,
+                let msgData = messages[language] as? Scalar_JSON{
                 if let welcome = msgData["welcome"] as? String {
                     msgWelcome = welcome
                 }
                 
-                if let greetings = msgData["greetings"] as? JSON, let msg = greetings["message"] as? String {
+                if let greetings = msgData["greetings"] as? Scalar_JSON, let msg = greetings["message"] as? String {
                     msgGreetings = msg
                 }
             }
@@ -119,8 +117,8 @@ public class RegisterVC: UIViewController {
     }
     
     public func connectMessenger() {
-        
-        let mutation = ConnectMutation(brandCode: brandCode, isUser:false)
+   
+        let mutation = MessengerConnectMutation(brandCode: brandCode, isUser:false)
         
         if erxesEmail.count > 0 {
             mutation.email = erxesEmail
@@ -145,7 +143,6 @@ public class RegisterVC: UIViewController {
             Erxes.saveIntegrationId(item: (result?.data?.messengerConnect?.integrationId)!)
             Erxes.saveCustomerId(item: (result?.data?.messengerConnect?.customerId)!)
             Erxes.saveEmail(item: (self?.tfEmail.text)!)
-            
             self?.getSupporter()
             
             let vc = self?.storyboard?.instantiateViewController(withIdentifier: "conversations")

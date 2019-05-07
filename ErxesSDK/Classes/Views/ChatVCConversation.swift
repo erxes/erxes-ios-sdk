@@ -7,7 +7,6 @@ extension ChatVC {
                     print(error)
                     return
                 }
-                print(result)
             }
         }
     }

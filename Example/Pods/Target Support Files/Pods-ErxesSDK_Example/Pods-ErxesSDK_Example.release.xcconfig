@@ -1,9 +1,9 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/Apollo" "${PODS_CONFIGURATION_BUILD_DIR}/ErxesSDK" "${PODS_CONFIGURATION_BUILD_DIR}/LiveGQL" "${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/Apollo" "${PODS_CONFIGURATION_BUILD_DIR}/ErxesSDK" "${PODS_CONFIGURATION_BUILD_DIR}/LiveGQL" "${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket" "${PODS_CONFIGURATION_BUILD_DIR}/Starscream"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Apollo/Apollo.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ErxesSDK/ErxesSDK.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/LiveGQL/LiveGQL.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket/SocketRocket.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Apollo/Apollo.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ErxesSDK/ErxesSDK.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/LiveGQL/LiveGQL.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/SocketRocket/SocketRocket.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Starscream/Starscream.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_LDFLAGS = $(inherited) -l"icucore" -framework "Alamofire" -framework "Apollo" -framework "CFNetwork" -framework "ErxesSDK" -framework "LiveGQL" -framework "Photos" -framework "Security" -framework "SocketRocket"
+OTHER_LDFLAGS = $(inherited) -l"icucore" -framework "Alamofire" -framework "Apollo" -framework "CFNetwork" -framework "ErxesSDK" -framework "LiveGQL" -framework "Photos" -framework "Security" -framework "SocketRocket" -framework "Starscream"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
