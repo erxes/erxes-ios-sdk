@@ -25,12 +25,12 @@ class ViewController: UIViewController {
     }
 
     @IBAction func close(){
-        Erxes.endCostumerSession(completionHandler: {
+        Erxes.endSession(completionHandler: {
             // do your stuff
             
         })
         
-        Erxes.endCostumerSession()
+        Erxes.endSession()
         
     }
     
