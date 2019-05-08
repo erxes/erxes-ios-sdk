@@ -6,7 +6,7 @@ var brandCode:String!
 var integrationId:String!
 var erxesEmail = ""
 var erxesPhone = ""
-var erxesUserData = JSON()
+var erxesUserData = Scalar_JSON()
 var isUser = false
 var emailFirst = true
 var conversationId:String!
@@ -19,10 +19,13 @@ var supporterName:String!
 var supporterAvatar:String!
 var supporters:[GetSupportersQuery.Data.MessengerSupporter] = []
 var isOnline = true
-
+var isSaas = false
 
 @objc public class Erxes: NSObject {
 
+    
+    
+    
     static func firstRun() -> Bool {
         let defaults = UserDefaults()
         return defaults.value(forKey: "email") == nil
@@ -96,6 +99,18 @@ var isOnline = true
         }
     }
     
+    
+    @objc public static func endCostumerSession(completionHandler:() -> Void = { }){
+        let defaults = UserDefaults()
+        defaults.removeObject(forKey: "email")
+        defaults.removeObject(forKey: "phone")
+        defaults.synchronize()
+        erxesEmail = ""
+        erxesPhone = ""
+        conversationId = nil
+        completionHandler()
+    }
+    
     @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {
         
         if email.count > 0 {
@@ -163,6 +178,15 @@ var isOnline = true
     }
     
     @objc public static func setHosts(apiHost:String, subsHost:String, uploadUrl url: String) {
+        
+        let hostString = URL(string: apiHost)?.host
+        let hostSeperated = hostString?.components(separatedBy: ".")
+        if hostSeperated![1] == "app" && hostSeperated![2] == "erxes" && hostSeperated![3] == "io" {
+            isSaas = true
+        }else {
+            isSaas = false
+        }
+        
         apiUrl = apiHost
         subsUrl = subsHost
         uploadUrl = url

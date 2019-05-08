@@ -1,6 +1,6 @@
 {
   "name": "ErxesSDK",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "summary": "A short description of erxes-ios-sdk.",
   "swift_version": "4.0",
   "description": "erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/erxes/erxes-ios-sdk.git",
-    "tag": "0.1.8"
+    "tag": "0.1.9"
   },
   "platforms": {
     "ios": "9.0"
@@ -39,6 +39,9 @@
     ],
     "Alamofire": [
       "~> 4.7"
+    ],
+    "Apollo/WebSocket": [
+
     ]
   }
 }

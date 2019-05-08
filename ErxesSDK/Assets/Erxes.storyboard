@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rCO-ta-ob9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rCO-ta-ob9">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -251,8 +251,8 @@
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBU-jr-tTi">
                                                         <rect key="frame" x="271" y="15" width="34" height="34"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" name="erxes" family="erxes" pointSize="18"/>
-                                                        <state key="normal" title="">
+                                                        <fontDescription key="fontDescription" name="erxes" family="erxes" pointSize="13"/>
+                                                        <state key="normal" title="">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -503,6 +503,7 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="zdP-EF-tvp" id="m4P-3H-Z4B"/>
                         <outlet property="btnCancel" destination="39r-24-I4b" id="wFN-VT-H66"/>
                         <outlet property="container" destination="JKA-oz-Rzh" id="1vJ-ZL-Adb"/>
                         <outlet property="header" destination="vQZ-z3-Jpc" id="pqu-WV-iq2"/>
@@ -997,6 +998,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="avatar.png" width="120" height="120"/>
+        <image name="avatar.png" width="375.65216064453125" height="375.65216064453125"/>
     </resources>
 </document>

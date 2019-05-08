@@ -89,16 +89,11 @@ class ConversationVC: UIViewController {
             
             self?.tv.reloadData()
             
-//            if !(self?.inited)!{
-//                self?.inited = true
-//                let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
-//                if Erxes.conversationId != nil{
-//                    vc.conversationId = Erxes.conversationId
-//                }
-//                self?.navigationController?.pushViewController(vc, animated: true)
-//            }
+
             if self?.list != nil && self?.list.count == 0 {
                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
+                vc.isNewConversation = true
+                conversationId = nil
                 self?.navigationController?.pushViewController(vc, animated: false)
             }
         }
@@ -181,8 +176,11 @@ extension ConversationVC:UITableViewDataSource,UITableViewDelegate {
 extension ConversationVC:LiveGQLDelegate {
     
     public func subscribe() {
-        gql.subscribe(graphql: "subscription{conversationsChanged(customerId:\"\(erxesCustomerId!)\"){type,customerId}}", variables: nil, operationName: nil, identifier: "conversationsChanged")
+//        gql.subscribe(graphql: "subscription{conversationChanged(_id:\"\(erxesCustomerId!)\"){type,conversationId}}", variables: nil, operationName: nil, identifier: "conversationChanged")
+        gql.subscribe(graphql: "subscription{conversationAdminMessageInserted(customerId:\"\(erxesCustomerId!)\"){content}}", variables: nil, operationName: nil, identifier: "conversationAdminMessageInserted")
     }
+    
+    
     
     public func receivedRawMessage(text: String) {
        

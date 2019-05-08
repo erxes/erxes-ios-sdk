@@ -46,6 +46,277 @@ public struct AttachmentInput: GraphQLMapConvertible {
     }
 }
 
+public final class MessengerConnectMutation: GraphQLMutation {
+    public let operationDefinition =
+    "mutation messengerConnect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean!, $data: JSON) {\n  messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data) {\n    __typename\n    integrationId\n    messengerData\n    uiOptions\n    customerId\n    languageCode\n  }\n}"
+    
+    public var brandCode: String
+    public var email: String?
+    public var phone: String?
+    public var isUser: Bool
+    public var data: Scalar_JSON?
+    
+    public init(brandCode: String, email: String? = nil, phone: String? = nil, isUser: Bool, data: Scalar_JSON? = nil) {
+        self.brandCode = brandCode
+        self.email = email
+        self.phone = phone
+        self.isUser = isUser
+        self.data = data
+    }
+    
+    public var variables: GraphQLMap? {
+        return ["brandCode": brandCode, "email": email, "phone": phone, "isUser": isUser, "data": data]
+    }
+    
+    public struct Data: GraphQLSelectionSet {
+        public static let possibleTypes = ["Mutation"]
+        
+        public static let selections: [GraphQLSelection] = [
+            GraphQLField("messengerConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "isUser": GraphQLVariable("isUser"), "data": GraphQLVariable("data")], type: .object(MessengerConnect.selections)),
+        ]
+        
+        public private(set) var resultMap: ResultMap
+        
+        public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+        }
+        
+        public init(messengerConnect: MessengerConnect? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Mutation", "messengerConnect": messengerConnect.flatMap { (value: MessengerConnect) -> ResultMap in value.resultMap }])
+        }
+        
+        public var messengerConnect: MessengerConnect? {
+            get {
+                return (resultMap["messengerConnect"] as? ResultMap).flatMap { MessengerConnect(unsafeResultMap: $0) }
+            }
+            set {
+                resultMap.updateValue(newValue?.resultMap, forKey: "messengerConnect")
+            }
+        }
+        
+        public struct MessengerConnect: GraphQLSelectionSet {
+            public static let possibleTypes = ["MessengerConnectResponse"]
+            
+            public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("integrationId", type: .scalar(String.self)),
+                GraphQLField("messengerData", type: .scalar(Scalar_JSON.self)),
+                GraphQLField("uiOptions", type: .scalar(Scalar_JSON.self)),
+                GraphQLField("customerId", type: .scalar(String.self)),
+                GraphQLField("languageCode", type: .scalar(String.self)),
+            ]
+            
+            public private(set) var resultMap: ResultMap
+            
+            public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+            }
+            
+            public init(integrationId: String? = nil, messengerData: Scalar_JSON? = nil, uiOptions: Scalar_JSON? = nil, customerId: String? = nil, languageCode: String? = nil) {
+                self.init(unsafeResultMap: ["__typename": "MessengerConnectResponse", "integrationId": integrationId, "messengerData": messengerData, "uiOptions": uiOptions, "customerId": customerId, "languageCode": languageCode])
+            }
+            
+            public var __typename: String {
+                get {
+                    return resultMap["__typename"]! as! String
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "__typename")
+                }
+            }
+            
+            public var integrationId: String? {
+                get {
+                    return resultMap["integrationId"] as? String
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "integrationId")
+                }
+            }
+            
+            public var messengerData: Scalar_JSON? {
+                get {
+                    return resultMap["messengerData"] as? Scalar_JSON
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "messengerData")
+                }
+            }
+            
+            public var uiOptions: Scalar_JSON? {
+                get {
+                    return resultMap["uiOptions"] as? Scalar_JSON
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "uiOptions")
+                }
+            }
+            
+            public var customerId: String? {
+                get {
+                    return resultMap["customerId"] as? String
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "customerId")
+                }
+            }
+            
+            public var languageCode: String? {
+                get {
+                    return resultMap["languageCode"] as? String
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "languageCode")
+                }
+            }
+        }
+    }
+}
+
+public final class ReadConversationMessagesMutation: GraphQLMutation {
+    public let operationDefinition =
+    "mutation ReadConversationMessages($conversationId: String!) {\n  readConversationMessages(conversationId: $conversationId)\n}"
+    
+    public var conversationId: String
+    
+    public init(conversationId: String) {
+        self.conversationId = conversationId
+    }
+    
+    public var variables: GraphQLMap? {
+        return ["conversationId": conversationId]
+    }
+    
+    public struct Data: GraphQLSelectionSet {
+        public static let possibleTypes = ["Mutation"]
+        
+        public static let selections: [GraphQLSelection] = [
+            GraphQLField("readConversationMessages", arguments: ["conversationId": GraphQLVariable("conversationId")], type: .scalar(Scalar_JSON.self)),
+        ]
+        
+        public private(set) var resultMap: ResultMap
+        
+        public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+        }
+        
+        public init(readConversationMessages: Scalar_JSON? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Mutation", "readConversationMessages": readConversationMessages])
+        }
+        
+        public var readConversationMessages: Scalar_JSON? {
+            get {
+                return resultMap["readConversationMessages"] as? Scalar_JSON
+            }
+            set {
+                resultMap.updateValue(newValue, forKey: "readConversationMessages")
+            }
+        }
+    }
+}
+
+public final class InsertMessageMutation: GraphQLMutation {
+    public let operationDefinition =
+    "mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments: [AttachmentInput]) {\n  insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments: $attachments) {\n    __typename\n    ...MessageObject\n  }\n}"
+    
+    public var queryDocument: String { return operationDefinition.appending(MessageObject.fragmentDefinition) }
+    
+    public var integrationId: String
+    public var customerId: String
+    public var message: String?
+    public var conversationId: String?
+    public var attachments: [AttachmentInput?]?
+    
+    public init(integrationId: String, customerId: String, message: String? = nil, conversationId: String? = nil, attachments: [AttachmentInput?]? = nil) {
+        self.integrationId = integrationId
+        self.customerId = customerId
+        self.message = message
+        self.conversationId = conversationId
+        self.attachments = attachments
+    }
+    
+    public var variables: GraphQLMap? {
+        return ["integrationId": integrationId, "customerId": customerId, "message": message, "conversationId": conversationId, "attachments": attachments]
+    }
+    
+    public struct Data: GraphQLSelectionSet {
+        public static let possibleTypes = ["Mutation"]
+        
+        public static let selections: [GraphQLSelection] = [
+            GraphQLField("insertMessage", arguments: ["integrationId": GraphQLVariable("integrationId"), "customerId": GraphQLVariable("customerId"), "message": GraphQLVariable("message"), "conversationId": GraphQLVariable("conversationId"), "attachments": GraphQLVariable("attachments")], type: .object(InsertMessage.selections)),
+        ]
+        
+        public private(set) var resultMap: ResultMap
+        
+        public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+        }
+        
+        public init(insertMessage: InsertMessage? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Mutation", "insertMessage": insertMessage.flatMap { (value: InsertMessage) -> ResultMap in value.resultMap }])
+        }
+        
+        public var insertMessage: InsertMessage? {
+            get {
+                return (resultMap["insertMessage"] as? ResultMap).flatMap { InsertMessage(unsafeResultMap: $0) }
+            }
+            set {
+                resultMap.updateValue(newValue?.resultMap, forKey: "insertMessage")
+            }
+        }
+        
+        public struct InsertMessage: GraphQLSelectionSet {
+            public static let possibleTypes = ["ConversationMessage"]
+            
+            public static let selections: [GraphQLSelection] = [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLFragmentSpread(MessageObject.self),
+            ]
+            
+            public private(set) var resultMap: ResultMap
+            
+            public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+            }
+            
+            public var __typename: String {
+                get {
+                    return resultMap["__typename"]! as! String
+                }
+                set {
+                    resultMap.updateValue(newValue, forKey: "__typename")
+                }
+            }
+            
+            public var fragments: Fragments {
+                get {
+                    return Fragments(unsafeResultMap: resultMap)
+                }
+                set {
+                    resultMap += newValue.resultMap
+                }
+            }
+            
+            public struct Fragments {
+                public private(set) var resultMap: ResultMap
+                
+                public init(unsafeResultMap: ResultMap) {
+                    self.resultMap = unsafeResultMap
+                }
+                
+                public var messageObject: MessageObject {
+                    get {
+                        return MessageObject(unsafeResultMap: resultMap)
+                    }
+                    set {
+                        resultMap += newValue.resultMap
+                    }
+                }
+            }
+        }
+    }
+}
+
 public final class TotalUnreadCountQuery: GraphQLQuery {
     public let operationDefinition =
     "query totalUnreadCount($integrationId: String!, $customerId: String!) {\n  totalUnreadCount(integrationId: $integrationId, customerId: $customerId)\n}"
@@ -134,7 +405,9 @@ public final class UnreadCountQuery: GraphQLQuery {
 
 public final class MessagesQuery: GraphQLQuery {
     public let operationDefinition =
-    "query Messages($conversationId: String!) {\n  messages(conversationId: $conversationId) {\n    __typename\n    _id\n    user {\n      __typename\n      details {\n        __typename\n        avatar\n        fullName\n      }\n    }\n    customerId\n    content\n    createdAt\n    attachments {\n      __typename\n      url\n      name\n      type\n      size\n    }\n  }\n}"
+    "query Messages($conversationId: String!) {\n  messages(conversationId: $conversationId) {\n    __typename\n    ...MessageObject\n  }\n}"
+    
+    public var queryDocument: String { return operationDefinition.appending(MessageObject.fragmentDefinition) }
     
     public var conversationId: String
     
@@ -177,22 +450,13 @@ public final class MessagesQuery: GraphQLQuery {
             
             public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("_id", type: .nonNull(.scalar(String.self))),
-                GraphQLField("user", type: .object(User.selections)),
-                GraphQLField("customerId", type: .scalar(String.self)),
-                GraphQLField("content", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .scalar(Int.self)),
-                GraphQLField("attachments", type: .list(.object(Attachment.selections))),
+                GraphQLFragmentSpread(MessageObject.self),
             ]
             
             public private(set) var resultMap: ResultMap
             
             public init(unsafeResultMap: ResultMap) {
                 self.resultMap = unsafeResultMap
-            }
-            
-            public init(id: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Int? = nil, attachments: [Attachment?]? = nil) {
-                self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": id, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
             }
             
             public var __typename: String {
@@ -204,207 +468,28 @@ public final class MessagesQuery: GraphQLQuery {
                 }
             }
             
-            public var id: String {
+            public var fragments: Fragments {
                 get {
-                    return resultMap["_id"]! as! String
+                    return Fragments(unsafeResultMap: resultMap)
                 }
                 set {
-                    resultMap.updateValue(newValue, forKey: "_id")
+                    resultMap += newValue.resultMap
                 }
             }
             
-            public var user: User? {
-                get {
-                    return (resultMap["user"] as? ResultMap).flatMap { User(unsafeResultMap: $0) }
-                }
-                set {
-                    resultMap.updateValue(newValue?.resultMap, forKey: "user")
-                }
-            }
-            
-            public var customerId: String? {
-                get {
-                    return resultMap["customerId"] as? String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "customerId")
-                }
-            }
-            
-            public var content: String? {
-                get {
-                    return resultMap["content"] as? String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "content")
-                }
-            }
-            
-            public var createdAt: Int? {
-                get {
-                    return resultMap["createdAt"] as? Int
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "createdAt")
-                }
-            }
-            
-            public var attachments: [Attachment?]? {
-                get {
-                    return (resultMap["attachments"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Attachment?] in value.map { (value: ResultMap?) -> Attachment? in value.flatMap { (value: ResultMap) -> Attachment in Attachment(unsafeResultMap: value) } } }
-                }
-                set {
-                    resultMap.updateValue(newValue.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }, forKey: "attachments")
-                }
-            }
-            
-            public struct User: GraphQLSelectionSet {
-                public static let possibleTypes = ["User"]
-                
-                public static let selections: [GraphQLSelection] = [
-                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("details", type: .object(Detail.selections)),
-                ]
-                
+            public struct Fragments {
                 public private(set) var resultMap: ResultMap
                 
                 public init(unsafeResultMap: ResultMap) {
                     self.resultMap = unsafeResultMap
                 }
                 
-                public init(details: Detail? = nil) {
-                    self.init(unsafeResultMap: ["__typename": "User", "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }])
-                }
-                
-                public var __typename: String {
+                public var messageObject: MessageObject {
                     get {
-                        return resultMap["__typename"]! as! String
+                        return MessageObject(unsafeResultMap: resultMap)
                     }
                     set {
-                        resultMap.updateValue(newValue, forKey: "__typename")
-                    }
-                }
-                
-                public var details: Detail? {
-                    get {
-                        return (resultMap["details"] as? ResultMap).flatMap { Detail(unsafeResultMap: $0) }
-                    }
-                    set {
-                        resultMap.updateValue(newValue?.resultMap, forKey: "details")
-                    }
-                }
-                
-                public struct Detail: GraphQLSelectionSet {
-                    public static let possibleTypes = ["UserDetails"]
-                    
-                    public static let selections: [GraphQLSelection] = [
-                        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                        GraphQLField("avatar", type: .scalar(String.self)),
-                        GraphQLField("fullName", type: .scalar(String.self)),
-                    ]
-                    
-                    public private(set) var resultMap: ResultMap
-                    
-                    public init(unsafeResultMap: ResultMap) {
-                        self.resultMap = unsafeResultMap
-                    }
-                    
-                    public init(avatar: String? = nil, fullName: String? = nil) {
-                        self.init(unsafeResultMap: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
-                    }
-                    
-                    public var __typename: String {
-                        get {
-                            return resultMap["__typename"]! as! String
-                        }
-                        set {
-                            resultMap.updateValue(newValue, forKey: "__typename")
-                        }
-                    }
-                    
-                    public var avatar: String? {
-                        get {
-                            return resultMap["avatar"] as? String
-                        }
-                        set {
-                            resultMap.updateValue(newValue, forKey: "avatar")
-                        }
-                    }
-                    
-                    public var fullName: String? {
-                        get {
-                            return resultMap["fullName"] as? String
-                        }
-                        set {
-                            resultMap.updateValue(newValue, forKey: "fullName")
-                        }
-                    }
-                }
-            }
-            
-            public struct Attachment: GraphQLSelectionSet {
-                public static let possibleTypes = ["Attachment"]
-                
-                public static let selections: [GraphQLSelection] = [
-                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("url", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("name", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("type", type: .nonNull(.scalar(String.self))),
-                    GraphQLField("size", type: .scalar(Double.self)),
-                ]
-                
-                public private(set) var resultMap: ResultMap
-                
-                public init(unsafeResultMap: ResultMap) {
-                    self.resultMap = unsafeResultMap
-                }
-                
-                public init(url: String, name: String, type: String, size: Double? = nil) {
-                    self.init(unsafeResultMap: ["__typename": "Attachment", "url": url, "name": name, "type": type, "size": size])
-                }
-                
-                public var __typename: String {
-                    get {
-                        return resultMap["__typename"]! as! String
-                    }
-                    set {
-                        resultMap.updateValue(newValue, forKey: "__typename")
-                    }
-                }
-                
-                public var url: String {
-                    get {
-                        return resultMap["url"]! as! String
-                    }
-                    set {
-                        resultMap.updateValue(newValue, forKey: "url")
-                    }
-                }
-                
-                public var name: String {
-                    get {
-                        return resultMap["name"]! as! String
-                    }
-                    set {
-                        resultMap.updateValue(newValue, forKey: "name")
-                    }
-                }
-                
-                public var type: String {
-                    get {
-                        return resultMap["type"]! as! String
-                    }
-                    set {
-                        resultMap.updateValue(newValue, forKey: "type")
-                    }
-                }
-                
-                public var size: Double? {
-                    get {
-                        return resultMap["size"] as? Double
-                    }
-                    set {
-                        resultMap.updateValue(newValue, forKey: "size")
+                        resultMap += newValue.resultMap
                     }
                 }
             }
@@ -461,7 +546,7 @@ public final class ConversationsQuery: GraphQLQuery {
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("_id", type: .nonNull(.scalar(String.self))),
                 GraphQLField("content", type: .scalar(String.self)),
-                GraphQLField("createdAt", type: .scalar(Int.self)),
+                GraphQLField("createdAt", type: .scalar(Scalar_Date.self)),
                 GraphQLField("messages", type: .list(.object(Message.selections))),
                 GraphQLField("status", type: .nonNull(.scalar(String.self))),
                 GraphQLField("readUserIds", type: .list(.scalar(String.self))),
@@ -474,7 +559,7 @@ public final class ConversationsQuery: GraphQLQuery {
                 self.resultMap = unsafeResultMap
             }
             
-            public init(id: String, content: String? = nil, createdAt: Int? = nil, messages: [Message?]? = nil, status: String, readUserIds: [String?]? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
+            public init(id: String, content: String? = nil, createdAt: Scalar_Date? = nil, messages: [Message?]? = nil, status: String, readUserIds: [String?]? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
                 self.init(unsafeResultMap: ["__typename": "Conversation", "_id": id, "content": content, "createdAt": createdAt, "messages": messages.flatMap { (value: [Message?]) -> [ResultMap?] in value.map { (value: Message?) -> ResultMap? in value.flatMap { (value: Message) -> ResultMap in value.resultMap } } }, "status": status, "readUserIds": readUserIds, "participatedUsers": participatedUsers.flatMap { (value: [ParticipatedUser?]) -> [ResultMap?] in value.map { (value: ParticipatedUser?) -> ResultMap? in value.flatMap { (value: ParticipatedUser) -> ResultMap in value.resultMap } } }])
             }
             
@@ -505,9 +590,9 @@ public final class ConversationsQuery: GraphQLQuery {
                 }
             }
             
-            public var createdAt: Int? {
+            public var createdAt: Scalar_Date? {
                 get {
-                    return resultMap["createdAt"] as? Int
+                    return resultMap["createdAt"] as? Scalar_Date
                 }
                 set {
                     resultMap.updateValue(newValue, forKey: "createdAt")
@@ -556,7 +641,7 @@ public final class ConversationsQuery: GraphQLQuery {
                 public static let selections: [GraphQLSelection] = [
                     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                     GraphQLField("customerId", type: .scalar(String.self)),
-                    GraphQLField("createdAt", type: .scalar(Int.self)),
+                    GraphQLField("createdAt", type: .scalar(Scalar_Date.self)),
                 ]
                 
                 public private(set) var resultMap: ResultMap
@@ -565,7 +650,7 @@ public final class ConversationsQuery: GraphQLQuery {
                     self.resultMap = unsafeResultMap
                 }
                 
-                public init(customerId: String? = nil, createdAt: Int? = nil) {
+                public init(customerId: String? = nil, createdAt: Scalar_Date? = nil) {
                     self.init(unsafeResultMap: ["__typename": "ConversationMessage", "customerId": customerId, "createdAt": createdAt])
                 }
                 
@@ -587,9 +672,9 @@ public final class ConversationsQuery: GraphQLQuery {
                     }
                 }
                 
-                public var createdAt: Int? {
+                public var createdAt: Scalar_Date? {
                     get {
-                        return resultMap["createdAt"] as? Int
+                        return resultMap["createdAt"] as? Scalar_Date
                     }
                     set {
                         resultMap.updateValue(newValue, forKey: "createdAt")
@@ -925,8 +1010,8 @@ public final class GetConfigQuery: GraphQLQuery {
             public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
                 GraphQLField("languageCode", type: .scalar(String.self)),
-                GraphQLField("uiOptions", type: .scalar(JSON.self)),
-                GraphQLField("messengerData", type: .scalar(JSON.self)),
+                GraphQLField("uiOptions", type: .scalar(Scalar_JSON.self)),
+                GraphQLField("messengerData", type: .scalar(Scalar_JSON.self)),
             ]
             
             public private(set) var resultMap: ResultMap
@@ -935,7 +1020,7 @@ public final class GetConfigQuery: GraphQLQuery {
                 self.resultMap = unsafeResultMap
             }
             
-            public init(languageCode: String? = nil, uiOptions: JSON? = nil, messengerData: JSON? = nil) {
+            public init(languageCode: String? = nil, uiOptions: Scalar_JSON? = nil, messengerData: Scalar_JSON? = nil) {
                 self.init(unsafeResultMap: ["__typename": "Integration", "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData])
             }
             
@@ -957,18 +1042,18 @@ public final class GetConfigQuery: GraphQLQuery {
                 }
             }
             
-            public var uiOptions: JSON? {
+            public var uiOptions: Scalar_JSON? {
                 get {
-                    return resultMap["uiOptions"] as? JSON
+                    return resultMap["uiOptions"] as? Scalar_JSON
                 }
                 set {
                     resultMap.updateValue(newValue, forKey: "uiOptions")
                 }
             }
             
-            public var messengerData: JSON? {
+            public var messengerData: Scalar_JSON? {
                 get {
-                    return resultMap["messengerData"] as? JSON
+                    return resultMap["messengerData"] as? Scalar_JSON
                 }
                 set {
                     resultMap.updateValue(newValue, forKey: "messengerData")
@@ -1154,33 +1239,111 @@ public final class GetSupportersQuery: GraphQLQuery {
     }
 }
 
-public final class ConnectMutation: GraphQLMutation {
-    public let operationDefinition =
-    "mutation Connect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean!, $data: JSON) {\n  messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data) {\n    __typename\n    integrationId\n    messengerData\n    uiOptions\n    customerId\n  }\n}"
+public struct MessageObject: GraphQLFragment {
+    public static let fragmentDefinition =
+    "fragment MessageObject on ConversationMessage {\n  __typename\n  _id\n  conversationId\n  user {\n    __typename\n    details {\n      __typename\n      avatar\n      fullName\n    }\n  }\n  customerId\n  content\n  createdAt\n  attachments {\n    __typename\n    url\n    name\n    type\n    size\n  }\n}"
     
-    public var brandCode: String
-    public var email: String?
-    public var phone: String?
-    public var isUser: Bool
-    public var data: JSON?
+    public static let possibleTypes = ["ConversationMessage"]
     
-    public init(brandCode: String, email: String? = nil, phone: String? = nil, isUser: Bool, data: JSON? = nil) {
-        self.brandCode = brandCode
-        self.email = email
-        self.phone = phone
-        self.isUser = isUser
-        self.data = data
+    public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+        GraphQLField("conversationId", type: .nonNull(.scalar(String.self))),
+        GraphQLField("user", type: .object(User.selections)),
+        GraphQLField("customerId", type: .scalar(String.self)),
+        GraphQLField("content", type: .scalar(String.self)),
+        GraphQLField("createdAt", type: .scalar(Scalar_Date.self)),
+        GraphQLField("attachments", type: .list(.object(Attachment.selections))),
+    ]
+    
+    public private(set) var resultMap: ResultMap
+    
+    public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
     }
     
-    public var variables: GraphQLMap? {
-        return ["brandCode": brandCode, "email": email, "phone": phone, "isUser": isUser, "data": data]
+    public init(id: String, conversationId: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Scalar_Date? = nil, attachments: [Attachment?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": id, "conversationId": conversationId, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
     }
     
-    public struct Data: GraphQLSelectionSet {
-        public static let possibleTypes = ["Mutation"]
+    public var __typename: String {
+        get {
+            return resultMap["__typename"]! as! String
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+        }
+    }
+    
+    public var id: String {
+        get {
+            return resultMap["_id"]! as! String
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "_id")
+        }
+    }
+    
+    public var conversationId: String {
+        get {
+            return resultMap["conversationId"]! as! String
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "conversationId")
+        }
+    }
+    
+    public var user: User? {
+        get {
+            return (resultMap["user"] as? ResultMap).flatMap { User(unsafeResultMap: $0) }
+        }
+        set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "user")
+        }
+    }
+    
+    public var customerId: String? {
+        get {
+            return resultMap["customerId"] as? String
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "customerId")
+        }
+    }
+    
+    public var content: String? {
+        get {
+            return resultMap["content"] as? String
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "content")
+        }
+    }
+    
+    public var createdAt: Scalar_Date? {
+        get {
+            return resultMap["createdAt"] as? Scalar_Date
+        }
+        set {
+            resultMap.updateValue(newValue, forKey: "createdAt")
+        }
+    }
+    
+    public var attachments: [Attachment?]? {
+        get {
+            return (resultMap["attachments"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Attachment?] in value.map { (value: ResultMap?) -> Attachment? in value.flatMap { (value: ResultMap) -> Attachment in Attachment(unsafeResultMap: value) } } }
+        }
+        set {
+            resultMap.updateValue(newValue.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }, forKey: "attachments")
+        }
+    }
+    
+    public struct User: GraphQLSelectionSet {
+        public static let possibleTypes = ["User"]
         
         public static let selections: [GraphQLSelection] = [
-            GraphQLField("messengerConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "isUser": GraphQLVariable("isUser"), "data": GraphQLVariable("data")], type: .object(MessengerConnect.selections)),
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("details", type: .object(Detail.selections)),
         ]
         
         public private(set) var resultMap: ResultMap
@@ -1189,28 +1352,35 @@ public final class ConnectMutation: GraphQLMutation {
             self.resultMap = unsafeResultMap
         }
         
-        public init(messengerConnect: MessengerConnect? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Mutation", "messengerConnect": messengerConnect.flatMap { (value: MessengerConnect) -> ResultMap in value.resultMap }])
+        public init(details: Detail? = nil) {
+            self.init(unsafeResultMap: ["__typename": "User", "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }])
         }
         
-        public var messengerConnect: MessengerConnect? {
+        public var __typename: String {
             get {
-                return (resultMap["messengerConnect"] as? ResultMap).flatMap { MessengerConnect(unsafeResultMap: $0) }
+                return resultMap["__typename"]! as! String
             }
             set {
-                resultMap.updateValue(newValue?.resultMap, forKey: "messengerConnect")
+                resultMap.updateValue(newValue, forKey: "__typename")
             }
         }
         
-        public struct MessengerConnect: GraphQLSelectionSet {
-            public static let possibleTypes = ["MessengerConnectResponse"]
+        public var details: Detail? {
+            get {
+                return (resultMap["details"] as? ResultMap).flatMap { Detail(unsafeResultMap: $0) }
+            }
+            set {
+                resultMap.updateValue(newValue?.resultMap, forKey: "details")
+            }
+        }
+        
+        public struct Detail: GraphQLSelectionSet {
+            public static let possibleTypes = ["UserDetails"]
             
             public static let selections: [GraphQLSelection] = [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("integrationId", type: .scalar(String.self)),
-                GraphQLField("messengerData", type: .scalar(JSON.self)),
-                GraphQLField("uiOptions", type: .scalar(JSON.self)),
-                GraphQLField("customerId", type: .scalar(String.self)),
+                GraphQLField("avatar", type: .scalar(String.self)),
+                GraphQLField("fullName", type: .scalar(String.self)),
             ]
             
             public private(set) var resultMap: ResultMap
@@ -1219,8 +1389,8 @@ public final class ConnectMutation: GraphQLMutation {
                 self.resultMap = unsafeResultMap
             }
             
-            public init(integrationId: String? = nil, messengerData: JSON? = nil, uiOptions: JSON? = nil, customerId: String? = nil) {
-                self.init(unsafeResultMap: ["__typename": "MessengerConnectResponse", "integrationId": integrationId, "messengerData": messengerData, "uiOptions": uiOptions, "customerId": customerId])
+            public init(avatar: String? = nil, fullName: String? = nil) {
+                self.init(unsafeResultMap: ["__typename": "UserDetails", "avatar": avatar, "fullName": fullName])
             }
             
             public var __typename: String {
@@ -1232,64 +1402,35 @@ public final class ConnectMutation: GraphQLMutation {
                 }
             }
             
-            public var integrationId: String? {
+            public var avatar: String? {
                 get {
-                    return resultMap["integrationId"] as? String
+                    return resultMap["avatar"] as? String
                 }
                 set {
-                    resultMap.updateValue(newValue, forKey: "integrationId")
+                    resultMap.updateValue(newValue, forKey: "avatar")
                 }
             }
             
-            public var messengerData: JSON? {
+            public var fullName: String? {
                 get {
-                    return resultMap["messengerData"] as? JSON
+                    return resultMap["fullName"] as? String
                 }
                 set {
-                    resultMap.updateValue(newValue, forKey: "messengerData")
-                }
-            }
-            
-            public var uiOptions: JSON? {
-                get {
-                    return resultMap["uiOptions"] as? JSON
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "uiOptions")
-                }
-            }
-            
-            public var customerId: String? {
-                get {
-                    return resultMap["customerId"] as? String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "customerId")
+                    resultMap.updateValue(newValue, forKey: "fullName")
                 }
             }
         }
     }
-}
-
-public final class ReadConversationMessagesMutation: GraphQLMutation {
-    public let operationDefinition =
-    "mutation ReadConversationMessages($conversationId: String!) {\n  readConversationMessages(conversationId: $conversationId)\n}"
     
-    public var conversationId: String
-    
-    public init(conversationId: String) {
-        self.conversationId = conversationId
-    }
-    
-    public var variables: GraphQLMap? {
-        return ["conversationId": conversationId]
-    }
-    
-    public struct Data: GraphQLSelectionSet {
-        public static let possibleTypes = ["Mutation"]
+    public struct Attachment: GraphQLSelectionSet {
+        public static let possibleTypes = ["Attachment"]
         
         public static let selections: [GraphQLSelection] = [
-            GraphQLField("readConversationMessages", arguments: ["conversationId": GraphQLVariable("conversationId")], type: .scalar(JSON.self)),
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("url", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            GraphQLField("type", type: .nonNull(.scalar(String.self))),
+            GraphQLField("size", type: .scalar(Double.self)),
         ]
         
         public private(set) var resultMap: ResultMap
@@ -1298,113 +1439,52 @@ public final class ReadConversationMessagesMutation: GraphQLMutation {
             self.resultMap = unsafeResultMap
         }
         
-        public init(readConversationMessages: JSON? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Mutation", "readConversationMessages": readConversationMessages])
+        public init(url: String, name: String, type: String, size: Double? = nil) {
+            self.init(unsafeResultMap: ["__typename": "Attachment", "url": url, "name": name, "type": type, "size": size])
         }
         
-        public var readConversationMessages: JSON? {
+        public var __typename: String {
             get {
-                return resultMap["readConversationMessages"] as? JSON
+                return resultMap["__typename"]! as! String
             }
             set {
-                resultMap.updateValue(newValue, forKey: "readConversationMessages")
+                resultMap.updateValue(newValue, forKey: "__typename")
             }
         }
-    }
-}
-
-public final class InsertMessageMutation: GraphQLMutation {
-    public let operationDefinition =
-    "mutation insertMessage($integrationId: String!, $customerId: String!, $message: String, $conversationId: String, $attachments: [AttachmentInput]) {\n  insertMessage(integrationId: $integrationId, customerId: $customerId, message: $message, conversationId: $conversationId, attachments: $attachments) {\n    __typename\n    _id\n    conversationId\n  }\n}"
-    
-    public var integrationId: String
-    public var customerId: String
-    public var message: String?
-    public var conversationId: String?
-    public var attachments: [AttachmentInput?]?
-    
-    public init(integrationId: String, customerId: String, message: String? = nil, conversationId: String? = nil, attachments: [AttachmentInput?]? = nil) {
-        self.integrationId = integrationId
-        self.customerId = customerId
-        self.message = message
-        self.conversationId = conversationId
-        self.attachments = attachments
-    }
-    
-    public var variables: GraphQLMap? {
-        return ["integrationId": integrationId, "customerId": customerId, "message": message, "conversationId": conversationId, "attachments": attachments]
-    }
-    
-    public struct Data: GraphQLSelectionSet {
-        public static let possibleTypes = ["Mutation"]
         
-        public static let selections: [GraphQLSelection] = [
-            GraphQLField("insertMessage", arguments: ["integrationId": GraphQLVariable("integrationId"), "customerId": GraphQLVariable("customerId"), "message": GraphQLVariable("message"), "conversationId": GraphQLVariable("conversationId"), "attachments": GraphQLVariable("attachments")], type: .object(InsertMessage.selections)),
-        ]
-        
-        public private(set) var resultMap: ResultMap
-        
-        public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-        }
-        
-        public init(insertMessage: InsertMessage? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Mutation", "insertMessage": insertMessage.flatMap { (value: InsertMessage) -> ResultMap in value.resultMap }])
-        }
-        
-        public var insertMessage: InsertMessage? {
+        public var url: String {
             get {
-                return (resultMap["insertMessage"] as? ResultMap).flatMap { InsertMessage(unsafeResultMap: $0) }
+                return resultMap["url"]! as! String
             }
             set {
-                resultMap.updateValue(newValue?.resultMap, forKey: "insertMessage")
+                resultMap.updateValue(newValue, forKey: "url")
             }
         }
         
-        public struct InsertMessage: GraphQLSelectionSet {
-            public static let possibleTypes = ["ConversationMessage"]
-            
-            public static let selections: [GraphQLSelection] = [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("_id", type: .nonNull(.scalar(String.self))),
-                GraphQLField("conversationId", type: .nonNull(.scalar(String.self))),
-            ]
-            
-            public private(set) var resultMap: ResultMap
-            
-            public init(unsafeResultMap: ResultMap) {
-                self.resultMap = unsafeResultMap
+        public var name: String {
+            get {
+                return resultMap["name"]! as! String
             }
-            
-            public init(id: String, conversationId: String) {
-                self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": id, "conversationId": conversationId])
+            set {
+                resultMap.updateValue(newValue, forKey: "name")
             }
-            
-            public var __typename: String {
-                get {
-                    return resultMap["__typename"]! as! String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "__typename")
-                }
+        }
+        
+        public var type: String {
+            get {
+                return resultMap["type"]! as! String
             }
-            
-            public var id: String {
-                get {
-                    return resultMap["_id"]! as! String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "_id")
-                }
+            set {
+                resultMap.updateValue(newValue, forKey: "type")
             }
-            
-            public var conversationId: String {
-                get {
-                    return resultMap["conversationId"]! as! String
-                }
-                set {
-                    resultMap.updateValue(newValue, forKey: "conversationId")
-                }
+        }
+        
+        public var size: Double? {
+            get {
+                return resultMap["size"] as? Double
+            }
+            set {
+                resultMap.updateValue(newValue, forKey: "size")
             }
         }
     }

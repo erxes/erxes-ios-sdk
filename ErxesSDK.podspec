@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.1.9'
+  s.version          = '0.1.10'
   s.summary          = 'A short description of erxes-ios-sdk.'
   s.swift_version = '4.0'
   s.description      = 'erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'
@@ -20,4 +20,5 @@ Pod::Spec.new do |s|
   s.dependency 'Apollo', '~> 0.10.1'
   s.dependency 'LiveGQL', '~> 2.0.0'
   s.dependency 'Alamofire', '~> 4.7'
+  
 end
