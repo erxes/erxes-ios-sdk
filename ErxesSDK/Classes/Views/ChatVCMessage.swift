@@ -15,12 +15,14 @@ public class ChatVCMessage: UIViewController {
     @IBOutlet weak var lblFilesize: UILabel!
     @IBOutlet weak var loader: UIView!
     @IBOutlet weak var lblLoader: UILabel!
-
+    @IBOutlet weak var backButton: UIButton!
+    
     var bg = "#7754b3"
     var css = ""
     var attachments = [AttachmentInput]()
     var inited = false
     var attached = false
+    var isNewConversation = false
     let gql = LiveGQL(socket: subsUrl)
 
     var receivedMessage = ""

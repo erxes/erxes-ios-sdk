@@ -89,16 +89,11 @@ class ConversationVC: UIViewController {
             
             self?.tv.reloadData()
             
-//            if !(self?.inited)!{
-//                self?.inited = true
-//                let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
-//                if Erxes.conversationId != nil{
-//                    vc.conversationId = Erxes.conversationId
-//                }
-//                self?.navigationController?.pushViewController(vc, animated: true)
-//            }
+
             if self?.list != nil && self?.list.count == 0 {
                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: "chat") as! ChatVC
+                vc.isNewConversation = true
+                conversationId = nil
                 self?.navigationController?.pushViewController(vc, animated: false)
             }
         }

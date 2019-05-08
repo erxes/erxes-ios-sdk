@@ -23,6 +23,9 @@ var isSaas = false
 
 @objc public class Erxes: NSObject {
 
+    
+    
+    
     static func firstRun() -> Bool {
         let defaults = UserDefaults()
         return defaults.value(forKey: "email") == nil
@@ -94,6 +97,18 @@ var isSaas = false
             }
             Router.toRegister(target: topController)
         }
+    }
+    
+    
+    @objc public static func endCostumerSession(completionHandler:() -> Void = { }){
+        let defaults = UserDefaults()
+        defaults.removeObject(forKey: "email")
+        defaults.removeObject(forKey: "phone")
+        defaults.synchronize()
+        erxesEmail = ""
+        erxesPhone = ""
+        conversationId = nil
+        completionHandler()
     }
     
     @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {

@@ -10,6 +10,7 @@ public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
     var totalUnreadCountInt = 0
     var sv:UIView?
     
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         checkOnline()
@@ -33,6 +34,9 @@ public class ChatVC: ChatVCAttachment, UITextFieldDelegate {
         }
         sendButton.isEnabled = false
         tfInput.addTarget(self, action: #selector(textfieldChanged(sender:)), for: .editingChanged)
+        if isNewConversation {
+            backButton.isHidden = true
+        }
     }
     
     func loading() {
