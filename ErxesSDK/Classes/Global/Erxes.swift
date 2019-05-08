@@ -100,7 +100,7 @@ var isSaas = false
     }
     
     
-    @objc public static func endCostumerSession(completionHandler:() -> Void = { }){
+    @objc public static func endSession(completionHandler:() -> Void = { }){
         let defaults = UserDefaults()
         defaults.removeObject(forKey: "email")
         defaults.removeObject(forKey: "phone")
