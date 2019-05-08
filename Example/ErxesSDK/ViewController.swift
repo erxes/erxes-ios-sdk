@@ -24,4 +24,14 @@ class ViewController: UIViewController {
         Erxes.start()
     }
 
+    @IBAction func close(){
+        Erxes.endCostumerSession(completionHandler: {
+            // do your stuff
+            
+        })
+        
+        Erxes.endCostumerSession()
+        
+    }
+    
 }

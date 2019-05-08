@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qVr-4P-YGG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qVr-4P-YGG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,9 +37,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-vF-qPM">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-vF-qPM">
                                 <rect key="frame" x="16" y="20" width="343" height="40"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Chat">
@@ -49,8 +48,30 @@
                                     <action selector="btnClick" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fDN-lU-fle"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-xd-eyA">
+                                <rect key="frame" x="16" y="138" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="yUw-wP-was"/>
+                                </constraints>
+                                <color key="tintColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="close" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hwf-dc-emh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="top" secondItem="ThS-vF-qPM" secondAttribute="bottom" constant="78" id="C76-k6-8mn"/>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="leading" secondItem="ThS-vF-qPM" secondAttribute="leading" id="You-Ma-xd3"/>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ZW0-10-Kvb"/>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cnY-Gu-es2"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eXb-xd-eyA" secondAttribute="bottom" constant="425" id="gyb-1r-ZqH"/>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="trailing" secondItem="ThS-vF-qPM" secondAttribute="trailing" id="hWD-GD-eqO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hSN-dY-WQg"/>
                 </viewController>

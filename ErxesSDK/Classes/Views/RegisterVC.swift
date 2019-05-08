@@ -19,15 +19,16 @@ public class RegisterVC: UIViewController {
         
         Erxes.restore()
         
-        if !Erxes.firstRun() {
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
-            self.navigationController?.pushViewController(vc!, animated: false)
-        } else {
+//        if !Erxes.firstRun() {
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "conversations")
+//            self.navigationController?.pushViewController(vc!, animated: false)
+//                connectMessenger()
+//        } else {
             if erxesEmail.count > 0 || erxesPhone.count > 0 {
                 self.tfEmail.text = erxesEmail
                 connectMessenger()
             }
-        }
+//        }
         changeColor()
         
         lblTitle.text = "RegVC_lblTitle".localized
