@@ -4,7 +4,7 @@ private var stringTagHandle: UInt8 = 0
 extension UIView {
     
     @IBInspectable
-    var cornerRadius: CGFloat {
+    var cornerRadiusValue: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -14,7 +14,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var borderWidth: CGFloat {
+    var borderWidthValue: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -24,7 +24,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var borderColor: UIColor? {
+    var borderColorValue: UIColor? {
         get {
             if let color = layer.borderColor {
                 return UIColor(cgColor: color)
@@ -41,7 +41,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowRadius: CGFloat {
+    var shadowRadiusValue: CGFloat {
         get {
             return layer.shadowRadius
         }
@@ -51,7 +51,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowOpacity: Float {
+    var shadowOpacityValue: Float {
         get {
             return layer.shadowOpacity
         }
@@ -61,7 +61,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowOffset: CGSize {
+    var shadowOffsetValue: CGSize {
         get {
             return layer.shadowOffset
         }
@@ -71,7 +71,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowColor: UIColor? {
+    var shadowColorValue: UIColor? {
         get {
             if let color = layer.shadowColor {
                 return UIColor(cgColor: color)
