@@ -43,7 +43,9 @@ public class ChatVCMessage: UIViewController {
 
         var str = ""
         let now = Utils.now()
-
+        if supporterAvatar == nil || supporterAvatar.count == 0{
+            supporterAvatar = "avatar.png"
+        }
         if msgGreetings.count > 0, conversationId == nil {
             str = "<div class=\"row\"><div class=\"img\"><img src=\"\(supporterAvatar!)\"/></div><div class=\"text\"><a>\(msgGreetings ?? "")</a></div><div class=\"date\">\(now!)</div></div>"
         }
