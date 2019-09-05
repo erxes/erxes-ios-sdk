@@ -1,0 +1,61 @@
+query allConversations($integrationId: String!, $customerId: String!) {
+conversations(integrationId: $integrationId, customerId: $customerId) {
+    ...ConversationModel
+    }
+}
+
+fragment ConversationModel on Conversation {
+    _id
+    content
+    createdAt
+    participatedUsers {
+        
+            ...UserModel
+        
+    }
+}
+
+mutation formConnect($brandCode: String!, $formCode: String!) {
+formConnect(brandCode: $brandCode, formCode: $formCode) {
+        ...FormConnectModel
+    }
+}
+
+fragment FormConnectModel on FormConnectResponse {
+    form {
+        ...FormModel
+    }
+    integration {
+        ...IntegrationModel
+        
+    }
+}
+
+fragment FormModel on Form {
+    _id
+    title
+    description
+    callout
+}
+
+fragment IntegrationModel on Integration {
+    _id
+    name
+    formData
+}
+
+
+query getMessengerIntegration($brandCode: String!){
+    getMessengerIntegration(brandCode: $brandCode){
+        _id
+        languageCode
+        uiOptions
+        messengerData
+        formData
+    }
+}
+
+
+query unreadCount($conversationId: String) {
+    unreadCount(conversationId: $conversationId)
+}

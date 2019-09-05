@@ -1,0 +1,24 @@
+query knowledgeBaseCategoriesDetail($categoryId: String!) {
+    knowledgeBaseCategoriesDetail(categoryId: $categoryId) {
+        ...KBModel
+    }
+}
+
+fragment KBModel on KnowledgeBaseCategory {
+    _id
+    title
+    description
+    numOfArticles
+    icon
+    articles {
+        ...KBArticleModel
+    }
+}
+
+fragment KBArticleModel on KnowledgeBaseArticle {
+    _id
+    title
+    summary
+    content
+    createdDate
+}

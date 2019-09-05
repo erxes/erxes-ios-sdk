@@ -8,13 +8,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+       
+
+        //if you are Saas user you can setup as following
+//        Erxes.setupSaas(companyName: "companyName", brandCode: "brandCode")
         
-        Erxes.setBrandCode(code: "asC5MG")
-        let host = "localhost"
-        Erxes.setHosts(apiHost: "https://\(host)/graphql",
-            subsHost: "wss://\(host)/subscriptions",
-            uploadUrl: "https:\(host)/upload-file")
+        //if you are OpenSource user you can setup as following
+        Erxes.setup(erxesWidgetsApiUrl: "http://localhost:3100", erxesApiUrl: "http://localhost:3300", brandCode: "brandCode")
         return true
     }
 
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let token = deviceToken.map { String(format: "%.2hhx", $0) }.joined()
-        Erxes.setDeviceToken(token: token)
+       
         
     }
     
@@ -47,6 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        Erxes.notificationReceived(userInfo: userInfo)
+        
     }
 }

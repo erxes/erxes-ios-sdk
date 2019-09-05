@@ -1,0 +1,27 @@
+query knowledgeBaseTopicsDetail($topicId: String!) {
+    knowledgeBaseTopicsDetail(topicId: $topicId) {
+        ...KnowledgeBaseTopicModel
+    }
+}
+
+
+fragment KnowledgeBaseTopicModel on KnowledgeBaseTopic {
+    title
+    description
+    categories {
+        ...KnowledgeBaseCategoryModel
+    }
+}
+
+fragment KnowledgeBaseCategoryModel on KnowledgeBaseCategory {
+    _id
+    title
+    description
+    numOfArticles
+    icon
+    articles {
+        ...KBArticleModel
+    }
+}
+
+

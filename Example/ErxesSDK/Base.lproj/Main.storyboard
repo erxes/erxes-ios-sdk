@@ -37,19 +37,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-vF-qPM">
-                                <rect key="frame" x="16" y="20" width="343" height="40"/>
-                                <color key="backgroundColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Chat">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="btnClick" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fDN-lU-fle"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-xd-eyA">
-                                <rect key="frame" x="16" y="138" width="343" height="40"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-xd-eyA">
+                                <rect key="frame" x="16" y="310" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="yUw-wP-was"/>
@@ -62,15 +51,30 @@
                                     <action selector="close" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hwf-dc-emh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-vF-qPM">
+                                <rect key="frame" x="16" y="213" width="343" height="40"/>
+                                <color key="backgroundColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ht2-IN-Pwg"/>
+                                </constraints>
+                                <color key="tintColor" red="0.46414607759999998" green="0.3292639852" blue="0.70330101249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Chat">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnClick" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fDN-lU-fle"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eXb-xd-eyA" firstAttribute="top" secondItem="ThS-vF-qPM" secondAttribute="bottom" constant="78" id="C76-k6-8mn"/>
-                            <constraint firstItem="eXb-xd-eyA" firstAttribute="leading" secondItem="ThS-vF-qPM" secondAttribute="leading" id="You-Ma-xd3"/>
+                            <constraint firstItem="ThS-vF-qPM" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="213" id="Br3-N4-IHY"/>
+                            <constraint firstItem="ThS-vF-qPM" firstAttribute="leading" secondItem="eXb-xd-eyA" secondAttribute="leading" id="JcO-yY-zrd"/>
+                            <constraint firstItem="eXb-xd-eyA" firstAttribute="top" secondItem="ThS-vF-qPM" secondAttribute="bottom" constant="57" id="MBC-7j-YUI"/>
+                            <constraint firstItem="ThS-vF-qPM" firstAttribute="trailing" secondItem="eXb-xd-eyA" secondAttribute="trailing" id="Nba-bn-fWj"/>
                             <constraint firstItem="eXb-xd-eyA" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ZW0-10-Kvb"/>
                             <constraint firstItem="eXb-xd-eyA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cnY-Gu-es2"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="eXb-xd-eyA" secondAttribute="bottom" constant="425" id="gyb-1r-ZqH"/>
-                            <constraint firstItem="eXb-xd-eyA" firstAttribute="trailing" secondItem="ThS-vF-qPM" secondAttribute="trailing" id="hWD-GD-eqO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hSN-dY-WQg"/>

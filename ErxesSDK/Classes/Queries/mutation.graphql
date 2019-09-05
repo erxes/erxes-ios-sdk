@@ -8,7 +8,7 @@ mutation Connect($brandCode: String!, $email: String, $phone:String, $isUser: Bo
     }
 }
 
-mutation ReadConversationMessages($conversationId: String!) {
+mutation readConversationMessages($conversationId: String!) {
     readConversationMessages(conversationId: $conversationId)
 }
 
