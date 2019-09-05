@@ -1,117 +1,174 @@
+//
+//  UIView.swift
+//  erxesiosdk
+//
+//  Created by Soyombo bat-erdene on 8/16/19.
+//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
+//
 
-private var stringTagHandle: UInt8 = 0
+import Foundation
+import  UIKit
 
 extension UIView {
     
-    @IBInspectable
-    var cornerRadiusValue: CGFloat {
-        get {
-            return layer.cornerRadius
+    func addConstraintsWithVisualStrings(format: String, views: UIView...) {
+        
+        var viewsDictionary = [String: UIView]()
+        
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            view.translatesAutoresizingMaskIntoConstraints = false
+            viewsDictionary[key] = view
         }
-        set {
-            layer.cornerRadius = newValue
+        
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
+    }
+    
+    /** This method binds the view with frame of keyboard frame. So, The View will change its frame with the height of the keyboard's height */
+    func bindToTheKeyboard(_ bottomConstaint: NSLayoutConstraint? = nil) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: bottomConstaint)
+    }
+    
+    @objc func keyboardWillChange(_ notification: NSNotification) {
+        
+        let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
+        let curveframe = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let deltaY = targetFrame.origin.y - curveframe.origin.y
+        
+        if let constraint = notification.object as? NSLayoutConstraint {
+            constraint.constant = deltaY
+            UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions.init(rawValue: curve), animations: {
+                self.layoutIfNeeded()
+            }, completion: nil)
+            
+        } else {
+            UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions.init(rawValue: curve), animations: {
+                self.frame.origin.y += deltaY
+            }, completion: nil)
         }
     }
     
-    @IBInspectable
-    var borderWidthValue: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -1, height: 1)
+        layer.shadowRadius = 1
+        
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
     
-    @IBInspectable
-    var borderColorValue: UIColor? {
-        get {
-            if let color = layer.borderColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.borderColor = color.cgColor
-            } else {
-                layer.borderColor = nil
-            }
-        }
+   
+    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
-    
-    @IBInspectable
-    var shadowRadiusValue: CGFloat {
-        get {
-            return layer.shadowRadius
-        }
-        set {
-            layer.shadowRadius = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowOpacityValue: Float {
-        get {
-            return layer.shadowOpacity
-        }
-        set {
-            layer.shadowOpacity = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowOffsetValue: CGSize {
-        get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-        }
-    }
-    
-    @IBInspectable
-    var shadowColorValue: UIColor? {
-        get {
-            if let color = layer.shadowColor {
-                return UIColor(cgColor: color)
-            }
-            return nil
-        }
-        set {
-            if let color = newValue {
-                layer.shadowColor = color.cgColor
-            } else {
-                layer.shadowColor = nil
-            }
-        }
-    }
+}
 
-    @IBInspectable public var stringTag:String? {
-        get {
-            if let object = objc_getAssociatedObject(self, &stringTagHandle) as? String {
-                return object
-            }
-            return nil
-        }
-        set {
-            objc_setAssociatedObject(self, &stringTagHandle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+
+extension UINavigationBar {
+    
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.size.width, height: 100.0)
     }
+    
+}
 
-    //this should work in a similar way to viewWithTag:
-    public func viewWithStringTag(strTag:String) -> UIView? {
 
-        if stringTag == strTag {
-            return self
+extension UIImage {
+    
+    
+    public func resizeImage(targetSize: CGSize) -> UIImage {
+        let size = self.size
+        
+        let widthRatio  = targetSize.width  / self.size.width
+        let heightRatio = targetSize.height / self.size.height
+        
+        var newSize: CGSize
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
         }
-
-        for view in subviews as! [UIView] {
-            if let matchingSubview = view.viewWithStringTag(strTag: strTag) {
-                return matchingSubview
+        
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    public func scale( by scale: CGFloat) -> UIImage? {
+        let size = self.size
+        let scaledSize = CGSize(width: size.width * scale, height: size.height * scale)
+        return resizeImage(targetSize: scaledSize)
+    }
+    
+    // image with rounded corners
+    public func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
+        let maxRadius = min(size.width, size.height) / 2
+        let cornerRadius: CGFloat
+        if let radius = radius, radius > 0 && radius <= maxRadius {
+            cornerRadius = radius
+        } else {
+            cornerRadius = maxRadius
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        let rect = CGRect(origin: .zero, size: size)
+        UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).addClip()
+        draw(in: rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    class func resize(_ image: UIImage) -> Data! {
+        var actualHeight = Float(image.size.height)
+        var actualWidth = Float(image.size.width)
+        let maxHeight: Float = 1000.0
+        let maxWidth: Float = 1000.0
+        var imgRatio: Float = actualWidth / actualHeight
+        let maxRatio: Float = maxWidth / maxHeight
+        let compressionQuality: Float = 0.5
+        //50 percent compression
+        if actualHeight > maxHeight || actualWidth > maxWidth {
+            if imgRatio < maxRatio {
+                //adjust width according to maxHeight
+                imgRatio = maxHeight / actualHeight
+                actualWidth = imgRatio * actualWidth
+                actualHeight = maxHeight
+            }
+            else if imgRatio > maxRatio {
+                //adjust height according to maxWidth
+                imgRatio = maxWidth / actualWidth
+                actualHeight = imgRatio * actualHeight
+                actualWidth = maxWidth
+            }
+            else {
+                actualHeight = maxHeight
+                actualWidth = maxWidth
             }
         }
-
-        return nil
+        let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(actualWidth), height: CGFloat(actualHeight))
+        UIGraphicsBeginImageContext(rect.size)
+        image.draw(in: rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        let imageData = img?.jpegData(compressionQuality: 1)
+        return imageData!
     }
 }

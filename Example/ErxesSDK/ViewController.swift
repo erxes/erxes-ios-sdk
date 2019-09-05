@@ -24,18 +24,10 @@ class ViewController: UIViewController {
         
         var messengerData = [String:Any]()
         messengerData["user data"] = "what ever you want"
-        Erxes.start(email: "", phone: "", data: messengerData)
+        Erxes.start(data: messengerData)
         
     }
 
-    @IBAction func close(){
-        Erxes.endSession(completionHandler: {
-            // do your stuff
-            
-        })
-        
-        Erxes.endSession()
-        
-    }
+   
     
 }

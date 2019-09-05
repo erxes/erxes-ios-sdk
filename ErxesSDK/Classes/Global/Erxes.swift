@@ -1,155 +1,290 @@
+//
+//  Erxes.swift
+//  erxesiosdk
+//
+//  Created by Soyombo bat-erdene on 8/31/19.
+//  Copyright © 2019 Soyombo bat-erdene. All rights reserved.
+//
+
 import UIKit
+import Foundation
+import Apollo
 
-var erxesUserId:String!
-var erxesCustomerId:String!
-var brandCode:String!
-var integrationId:String!
-var erxesEmail = ""
-var erxesPhone = ""
-var erxesUserData = Scalar_JSON()
-var isUser = false
-var emailFirst = true
-var conversationId:String!
 var erxesColor = UIColor(hexString: "#5629B6")
-var erxesColorHex = "#5629B6"
-var msgThankyou = ""
-var msgWelcome = ""
-var msgGreetings = ""
-var supporterName:String!
-var supporterAvatar:String!
-var supporters:[GetSupportersQuery.Data.MessengerSupporter] = []
-var isOnline = true
+var lang = "en"
+
+
+let screenSize = UIScreen.main.bounds
+let SCREEN_WIDTH = screenSize.width
+let SCREEN_HEIGHT = screenSize.height
+
+var themeColor = erxesColor
+var titleText = ""
+var descriptionText = ""
+var loaded = false
+var erxesCustomerId: String!
+var erxesBrandCode: String!
+var erxesIntegrationId: String!
+var wallPaper: String!
+var greetings: String!
+var away: String!
+var welcome: String!
+var thank: String!
+var customerEmail = ""
+var customerPhoneNumber = ""
+var supporters = [UserModel]()
+var requireAuth = false
+var knowledgeBaseTopicId = ""
+var hasKnowledgeBase = false
+
+var welcomeTitle: String!
+var welcomeDescription: String!
+var socialLinks = Scalar_JSON()
+var uploadUrl = ""
 var isSaas = false
-
 @objc public class Erxes: NSObject {
+    static func isInitialLoad() -> Bool {
+        return UserDefaults().value(forKey: "email") == nil
+    }
+    static func storeEmail(value: String) {
+        customerEmail = value
+        UserDefaults().set(customerEmail, forKey: "email")
+        UserDefaults().synchronize()
+    }
 
-    
-    
-    
-    static func firstRun() -> Bool {
-        let defaults = UserDefaults()
-        return defaults.value(forKey: "email") == nil
+    static func storePhoneNumber(value: String) {
+        customerPhoneNumber = value
+        UserDefaults().set(customerPhoneNumber, forKey: "phone")
+        UserDefaults().synchronize()
+    }
+
+    static func storeCustomerId(value: String) {
+
+        erxesCustomerId = value
+        UserDefaults().set(value, forKey: "customerId")
+        UserDefaults().synchronize()
+    }
+
+    static func storeIntegrationId(value: String) {
+        erxesIntegrationId = value
+        UserDefaults().set(value, forKey: "integrationId")
+        UserDefaults().synchronize()
     }
     
-    static func saveEmail( item:String) {
-        erxesEmail = item
-        let defaults = UserDefaults()
-        defaults.set(erxesEmail, forKey: "email")
-        defaults.synchronize()
+    static func storeThemeColor(hex:String) {
+        themeColor = UIColor.init(hexString: hex)
+        UserDefaults().set(hex, forKey: "themeColor")
+        UserDefaults().synchronize()
     }
-    
-    static func savePhone( item:String) {
-        erxesEmail = item
-        let defaults = UserDefaults()
-        defaults.set(erxesEmail, forKey: "phone")
-        defaults.synchronize()
-    }
-    
-    static func saveCustomerId( item:String) {
-        erxesCustomerId = item
-        let defaults = UserDefaults()
-        defaults.set(erxesCustomerId, forKey: "customerId")
-        defaults.synchronize()
-    }
-    
-    static func saveIntegrationId( item:String) {
-        integrationId = item
-        let defaults = UserDefaults()
-        defaults.set(integrationId, forKey: "integrationId")
-        defaults.synchronize()
-    }
-    
+
     static func restore() {
         let defaults = UserDefaults()
         
         if let email = defaults.string(forKey: "email") {
-            erxesEmail = email
+            customerEmail = email
         }
         
         if let phone = defaults.string(forKey: "phone") {
-            erxesPhone = phone
+            customerPhoneNumber = phone
+        }
+        if let integrationid = defaults.string(forKey: "integrationId") {
+            erxesIntegrationId = integrationid
         }
         
-        integrationId = defaults.string(forKey: "integrationId")
-        erxesCustomerId = defaults.string(forKey: "customerId")
-    }
-    
-    @objc public static func setBrandCode(code:String) {
-        brandCode = code
+        if let customerid = defaults.string(forKey: "customerId") {
+            erxesCustomerId = customerid
+        }
         
+        if let color = defaults.string(forKey: "themeColor") {
+            themeColor = UIColor.init(hexString: color)
+        }
+
     }
     
-    @objc public static func startWithUserEmail(email:String) {
-        erxesEmail = email
-        start()
-    }
-    
-    @objc public static func startWithUserPhone(phone:String) {
-        erxesPhone = phone
-        start()
-    }
-    
-    @objc public static func start() {
+    static func registerFonts() {
+     
+        UIFont.registerFontWithFilenameString(filenameString:"erxes.ttf",bundle:erxesBundle())
         
+     
+    }
+    
+ 
+
+     @objc public static func setup(erxesWidgetsApiUrl: String, erxesApiUrl: String, brandCode: String) {
+        
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        erxesBrandCode = brandCode
+        uploadUrl = erxesApiUrl
+        var subscriptionUrl = ""
+        
+        if erxesApiUrl.contains("http"){
+            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "http", with: "ws") + "/upload-file"
+        }else if erxesApiUrl.contains("https") {
+            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "https", with: "wss") + "/upload-file"
+        }
+        
+        ErxesClient.shared.setupClient(widgetsApiUrl: erxesWidgetsApiUrl, apiUrlString: subscriptionUrl)
+        self.getMessengerIntegration(brandCode: brandCode)
+        restore()
+    
+    }
+    
+    @objc public static func setupSaas(companyName: String,brandCode: String) {
+         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        isSaas = true
+        let erxesWidgetsApiUrl = "https://\(companyName).app.erxes.io/widgets-api"
+        let erxesApiUrl = "wss://\(companyName).app.erxes.io/api"
+        uploadUrl = "https://\(companyName).app.erxes.io/api/upload-file"
+        erxesBrandCode = brandCode
+        ErxesClient.shared.setupClient(widgetsApiUrl: erxesWidgetsApiUrl, apiUrlString: erxesApiUrl)
+        
+        self.getMessengerIntegration(brandCode: brandCode)
+        restore()
+    }
+
+
+    private static func getMessengerIntegration(brandCode: String) {
+        self.registerFonts()
+        
+        let query = GetMessengerIntegrationQuery(brandCode: brandCode)
+        ErxesClient.shared.client.fetch(query: query) { result in
+            guard let data = try? result.get().data else { return }
+            if let integrationData = data.getMessengerIntegration {
+                erxesIntegrationId = integrationData.id
+                let defaults = UserDefaults()
+
+                if let uiOptions = integrationData.uiOptions {
+                    defaults.setValue(uiOptions, forKey: "uiOptions")
+                    themeColor = UIColor.init(hexString: uiOptions["color"] as! String)
+                    if let _wallpaper: String = uiOptions["wallpaper"] as! String, _wallpaper != "5" {
+                        wallPaper = _wallpaper
+                    }
+                }
+                if let messengerData = integrationData.messengerData {
+                    if let requireAuthentication: Bool = messengerData["requireAuth"] as? Bool {
+                        requireAuth = requireAuthentication
+                    }
+                    defaults.setValue(messengerData, forKey: "messengerData")
+                }
+                if let language = integrationData.languageCode {
+                    lang = language
+                    defaults.setValue(language, forKey: "languageCode")
+                }
+                if let formData = integrationData.formData {
+                    defaults.setValue(formData, forKey: "formData")
+                }
+                defaults.synchronize()
+                self.getSupporters(integrationId: integrationData.id)
+            }
+            if let errors = try? result.get().errors {
+                print(errors)
+            }
+        }
+    }
+
+    private static func getSupporters(integrationId: String) {
+        let query = MessengerSupportersQuery(integrationId: integrationId)
+        ErxesClient.shared.client.fetch(query: query) { result in
+            guard let data = try? result.get().data else { return }
+            if let dataModel = data.messengerSupporters {
+                supporters = (data.messengerSupporters?.compactMap({ $0?.fragments.userModel }))!
+            }
+            if let errors = try? result.get().errors {
+                print(errors[0].localizedDescription)
+            }
+
+        }
+    }
+
+    @objc public static func start(data: [String: Any]! = nil) {
+
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
-            Router.toRegister(target: topController)
+
+
+            let navigationController = UINavigationController()
+            navigationController.modalPresentationStyle = .custom
+            navigationController.isNavigationBarHidden = true
+
+            if requireAuth {
+                if erxesCustomerId != nil && erxesCustomerId.count != 0 {
+                    let controller = HomeView()
+                    controller.isResigningCustomer = true
+                    controller.data = data
+                    navigationController.viewControllers.insert(controller, at: 0)
+                } else {
+                    let controller = AuthtenticationView()
+                    controller.data = data
+                    navigationController.viewControllers.insert(controller, at: 0)
+                }
+            } else {
+                let controller = HomeView()
+                controller.isResigningCustomer = false
+                controller.data = data
+                navigationController.viewControllers.insert(controller, at: 0)
+            }
+
+            topController.present(navigationController, animated: true, completion: nil)
         }
     }
-    
-    
-    @objc public static func endSession(completionHandler:() -> Void = { }){
+
+    @objc private static func sendData(data: [String: Any]) {
+
+        if (erxesCustomerId != nil) {
+            var userData = Scalar_JSON()
+            if data.keys.count > 0 {
+                var processed = [String: Any]()
+                for (key, value) in data {
+                    processed[key] = forceBridgeFromObjectiveC(value)
+                }
+                userData = processed
+            }
+
+            let mutation = MessengerConnectMutation(brandCode: erxesBrandCode)
+            mutation.cachedCustomerId = erxesCustomerId
+            mutation.data = userData
+            ErxesClient.shared.client.perform(mutation: mutation) { result in
+                guard let data = try? result.get().data else { return }
+                if (data.messengerConnect != nil) {
+                    Log.d("Send data result: Data has been sent")
+                }
+                if let errors = try? result.get().errors {
+                    Log.e("Error: \(errors[0].localizedDescription)")
+                }
+            }
+        } else {
+            Log.e("Error: Customer is not set !!!")
+        }
+
+    }
+
+    @objc public static func endSession(completionHandler: () -> Void = { }) {
         let defaults = UserDefaults()
         defaults.removeObject(forKey: "email")
         defaults.removeObject(forKey: "phone")
+        defaults.removeObject(forKey: "customerId")
+        defaults.removeObject(forKey: "integrationId")
         defaults.synchronize()
-        erxesEmail = ""
-        erxesPhone = ""
-        conversationId = nil
+        customerEmail = ""
+        customerPhoneNumber = ""
+        erxesCustomerId = ""
+        erxesIntegrationId = ""
         completionHandler()
     }
-    
-    @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {
-        
-        if email.count > 0 {
-            erxesEmail = email
-            isUser = true
-        }
-        
-        if phone.count > 0 {
-            erxesPhone = phone
-            isUser = true
-        }
-        
-        if data.keys.count > 0 {
-            var processed = [String:Any]()
-            for (key, value) in data {
-                processed[key] = forceBridgeFromObjectiveC(value)
-            }
-            erxesUserData = processed
-        }
-        
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            Router.toRegister(target: topController)
-        }
-    }
-    
+
     static func forceBridgeFromObjectiveC(_ value: Any) -> Any {
-        
+
         if value == nil {
             return value
         }
-        
+
         switch value {
-            
+
         case is NSString:
             return value as! String
-            
+
         case is Bool:
             return value as! Bool
         case is Int:
@@ -167,79 +302,41 @@ var isSaas = false
         }
     }
     
-    @objc public static func setDeviceToken(token:String){
+    public static func erxesBundle() -> Bundle {
+     
+        let frameworkBundle = Bundle(for: AuthtenticationView.self)
+        let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("ErxesSDK.bundle")
+        let resourceBundle = Bundle(url: bundleURL!)!
+        return resourceBundle
     }
-    
-    @objc public static func notificationReceived(userInfo: [AnyHashable : Any]) {
-        if let id = userInfo["conversationId"] as? String{
-            conversationId = id
-            Erxes.start()
+}
+
+
+public typealias Scalar_JSON = [String: Any]
+public typealias Scalar_Date = Int64
+
+extension Int64: JSONDecodable, JSONEncodable {
+    public init(jsonValue value: JSONValue) throws {
+
+        let string = String(describing: value)
+        guard let number = Int64(string) else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Int64.self)
         }
-    }
-    
-    @objc public static func setHosts(apiHost:String, subsHost:String, uploadUrl url: String) {
-        
-        let hostString = URL(string: apiHost)?.host
-        let hostSeperated = hostString?.components(separatedBy: ".")
-        if hostSeperated![1] == "app" && hostSeperated![2] == "erxes" && hostSeperated![3] == "io" {
-            isSaas = true
-        }else {
-            isSaas = false
-        }
-        
-        apiUrl = apiHost
-        subsUrl = subsHost
-        uploadUrl = url
-        getConfig()
+
+        self = number
     }
 
-    static func registerFonts() {
-        let b = Router.erxesBundle()
-        UIFont.registerFontWithFilenameString(filenameString: "icomoon.ttf", bundle: b)
-        UIFont.registerFontWithFilenameString(filenameString: "erxes.ttf", bundle: b)
-        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Regular.ttf", bundle: b)
-        UIFont.registerFontWithFilenameString(filenameString: "Roboto-Medium.ttf", bundle: b)
+    public var jsonValue: JSONValue {
+        return String(self)
     }
+}
 
-    static func getConfig() {
+extension Dictionary: JSONDecodable {
+    public init(jsonValue value: JSONValue) throws {
+        guard let dictionary = value as? Dictionary else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
+        }
 
-        registerFonts()
-        let query = GetConfigQuery(brandCode: brandCode!)
-        apollo.fetch(query: query) { result, error in
-            
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            let data = result?.data?.getMessengerIntegration
-            let defaults = UserDefaults()
-            
-            
-            if let uiOptions = data?.uiOptions {
-                defaults.setValue(uiOptions, forKey: "uiOptions")
-            }
-            if let messengerData = data?.messengerData {
-                defaults.setValue(messengerData, forKey: "messengerData")
-            }
-            if let language = data?.languageCode {
-                defaults.setValue(language, forKey: "languageCode")
-            }
-            defaults.synchronize()
-        }
+        self = dictionary
     }
-    
-    @objc public static func changeLanguage() {
-        var selected = "en"
-        if let lang = UserDefaults.standard.string(forKey:"languageCode") {
-            if lang == "en" {
-                selected = "mn"
-        }
-            else {
-                selected = "en"
-            }
-        }
-        UserDefaults.standard.set(selected, forKey: "languageCode")
-        UserDefaults.standard.synchronize()
-    }
-    
 }

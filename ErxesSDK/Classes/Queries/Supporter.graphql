@@ -1,0 +1,12 @@
+query messengerSupporters($integrationId:String!) {
+    messengerSupporters(integrationId:$integrationId) {
+        ...UserModel
+    }
+}
+
+fragment UserModel on User {
+    details{
+        fullName
+        avatar
+    }
+}
