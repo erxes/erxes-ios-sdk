@@ -85,9 +85,10 @@ class ChatViewModel {
             self.isDisconnected = true
             self.internetConnectionStatus?()
         case .online:
+            self.isLoading = true
             self.service.getMessages(conversationId: conversationId, success: { (data) in
                 self.model = data
-
+                self.isLoading = false
             }) { (error) in
                 print(error)
             }

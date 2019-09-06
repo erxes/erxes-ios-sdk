@@ -270,10 +270,11 @@ class HomeView: UIViewController {
         }
 
         self.viewModel.updateLoadingStatus = {
+            self.conversationsTableView.activityIndicatorView.center = self.conversationsTableView.center
             if self.viewModel.isLoading {
-                print("LOADING...")
+                self.conversationsTableView.activityIndicatorView.startAnimating()
             } else {
-                print("DATA READY")
+                self.conversationsTableView.activityIndicatorView.stopAnimating()
             }
         }
 

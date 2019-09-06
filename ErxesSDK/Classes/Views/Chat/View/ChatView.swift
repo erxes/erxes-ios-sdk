@@ -264,10 +264,11 @@ class ChatView: UIViewController {
         }
         
         self.viewModel.updateLoadingStatus = {
+            self.collectionView.activityIndicatorView.center = self.collectionView.center
             if self.viewModel.isLoading {
-                print("LOADING...")
+                self.collectionView.activityIndicatorView.startAnimating()
             } else {
-                print("DATA READY")
+                self.collectionView.activityIndicatorView.stopAnimating()
             }
         }
         
