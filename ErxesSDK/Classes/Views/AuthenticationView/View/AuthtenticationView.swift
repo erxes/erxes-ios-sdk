@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import ErxesFont
 class AuthtenticationView: UIViewController {
 
     // OUTLETS HERE
