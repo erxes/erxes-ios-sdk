@@ -15,7 +15,7 @@ class ChatHeader: UIView {
     
     var rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ic_more"),for:.normal)
+        button.setImage(UIImage(named: "ic_more", in: Erxes.erxesBundle(), compatibleWith: nil),for:.normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         return button
@@ -75,7 +75,7 @@ class ChatHeader: UIView {
         self.clipsToBounds = false
         //I actually create & place constraints in here, instead of in
         //updateConstraints
-        let image = UIImage(named: "pattern")
+        let image = UIImage(named: "pattern", in: Erxes.erxesBundle(), compatibleWith: nil)
         let bgView = UIImageView()
         bgView.tag = 100
         bgView.backgroundColor = themeColor

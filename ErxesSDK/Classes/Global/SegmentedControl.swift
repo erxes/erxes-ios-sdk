@@ -19,8 +19,13 @@ class SegmentedControl: UIView {
     private var selectorView: UIView!
 
     var textColor: UIColor = .black
-    var selectorViewColor: UIColor = .black
-    var selectorTextColor: UIColor = .black
+   
+    var selectorViewColor: UIColor = themeColor! {
+        didSet {
+            selectorView.backgroundColor = selectorViewColor
+        }
+    }
+    var selectorTextColor: UIColor = themeColor!
 
     weak var delegate: SegmentedControlDelegate?
 

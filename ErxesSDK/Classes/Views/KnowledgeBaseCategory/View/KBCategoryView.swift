@@ -141,10 +141,11 @@ class KBCategoryView: UIViewController {
         }
         
         self.viewModel.updateLoadingStatus = {
+            self.tableView.activityIndicatorView.center = self.tableView.center
             if self.viewModel.isLoading {
-                print("LOADING...")
+                self.tableView.activityIndicatorView.startAnimating()
             } else {
-                 print("DATA READY")
+                self.tableView.activityIndicatorView.stopAnimating()
             }
         }
 

@@ -102,6 +102,7 @@ class HomeViewModel {
 
     //MARK: -- Example Func
     func messengerConnect(Email email:String? = "", Phone phone:String? = "",CachedCustomerId customerId:String? = "",data:Scalar_JSON! = nil) {
+        self.isLoading = true
         self.service.messengerConnect(brandCode:erxesBrandCode , email:email , phone:phone, customerId: customerId, data: data ,success: { (data) in
             if let messengerData = data.messengerData {
          
@@ -159,7 +160,7 @@ class HomeViewModel {
                     self.didGetKnowledgeBaseTopicId!(KBTopicID)
                 }
             }
-            
+            self.isLoading = false
             self.model = data
         }) { (error) in
             print(error)

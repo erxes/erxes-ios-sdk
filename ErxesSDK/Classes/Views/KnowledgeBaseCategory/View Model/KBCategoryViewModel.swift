@@ -80,9 +80,13 @@ class KBCategoryViewModel {
             self.isDisconnected = true
             self.internetConnectionStatus?()
         case .online:
+            self.isLoading = true
             self.service.knowledgeBaseCategoriesDetail(categoryId: categoryId, success: { (data) in
+                self.isLoading = false
                 self.didGetData!(data)
+                
             }) { (error) in
+                self.isLoading = false
                 print(error)
             }
         default:
