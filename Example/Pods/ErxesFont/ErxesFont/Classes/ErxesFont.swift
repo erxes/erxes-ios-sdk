@@ -436,7 +436,7 @@ public enum ErxesFont: String {
 }
 
 
-var fontDict:[String:String] =     ["adduser": "\u{e800}",
+public var fontDict:[String:String] =     ["adduser": "\u{e800}",
     "alarm2": "\u{e801}",
     "alarm": "\u{e802}",
     "alignleft": "\u{e803}",

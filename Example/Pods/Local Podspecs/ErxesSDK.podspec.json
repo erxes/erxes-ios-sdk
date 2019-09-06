@@ -1,8 +1,8 @@
 {
   "name": "ErxesSDK",
-  "version": "0.1.12",
+  "version": "0.4.0",
   "summary": "A short description of erxes-ios-sdk.",
-  "swift_version": "4.0",
+  "swift_version": "5.0",
   "description": "erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/",
   "homepage": "https://github.com/erxes/erxes-ios-sdk",
   "license": {
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/erxes/erxes-ios-sdk.git",
-    "tag": "0.1.12"
+    "tag": "0.4.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -22,7 +22,7 @@
   "source_files": "ErxesSDK/Classes/**/*",
   "resource_bundles": {
     "ErxesSDK": [
-      "ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings}"
+      "ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings,lproj}"
     ]
   },
   "pod_target_xcconfig": {
@@ -51,6 +51,9 @@
     ],
     "SnapKit": [
       "~> 4.2.0"
+    ],
+    "ErxesFont": [
+      "~> 1.0.1"
     ]
   }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import ErxesFont
 class KnowledBaseTopicCell: UITableViewCell {
 
 

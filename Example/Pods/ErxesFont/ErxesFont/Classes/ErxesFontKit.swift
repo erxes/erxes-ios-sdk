@@ -12,13 +12,24 @@ import CoreText
 
 
 
+private var fontloaded = false
+public func loadFont(){
+    if fontloaded {
+        return
+    }
+    fontloaded = true
+    let frameworkBundle = Bundle(identifier: "org.cocoapods.ErxesFont")!
+    let bundleURL = frameworkBundle.resourceURL?.appendingPathComponent("ErxesFont.bundle")
+    let resourceBundle = Bundle(url: bundleURL!)!
+    UIFont.registerFontWithFilenameString(filenameString:"erxes.ttf",bundle:resourceBundle)
+}
 
 
 public extension UIFont {
     class func erxes(of size: CGFloat) -> UIFont {
-//        UIFont.registerFontWithFilenameString(filenameString:"erxes.ttf",bundle:erxesBundle())
-        
-        return UIFont(name: "erxes", size: size)!
+        loadFont()
+        let name = "erxes"
+        return UIFont(name: name, size: size)!
     }
 }
 
@@ -67,4 +78,36 @@ public extension UIImage {
         return image!
     }
     
+}
+
+
+public extension UIFont {
+    static func registerFontWithFilenameString(filenameString: String, bundle: Bundle) {
+        
+        _ = UIFont.familyNames
+        guard let pathForResourceString = bundle.path(forResource: filenameString, ofType: nil) else {
+            print("UIFont+:  Failed to register font - path for resource not found.")
+            return
+        }
+        
+        guard let fontData = NSData(contentsOfFile: pathForResourceString) else {
+            print("UIFont+:  Failed to register font - font data could not be loaded.")
+            return
+        }
+        
+        guard let dataProvider = CGDataProvider(data: fontData) else {
+            print("UIFont+:  Failed to register font - data provider could not be loaded.")
+            return
+        }
+        
+        guard let fontRef = CGFont(dataProvider) else {
+            print("UIFont+:  Failed to register font - font could not be loaded.")
+            return
+        }
+        
+        var errorRef: Unmanaged<CFError>? = nil
+        if (CTFontManagerRegisterGraphicsFont(fontRef, &errorRef) == false) {
+            print("UIFont+:  Failed to register font - register graphics font failed - this font may have already been registered in the main bundle.")
+        }
+    }
 }

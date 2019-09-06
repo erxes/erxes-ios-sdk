@@ -10,6 +10,8 @@ import UIKit
 import Foundation
 import Apollo
 
+
+
 var erxesColor = UIColor(hexString: "#5629B6")
 var lang = "en"
 

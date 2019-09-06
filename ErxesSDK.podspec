@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.3.1'
+  s.version          = '0.4.0'
   s.summary          = 'A short description of erxes-ios-sdk.'
   s.swift_version = '5.0'
   s.description      = 'erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'
@@ -24,4 +24,5 @@ Pod::Spec.new do |s|
   s.dependency 'Alamofire', '~> 4.8.0'
   s.dependency 'SDWebImage', '~> 5.1.0'
   s.dependency 'SnapKit', '~> 4.2.0'
+  s.dependency 'ErxesFont','~> 1.0.1'
 end
