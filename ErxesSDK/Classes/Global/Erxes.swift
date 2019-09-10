@@ -239,7 +239,7 @@ var isSaas = false
             if data.keys.count > 0 {
                 var processed = [String: Any]()
                 for (key, value) in data {
-                    processed[key] = forceBridgeFromObjectiveC(value)
+                    processed[key] = forceBridgeObjectiveC(value)
                 }
                 userData = processed
             }
@@ -276,7 +276,7 @@ var isSaas = false
         completionHandler()
     }
 
-    static func forceBridgeFromObjectiveC(_ value: Any) -> Any {
+    static func forceBridgeObjectiveC(_ value: Any) -> Any {
 
         if value == nil {
             return value
@@ -296,9 +296,9 @@ var isSaas = false
         case is Double:
             return value as! Double
         case is NSDictionary:
-            return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeFromObjectiveC($0.value)) })
+            return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeObjectiveC($0.value)) })
         case is NSArray:
-            return (value as? NSArray).map { forceBridgeFromObjectiveC($0) }
+            return (value as? NSArray).map { forceBridgeObjectiveC($0) }
         default:
             return value
         }
@@ -314,31 +314,3 @@ var isSaas = false
 }
 
 
-public typealias Scalar_JSON = [String: Any]
-public typealias Scalar_Date = Int64
-
-extension Int64: JSONDecodable, JSONEncodable {
-    public init(jsonValue value: JSONValue) throws {
-
-        let string = String(describing: value)
-        guard let number = Int64(string) else {
-            throw JSONDecodingError.couldNotConvert(value: value, to: Int64.self)
-        }
-
-        self = number
-    }
-
-    public var jsonValue: JSONValue {
-        return String(self)
-    }
-}
-
-extension Dictionary: JSONDecodable {
-    public init(jsonValue value: JSONValue) throws {
-        guard let dictionary = value as? Dictionary else {
-            throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
-        }
-
-        self = dictionary
-    }
-}
