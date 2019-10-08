@@ -116,13 +116,13 @@ var isSaas = false
         
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         erxesBrandCode = brandCode
-        uploadUrl = erxesApiUrl
+        uploadUrl = erxesApiUrl + "/upload-file"
         var subscriptionUrl = ""
         
         if erxesApiUrl.contains("http"){
-            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "http", with: "ws") + "/upload-file"
+            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "http", with: "ws")
         }else if erxesApiUrl.contains("https") {
-            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "https", with: "wss") + "/upload-file"
+            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "https", with: "wss")
         }
         
         ErxesClient.shared.setupClient(widgetsApiUrl: erxesWidgetsApiUrl, apiUrlString: subscriptionUrl)
