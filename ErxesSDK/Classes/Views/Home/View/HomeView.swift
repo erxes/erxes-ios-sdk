@@ -298,6 +298,7 @@ class HomeView: UIViewController {
             self.segmentedControl.selectorViewColor = themeColor!
             self.segmentedControl.selectorTextColor = themeColor!
             self.segmentedControl.setNeedsDisplay()
+        
             
         }
 

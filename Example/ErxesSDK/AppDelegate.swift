@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Erxes.setupSaas(companyName: "companyName", brandCode: "brandCode")
         
         //if you are OpenSource user you can setup as following
-        Erxes.setup(erxesWidgetsApiUrl: "https://wapi.office.erxes.io", erxesApiUrl: "https://api.office.erxes.io", brandCode: "5fkS4v")
+        Erxes.setup(erxesWidgetsApiUrl: "http://localhost:3100", erxesApiUrl: "http://localhost:3300", brandCode: "ftnq6K")
         return true
     }
 
