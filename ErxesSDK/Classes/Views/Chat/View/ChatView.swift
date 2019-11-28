@@ -193,7 +193,7 @@ class ChatView: UIViewController {
     }
     
     func prepareViews() {
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
         view.addSubview(textField)
         textField.delegate = self
         view.addSubview(containerView)

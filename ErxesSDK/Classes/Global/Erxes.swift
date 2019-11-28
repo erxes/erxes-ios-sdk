@@ -110,7 +110,10 @@ var isSaas = false
      
     }
     
- 
+    @objc public static func setCustomer(email:String? = "",phone:String? = ""){
+        customerEmail = email!
+        customerPhoneNumber = phone!
+    }
 
      @objc public static func setup(erxesWidgetsApiUrl: String, erxesApiUrl: String, brandCode: String) {
         
@@ -172,7 +175,7 @@ var isSaas = false
                     lang = language
                     defaults.setValue(language, forKey: "languageCode")
                 }
-                if let formData = integrationData.formData {
+                if let formData = integrationData.leadData {
                     defaults.setValue(formData, forKey: "formData")
                 }
                 defaults.synchronize()
@@ -190,6 +193,7 @@ var isSaas = false
             guard let data = try? result.get().data else { return }
             if let dataModel = data.messengerSupporters {
                 supporters = (data.messengerSupporters?.compactMap({ $0?.fragments.userModel }))!
+                print("supporters = ",supporters)
             }
             if let errors = try? result.get().errors {
                 print(errors[0].localizedDescription)
