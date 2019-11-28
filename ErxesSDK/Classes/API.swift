@@ -621,13 +621,13 @@ public final class AllConversationsQuery: GraphQLQuery {
 
 public final class FormConnectMutation: GraphQLMutation {
   /// mutation formConnect($brandCode: String!, $formCode: String!) {
-  ///   formConnect(brandCode: $brandCode, formCode: $formCode) {
+  ///   leadConnect(brandCode: $brandCode, formCode: $formCode) {
   ///     __typename
   ///     ...FormConnectModel
   ///   }
   /// }
   public let operationDefinition =
-    "mutation formConnect($brandCode: String!, $formCode: String!) { formConnect(brandCode: $brandCode, formCode: $formCode) { __typename ...FormConnectModel } }"
+    "mutation formConnect($brandCode: String!, $formCode: String!) { leadConnect(brandCode: $brandCode, formCode: $formCode) { __typename ...FormConnectModel } }"
 
   public let operationName = "formConnect"
 
@@ -649,7 +649,7 @@ public final class FormConnectMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("formConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "formCode": GraphQLVariable("formCode")], type: .object(FormConnect.selections)),
+      GraphQLField("leadConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "formCode": GraphQLVariable("formCode")], type: .object(LeadConnect.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -658,20 +658,20 @@ public final class FormConnectMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(formConnect: FormConnect? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "formConnect": formConnect.flatMap { (value: FormConnect) -> ResultMap in value.resultMap }])
+    public init(leadConnect: LeadConnect? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "leadConnect": leadConnect.flatMap { (value: LeadConnect) -> ResultMap in value.resultMap }])
     }
 
-    public var formConnect: FormConnect? {
+    public var leadConnect: LeadConnect? {
       get {
-        return (resultMap["formConnect"] as? ResultMap).flatMap { FormConnect(unsafeResultMap: $0) }
+        return (resultMap["leadConnect"] as? ResultMap).flatMap { LeadConnect(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "formConnect")
+        resultMap.updateValue(newValue?.resultMap, forKey: "leadConnect")
       }
     }
 
-    public struct FormConnect: GraphQLSelectionSet {
+    public struct LeadConnect: GraphQLSelectionSet {
       public static let possibleTypes = ["FormConnectResponse"]
 
       public static let selections: [GraphQLSelection] = [
@@ -731,11 +731,11 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
   ///     languageCode
   ///     uiOptions
   ///     messengerData
-  ///     formData
+  ///     leadData
   ///   }
   /// }
   public let operationDefinition =
-    "query getMessengerIntegration($brandCode: String!) { getMessengerIntegration(brandCode: $brandCode) { __typename _id languageCode uiOptions messengerData formData } }"
+    "query getMessengerIntegration($brandCode: String!) { getMessengerIntegration(brandCode: $brandCode) { __typename _id languageCode uiOptions messengerData leadData } }"
 
   public let operationName = "getMessengerIntegration"
 
@@ -784,7 +784,7 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
         GraphQLField("languageCode", type: .scalar(String.self)),
         GraphQLField("uiOptions", type: .scalar(Scalar_JSON.self)),
         GraphQLField("messengerData", type: .scalar(Scalar_JSON.self)),
-        GraphQLField("formData", type: .scalar(Scalar_JSON.self)),
+        GraphQLField("leadData", type: .scalar(Scalar_JSON.self)),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -793,8 +793,8 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: String, languageCode: String? = nil, uiOptions: Scalar_JSON? = nil, messengerData: Scalar_JSON? = nil, formData: Scalar_JSON? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData, "formData": formData])
+      public init(id: String, languageCode: String? = nil, uiOptions: Scalar_JSON? = nil, messengerData: Scalar_JSON? = nil, leadData: Scalar_JSON? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData, "leadData": leadData])
       }
 
       public var __typename: String {
@@ -842,12 +842,12 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
         }
       }
 
-      public var formData: Scalar_JSON? {
+      public var leadData: Scalar_JSON? {
         get {
-          return resultMap["formData"] as? Scalar_JSON
+          return resultMap["leadData"] as? Scalar_JSON
         }
         set {
-          resultMap.updateValue(newValue, forKey: "formData")
+          resultMap.updateValue(newValue, forKey: "leadData")
         }
       }
     }
@@ -1877,8 +1877,8 @@ public struct FormConnectModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String? = nil, title: String? = nil, description: String? = nil, callout: Scalar_JSON? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "callout": callout])
+    public init(id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "buttonText": buttonText])
     }
 
     public var __typename: String {
@@ -1931,8 +1931,8 @@ public struct FormConnectModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String, name: String? = nil, formData: Scalar_JSON? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "formData": formData])
+    public init(id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "leadData": leadData])
     }
 
     public var __typename: String {
@@ -1978,10 +1978,10 @@ public struct FormModel: GraphQLFragment {
   ///   _id
   ///   title
   ///   description
-  ///   callout
+  ///   buttonText
   /// }
   public static let fragmentDefinition =
-    "fragment FormModel on Form { __typename _id title description callout }"
+    "fragment FormModel on Form { __typename _id title description buttonText }"
 
   public static let possibleTypes = ["Form"]
 
@@ -1990,7 +1990,7 @@ public struct FormModel: GraphQLFragment {
     GraphQLField("_id", type: .scalar(String.self)),
     GraphQLField("title", type: .scalar(String.self)),
     GraphQLField("description", type: .scalar(String.self)),
-    GraphQLField("callout", type: .scalar(Scalar_JSON.self)),
+    GraphQLField("buttonText", type: .scalar(String.self)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -1999,8 +1999,8 @@ public struct FormModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String? = nil, title: String? = nil, description: String? = nil, callout: Scalar_JSON? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "callout": callout])
+  public init(id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "buttonText": buttonText])
   }
 
   public var __typename: String {
@@ -2039,12 +2039,12 @@ public struct FormModel: GraphQLFragment {
     }
   }
 
-  public var callout: Scalar_JSON? {
+  public var buttonText: String? {
     get {
-      return resultMap["callout"] as? Scalar_JSON
+      return resultMap["buttonText"] as? String
     }
     set {
-      resultMap.updateValue(newValue, forKey: "callout")
+      resultMap.updateValue(newValue, forKey: "buttonText")
     }
   }
 }
@@ -2054,10 +2054,10 @@ public struct IntegrationModel: GraphQLFragment {
   ///   __typename
   ///   _id
   ///   name
-  ///   formData
+  ///   leadData
   /// }
   public static let fragmentDefinition =
-    "fragment IntegrationModel on Integration { __typename _id name formData }"
+    "fragment IntegrationModel on Integration { __typename _id name leadData }"
 
   public static let possibleTypes = ["Integration"]
 
@@ -2065,7 +2065,7 @@ public struct IntegrationModel: GraphQLFragment {
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
     GraphQLField("_id", type: .nonNull(.scalar(String.self))),
     GraphQLField("name", type: .scalar(String.self)),
-    GraphQLField("formData", type: .scalar(Scalar_JSON.self)),
+    GraphQLField("leadData", type: .scalar(Scalar_JSON.self)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -2074,8 +2074,8 @@ public struct IntegrationModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String, name: String? = nil, formData: Scalar_JSON? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "formData": formData])
+  public init(id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "leadData": leadData])
   }
 
   public var __typename: String {
@@ -2105,12 +2105,12 @@ public struct IntegrationModel: GraphQLFragment {
     }
   }
 
-  public var formData: Scalar_JSON? {
+  public var leadData: Scalar_JSON? {
     get {
-      return resultMap["formData"] as? Scalar_JSON
+      return resultMap["leadData"] as? Scalar_JSON
     }
     set {
-      resultMap.updateValue(newValue, forKey: "formData")
+      resultMap.updateValue(newValue, forKey: "leadData")
     }
   }
 }
