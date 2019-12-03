@@ -310,10 +310,10 @@ class HomeView: UIViewController {
         }
         
         self.viewModel.didReceiveAdminMessage = { data in
-            if let index = self.conversations.firstIndex(where: {$0.id == data.conversationId}) {
+            if let index = self.conversations.firstIndex(where: {$0._id == data.conversationId}) {
                 var conversation = self.conversations[index]
                 conversation.content = data.content
-                self.viewModel.unreadIds.append(conversation.id)
+                self.viewModel.unreadIds.append(conversation._id)
                 self.conversations[index] = conversation
             }
         }
@@ -401,7 +401,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
                 let model = conversations[indexPath.row]
                 
                 
-                if self.viewModel.unreadIds.contains(model.id) {
+                if self.viewModel.unreadIds.contains(model._id) {
                     
                     if let unreadCell = tableView.dequeueReusableCell(withIdentifier: "ConversationUnreadCell", for: indexPath) as? ConversationUnreadCell {
                         unreadCell.setup(viewModel: model)
@@ -474,7 +474,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
         if tableView == self.conversationsTableView {
             let conversation = self.conversations[indexPath.row]
             let controller = ChatView()
-            controller.conversationId = conversation.id
+            controller.conversationId = conversation._id
             controller.mainTitle = "title"
             controller.subTitle = "subtitle"
             
@@ -483,7 +483,7 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
            
             if let model = self.knowledgeBase.categories![indexPath.row]?.fragments.knowledgeBaseCategoryModel {
                 let controller = KBCategoryView()
-                controller.categoryId = model.id!
+                controller.categoryId = model._id!
                 controller.mainTitle = model.title
                 controller.subTitle = model.description
                 self.navigationController?.pushViewController(controller, animated: true)

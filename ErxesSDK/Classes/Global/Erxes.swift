@@ -155,7 +155,7 @@ var isSaas = false
         ErxesClient.shared.client.fetch(query: query) { result in
             guard let data = try? result.get().data else { return }
             if let integrationData = data.getMessengerIntegration {
-                erxesIntegrationId = integrationData.id
+                erxesIntegrationId = integrationData._id
                 let defaults = UserDefaults()
 
                 if let uiOptions = integrationData.uiOptions {
@@ -179,7 +179,7 @@ var isSaas = false
                     defaults.setValue(formData, forKey: "formData")
                 }
                 defaults.synchronize()
-                self.getSupporters(integrationId: integrationData.id)
+                self.getSupporters(integrationId: integrationData._id)
             }
             if let errors = try? result.get().errors {
                 print(errors)

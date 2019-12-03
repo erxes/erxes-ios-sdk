@@ -1,18 +1,18 @@
 PODS:
   - Alamofire (4.8.2)
-  - Apollo (0.15.0):
-    - Apollo/Core (= 0.15.0)
-  - Apollo/Core (0.15.0)
-  - Apollo/SQLite (0.15.0):
+  - Apollo (0.20.0):
+    - Apollo/Core (= 0.20.0)
+  - Apollo/Core (0.20.0)
+  - Apollo/SQLite (0.20.0):
     - Apollo/Core
     - SQLite.swift (= 0.12.2)
-  - Apollo/WebSocket (0.15.0):
+  - Apollo/WebSocket (0.20.0):
     - Apollo/Core
-    - Starscream (= 3.1.0)
+    - Starscream (= 3.1.1)
   - ErxesFont (1.0.1)
-  - ErxesSDK (0.4.0):
+  - ErxesSDK (0.9.0):
     - Alamofire (~> 4.8.0)
-    - Apollo (~> 0.15.0)
+    - Apollo (~> 0.20.0)
     - Apollo/SQLite
     - Apollo/WebSocket
     - ErxesFont (~> 1.0.1)
@@ -27,19 +27,20 @@ PODS:
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
-  - Starscream (3.1.0)
+  - Starscream (3.1.1)
 
 DEPENDENCIES:
   - ErxesSDK (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - Apollo
     - ErxesFont
     - Fusuma
     - SDWebImage
     - SnapKit
+  trunk:
+    - Apollo
     - SQLite.swift
     - Starscream
 
@@ -49,15 +50,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Apollo: a103aa59622fceb089063517db058e3d37d7c0ca
+  Apollo: 46b40c7023c1d49f2220a0364cdff8829674d9d3
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  ErxesSDK: 39e22ac232e8061bc97c4895383ef11b7d6d990e
+  ErxesSDK: 98ea9ba083162249ddd3bedc8e754fbdcc123b31
   Fusuma: 3bd08c8c5341ec60c0074fa28570fea8765966f0
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

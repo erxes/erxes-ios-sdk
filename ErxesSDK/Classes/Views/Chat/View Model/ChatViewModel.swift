@@ -124,7 +124,7 @@ class ChatViewModel {
             ErxesClient.shared.client.subscribe(subscription: subscription) { (result) in
                 guard let data = try? result.get().data else { return }
                 if let dataModel = data.conversationMessageInserted?.fragments.messageSubscriptionModel {
-                    var message = MessageModel(id: dataModel.id, conversationId: conversationId)
+                    var message = MessageModel(_id: dataModel.id, conversationId: conversationId)
                     message.customerId = dataModel.customerId
                     message.content = dataModel.content
                     message.createdAt = dataModel.createdAt
