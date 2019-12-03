@@ -125,9 +125,14 @@ class BaseCells: UICollectionViewCell {
             avatarView.image = UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil)
         }
         
-        let date = model?.createdAt?.dateFromUnixTime()
-        let now = date?.hourMinutes!
-        dateLabel.text = now!
+        if let date = model?.createdAt?.dateFromUnixTime() {
+            let now = date.hourMinutes!
+            dateLabel.text = now
+        }else {
+            let date = Date()
+            let now = date.hourMinutes!
+            dateLabel.text = now
+        }
     }
     
     
