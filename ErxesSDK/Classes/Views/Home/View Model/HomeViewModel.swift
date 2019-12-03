@@ -176,7 +176,7 @@ class HomeViewModel {
             self.getKnowledgeBaseTopic(topicId: knowledgeBaseTopicId)
             self.unreadIds.removeAll()
             for conversation in self.conversations {
-                self.unreadCount(conversationId: conversation.id)
+                self.unreadCount(conversationId: conversation._id)
             }
         }) { (error) in
             print(error)

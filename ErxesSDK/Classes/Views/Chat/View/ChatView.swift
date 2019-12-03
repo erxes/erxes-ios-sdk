@@ -316,7 +316,7 @@ class ChatView: UIViewController {
         
         self.viewModel.didReceiveMessage = { data in
             self.conversationId = data.conversationId
-            if self.isNewMessage(id: data.id) {
+            if self.isNewMessage(id: data._id) {
                 self.chats.append(data)
                 if self.chats.count > 1 {
                     let indexPath = IndexPath(item: self.chats.count - 1, section: 0)
@@ -387,7 +387,7 @@ class ChatView: UIViewController {
     }
     
     func isNewMessage(id:String) -> Bool {
-        let temp = self.chats.filter{$0.id == id}
+        let temp = self.chats.filter{$0._id == id}
         if temp.count != 0 {
             return false
         }else {

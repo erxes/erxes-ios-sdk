@@ -1,6 +1,7 @@
 //  This file was automatically generated and should not be edited.
 
 import Apollo
+import Foundation
 
 public struct AttachmentInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -38,7 +39,7 @@ public struct AttachmentInput: GraphQLMapConvertible {
 
   public var size: Swift.Optional<Double?> {
     get {
-      return graphQLMap["size"] as? Swift.Optional<Double?> ?? .none
+      return graphQLMap["size"] as? Swift.Optional<Double?> ?? Swift.Optional<Double?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "size")
@@ -47,14 +48,16 @@ public struct AttachmentInput: GraphQLMapConvertible {
 }
 
 public final class InsertMessageMutation: GraphQLMutation {
-  /// mutation insertMessage($integrationId: String!, $customerId: String!, $conversationId: String, $message: String, $attachments: [AttachmentInput]) {
-  ///   insertMessage(integrationId: $integrationId, customerId: $customerId, conversationId: $conversationId, message: $message, attachments: $attachments) {
-  ///     __typename
-  ///     ...MessageModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation insertMessage($integrationId: String!, $customerId: String!, $conversationId: String, $message: String, $attachments: [AttachmentInput]) { insertMessage(integrationId: $integrationId, customerId: $customerId, conversationId: $conversationId, message: $message, attachments: $attachments) { __typename ...MessageModel } }"
+    """
+    mutation insertMessage($integrationId: String!, $customerId: String!, $conversationId: String, $message: String, $attachments: [AttachmentInput]) {
+      insertMessage(integrationId: $integrationId, customerId: $customerId, conversationId: $conversationId, message: $message, attachments: $attachments) {
+        __typename
+        ...MessageModel
+      }
+    }
+    """
 
   public let operationName = "insertMessage"
 
@@ -157,14 +160,16 @@ public final class InsertMessageMutation: GraphQLMutation {
 }
 
 public final class MessagesQuery: GraphQLQuery {
-  /// query Messages($conversationId: String!) {
-  ///   messages(conversationId: $conversationId) {
-  ///     __typename
-  ///     ...MessageModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query Messages($conversationId: String!) { messages(conversationId: $conversationId) { __typename ...MessageModel } }"
+    """
+    query Messages($conversationId: String!) {
+      messages(conversationId: $conversationId) {
+        __typename
+        ...MessageModel
+      }
+    }
+    """
 
   public let operationName = "Messages"
 
@@ -259,14 +264,16 @@ public final class MessagesQuery: GraphQLQuery {
 }
 
 public final class ConversationDetailQuery: GraphQLQuery {
-  /// query conversationDetail($id: String, $integrationId: String!) {
-  ///   conversationDetail(_id: $id, integrationId: $integrationId) {
-  ///     __typename
-  ///     ...DetailResponse
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query conversationDetail($id: String, $integrationId: String!) { conversationDetail(_id: $id, integrationId: $integrationId) { __typename ...DetailResponse } }"
+    """
+    query conversationDetail($id: String, $integrationId: String!) {
+      conversationDetail(_id: $id, integrationId: $integrationId) {
+        __typename
+        ...DetailResponse
+      }
+    }
+    """
 
   public let operationName = "conversationDetail"
 
@@ -367,11 +374,13 @@ public final class ConversationDetailQuery: GraphQLQuery {
 }
 
 public final class ReadConversationMessagesMutation: GraphQLMutation {
-  /// mutation readConversationMessages($conversationId: String!) {
-  ///   readConversationMessages(conversationId: $conversationId)
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation readConversationMessages($conversationId: String!) { readConversationMessages(conversationId: $conversationId) }"
+    """
+    mutation readConversationMessages($conversationId: String!) {
+      readConversationMessages(conversationId: $conversationId)
+    }
+    """
 
   public let operationName = "readConversationMessages"
 
@@ -414,14 +423,16 @@ public final class ReadConversationMessagesMutation: GraphQLMutation {
 }
 
 public final class MessengerSupportersQuery: GraphQLQuery {
-  /// query messengerSupporters($integrationId: String!) {
-  ///   messengerSupporters(integrationId: $integrationId) {
-  ///     __typename
-  ///     ...UserModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query messengerSupporters($integrationId: String!) { messengerSupporters(integrationId: $integrationId) { __typename ...UserModel } }"
+    """
+    query messengerSupporters($integrationId: String!) {
+      messengerSupporters(integrationId: $integrationId) {
+        __typename
+        ...UserModel
+      }
+    }
+    """
 
   public let operationName = "messengerSupporters"
 
@@ -516,14 +527,16 @@ public final class MessengerSupportersQuery: GraphQLQuery {
 }
 
 public final class AllConversationsQuery: GraphQLQuery {
-  /// query allConversations($integrationId: String!, $customerId: String!) {
-  ///   conversations(integrationId: $integrationId, customerId: $customerId) {
-  ///     __typename
-  ///     ...ConversationModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query allConversations($integrationId: String!, $customerId: String!) { conversations(integrationId: $integrationId, customerId: $customerId) { __typename ...ConversationModel } }"
+    """
+    query allConversations($integrationId: String!, $customerId: String!) {
+      conversations(integrationId: $integrationId, customerId: $customerId) {
+        __typename
+        ...ConversationModel
+      }
+    }
+    """
 
   public let operationName = "allConversations"
 
@@ -620,14 +633,16 @@ public final class AllConversationsQuery: GraphQLQuery {
 }
 
 public final class FormConnectMutation: GraphQLMutation {
-  /// mutation formConnect($brandCode: String!, $formCode: String!) {
-  ///   leadConnect(brandCode: $brandCode, formCode: $formCode) {
-  ///     __typename
-  ///     ...FormConnectModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation formConnect($brandCode: String!, $formCode: String!) { leadConnect(brandCode: $brandCode, formCode: $formCode) { __typename ...FormConnectModel } }"
+    """
+    mutation formConnect($brandCode: String!, $formCode: String!) {
+      leadConnect(brandCode: $brandCode, formCode: $formCode) {
+        __typename
+        ...FormConnectModel
+      }
+    }
+    """
 
   public let operationName = "formConnect"
 
@@ -724,18 +739,20 @@ public final class FormConnectMutation: GraphQLMutation {
 }
 
 public final class GetMessengerIntegrationQuery: GraphQLQuery {
-  /// query getMessengerIntegration($brandCode: String!) {
-  ///   getMessengerIntegration(brandCode: $brandCode) {
-  ///     __typename
-  ///     _id
-  ///     languageCode
-  ///     uiOptions
-  ///     messengerData
-  ///     leadData
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query getMessengerIntegration($brandCode: String!) { getMessengerIntegration(brandCode: $brandCode) { __typename _id languageCode uiOptions messengerData leadData } }"
+    """
+    query getMessengerIntegration($brandCode: String!) {
+      getMessengerIntegration(brandCode: $brandCode) {
+        __typename
+        _id
+        languageCode
+        uiOptions
+        messengerData
+        leadData
+      }
+    }
+    """
 
   public let operationName = "getMessengerIntegration"
 
@@ -793,8 +810,8 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: String, languageCode: String? = nil, uiOptions: Scalar_JSON? = nil, messengerData: Scalar_JSON? = nil, leadData: Scalar_JSON? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData, "leadData": leadData])
+      public init(_id: String, languageCode: String? = nil, uiOptions: Scalar_JSON? = nil, messengerData: Scalar_JSON? = nil, leadData: Scalar_JSON? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Integration", "_id": _id, "languageCode": languageCode, "uiOptions": uiOptions, "messengerData": messengerData, "leadData": leadData])
       }
 
       public var __typename: String {
@@ -806,7 +823,7 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
         }
       }
 
-      public var id: String {
+      public var _id: String {
         get {
           return resultMap["_id"]! as! String
         }
@@ -855,11 +872,13 @@ public final class GetMessengerIntegrationQuery: GraphQLQuery {
 }
 
 public final class UnreadCountQuery: GraphQLQuery {
-  /// query unreadCount($conversationId: String) {
-  ///   unreadCount(conversationId: $conversationId)
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query unreadCount($conversationId: String) { unreadCount(conversationId: $conversationId) }"
+    """
+    query unreadCount($conversationId: String) {
+      unreadCount(conversationId: $conversationId)
+    }
+    """
 
   public let operationName = "unreadCount"
 
@@ -902,14 +921,16 @@ public final class UnreadCountQuery: GraphQLQuery {
 }
 
 public final class KnowledgeBaseTopicsDetailQuery: GraphQLQuery {
-  /// query knowledgeBaseTopicsDetail($topicId: String!) {
-  ///   knowledgeBaseTopicsDetail(topicId: $topicId) {
-  ///     __typename
-  ///     ...KnowledgeBaseTopicModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query knowledgeBaseTopicsDetail($topicId: String!) { knowledgeBaseTopicsDetail(topicId: $topicId) { __typename ...KnowledgeBaseTopicModel } }"
+    """
+    query knowledgeBaseTopicsDetail($topicId: String!) {
+      knowledgeBaseTopicsDetail(topicId: $topicId) {
+        __typename
+        ...KnowledgeBaseTopicModel
+      }
+    }
+    """
 
   public let operationName = "knowledgeBaseTopicsDetail"
 
@@ -1004,14 +1025,16 @@ public final class KnowledgeBaseTopicsDetailQuery: GraphQLQuery {
 }
 
 public final class MessengerConnectMutation: GraphQLMutation {
-  /// mutation messengerConnect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean, $data: JSON, $companyData: JSON, $cachedCustomerId: String, $deviceToken: String) {
-  ///   messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data, companyData: $companyData, deviceToken: $deviceToken, cachedCustomerId: $cachedCustomerId) {
-  ///     __typename
-  ///     ...ConnectResponseModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "mutation messengerConnect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean, $data: JSON, $companyData: JSON, $cachedCustomerId: String, $deviceToken: String) { messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data, companyData: $companyData, deviceToken: $deviceToken, cachedCustomerId: $cachedCustomerId) { __typename ...ConnectResponseModel } }"
+    """
+    mutation messengerConnect($brandCode: String!, $email: String, $phone: String, $isUser: Boolean, $data: JSON, $companyData: JSON, $cachedCustomerId: String, $deviceToken: String) {
+      messengerConnect(brandCode: $brandCode, email: $email, phone: $phone, isUser: $isUser, data: $data, companyData: $companyData, deviceToken: $deviceToken, cachedCustomerId: $cachedCustomerId) {
+        __typename
+        ...ConnectResponseModel
+      }
+    }
+    """
 
   public let operationName = "messengerConnect"
 
@@ -1120,14 +1143,16 @@ public final class MessengerConnectMutation: GraphQLMutation {
 }
 
 public final class KnowledgeBaseCategoriesDetailQuery: GraphQLQuery {
-  /// query knowledgeBaseCategoriesDetail($categoryId: String!) {
-  ///   knowledgeBaseCategoriesDetail(categoryId: $categoryId) {
-  ///     __typename
-  ///     ...KBModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this operation.
   public let operationDefinition =
-    "query knowledgeBaseCategoriesDetail($categoryId: String!) { knowledgeBaseCategoriesDetail(categoryId: $categoryId) { __typename ...KBModel } }"
+    """
+    query knowledgeBaseCategoriesDetail($categoryId: String!) {
+      knowledgeBaseCategoriesDetail(categoryId: $categoryId) {
+        __typename
+        ...KBModel
+      }
+    }
+    """
 
   public let operationName = "knowledgeBaseCategoriesDetail"
 
@@ -1222,12 +1247,14 @@ public final class KnowledgeBaseCategoriesDetailQuery: GraphQLQuery {
 }
 
 public struct DetailResponse: GraphQLFragment {
-  /// fragment DetailResponse on ConversationDetailResponse {
-  ///   __typename
-  ///   isOnline
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment DetailResponse on ConversationDetailResponse { __typename isOnline }"
+    """
+    fragment DetailResponse on ConversationDetailResponse {
+      __typename
+      isOnline
+    }
+    """
 
   public static let possibleTypes = ["ConversationDetailResponse"]
 
@@ -1266,27 +1293,29 @@ public struct DetailResponse: GraphQLFragment {
 }
 
 public struct MessageModel: GraphQLFragment {
-  /// fragment MessageModel on ConversationMessage {
-  ///   __typename
-  ///   _id
-  ///   conversationId
-  ///   user {
-  ///     __typename
-  ///     ...UserModel
-  ///   }
-  ///   customerId
-  ///   content
-  ///   createdAt
-  ///   attachments {
-  ///     __typename
-  ///     url
-  ///     name
-  ///     type
-  ///     size
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment MessageModel on ConversationMessage { __typename _id conversationId user { __typename ...UserModel } customerId content createdAt attachments { __typename url name type size } }"
+    """
+    fragment MessageModel on ConversationMessage {
+      __typename
+      _id
+      conversationId
+      user {
+        __typename
+        ...UserModel
+      }
+      customerId
+      content
+      createdAt
+      attachments {
+        __typename
+        url
+        name
+        type
+        size
+      }
+    }
+    """
 
   public static let possibleTypes = ["ConversationMessage"]
 
@@ -1307,8 +1336,8 @@ public struct MessageModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String, conversationId: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Scalar_Date? = nil, attachments: [Attachment?]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": id, "conversationId": conversationId, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
+  public init(_id: String, conversationId: String, user: User? = nil, customerId: String? = nil, content: String? = nil, createdAt: Scalar_Date? = nil, attachments: [Attachment?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "ConversationMessage", "_id": _id, "conversationId": conversationId, "user": user.flatMap { (value: User) -> ResultMap in value.resultMap }, "customerId": customerId, "content": content, "createdAt": createdAt, "attachments": attachments.flatMap { (value: [Attachment?]) -> [ResultMap?] in value.map { (value: Attachment?) -> ResultMap? in value.flatMap { (value: Attachment) -> ResultMap in value.resultMap } } }])
   }
 
   public var __typename: String {
@@ -1320,7 +1349,7 @@ public struct MessageModel: GraphQLFragment {
     }
   }
 
-  public var id: String {
+  public var _id: String {
     get {
       return resultMap["_id"]! as! String
     }
@@ -1502,15 +1531,17 @@ public struct MessageModel: GraphQLFragment {
 }
 
 public struct AttachmentModel: GraphQLFragment {
-  /// fragment AttachmentModel on Attachment {
-  ///   __typename
-  ///   url
-  ///   name
-  ///   type
-  ///   size
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment AttachmentModel on Attachment { __typename url name type size }"
+    """
+    fragment AttachmentModel on Attachment {
+      __typename
+      url
+      name
+      type
+      size
+    }
+    """
 
   public static let possibleTypes = ["Attachment"]
 
@@ -1579,16 +1610,18 @@ public struct AttachmentModel: GraphQLFragment {
 }
 
 public struct UserModel: GraphQLFragment {
-  /// fragment UserModel on User {
-  ///   __typename
-  ///   details {
-  ///     __typename
-  ///     fullName
-  ///     avatar
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment UserModel on User { __typename details { __typename fullName avatar } }"
+    """
+    fragment UserModel on User {
+      __typename
+      details {
+        __typename
+        fullName
+        avatar
+      }
+    }
+    """
 
   public static let possibleTypes = ["User"]
 
@@ -1674,18 +1707,20 @@ public struct UserModel: GraphQLFragment {
 }
 
 public struct ConversationModel: GraphQLFragment {
-  /// fragment ConversationModel on Conversation {
-  ///   __typename
-  ///   _id
-  ///   content
-  ///   createdAt
-  ///   participatedUsers {
-  ///     __typename
-  ///     ...UserModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment ConversationModel on Conversation { __typename _id content createdAt participatedUsers { __typename ...UserModel } }"
+    """
+    fragment ConversationModel on Conversation {
+      __typename
+      _id
+      content
+      createdAt
+      participatedUsers {
+        __typename
+        ...UserModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["Conversation"]
 
@@ -1703,8 +1738,8 @@ public struct ConversationModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String, content: String? = nil, createdAt: Scalar_Date? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Conversation", "_id": id, "content": content, "createdAt": createdAt, "participatedUsers": participatedUsers.flatMap { (value: [ParticipatedUser?]) -> [ResultMap?] in value.map { (value: ParticipatedUser?) -> ResultMap? in value.flatMap { (value: ParticipatedUser) -> ResultMap in value.resultMap } } }])
+  public init(_id: String, content: String? = nil, createdAt: Scalar_Date? = nil, participatedUsers: [ParticipatedUser?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Conversation", "_id": _id, "content": content, "createdAt": createdAt, "participatedUsers": participatedUsers.flatMap { (value: [ParticipatedUser?]) -> [ResultMap?] in value.map { (value: ParticipatedUser?) -> ResultMap? in value.flatMap { (value: ParticipatedUser) -> ResultMap in value.resultMap } } }])
   }
 
   public var __typename: String {
@@ -1716,7 +1751,7 @@ public struct ConversationModel: GraphQLFragment {
     }
   }
 
-  public var id: String {
+  public var _id: String {
     get {
       return resultMap["_id"]! as! String
     }
@@ -1804,19 +1839,21 @@ public struct ConversationModel: GraphQLFragment {
 }
 
 public struct FormConnectModel: GraphQLFragment {
-  /// fragment FormConnectModel on FormConnectResponse {
-  ///   __typename
-  ///   form {
-  ///     __typename
-  ///     ...FormModel
-  ///   }
-  ///   integration {
-  ///     __typename
-  ///     ...IntegrationModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment FormConnectModel on FormConnectResponse { __typename form { __typename ...FormModel } integration { __typename ...IntegrationModel } }"
+    """
+    fragment FormConnectModel on FormConnectResponse {
+      __typename
+      form {
+        __typename
+        ...FormModel
+      }
+      integration {
+        __typename
+        ...IntegrationModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["FormConnectResponse"]
 
@@ -1877,8 +1914,8 @@ public struct FormConnectModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "buttonText": buttonText])
+    public init(_id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Form", "_id": _id, "title": title, "description": description, "buttonText": buttonText])
     }
 
     public var __typename: String {
@@ -1931,8 +1968,8 @@ public struct FormConnectModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "leadData": leadData])
+    public init(_id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Integration", "_id": _id, "name": name, "leadData": leadData])
     }
 
     public var __typename: String {
@@ -1973,15 +2010,17 @@ public struct FormConnectModel: GraphQLFragment {
 }
 
 public struct FormModel: GraphQLFragment {
-  /// fragment FormModel on Form {
-  ///   __typename
-  ///   _id
-  ///   title
-  ///   description
-  ///   buttonText
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment FormModel on Form { __typename _id title description buttonText }"
+    """
+    fragment FormModel on Form {
+      __typename
+      _id
+      title
+      description
+      buttonText
+    }
+    """
 
   public static let possibleTypes = ["Form"]
 
@@ -1999,8 +2038,8 @@ public struct FormModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Form", "_id": id, "title": title, "description": description, "buttonText": buttonText])
+  public init(_id: String? = nil, title: String? = nil, description: String? = nil, buttonText: String? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Form", "_id": _id, "title": title, "description": description, "buttonText": buttonText])
   }
 
   public var __typename: String {
@@ -2012,7 +2051,7 @@ public struct FormModel: GraphQLFragment {
     }
   }
 
-  public var id: String? {
+  public var _id: String? {
     get {
       return resultMap["_id"] as? String
     }
@@ -2050,14 +2089,16 @@ public struct FormModel: GraphQLFragment {
 }
 
 public struct IntegrationModel: GraphQLFragment {
-  /// fragment IntegrationModel on Integration {
-  ///   __typename
-  ///   _id
-  ///   name
-  ///   leadData
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment IntegrationModel on Integration { __typename _id name leadData }"
+    """
+    fragment IntegrationModel on Integration {
+      __typename
+      _id
+      name
+      leadData
+    }
+    """
 
   public static let possibleTypes = ["Integration"]
 
@@ -2074,8 +2115,8 @@ public struct IntegrationModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
-    self.init(unsafeResultMap: ["__typename": "Integration", "_id": id, "name": name, "leadData": leadData])
+  public init(_id: String, name: String? = nil, leadData: Scalar_JSON? = nil) {
+    self.init(unsafeResultMap: ["__typename": "Integration", "_id": _id, "name": name, "leadData": leadData])
   }
 
   public var __typename: String {
@@ -2087,7 +2128,7 @@ public struct IntegrationModel: GraphQLFragment {
     }
   }
 
-  public var id: String {
+  public var _id: String {
     get {
       return resultMap["_id"]! as! String
     }
@@ -2116,17 +2157,19 @@ public struct IntegrationModel: GraphQLFragment {
 }
 
 public struct KnowledgeBaseTopicModel: GraphQLFragment {
-  /// fragment KnowledgeBaseTopicModel on KnowledgeBaseTopic {
-  ///   __typename
-  ///   title
-  ///   description
-  ///   categories {
-  ///     __typename
-  ///     ...KnowledgeBaseCategoryModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment KnowledgeBaseTopicModel on KnowledgeBaseTopic { __typename title description categories { __typename ...KnowledgeBaseCategoryModel } }"
+    """
+    fragment KnowledgeBaseTopicModel on KnowledgeBaseTopic {
+      __typename
+      title
+      description
+      categories {
+        __typename
+        ...KnowledgeBaseCategoryModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["KnowledgeBaseTopic"]
 
@@ -2235,20 +2278,22 @@ public struct KnowledgeBaseTopicModel: GraphQLFragment {
 }
 
 public struct KnowledgeBaseCategoryModel: GraphQLFragment {
-  /// fragment KnowledgeBaseCategoryModel on KnowledgeBaseCategory {
-  ///   __typename
-  ///   _id
-  ///   title
-  ///   description
-  ///   numOfArticles
-  ///   icon
-  ///   articles {
-  ///     __typename
-  ///     ...KBArticleModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment KnowledgeBaseCategoryModel on KnowledgeBaseCategory { __typename _id title description numOfArticles icon articles { __typename ...KBArticleModel } }"
+    """
+    fragment KnowledgeBaseCategoryModel on KnowledgeBaseCategory {
+      __typename
+      _id
+      title
+      description
+      numOfArticles
+      icon
+      articles {
+        __typename
+        ...KBArticleModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["KnowledgeBaseCategory"]
 
@@ -2268,8 +2313,8 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String? = nil, title: String? = nil, description: String? = nil, numOfArticles: Int? = nil, icon: String? = nil, articles: [Article?]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseCategory", "_id": id, "title": title, "description": description, "numOfArticles": numOfArticles, "icon": icon, "articles": articles.flatMap { (value: [Article?]) -> [ResultMap?] in value.map { (value: Article?) -> ResultMap? in value.flatMap { (value: Article) -> ResultMap in value.resultMap } } }])
+  public init(_id: String? = nil, title: String? = nil, description: String? = nil, numOfArticles: Int? = nil, icon: String? = nil, articles: [Article?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseCategory", "_id": _id, "title": title, "description": description, "numOfArticles": numOfArticles, "icon": icon, "articles": articles.flatMap { (value: [Article?]) -> [ResultMap?] in value.map { (value: Article?) -> ResultMap? in value.flatMap { (value: Article) -> ResultMap in value.resultMap } } }])
   }
 
   public var __typename: String {
@@ -2281,7 +2326,7 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
     }
   }
 
-  public var id: String? {
+  public var _id: String? {
     get {
       return resultMap["_id"] as? String
     }
@@ -2349,8 +2394,8 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
-      self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
+    public init(_id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
+      self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": _id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
     }
 
     public var __typename: String {
@@ -2391,20 +2436,22 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
 }
 
 public struct ConnectResponseModel: GraphQLFragment {
-  /// fragment ConnectResponseModel on MessengerConnectResponse {
-  ///   __typename
-  ///   integrationId
-  ///   uiOptions
-  ///   languageCode
-  ///   messengerData
-  ///   customerId
-  ///   brand {
-  ///     __typename
-  ///     ...BrandModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment ConnectResponseModel on MessengerConnectResponse { __typename integrationId uiOptions languageCode messengerData customerId brand { __typename ...BrandModel } }"
+    """
+    fragment ConnectResponseModel on MessengerConnectResponse {
+      __typename
+      integrationId
+      uiOptions
+      languageCode
+      messengerData
+      customerId
+      brand {
+        __typename
+        ...BrandModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["MessengerConnectResponse"]
 
@@ -2547,14 +2594,16 @@ public struct ConnectResponseModel: GraphQLFragment {
 }
 
 public struct BrandModel: GraphQLFragment {
-  /// fragment BrandModel on Brand {
-  ///   __typename
-  ///   name
-  ///   code
-  ///   description
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment BrandModel on Brand { __typename name code description }"
+    """
+    fragment BrandModel on Brand {
+      __typename
+      name
+      code
+      description
+    }
+    """
 
   public static let possibleTypes = ["Brand"]
 
@@ -2613,20 +2662,22 @@ public struct BrandModel: GraphQLFragment {
 }
 
 public struct KbModel: GraphQLFragment {
-  /// fragment KBModel on KnowledgeBaseCategory {
-  ///   __typename
-  ///   _id
-  ///   title
-  ///   description
-  ///   numOfArticles
-  ///   icon
-  ///   articles {
-  ///     __typename
-  ///     ...KBArticleModel
-  ///   }
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment KBModel on KnowledgeBaseCategory { __typename _id title description numOfArticles icon articles { __typename ...KBArticleModel } }"
+    """
+    fragment KBModel on KnowledgeBaseCategory {
+      __typename
+      _id
+      title
+      description
+      numOfArticles
+      icon
+      articles {
+        __typename
+        ...KBArticleModel
+      }
+    }
+    """
 
   public static let possibleTypes = ["KnowledgeBaseCategory"]
 
@@ -2646,8 +2697,8 @@ public struct KbModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String? = nil, title: String? = nil, description: String? = nil, numOfArticles: Int? = nil, icon: String? = nil, articles: [Article?]? = nil) {
-    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseCategory", "_id": id, "title": title, "description": description, "numOfArticles": numOfArticles, "icon": icon, "articles": articles.flatMap { (value: [Article?]) -> [ResultMap?] in value.map { (value: Article?) -> ResultMap? in value.flatMap { (value: Article) -> ResultMap in value.resultMap } } }])
+  public init(_id: String? = nil, title: String? = nil, description: String? = nil, numOfArticles: Int? = nil, icon: String? = nil, articles: [Article?]? = nil) {
+    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseCategory", "_id": _id, "title": title, "description": description, "numOfArticles": numOfArticles, "icon": icon, "articles": articles.flatMap { (value: [Article?]) -> [ResultMap?] in value.map { (value: Article?) -> ResultMap? in value.flatMap { (value: Article) -> ResultMap in value.resultMap } } }])
   }
 
   public var __typename: String {
@@ -2659,7 +2710,7 @@ public struct KbModel: GraphQLFragment {
     }
   }
 
-  public var id: String? {
+  public var _id: String? {
     get {
       return resultMap["_id"] as? String
     }
@@ -2727,8 +2778,8 @@ public struct KbModel: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
-      self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
+    public init(_id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
+      self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": _id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
     }
 
     public var __typename: String {
@@ -2769,16 +2820,18 @@ public struct KbModel: GraphQLFragment {
 }
 
 public struct KbArticleModel: GraphQLFragment {
-  /// fragment KBArticleModel on KnowledgeBaseArticle {
-  ///   __typename
-  ///   _id
-  ///   title
-  ///   summary
-  ///   content
-  ///   createdDate
-  /// }
+  /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition =
-    "fragment KBArticleModel on KnowledgeBaseArticle { __typename _id title summary content createdDate }"
+    """
+    fragment KBArticleModel on KnowledgeBaseArticle {
+      __typename
+      _id
+      title
+      summary
+      content
+      createdDate
+    }
+    """
 
   public static let possibleTypes = ["KnowledgeBaseArticle"]
 
@@ -2797,8 +2850,8 @@ public struct KbArticleModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
-    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
+  public init(_id: String? = nil, title: String? = nil, summary: String? = nil, content: String? = nil, createdDate: Scalar_Date? = nil) {
+    self.init(unsafeResultMap: ["__typename": "KnowledgeBaseArticle", "_id": _id, "title": title, "summary": summary, "content": content, "createdDate": createdDate])
   }
 
   public var __typename: String {
@@ -2810,7 +2863,7 @@ public struct KbArticleModel: GraphQLFragment {
     }
   }
 
-  public var id: String? {
+  public var _id: String? {
     get {
       return resultMap["_id"] as? String
     }
