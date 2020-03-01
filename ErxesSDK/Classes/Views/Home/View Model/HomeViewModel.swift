@@ -35,7 +35,7 @@ class HomeViewModel {
     
     private var conversations: [ConversationModel] = [ConversationModel]() {
         didSet {
-           
+            
             didGetConversations!(conversations)
         }
     }
@@ -83,7 +83,7 @@ class HomeViewModel {
     var didGetData: ((_ model:ConnectResponseModel) -> ())?
     
     var didGetConversations: ((_ model:[ConversationModel]) -> ())?
-    var didReceiveAdminMessage: ((_ model:MessageModel) -> ())?
+    var didReceiveAdminMessage: ((_ model:ConversationAdminMessageInsertedModel) -> ())?
     var didGetKnowledgeBaseTopicId: ((_ model:String) -> ())?
     var didSetUnreadCount: (() -> ())?
     var didGetKnowledgeBase:((_ model:KnowledgeBaseTopicModel) -> ())?
@@ -102,14 +102,18 @@ class HomeViewModel {
 
     //MARK: -- Example Func
     func messengerConnect(Email email:String? = "", Phone phone:String? = "",CachedCustomerId customerId:String? = "",data:Scalar_JSON! = nil) {
-        self.isLoading = true
+        isLoading = true
         self.service.messengerConnect(brandCode:erxesBrandCode , email:email , phone:phone, customerId: customerId, data: data ,success: { (data) in
             if let messengerData = data.messengerData {
-         
+                print(messengerData)
                 if let messages: Scalar_JSON = (messengerData["messages"] as! Scalar_JSON) {
                     if let greetings: Scalar_JSON = (messages["greetings"] as! Scalar_JSON) {
-                        welcomeTitle = greetings["title"] as! String
-                        welcomeDescription = greetings["message"] as! String
+                        welcomeTitle = (greetings["title"] as! String)
+                        welcomeDescription = (greetings["message"] as! String)
+                        if welcomeTitle.count == 0 || welcomeDescription.count == 0 {
+                            welcomeTitle = "Welcome!".localized(lang)
+                            welcomeDescription = "Welcome description".localized(lang)
+                        }
                     } else {
                         welcomeTitle = "Welcome!".localized(lang)
                         welcomeDescription = "Welcome description".localized(lang)
@@ -138,11 +142,12 @@ class HomeViewModel {
                 
                 if let _customerId = data.customerId {
                     erxesCustomerId = _customerId
+                  
                     Erxes.storeCustomerId(value: _customerId)
                 }
                 if let uiOptions = data.uiOptions {
                     themeColor = UIColor.init(hexString: uiOptions["color"] as! String)
-                    if let _wallpaper:String = uiOptions["wallpaper"] as! String , _wallpaper != "5"{
+                    if let _wallpaper:String = (uiOptions["wallpaper"] as! String) , _wallpaper != "5"{
                         wallPaper = _wallpaper
                     }
                 }
@@ -150,7 +155,7 @@ class HomeViewModel {
                 
                 
                 if let brandData = data.brand?.fragments.brandModel {
-                    titleText = brandData.name
+                    titleText = brandData.name!
                     descriptionText = brandData.description!
                     
                 }
@@ -159,9 +164,12 @@ class HomeViewModel {
                     knowledgeBaseTopicId = KBTopicID
                     self.didGetKnowledgeBaseTopicId!(KBTopicID)
                 }
+                
+        
             }
-            self.isLoading = false
+            
             self.model = data
+            self.isLoading = false
         }) { (error) in
             print(error)
         }
@@ -202,7 +210,6 @@ class HomeViewModel {
                     
                 }
             }
-//            self.allKBArticles = data.
         }) { (error) in
             print(error)
         }
@@ -212,12 +219,11 @@ class HomeViewModel {
         let subscription = ConversationAdminMessageInsertedSubscription(customerId: customerId)
         ErxesClient.shared.client.subscribe(subscription: subscription) { (result) in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.conversationAdminMessageInserted?.fragments.messageModel {
+            if let dataModel = data.conversationAdminMessageInserted?.fragments.conversationAdminMessageInsertedModel {
                 self.didReceiveAdminMessage!(dataModel)
 
             }
             if let errors = try? result.get().errors {
-                print("errors = ",errors)
                 print(errors[0])
             }
         }
@@ -226,7 +232,7 @@ class HomeViewModel {
     func unreadCount(conversationId:String){
         self.service.unreadCount(conversationId: conversationId, success: { (count) in
             if count > 0 {
-                
+                print("unread = ", conversationId)
                 self.unreadIds.append(conversationId)
             }
         }) { (error) in

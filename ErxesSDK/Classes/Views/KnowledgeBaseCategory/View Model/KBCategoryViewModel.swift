@@ -82,11 +82,9 @@ class KBCategoryViewModel {
         case .online:
             self.isLoading = true
             self.service.knowledgeBaseCategoriesDetail(categoryId: categoryId, success: { (data) in
-                self.isLoading = false
                 self.didGetData!(data)
-                
-            }) { (error) in
                 self.isLoading = false
+            }) { (error) in
                 print(error)
             }
         default:

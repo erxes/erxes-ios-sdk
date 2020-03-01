@@ -29,7 +29,7 @@ class HomeService: HomeServiceProtocol {
         let query = AllConversationsQuery(integrationId: integrationId,customerId: customerId)
         ErxesClient.shared.client.fetch(query: query,cachePolicy: .fetchIgnoringCacheData) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.conversations {
+            if let dataModel = data.widgetsConversations {
                 success(dataModel.map{($0?.fragments.conversationModel)!})
             }
             if let errors = try? result.get().errors {
@@ -46,7 +46,7 @@ class HomeService: HomeServiceProtocol {
         let query = MessengerSupportersQuery(integrationId: integrationId)
         ErxesClient.shared.client.fetch(query: query) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.messengerSupporters {
+            if let dataModel = data.widgetsMessengerSupporters {
                 success(dataModel.map{(($0?.fragments.userModel)!)})
             }
             if let errors = try? result.get().errors {
@@ -69,7 +69,7 @@ class HomeService: HomeServiceProtocol {
         mutation.data = data
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel:ConnectResponseModel = data.messengerConnect!.fragments.connectResponseModel {
+            if let dataModel:ConnectResponseModel = data.widgetsMessengerConnect!.fragments.connectResponseModel {
                 success(dataModel)
             }
             if let errors = try? result.get().errors {
@@ -81,10 +81,12 @@ class HomeService: HomeServiceProtocol {
     
   
     func knowledgeBaseTopic(topicId: String, success: @escaping (KnowledgeBaseTopicModel) -> (), failure: @escaping (GraphQLError) -> ()) {
-        let query = KnowledgeBaseTopicsDetailQuery(topicId: topicId)
+        
+        let query = KnowledgeBaseTopicDetailQuery(id: topicId)
         ErxesClient.shared.client.fetch(query: query) { result in
+        
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.knowledgeBaseTopicsDetail?.fragments.knowledgeBaseTopicModel {
+            if let dataModel = data.knowledgeBaseTopicDetail?.fragments.knowledgeBaseTopicModel {
                 success(dataModel)
             }
             if let errors = try? result.get().errors {
@@ -98,7 +100,7 @@ class HomeService: HomeServiceProtocol {
         let query = UnreadCountQuery(conversationId: conversationId)
         ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.unreadCount{
+            if let dataModel = data.widgetsUnreadCount{
                 success(dataModel)
             }
             if let errors = try? result.get().errors {

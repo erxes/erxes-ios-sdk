@@ -1,6 +1,6 @@
 {
   "name": "ErxesSDK",
-  "version": "0.9.0",
+  "version": "0.11.0",
   "summary": "A short description of erxes-ios-sdk.",
   "swift_versions": "5.0",
   "description": "erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/erxes/erxes-ios-sdk.git",
-    "tag": "0.9.0"
+    "tag": "0.11.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -32,7 +32,7 @@
   "frameworks": "Photos",
   "dependencies": {
     "Apollo": [
-      "~> 0.20.0"
+      "~> 0.22.0"
     ],
     "Apollo/WebSocket": [
 

@@ -18,7 +18,7 @@ class AuthtenticationService: AuthtenticationServiceProtocol {
         mutation.data = data
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel:ConnectResponseModel = data.messengerConnect!.fragments.connectResponseModel {
+            if let dataModel:ConnectResponseModel = data.widgetsMessengerConnect!.fragments.connectResponseModel {
                 success(dataModel)
             }
             if let errors = try? result.get().errors {

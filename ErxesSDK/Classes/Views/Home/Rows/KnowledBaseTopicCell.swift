@@ -13,7 +13,7 @@ class KnowledBaseTopicCell: UITableViewCell {
 
     lazy var iconView: UIImageView = {
         let imageview = UIImageView()
-        imageview.image = UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil)
+        imageview.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
         self.contentView.addSubview(imageview)
         imageview.backgroundColor = UIColor.init(hexString: "#f6f4f8")
         imageview.contentMode = .center
@@ -112,8 +112,10 @@ class KnowledBaseTopicCell: UITableViewCell {
     func setup(model: KnowledgeBaseCategoryModel) {
         self.titleLabel.text = model.title
         self.subtitleLabel.text = model.description
+        print(model.numOfArticles)
         if let count = model.numOfArticles {
-            self.countLabel.text = String(format: "(%i)", count)
+            
+            self.countLabel.text = String(format: "(%i)", Int(count))
         }
         if let icon = model.icon {
             if let rawValue = fontDict[icon] {

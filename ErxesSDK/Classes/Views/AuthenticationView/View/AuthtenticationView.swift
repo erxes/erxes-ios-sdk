@@ -7,21 +7,13 @@
 //
 
 import UIKit
-import SnapKit
 import ErxesFont
-class AuthtenticationView: UIViewController {
+class AuthtenticationView: AbstractViewController {
 
     // OUTLETS HERE
 
-    var containerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = .white
-        //        container.clipsToBounds = true
-        return container
-    }()
-
-    var headerView: ChatHeader = {
-        let header = ChatHeader()
+    var headerView: AuthHeaderView = {
+        let header = AuthHeaderView()
         header.titleLabel.text = "Contact".localized(lang)
         header.subTitleLabel.text = "Give us your contact information".localized(lang)
         return header
@@ -36,19 +28,24 @@ class AuthtenticationView: UIViewController {
         textfield.leftView = leftPadding
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         button.setImage(UIImage.erxes(with: .chevron, textColor: .white), for: .normal)
-        button.roundCorners(corners: [.topRight, .bottomRight], radius: 6)
         button.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         button.backgroundColor = themeColor
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        rightView.addSubview(button)
         textfield.rightViewMode = .always
-        textfield.rightView = button
+        textfield.rightView = rightView
+        textfield.rightView?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         textfield.layer.cornerRadius = 6
         textfield.layer.borderColor = UIColor.lightGray.cgColor
         textfield.layer.borderWidth = 0.75
         textfield.clipsToBounds = true
         textfield.autocapitalizationType = .none
         textfield.autocorrectionType = UITextAutocorrectionType.no
+        
         return textfield
     }()
+    
+  
 
     lazy var segmentedControl: SegmentedControl = {
         let control = SegmentedControl()
@@ -70,6 +67,7 @@ class AuthtenticationView: UIViewController {
     var data:Scalar_JSON! = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        containerHeight = 240
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.prepareViews()
@@ -77,7 +75,7 @@ class AuthtenticationView: UIViewController {
     }
 
     func prepareViews() {
-        self.view.addSubview(containerView)
+       
         self.containerView.addSubview(headerView)
         segmentedControl.setButtonTitles(buttonTitles: ["Email".localized(lang), "SMS".localized(lang)])
         self.containerView.addSubview(textField)
@@ -109,24 +107,16 @@ class AuthtenticationView: UIViewController {
             // show UI Server is Error
         }
 
-        self.viewModel.didAthenticate = { data in
-          
-            
-            
+        self.viewModel.didAuthenticate = { data in
             let controller = HomeView()
             self.navigationController?.pushViewController(controller, animated: true)
-            
         }
 
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        containerView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(240)
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-        }
+        
         headerView.snp.makeConstraints { (make) in
             make.height.equalTo(64)
             make.left.right.top.equalToSuperview()
@@ -137,6 +127,8 @@ class AuthtenticationView: UIViewController {
             make.height.equalTo(40)
             make.top.equalTo(self.segmentedControl.snp.bottom).offset(20)
         }
+        
+
         self.containerView.roundCorners(corners: [.topLeft, .topRight], radius: 8)
 
     }
@@ -161,6 +153,7 @@ class AuthtenticationView: UIViewController {
                     make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardFrame.size.height)
                 })
                 self.containerView.layoutSubviews()
+               
             }
 
         }
@@ -171,6 +164,8 @@ class AuthtenticationView: UIViewController {
         if notification.name == UIResponder.keyboardDidShowNotification {
 
         }
+        
+         self.headerView.layoutSubviews()
     }
 
     @objc func loginAction() {
@@ -214,5 +209,24 @@ extension AuthtenticationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.loginAction()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+
+        let start = textField.position(from: textField.beginningOfDocument, offset: range.location)
+
+        let cursorOffset = textField.offset(from: textField.beginningOfDocument, to: start!) + string.count
+        
+
+        textField.text = (textField.text as NSString?)!.replacingCharacters(in: range, with: string)
+        
+        let newCursorPosition = textField.position(from: textField.beginningOfDocument, offset:cursorOffset)
+        
+        let newSelectedRange = textField.textRange(from: newCursorPosition!, to: newCursorPosition!)
+        
+        textField.selectedTextRange = newSelectedRange
+        
+        return false
     }
 }

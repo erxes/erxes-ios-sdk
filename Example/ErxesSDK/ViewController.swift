@@ -21,10 +21,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnClick(){
+        Erxes.start()
         
-        var messengerData = [String:Any]()
-        messengerData["user data"] = "what ever you want"
-        Erxes.start(data: messengerData)
         
     }
 

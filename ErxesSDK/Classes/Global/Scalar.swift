@@ -8,19 +8,46 @@
 import Apollo
 
 public typealias Scalar_JSON = [String: Any]
-public typealias Scalar_Date = Int64
+public typealias Scalar_Date = Date
+
+
+extension Date: JSONDecodable, JSONEncodable {
+    public var jsonValue: JSONValue {
+        let dateFormatter = DateFormatter()
+                                  
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return dateFormatter.string(from: self)
+    }
+    
+    public init(jsonValue value: JSONValue) throws {
+        guard let isoString = value as? String else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Date.self)
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        guard let date = dateFormatter.date(from: isoString) else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Date.self)
+        }
+        self = date
+    }
+}
 
 extension Int64: JSONDecodable, JSONEncodable {
     public init(jsonValue value: JSONValue) throws {
-        
+
         let string = String(describing: value)
         guard let number = Int64(string) else {
             throw JSONDecodingError.couldNotConvert(value: value, to: Int64.self)
         }
-        
+
         self = number
     }
-    
+
     public var jsonValue: JSONValue {
         return String(self)
     }
@@ -28,7 +55,7 @@ extension Int64: JSONDecodable, JSONEncodable {
 
 extension Dictionary: JSONDecodable {
     public init(jsonValue value: JSONValue) throws {
-        
+
         if let array = value as? NSArray {
             self.init()
             if var dict = self as? [String: JSONDecodable & JSONEncodable] {
@@ -37,9 +64,9 @@ extension Dictionary: JSONDecodable {
                 return
             }
         }
-        
+
         guard let dictionary = value as? Dictionary else {
-            
+
             throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
         }
         self = dictionary
@@ -49,7 +76,7 @@ extension Dictionary: JSONDecodable {
 extension Array: JSONDecodable {
     public init(jsonValue value: JSONValue) throws {
         guard let array = forceBridgeFromObjectiveC(value) as? Array else {
-            
+
             throw JSONDecodingError.couldNotConvert(value: value, to: Array.self)
         }
         self = array
@@ -58,16 +85,16 @@ extension Array: JSONDecodable {
 
 
 private func forceBridgeFromObjectiveC(_ value: Any) -> Any {
-    
+
     if value == nil {
         return value
     }
-    
+
     switch value {
-        
+
     case is NSString:
         return value as! String
-        
+
     case is Bool:
         return value as! Bool
     case is Int:

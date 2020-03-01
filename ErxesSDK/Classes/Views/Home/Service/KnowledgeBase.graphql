@@ -1,5 +1,5 @@
-query knowledgeBaseTopicsDetail($topicId: String!) {
-    knowledgeBaseTopicsDetail(topicId: $topicId) {
+query knowledgeBaseTopicDetail($id: String!) {
+    knowledgeBaseTopicDetail(_id: $id) {
         ...KnowledgeBaseTopicModel
     }
 }

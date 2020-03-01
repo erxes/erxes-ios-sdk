@@ -20,8 +20,7 @@ class ErxesClient {
     }
     
     private lazy var networkTransport = HTTPNetworkTransport(
-        url: URL(string: "\(widgetsApiUrlString)/graphql")!,
-        delegate:self
+        url: URL(string: "\(widgetsApiUrlString)/graphql")!
     )
     
     private lazy var webSocket = WebSocketTransport(request: URLRequest(url: URL(string: "\(apiUrlString)/subscriptions")!), sendOperationIdentifiers: false, reconnectionInterval: 0.5, connectingPayload: nil)
@@ -44,7 +43,7 @@ extension ErxesClient: HTTPNetworkTransportPreflightDelegate {
                           willSend request: inout URLRequest) {
         
         // Get the existing headers, or create new ones if they're nil
-        var headers = request.allHTTPHeaderFields ?? [String: String]()
+        _ = request.allHTTPHeaderFields ?? [String: String]()
         
         // Add any new headers you need
 //        headers["Authentication"] = "Bearer \(UserManager.shared.currentAuthToken)"
@@ -83,25 +82,4 @@ extension ErxesClient: HTTPNetworkTransportTaskCompletedDelegate {
     }
 }
 
-// MARK: - Retry Delegate
-//
-//extension ErxesClient: HTTPNetworkTransportRetryDelegate {
-//
-//    func networkTransport(_ networkTransport: HTTPNetworkTransport,
-//                          receivedError error: Error,
-//                          for request: URLRequest,
-//                          response: URLResponse?,
-//                          retryHandler: @escaping (_ shouldRetry: Bool) -> Void) {
-//        // Check if the error and/or response you've received are something that requires authentication
-//        guard UserManager.shared.requiresReAuthentication(basedOn: error, response: response) else {
-//            // This is not something this application can handle, do not retry.
-//            shouldRetry(false)
-//        }
-//
-//        // Attempt to re-authenticate asynchronously
-//        UserManager.shared.reAuthenticate { success in
-//            // If re-authentication succeeded, try again. If it didn't, don't.
-//            shouldRetry(success)
-//        }
-//    }
-//}
+

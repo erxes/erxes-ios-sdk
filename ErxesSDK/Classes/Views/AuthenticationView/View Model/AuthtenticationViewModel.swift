@@ -53,7 +53,7 @@ class AuthtenticationViewModel {
     var internetConnectionStatus: (() -> ())?
     var serverErrorStatus: (() -> ())?
    
-    var didAthenticate: ((_ data :ConnectResponseModel) -> ())?
+    var didAuthenticate: ((_ data :ConnectResponseModel) -> ())?
     init(withAuthtentication serviceProtocol: AuthtenticationServiceProtocol = AuthtenticationService() ) {
         self.service = serviceProtocol
 
@@ -116,7 +116,7 @@ class AuthtenticationViewModel {
             
             
             if let brandData = data.brand?.fragments.brandModel {
-                titleText = brandData.name
+                titleText = brandData.name!
                 descriptionText = brandData.description!
                 
             }
@@ -127,7 +127,7 @@ class AuthtenticationViewModel {
                 
             }
             
-            self.didAthenticate!(data)
+            self.didAuthenticate!(data)
         }) { (error) in
            
             print(error)

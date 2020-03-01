@@ -14,26 +14,25 @@ import UIKit
 
 class BaseCells: UICollectionViewCell {
     var isLoaded = false
-    var width:CGFloat = 0
-    var height:CGFloat = 0
-    
-    var model:MessageModel? {
-        didSet{
+    var width: CGFloat = 0
+    var height: CGFloat = 0
+
+    var model: MessageModel? {
+        didSet {
             self.updateView()
         }
     }
-    
+
     lazy var avatarView: UIImageView = {
         let imageview = UIImageView()
-        imageview.image = UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil)
-        
+        imageview.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
         self.contentView.addSubview(imageview)
         imageview.layer.cornerRadius = 15
-        imageview.clipsToBounds = true 
+        imageview.clipsToBounds = true
         return imageview
     }()
-    
-    
+
+
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
@@ -42,8 +41,8 @@ class BaseCells: UICollectionViewCell {
         label.sizeToFit()
         return label
     }()
-    
-    
+
+
     lazy var textView: UITextView = {
         let view = UITextView()
         view.isEditable = false
@@ -52,46 +51,46 @@ class BaseCells: UICollectionViewCell {
         view.layer.cornerRadius = 10
         view.backgroundColor = erxesColor
         view.font = UIFont.systemFont(ofSize: 18)
-        
+
         view.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
         self.contentView.addSubview(view)
         return view
     }()
-    
+
     lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.isUserInteractionEnabled = true
         view.contentMode = ContentMode.scaleAspectFill
         view.clipsToBounds = true
-        view.backgroundColor = .white 
+        view.backgroundColor = .white
         self.contentView.addSubview(view)
         return view
     }()
-    
-    lazy var edgeView:UIView = {
+
+    lazy var edgeView: UIView = {
         let view = UIView()
         self.contentView.addSubview(view)
         view.backgroundColor = erxesColor
         return view
     }()
 
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         cellDidLoad()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         cellDidLoad()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         cellDidLoad()
     }
-    
-    
+
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.avatarView.image = nil
@@ -99,33 +98,33 @@ class BaseCells: UICollectionViewCell {
         self.dateLabel.text = nil
         self.textView.attributedText = nil
     }
- 
+
     open func cellDidLoad() {
-        
+
     }
-    
-    
+
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if isLoaded { return }
         layoutView()
         isLoaded = true
     }
-    
-    
+
+
     open func layoutView() {
-        
+
     }
-    
-    
+
+
     func updateView() {
         if let avatar = model?.user?.fragments.userModel.details?.avatar {
-            avatarView.sd_setImage(with: URL(string: avatar), placeholderImage:UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil))
+            avatarView.sd_setImage(with: URL(string: avatar), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
         } else {
-            avatarView.image = UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil)
+            avatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
         }
-        
-        if let date = model?.createdAt?.dateFromUnixTime() {
+
+        if let date = model?.createdAt{
             let now = date.hourMinutes!
             dateLabel.text = now
         }else {
@@ -134,44 +133,44 @@ class BaseCells: UICollectionViewCell {
             dateLabel.text = now
         }
     }
-    
-    
-    static func getSizeOf(message:MessageModel) -> CGSize {
+
+
+    static func getSizeOf(message: MessageModel) -> CGSize {
         let textView = UITextView()
-        
-        
-        var options = [NSAttributedString.Key:Any]()
+
+
+        var options = [NSAttributedString.Key: Any]()
 //        options[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 13)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 5
         paragraphStyle.paragraphSpacing = 0
         options[NSAttributedString.Key.paragraphStyle] = paragraphStyle
-        
+
         guard let content = message.content else {
             return CGSize(width: 0, height: 50)
         }
-        
+
         let attributedString = content.html2Attributed
-        
+
         let attributes = attributedString!.attributes(at: 0, effectiveRange: nil)
         let font = attributes[NSAttributedString.Key.font] as? UIFont
         let newFont = font?.withSize(font!.pointSize + 5.0)
         options[NSAttributedString.Key.font] = newFont
-        
+
         attributedString!.addAttributes(options, range: NSMakeRange(0, attributedString!.length))
-        if attributedString!.attributedSubstring(from: NSMakeRange(attributedString!.length-1, 1)).string == "\n" {
-            attributedString!.deleteCharacters(in: NSMakeRange(attributedString!.length-1, 1))
+        if attributedString!.attributedSubstring(from: NSMakeRange(attributedString!.length - 1, 1)).string == "\n" {
+            attributedString!.deleteCharacters(in: NSMakeRange(attributedString!.length - 1, 1))
         }
         textView.attributedText = attributedString
         let textViewSize = textView.sizeThatFits(CGSize(width: SCREEN_WIDTH - 100, height: 10000))
         let height = textViewSize.height + 22
-       
-        
-      
-   
+
+
+
+
         if height < 50 {
             return CGSize(width: textViewSize.width, height: 50)
-        }else {
+        } else {
             return CGSize(width: textViewSize.width, height: height)
         }
     }

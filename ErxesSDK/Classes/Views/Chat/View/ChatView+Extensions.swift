@@ -12,10 +12,10 @@ import Fusuma
 
 extension ChatView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
+
         return chats.count
-        
-       
+
+
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -26,8 +26,8 @@ extension ChatView: UICollectionViewDelegate, UICollectionViewDataSource {
         let message = chats[indexPath.row]
         var cellIdentifier: String = ChatCell.identifier
 
-        if let files = message.attachments, files.count > 0 {
-            if let file = files.first {
+        if (message.attachments != nil) && message.attachments?.count != 0 {
+            if let file = message.attachments?.first {
                 let mimeTypes = ["image/jpeg", "image/png", "image/gif", "image/tiff"]
                 if mimeTypes.contains(file!.type) {
                     cellIdentifier = ImageCell.identifier
@@ -36,16 +36,19 @@ extension ChatView: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
             }
             cellIdentifier = ImageCell.identifier
+
         } else if message.customerId != nil {
             cellIdentifier = ChatCell.identifier
+
         } else {
             cellIdentifier = OperatorChatCell.identifier
+
         }
 
 
 
 
-        
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
 
         if let cell = cell as? BaseCells {
@@ -61,37 +64,43 @@ extension ChatView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     }
 
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-      
-        var h:CGFloat = 0
+
+        var h: CGFloat = 0
         var msg = ""
         if viewModel.isOnline {
-            
+            print("online")
             if let message = welcome {
                 msg = message
                 h = message.height(withWidth: SCREEN_WIDTH - 80, font: UIFont.systemFont(ofSize: 18))
             }
-             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionHeader", for: indexPath) as? CollectionHeader
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CollectionHeader", for: indexPath) as? CollectionHeader
             headerView!.frame.size.height = h + 40
             headerView?.textView.text = msg
+            if msg.count == 0 {
+                headerView?.isHidden = true
+            }
             return headerView!
-        }else {
-            
+        } else {
+            print("offline")
             if let message = away {
                 msg = message
                 h = message.height(withWidth: SCREEN_WIDTH - 80, font: UIFont.systemFont(ofSize: 18))
             }
-             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionFooter", for: indexPath) as? CollectionFooter
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionFooter", for: indexPath) as? CollectionFooter
             footerView!.frame.size.height = h + 40
             footerView?.textView.text = msg
+            if msg.count == 0 {
+                footerView?.isHidden = true
+            }
             return footerView!
         }
-        
-        
-        
+
+
+
     }
-    
+
     func forceScrollToBottom() {
         if (self.collectionView.numberOfSections == 0) {
             return
@@ -123,16 +132,27 @@ extension ChatView: UICollectionViewDelegate, UICollectionViewDataSource {
                 let y = self.headerView.frame.size.height
                 if rect.origin.y - y > 64 {
                     let newFrame = CGRect(x: 0, y: rect.origin.y - y, width: SCREEN_WIDTH, height: rect.height + y)
+                    print("newFrame: ",newFrame)
                     self.collectionView.frame = newFrame
                 } else {
+                    print("animate: ")
                     UIView.animate(withDuration: 0.1) {
+                        
                         self.collectionView.snp.remakeConstraints { (make) in
                             make.top.equalToSuperview().offset(64)
-                            make.bottom.left.right.equalToSuperview()
                             make.left.right.equalToSuperview()
+                            make.bottom.equalTo(self.textField.snp.top)
                         }
                         self.collectionView.layoutIfNeeded()
                     }
+                }
+                self.headerView.setTexts(title: titleText, subTitle: "", alignment: .center)
+
+                self.headerView.suppertersView.alpha = 0.0
+                self.headerView.titleLabel.snp.remakeConstraints { (make) in
+                    make.top.bottom.equalToSuperview()
+                    make.left.right.equalToSuperview().inset(40)
+
                 }
             }
         }
@@ -148,24 +168,24 @@ extension ChatView: UICollectionViewDelegateFlowLayout {
         var width: CGFloat = 0
 
 
-            if indexPath.row < calculatedHeights.count {
-                height = calculatedHeights[indexPath.row]
+        if indexPath.row < calculatedHeights.count {
+            height = calculatedHeights[indexPath.row]
+        } else {
+
+            if let files = item.attachments, files.count > 0 {
+                height = 170
+                width = 150
             } else {
-
-                if let files = item.attachments, files.count > 0 {
-                    height = 170
-                    width = 150
-                } else {
-                    let size = BaseCells.getSizeOf(message: item)
-                    height = size.height
-                    width = size.width
-                }
-
-                calculatedWidths.append(width)
-                calculatedHeights.append(height)
-
+                let size = BaseCells.getSizeOf(message: item)
+                height = size.height
+                width = size.width
             }
-        
+
+            calculatedWidths.append(width)
+            calculatedHeights.append(height)
+
+        }
+
 
         return CGSize(width: SCREEN_WIDTH, height: height)
     }

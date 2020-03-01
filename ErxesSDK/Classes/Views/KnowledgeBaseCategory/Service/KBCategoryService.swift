@@ -14,10 +14,10 @@ class KBCategoryService: KBCategoryServiceProtocol {
     // Call protocol function
 
     func knowledgeBaseCategoriesDetail(categoryId:String,success: @escaping (KbModel) -> (), failure: @escaping (GraphQLError) -> ()) {
-        let query = KnowledgeBaseCategoriesDetailQuery(categoryId: categoryId)
+        let query = KnowledgeBaseCategoryDetailQuery(id: categoryId)
         ErxesClient.shared.client.fetch(query: query) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.knowledgeBaseCategoriesDetail?.fragments.kbModel {
+            if let dataModel = data.knowledgeBaseCategoryDetail?.fragments.kbModel {
                 success(dataModel)
             }
             if let errors = try? result.get().errors {
