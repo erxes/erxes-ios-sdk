@@ -83,6 +83,8 @@ var isSaas = false
     }
 
     static func restore() {
+        UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        
         let defaults = UserDefaults()
         
         if let email = defaults.string(forKey: "email") {
