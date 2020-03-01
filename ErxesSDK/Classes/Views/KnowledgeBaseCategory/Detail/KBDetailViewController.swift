@@ -8,12 +8,14 @@
 
 import UIKit
 
-class KBDetailViewController: UIViewController {
+class KBDetailViewController: AbstractViewController {
 
     var model: KbArticleModel = KbArticleModel() {
         didSet{
+            
             self.tableView.reloadData()
-            self.headerView.titleLabel.text = model.title
+//            self.headerView.titleLabel.text = model.title
+            
             self.headerView.layoutSubviews()
         }
     }
@@ -48,12 +50,7 @@ class KBDetailViewController: UIViewController {
     
 
 
-    
-    var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
+
     
     var headerView: ChatHeader = {
         let header = ChatHeader()
@@ -80,13 +77,16 @@ class KBDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topOffset = 80
+        print("detail load")
         prepareViews()
         
     }
     
     func prepareViews(){
+        topOffset = 80
         self.view.backgroundColor = .clear
-        self.view.addSubview(containerView)
+        
         containerView.addSubview(headerView)
         headerView.addSubview(backButton)
         
@@ -96,11 +96,7 @@ class KBDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
       
         
-        containerView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
-            
-        }
+      
         
         headerView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()

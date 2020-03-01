@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ErxesSDK'
-  s.version          = '0.10.0'
+  s.version          = '0.11.0'
   s.summary          = 'A short description of erxes-ios-sdk.'
   s.swift_version = '5.0'
   s.description      = 'erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
    }
   s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES','SWIFT_VERSION' => '5.0'}
   s.frameworks = 'Photos'
-  s.dependency 'Apollo', '~> 0.20.0'
+  s.dependency 'Apollo', '~> 0.22.0'
   s.dependency 'Apollo/WebSocket'
   s.dependency 'Apollo/SQLite'
   s.dependency 'Fusuma', '~> 1.3.0'

@@ -1,5 +1,5 @@
-query allConversations($integrationId: String!, $customerId: String!) {
-conversations(integrationId: $integrationId, customerId: $customerId) {
+query widgetsConversations($integrationId: String!, $customerId: String!) {
+widgetsConversations(integrationId: $integrationId, customerId: $customerId) {
     ...ConversationModel
     }
 }
@@ -15,8 +15,8 @@ fragment ConversationModel on Conversation {
     }
 }
 
-mutation formConnect($brandCode: String!, $formCode: String!) {
-formConnect(brandCode: $brandCode, formCode: $formCode) {
+mutation widgetsLeadConnect($brandCode: String!, $formCode: String!) {
+widgetsLeadConnect(brandCode: $brandCode, formCode: $formCode) {
         ...FormConnectModel
     }
 }
@@ -35,27 +35,27 @@ fragment FormModel on Form {
     _id
     title
     description
-    callout
+    buttonText
 }
 
 fragment IntegrationModel on Integration {
     _id
     name
-    formData
+    leadData
 }
 
 
-query getMessengerIntegration($brandCode: String!){
-    getMessengerIntegration(brandCode: $brandCode){
+query widgetsGetMessengerIntegration($brandCode: String!){
+    widgetsGetMessengerIntegration(brandCode: $brandCode){
         _id
         languageCode
         uiOptions
         messengerData
-        formData
+        leadData
     }
 }
 
 
-query unreadCount($conversationId: String) {
-    unreadCount(conversationId: $conversationId)
+query widgetsUnreadCount($conversationId: String) {
+    widgetsUnreadCount(conversationId: $conversationId)
 }

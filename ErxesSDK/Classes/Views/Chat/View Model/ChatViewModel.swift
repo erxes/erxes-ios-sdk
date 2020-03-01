@@ -1,4 +1,4 @@
-//
+//  
 //  ChatViewModel.swift
 //  erxesiosdk
 //
@@ -15,14 +15,13 @@ class ChatViewModel {
     private var model: [MessageModel] = [MessageModel]() {
         didSet {
             self.count = self.model.count
-
             self.didGetData!(model)
         }
     }
 
     /// Count your data in model
     var count: Int = 0
-    var isOnline: Bool = false
+    var isOnline:Bool = false
     //MARK: -- Network checking
 
     /// Define networkStatus for check network connection
@@ -60,11 +59,11 @@ class ChatViewModel {
     var updateLoadingStatus: (() -> ())?
     var internetConnectionStatus: (() -> ())?
     var serverErrorStatus: (() -> ())?
-
-    var didGetData: ((_ model: [MessageModel]) -> ())?
-    var didReceiveMessage: ((_ model: MessageModel) -> ())?
-    var didSetIsOnline: ((_ isOnline: Bool) -> ())?
-    init(withChat serviceProtocol: ChatServiceProtocol = ChatService()) {
+    
+    var didGetData: ((_ model:[MessageModel]) -> ())?
+    var didReceiveMessage: ((_ model:MessageModel) -> ())?
+    var didSetIsOnline: ((_ isOnline:Bool) -> ())?
+    init(withChat serviceProtocol: ChatServiceProtocol = ChatService() ) {
         self.service = serviceProtocol
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.networkStatusChanged(_:)), name: NSNotification.Name(rawValue: ReachabilityStatusChangedNotification), object: nil)
@@ -78,7 +77,7 @@ class ChatViewModel {
     }
 
     //MARK: -- Example Func
-    func getMessages(conversationId: String) {
+    func getMessages(conversationId:String) {
         
         switch networkStatus {
         case .offline:
@@ -96,9 +95,9 @@ class ChatViewModel {
             break
         }
     }
-
-
-    func conversationDetail(id: String!, integrationId: String) {
+    
+    
+    func conversationDetail(id:String!,integrationId:String){
         self.service.conversationDetail(conversationId: id, integrationId: integrationId, success: { (data) in
             if let flag = data.isOnline {
                 self.isOnline = flag
@@ -108,21 +107,21 @@ class ChatViewModel {
             print(error)
         }
     }
-
-    func insertMessage(mutation: InsertMessageMutation) {
-        self.service.insertMessage(mutation: mutation, success: { (data) in
-
+    
+    func insertMessage(mutation:InsertMessageMutation){
+        self.service.insertMessage(mutation: mutation, success: { (data ) in
             self.didReceiveMessage!(data)
         }) { (error) in
             print(error)
         }
     }
-
-    func subscribe(conversationId: String) {
-        if isSaas {
+    
+    func subscribe(conversationId:String){
+        if isSaas{
             let subscription = ConversationMessageInsertedSaasSubscription(id: conversationId)
             ErxesClient.shared.client.subscribe(subscription: subscription) { (result) in
                 guard let data = try? result.get().data else { return }
+               
                 if let dataModel = data.conversationMessageInserted?.fragments.messageSubscriptionModel {
                     var message = MessageModel(_id: dataModel.id, conversationId: conversationId)
                     message.customerId = dataModel.customerId
@@ -143,27 +142,29 @@ class ChatViewModel {
                     print(errors[0])
                 }
             }
-        } else {
+        }else {
             let subscription = ConversationMessageInsertedSubscription(id: conversationId)
             ErxesClient.shared.client.subscribe(subscription: subscription) { (result) in
                 guard let data = try? result.get().data else { return }
                 if let dataModel = data.conversationMessageInserted?.fragments.messageModel {
-
+                    print(dataModel)
                     self.didReceiveMessage!(dataModel)
                 }
                 if let errors = try? result.get().errors {
                     print(errors[0])
-                    print("errors = ", errors)
                 }
             }
         }
+        
+        
+        
     }
-
-    func messageExists(id: String) {
-
+    
+    func messageExists(id:String){
+        
     }
-
-    func read(conversationId: String) {
+    
+    func read(conversationId:String) {
         self.service.readConversation(conversationId: conversationId, success: { (data) in
             print(data)
         }) { (error) in

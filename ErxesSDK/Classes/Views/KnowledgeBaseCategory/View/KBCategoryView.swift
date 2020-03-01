@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KBCategoryView: UIViewController {
+class KBCategoryView: AbstractViewController {
 
     // OUTLETS HERE
     
@@ -46,11 +46,7 @@ class KBCategoryView: UIViewController {
     var subTitle: String?
     var categoryId = String()
     var searchArray = [KbArticleModel]()
-    var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
+  
     
     var headerView: ChatHeader = {
         let header = ChatHeader()
@@ -77,12 +73,7 @@ class KBCategoryView: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        containerView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
-            
-        }
-        
+     
         headerView.snp.makeConstraints { (make) in
             make.top.equalTo(containerView)
             make.left.right.equalToSuperview()
@@ -110,27 +101,30 @@ class KBCategoryView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        topOffset = 80
         self.prepareViews()
         self.setupViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
         self.viewModel.knowledgeBaseCategoriesDetail(categoryId: self.categoryId)
     }
     
     func prepareViews(){
         self.view.backgroundColor = .clear
-        self.view.addSubview(containerView)
+        
         self.containerView.addSubview(tableView)
         
-        self.headerView.titleLabel.text = mainTitle
-        self.headerView.subTitleLabel.text = subTitle
+//        self.headerView.titleLabel.text = mainTitle
+//        self.headerView.subTitleLabel.text = subTitle
         self.headerView.addSubview(backButton)
         self.searchField.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.view.addSubview(headerView)
+        headerView.setTexts(title: mainTitle!, subTitle: subTitle!,alignment: .center)
     }
     
     fileprivate func setupViewModel() {
@@ -226,6 +220,7 @@ extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
             
             let controller = KBDetailViewController()
             controller.model = model
+            controller.headerView.setTexts(title:mainTitle!, subTitle: "",alignment: .center)
             self.navigationController?.pushViewController(controller, animated: true)
         }
 

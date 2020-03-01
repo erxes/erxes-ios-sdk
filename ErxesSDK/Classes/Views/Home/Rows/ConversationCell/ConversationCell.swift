@@ -108,7 +108,7 @@ class ConversationCell: UITableViewCell {
     
     func setup(viewModel:ConversationModel) {
         nameLabel.text = "Support staff".localized(lang)
-        dateLabel.text = Utils.formatDate(time: viewModel.createdAt!)
+        dateLabel.text = Utils.formatDate(date: viewModel.createdAt!)
         if let users = viewModel.participatedUsers?.compactMap({$0?.fragments.userModel}) {
             if let user = users.last {
                 nameLabel.text = user.details?.fullName

@@ -1,5 +1,5 @@
-query knowledgeBaseCategoriesDetail($categoryId: String!) {
-    knowledgeBaseCategoriesDetail(categoryId: $categoryId) {
+query knowledgeBaseCategoryDetail($id: String!) {
+    knowledgeBaseCategoryDetail(_id: $id) {
         ...KBModel
     }
 }

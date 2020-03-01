@@ -16,7 +16,9 @@ func rootCacheKey<Operation: GraphQLOperation>(for operation: Operation) -> Stri
 }
 
 protocol ApolloStoreSubscriber: class {
-  func store(_ store: ApolloStore, didChangeKeys changedKeys: Set<CacheKey>, context: UnsafeMutableRawPointer?)
+  func store(_ store: ApolloStore,
+             didChangeKeys changedKeys: Set<CacheKey>,
+             context: UnsafeMutableRawPointer?)
 }
 
 /// The `ApolloStore` class acts as a local cache for normalized GraphQL results.
@@ -99,7 +101,7 @@ public final class ApolloStore {
       self.cacheLock.unlock()
     }
   }
-  
+
   /// Performs an operation within a read transaction
   ///
   /// - Parameters:
@@ -128,14 +130,16 @@ public final class ApolloStore {
     return Promise<ReadWriteTransaction> { fulfill, reject in
       self.queue.async(flags: .barrier) {
         self.cacheLock.lockForWriting()
-        fulfill(ReadWriteTransaction(cache: self.cache, cacheKeyForObject: self.cacheKeyForObject, updateChangedKeysFunc: self.didChangeKeys))
+        fulfill(ReadWriteTransaction(cache: self.cache,
+                                     cacheKeyForObject: self.cacheKeyForObject,
+                                     updateChangedKeysFunc: self.didChangeKeys))
       }
     }.flatMap(body)
      .finally {
       self.cacheLock.unlock()
     }
   }
-  
+
   /// Performs an operation within a read-write transaction
   ///
   /// - Parameters:
@@ -165,12 +169,18 @@ public final class ApolloStore {
       let mapper = GraphQLSelectionSetMapper<Query.Data>()
       let dependencyTracker = GraphQLDependencyTracker()
 
-      return try transaction.execute(selections: Query.Data.selections, onObjectWithKey: rootCacheKey(for: query), variables: query.variables, accumulator: zip(mapper, dependencyTracker))
+      return try transaction.execute(selections: Query.Data.selections,
+                                     onObjectWithKey: rootCacheKey(for: query),
+                                     variables: query.variables,
+                                     accumulator: zip(mapper, dependencyTracker))
     }.map { (data: Query.Data, dependentKeys: Set<CacheKey>) in
-      GraphQLResult(data: data, errors: nil, source:.cache, dependentKeys: dependentKeys)
+      GraphQLResult(data: data,
+                    errors: nil,
+                    source:.cache,
+                    dependentKeys: dependentKeys)
     }
   }
-  
+
   /// Loads the results for the given query from the cache.
   ///
   /// - Parameters:
@@ -196,12 +206,19 @@ public final class ApolloStore {
     }
 
     public func read<Query: GraphQLQuery>(query: Query) throws -> Query.Data {
-      return try readObject(ofType: Query.Data.self, withKey: rootCacheKey(for: query), variables: query.variables)
+      return try readObject(ofType: Query.Data.self,
+                            withKey: rootCacheKey(for: query),
+                            variables: query.variables)
     }
 
-    public func readObject<SelectionSet: GraphQLSelectionSet>(ofType type: SelectionSet.Type, withKey key: CacheKey, variables: GraphQLMap? = nil) throws -> SelectionSet {
+    public func readObject<SelectionSet: GraphQLSelectionSet>(ofType type: SelectionSet.Type,
+                                                              withKey key: CacheKey,
+                                                              variables: GraphQLMap? = nil) throws -> SelectionSet {
       let mapper = GraphQLSelectionSetMapper<SelectionSet>()
-      return try execute(selections: type.selections, onObjectWithKey: key, variables: variables, accumulator: mapper).await()
+      return try execute(selections: type.selections,
+                         onObjectWithKey: key,
+                         variables: variables,
+                         accumulator: mapper).await()
     }
 
     public func loadRecords(forKeys keys: [CacheKey],
@@ -231,12 +248,15 @@ public final class ApolloStore {
           let value = object[info.cacheKeyForField]
           return self.complete(value: value)
         }
-        
-        
+
         executor.dispatchDataLoads = self.loader.dispatch
         executor.cacheKeyForObject = self.cacheKeyForObject
-        
-        return try executor.execute(selections: selections, on: object, withKey: key, variables: variables, accumulator: accumulator)
+
+        return try executor.execute(selections: selections,
+                                    on: object,
+                                    withKey: key,
+                                    variables: variables,
+                                    accumulator: accumulator)
       }
     }
 
@@ -265,29 +285,47 @@ public final class ApolloStore {
       try write(data: data, forQuery: query)
     }
 
-    public func updateObject<SelectionSet: GraphQLSelectionSet>(ofType type: SelectionSet.Type, withKey key: CacheKey, variables: GraphQLMap? = nil, _ body: (inout SelectionSet) throws -> Void) throws {
-      var object = try readObject(ofType: type, withKey: key, variables: variables)
+    public func updateObject<SelectionSet: GraphQLSelectionSet>(ofType type: SelectionSet.Type,
+                                                                withKey key: CacheKey,
+                                                                variables: GraphQLMap? = nil,
+                                                                _ body: (inout SelectionSet) throws -> Void) throws {
+      var object = try readObject(ofType: type,
+                                  withKey: key,
+                                  variables: variables)
       try body(&object)
       try write(object: object, withKey: key, variables: variables)
     }
 
     public func write<Query: GraphQLQuery>(data: Query.Data, forQuery query: Query) throws {
-      try write(object: data, withKey: rootCacheKey(for: query), variables: query.variables)
+      try write(object: data,
+                withKey: rootCacheKey(for: query),
+                variables: query.variables)
     }
 
-    public func write(object: GraphQLSelectionSet, withKey key: CacheKey, variables: GraphQLMap? = nil) throws {
-      try write(object: object.jsonObject, forSelections: type(of: object).selections, withKey: key, variables: variables)
+    public func write(object: GraphQLSelectionSet,
+                      withKey key: CacheKey,
+                      variables: GraphQLMap? = nil) throws {
+      try write(object: object.jsonObject,
+                forSelections: type(of: object).selections,
+                withKey: key, variables: variables)
     }
 
-    private func write(object: JSONObject, forSelections selections: [GraphQLSelection], withKey key: CacheKey, variables: GraphQLMap?) throws {
+    private func write(object: JSONObject,
+                       forSelections selections: [GraphQLSelection],
+                       withKey key: CacheKey,
+                       variables: GraphQLMap?) throws {
       let normalizer = GraphQLResultNormalizer()
       let executor = GraphQLExecutor { object, info in
         return .result(.success(object[info.responseKeyForField]))
       }
-      
+
       executor.cacheKeyForObject = self.cacheKeyForObject
-      
-      _ = try executor.execute(selections: selections, on: object, withKey: key, variables: variables, accumulator: normalizer)
+
+      _ = try executor.execute(selections: selections,
+                               on: object,
+                               withKey: key,
+                               variables: variables,
+                               accumulator: normalizer)
       .flatMap {
         self.cache.mergePromise(records: $0)
       }.andThen { changedKeys in
@@ -314,7 +352,7 @@ internal extension NormalizedCache {
         }
     }
   }
-  
+
   func mergePromise(records: RecordSet) -> Promise<Set<CacheKey>> {
     return Promise { fulfill, reject in
       self.merge(
@@ -329,7 +367,7 @@ internal extension NormalizedCache {
       }
     }
   }
-  
+
   func clearPromise() -> Promise<Void> {
     return Promise { fulfill, reject in
       self.clear(callbackQueue: nil) { result in

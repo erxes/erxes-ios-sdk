@@ -1,0 +1,12 @@
+query widgetsMessengerSupporters($integrationId:String!) {
+    widgetsMessengerSupporters(integrationId:$integrationId) {
+        ...UserModel
+    }
+}
+
+fragment UserModel on User {
+    details{
+        fullName
+        avatar
+    }
+}

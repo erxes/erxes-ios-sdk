@@ -94,13 +94,13 @@ class HomeHeader: UIView {
     
     var rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ic_more", in: Erxes.erxesBundle(), compatibleWith: nil),for:.normal)
+        button.setImage(UIImage(named: "ic_more",in: Erxes.erxesBundle(), compatibleWith: nil),for:.normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         return button
     }()
     
-    var suppertersView: SupporterView = {
+    var supportersView: SupporterView = {
        let view = SupporterView()
         return view
     }()
@@ -124,7 +124,7 @@ class HomeHeader: UIView {
         
         //I actually create & place constraints in here, instead of in
         //updateConstraints
-        let image = UIImage(named: "pattern", in: Erxes.erxesBundle(), compatibleWith: nil)
+        let image = UIImage(named: "pattern",in: Erxes.erxesBundle(), compatibleWith: nil)
         let bgView = UIImageView()
         bgView.tag = 100
         bgView.backgroundColor = themeColor
@@ -139,7 +139,7 @@ class HomeHeader: UIView {
         self.addSubview(facebookButton)
         self.addSubview(titleLabel)
         self.addSubview(subTitleLabel)
-        self.addSubview(suppertersView)
+        self.addSubview(supportersView)
         
         bgView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -186,7 +186,7 @@ class HomeHeader: UIView {
             make.right.equalToSuperview().offset(-10)
         }
         
-        suppertersView.snp.makeConstraints { (make) in
+        supportersView.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
             make.height.equalTo(50)
@@ -242,7 +242,7 @@ class HomeHeader: UIView {
     }
     
     func setSupperters(supporters:[UserModel]){
-        self.suppertersView.setSupprters(supporters: supporters)
+        self.supportersView.setSupprters(supporters: supporters)
     }
     
     @objc func socialAction(sender:UIButton){
@@ -280,11 +280,8 @@ class HomeHeader: UIView {
                 presentationController.sourceView = from
                 presentationController.sourceRect = from.bounds
             }
-            let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 13)
-            label.text = "End conversation".localized(lang)
-            label.sizeToFit()
-            viewController.preferredContentSize = CGSize(width: label.frame.size.width + 20, height: 80)
+            let moreViewWidth = ("End conversation".localized(lang)).widthOfString(usingFont: UIFont.systemFont(ofSize: 13)) + 10
+            viewController.preferredContentSize = CGSize(width: moreViewWidth, height: 80)
             
             topController.present(viewController, animated: true, completion: nil)
         }

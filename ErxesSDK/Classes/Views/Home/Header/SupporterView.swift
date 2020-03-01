@@ -9,19 +9,19 @@
 import UIKit
 import SDWebImage
 
-class AvatarView: UIImageView{
+class AvatarView: UIImageView {
     override init(image: UIImage?) {
         super.init(image: image)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = self.frame.size.height / 2
@@ -32,60 +32,89 @@ class AvatarView: UIImageView{
 
 class SupporterView: UIView {
 
-    
+
     private var supporters = [UserModel]() {
-        didSet{
+        didSet {
             if supporters.count != 0 {
                 for (i, supporter) in self.supporters.enumerated() {
-                    let imageview = AvatarView(frame: CGRect(x: i + (60*i), y: 0, width: 50, height: 50))
+                    let imageview = AvatarView(frame: CGRect(x: i + (60 * i), y: 0, width: 50, height: 50))
                     self.addSubview(imageview)
-                    imageview.sd_setImage(with: URL(string: (supporter.details?.avatar)!), placeholderImage:UIImage(named: "ic_avatar", in: Erxes.erxesBundle(), compatibleWith: nil))
+                    if let avatarUrl = supporter.details?.avatar {
+                        imageview.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    }else {
+                        imageview.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
+                    }
                 }
-               
+
             }
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         didLoad()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         didLoad()
     }
-    
+
     convenience init() {
         self.init(frame: .zero)
     }
-    
-    func setSupprters(supporters:[UserModel]){
+
+    func setCenter() {
+        print(self.frame)
+        if subviews.count == 2 {
+            let imageView1 = subviews.last
+            imageView1?.frame = CGRect(x: self.frame.size.width / 2 + 15, y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+
+            let imageView2 = subviews.first
+            imageView2?.frame = CGRect(x: self.frame.size.width / 2 - 15, y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+        } else if subviews.count == 3 {
+            let imageView1 = subviews.last
+            imageView1?.frame = CGRect(x: (self.frame.size.width / 2 - 25)+35, y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+            let imageView2 = subviews[1]
+            imageView2.frame = CGRect(x: (self.frame.size.width / 2 - 25), y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+            let imageView3 = subviews.first
+            imageView3?.frame = CGRect(x: (self.frame.size.width / 2 - 25)-35, y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+            
+        }else if subviews.count == 1 {
+            let imageView = subviews.first
+            imageView?.frame = CGRect(x: (self.frame.size.width / 2 - 25), y: self.frame.size.height / 2 - 25, width: 50, height: 50)
+        }
+        for sub in subviews{
+            print(sub.frame)
+        }
+    }
+
+    func setSupprters(supporters: [UserModel]) {
         self.supporters = supporters
     }
-    
+
     func didLoad() {
         //Place your initialization code here
-        
+
         //I actually create & place constraints in here, instead of in
         //updateConstraints
-   
-        
+
+
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         //Custom manually positioning layout goes here (auto-layout pass has already run first pass)
     }
-    
+
     override func updateConstraints() {
         super.updateConstraints()
-        
+
         //Disable this if you are adding constraints manually
         //or you're going to have a 'bad time'
         //self.translatesAutoresizingMaskIntoConstraints = false
-        
+
         //Add custom constraint code here
     }
 

@@ -9,25 +9,10 @@
 import UIKit
 import Fusuma
 
-class ChatView: UIViewController {
-    
+class ChatView: AbstractViewController {
+
     // OUTLETS HERE
-    //
-    //    let fusuma = FusumaViewController()
-    //    fusuma.delegate = self
-    //    // ...
-    //    fusumaCameraRollTitle = "CustomizeCameraRollTitle"
-    //    fusumaCameraTitle = "CustomizeCameraTitle" // Camera Title
-    //    fusumaTintColor: UIColor // tint color
-    
     lazy var picker =  FusumaViewController()
-    
-    
-    var containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
     
     lazy var flowLayout: ChatCollectionViewFlowLayout = {
         let layout = ChatCollectionViewFlowLayout()
@@ -37,8 +22,8 @@ class ChatView: UIViewController {
         
         return layout
     }()
-    
-    
+
+
     var backButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage.erxes(with: .leftarrow3, textColor: .white,size: CGSize(width: 27, height: 27)), for: .normal)
@@ -48,23 +33,23 @@ class ChatView: UIViewController {
     
     var rightButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ic_more", in: Erxes.erxesBundle(), compatibleWith: nil),for:.normal)
+        button.setImage(UIImage(named: "ic_more",in: Erxes.erxesBundle(), compatibleWith: nil),for:.normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
         return button
     }()
     
     var textField:UITextField = {
-        let field = UITextField()
+       let field = UITextField()
         field.font = UIFont.systemFont(ofSize: 13)
         field.borderStyle = UITextField.BorderStyle.roundedRect
         field.placeholder = "Write a reply".localized(lang)
         field.backgroundColor = .white
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 3, height: 40))
-        
+       
         field.leftView = leftView
         let rightView = UIView(frame:CGRect(x: 0, y: 0, width: 80, height: 40))
-        
+       
         let attachButton = UIButton()
         attachButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         attachButton.setImage(UIImage.erxes(with: .attach, textColor: UIColor.init(hexString: "#d3d2d2")!,size: CGSize(width: 26, height: 26)), for: .normal)
@@ -81,8 +66,6 @@ class ChatView: UIViewController {
         field.leftViewMode = .always
         field.rightViewMode = .always
         field.returnKeyType = UIReturnKeyType.send
-        field.autocapitalizationType = .none
-        field.autocorrectionType = UITextAutocorrectionType.no
         return field
     }()
     
@@ -95,7 +78,7 @@ class ChatView: UIViewController {
         })
         return imageview
     }()
-    
+
     lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -112,38 +95,38 @@ class ChatView: UIViewController {
         self.containerView.addSubview(collection)
         collection.snp.makeConstraints({ (make) in
             make.left.right.bottom.equalToSuperview()
-            //            make.top.equalToSuperview().offset(200)
+//            make.top.equalToSuperview().offset(200)
             make.top.equalTo(self.headerView.snp.bottom)
         })
-        //        collection.registerClass(MenuViewCell.self, forCellWithReuseIdentifier: "cell")
+//        collection.registerClass(MenuViewCell.self, forCellWithReuseIdentifier: "cell")
         return collection
     }()
-    
-    
+
+
     var headerView: ChatHeader = {
         let header = ChatHeader()
         header.rightButton.isHidden = true
         return header
     }()
-    
+
     // VARIABLES HERE
     var collectionViewLoaded = false
     var conversationId = String()
     var viewModel = ChatViewModel()
     var chats = [MessageModel]() {
         didSet {
-            
+            print("reload data")
         }
     }
-    
+
     var calculatedHeights: [CGFloat] = []
     var calculatedWidths: [CGFloat] = []
-    var containerHeight:CGFloat = 0.0
+  
     var mainTitle: String?
     var subTitle: String?
-    
-    
-    
+   
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,13 +136,11 @@ class ChatView: UIViewController {
         prepareViews()
         self.setupViewModel()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewModel.conversationDetail(id: conversationId, integrationId: erxesIntegrationId)
@@ -189,23 +170,27 @@ class ChatView: UIViewController {
         let height: CGFloat = 150 //whatever height you want to add to the existing height
         let bounds = self.navigationController!.navigationBar.bounds
         self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
-        
+
     }
-    
+
     func prepareViews() {
-        view.backgroundColor = .white
+        topOffset = 80
+        view.backgroundColor = .clear
         view.addSubview(textField)
         textField.delegate = self
-        view.addSubview(containerView)
+        
         containerView.addSubview(headerView)
-        headerView.titleLabel.text = titleText
+//        headerView.titleLabel.text = titleText
+        headerView.setTexts(title: titleText, subTitle: descriptionText,alignment: .left)
 //        headerView.subTitleLabel.text = descriptionText
         headerView.addSubview(backButton)
         headerView.addSubview(rightButton)
         headerView.setSupperters(supporters: supporters)
+        print("prepareViews")
         if let bg = wallPaper {
-            self.collectionView.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg-\(bg)", in: Erxes.erxesBundle(), compatibleWith: nil)!)
             
+            self.collectionView.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg-\(bg)",in: Erxes.erxesBundle(), compatibleWith: nil)!)
+
             self.view.bringSubviewToFront(headerView)
         }
         
@@ -214,7 +199,7 @@ class ChatView: UIViewController {
         fusumaTitleFont = UIFont.boldSystemFont(ofSize: 15)
         picker.allowMultipleSelection = false
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textField.snp.makeConstraints { (make) in
@@ -223,15 +208,11 @@ class ChatView: UIViewController {
             make.bottom.equalTo(bottomLayoutGuide.snp.top)
             make.height.equalTo(40)
         }
-        containerView.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
-            make.bottom.equalTo(self.textField.snp.top)
-        }
-        
+    
+
         headerView.snp.makeConstraints { (make) in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(150)
+//            make.height.equalTo(150)
         }
         
         backButton.snp.makeConstraints { (make) in
@@ -249,20 +230,20 @@ class ChatView: UIViewController {
         textField.dropShadow()
         
         
-        
+     
     }
     
     
     
     
-    
+
     fileprivate func setupViewModel() {
-        
+
         self.viewModel.showAlertClosure = {
             let alert = self.viewModel.alertMessage ?? ""
             print(alert)
         }
-        
+
         self.viewModel.updateLoadingStatus = {
             self.collectionView.activityIndicatorView.center = self.collectionView.center
             if self.viewModel.isLoading {
@@ -271,19 +252,19 @@ class ChatView: UIViewController {
                 self.collectionView.activityIndicatorView.stopAnimating()
             }
         }
-        
+
         self.viewModel.internetConnectionStatus = {
             print("Internet disconnected")
             // show UI Internet is disconnected
         }
-        
+
         self.viewModel.serverErrorStatus = {
             print("Server Error / Unknown Error")
             // show UI Server is Error
         }
         
         self.viewModel.didSetIsOnline = { isOnline in
-            
+            print("isonlone",isOnline)
             var h:CGFloat = 0
             if isOnline {
                 if let message = welcome {
@@ -298,24 +279,25 @@ class ChatView: UIViewController {
             }
             
             self.collectionView.reloadData()
-            //            self.forceScrollToBottom()
+//            self.forceScrollToBottom()
         }
         self.viewModel.didGetData = { data in
             // update UI after get data
             
             self.chats = data
-            
+         
             
             self.collectionView.reloadData()
             self.forceScrollToBottom()
-            
-            
+           
+           
         }
         
         
-        
+
         self.viewModel.didReceiveMessage = { data in
-            self.conversationId = data.conversationId
+        
+            self.conversationId = data.conversationId!
             if self.isNewMessage(id: data._id) {
                 self.chats.append(data)
                 if self.chats.count > 1 {
@@ -327,12 +309,12 @@ class ChatView: UIViewController {
                     self.collectionView.reloadData()
                     
                 }
-                
+
             }
         }
-        
+
     }
-    
+
     @objc func backAction(sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -360,11 +342,8 @@ class ChatView: UIViewController {
                 presentationController.sourceView = from
                 presentationController.sourceRect = from.bounds
             }
-            let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 13)
-            label.text = "End conversation".localized(lang)
-            label.sizeToFit()
-            viewController.preferredContentSize = CGSize(width: label.frame.size.width + 20, height: 80)
+            let moreViewWidth = ("End conversation".localized(lang)).widthOfString(usingFont: UIFont.systemFont(ofSize: 13)) + 10
+            viewController.preferredContentSize = CGSize(width: moreViewWidth, height: 80)
             
             topController.present(viewController, animated: true, completion: nil)
         }
@@ -377,6 +356,7 @@ class ChatView: UIViewController {
     }
     
     @objc func sendAction(sender:UIButton) {
+     
         let mutation = InsertMessageMutation(integrationId: erxesIntegrationId, customerId: erxesCustomerId)
         if conversationId.count != 0 {
             mutation.conversationId = conversationId
@@ -401,7 +381,7 @@ class ChatView: UIViewController {
         uploader.tag = 55
         uploader.delegate = self
         self.view.addSubview(uploader)
-        
+
     }
     
     @objc func keyboardHandler(notification: NSNotification) {
@@ -414,15 +394,23 @@ class ChatView: UIViewController {
             return
         }
         
-        
+       
         if notification.name == UIResponder.keyboardWillShowNotification{
             UIView.animate(withDuration: 0.3) {
                 
-                self.headerView.snp.updateConstraints({ (make) in
+                self.headerView.snp.remakeConstraints({ (make) in
                     make.height.equalTo(64)
+                    make.left.top.right.equalToSuperview()
                 })
                 
+                self.headerView.setTexts(title: titleText, subTitle: "",alignment: .center)
                 
+                self.headerView.suppertersView.alpha = 0.0
+                self.headerView.titleLabel.snp.remakeConstraints { (make) in
+                    make.top.bottom.equalToSuperview()
+                    make.left.right.equalToSuperview().inset(40)
+                   
+                }
                 self.textField.snp.remakeConstraints { (make) in
                     make.bottom.equalToSuperview().offset(-keyboardFrame.size.height)
                     make.height.equalTo(40)
@@ -435,9 +423,10 @@ class ChatView: UIViewController {
                     make.bottom.equalTo(self.textField.snp.top)
                     make.width.equalToSuperview()
                 })
+                
                 self.collectionView.layoutIfNeeded()
             }
-            
+           
         }
         if notification.name == UIResponder.keyboardWillHideNotification {
             UIView.animate(withDuration: 0.3) {
@@ -464,10 +453,10 @@ class ChatView: UIViewController {
         }
         
         if notification.name == UIResponder.keyboardDidShowNotification {
-            self.scrollToBottom()
+             self.scrollToBottom()
         }
     }
-    
+
 }
 
 
@@ -499,8 +488,7 @@ extension ChatView: UIPopoverPresentationControllerDelegate {
 
 extension ChatView: MoreViewDelegate {
     func close() {
-       
-        self.dismiss(animated: true, completion: nil)
+      self.dismiss(animated: true, completion: nil)
     }
     
     func end() {

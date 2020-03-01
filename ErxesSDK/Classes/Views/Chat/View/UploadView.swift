@@ -137,7 +137,7 @@ class UploadView: UIView {
         self.progressBar.progress = 0
 //        self.uploadLoader.startAnimating()
         
-        let url = uploadUrl
+       
         
         if let imgData = UIImage.resize(image) {
             size = imgData.count
@@ -150,7 +150,7 @@ class UploadView: UIView {
                 multipartFormData.append(imgData, withName: "file",fileName: "file.jpg", mimeType: "image/jpg")
                 
             },
-                             to:url ) {
+                             to:uploadUrl ) {
                                 (result) in
                                 
                                 switch result {
@@ -181,7 +181,7 @@ class UploadView: UIView {
             case .success(_):
                 self.progressBar.progress = 1
                 if self.isValidUrl(url: response.value!)  {
-                    
+                    print("response = ", response)
                     let file = AttachmentInput(url: response.value!, name: "file", type: "image/jpeg", size: Double(exactly: self.size))
                     self.delegate?.attachmentUploaded(file: file)
                 
@@ -197,7 +197,7 @@ class UploadView: UIView {
             case .failure(_):
                 print(response.error?.localizedDescription as Any)
             @unknown default:
-                print("default")
+                print("asd")
             }
         
             

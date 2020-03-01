@@ -18,7 +18,7 @@ class ChatService: ChatServiceProtocol {
         let query = ConversationDetailQuery(id: conversationId, integrationId: integrationId)
         ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheCompletely) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.conversationDetail {
+            if let dataModel = data.widgetsConversationDetail {
 
                 success(dataModel.fragments.detailResponse)
             }
@@ -31,7 +31,7 @@ class ChatService: ChatServiceProtocol {
     func insertMessage(mutation: InsertMessageMutation, success: @escaping (MessageModel) -> (), failure: @escaping (GraphQLError) -> ()) {
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             guard let data = try? result.get().data else { return }
-            if let model = data.insertMessage?.fragments.messageModel {
+            if let model = data.widgetsInsertMessage?.fragments.messageModel {
                 success(model)
             }
 
@@ -46,8 +46,8 @@ class ChatService: ChatServiceProtocol {
         let query = MessagesQuery(conversationId: conversationId)
         ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheCompletely) { result in
             guard let data = try? result.get().data else { return }
-            if let dataModel = data.messages {
-                
+            if let dataModel = data.widgetsMessages {
+               
                 success(dataModel.map { ($0?.fragments.messageModel)! })
             }
             if let errors = try? result.get().errors {
@@ -63,7 +63,7 @@ class ChatService: ChatServiceProtocol {
         let mutation = ReadConversationMessagesMutation(conversationId: conversationId)
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             guard let data = try? result.get().data else { return }
-            if let model = data.readConversationMessages {
+            if let model = data.widgetsReadConversationMessages {
                 success(model)
             }
 
