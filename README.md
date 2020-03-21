@@ -1,8 +1,8 @@
-# erxes Inc - erxes for IOS SDK
+# erxes - IOS SDK
 
 erxes is an open source growth marketing platform. Marketing, sales, and customer service platform designed to help your business attract more engaged customers. Replace Hubspot with the mission and community-driven ecosystem.
 
-<a href="https://demo.erxes.io/">View demo</a> <b>| </b> <a href="https://github.com/erxes/erxes-ios-sdk/archive/master.zip">Download ZIP </a> <b> | </b> <a href="https://slack.erxes.io">Join us on Slack</a>
+<a href="https://demo.erxes.io/">Live demo</a> <b>| </b> <a href="https://community.erxes.io/register/Gw4WRJnk9fSbyAXTq">Join us on RocketChat</a>
 
 ## Status  <br> 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
@@ -52,6 +52,18 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/erxes/sponsor/8/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/erxes/sponsor/9/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/9/avatar.svg"></a>
 
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/erxes#sponsor)]
+
+<a href="https://opencollective.com/erxes/sponsor/0/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/1/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/2/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/3/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/4/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/6/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/erxes/sponsor/8/website" target="_blank"><img src="https://opencollective.com/erxes/sponsor/8/avatar.svg"></a>
+
 ## In-kind sponsors
 
 <a href="https://www.cloudflare.com/" target="_blank"><img src="https://s3.amazonaws.com/erxes/github/cloudflare.png" width="130px;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -60,5 +72,5 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://www.transifex.com/" target="_blank"><img src="https://s3.amazonaws.com/erxes/github/transifex.png" width="100px;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 <a href="https://www.browserstack.com/" target="_blank"><img src="https://s3.amazonaws.com/erxes/github/browserstack.png" width="130px;" /></a>
 
-## Copyright & License
-Copyright (c) 2018 erxes Inc - Released under the [MIT license.](https://github.com/erxes/erxes/blob/develop/LICENSE.md)
+## License
+<a href="https://github.com/erxes/erxes/blob/master/LICENSE.md">GNU General Public License v3.0</a>
