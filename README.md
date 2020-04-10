@@ -2,7 +2,7 @@
 
 erxes is an open source growth marketing platform. Marketing, sales, and customer service platform designed to help your business attract more engaged customers. Replace Hubspot with the mission and community-driven ecosystem.
 
-<a href="https://demo.erxes.io/">Live demo</a> <b>| </b> <a href="https://community.erxes.io/register/Gw4WRJnk9fSbyAXTq">Join us on RocketChat</a>
+<a href="https://demo.erxes.io/">Live demo</a> <b>| </b> <a href="https://community.erxes.io/register/Gw4WRJnk9fSbyAXTq">Join our community</a>
 
 ## Status  <br> 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/50fb6d068f044f8a86f89471c836d014)](https://www.codacy.com/app/puujeedevdev/erxes-ios-sdk?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=erxes/erxes-ios-sdk&amp;utm_campaign=Badge_Grade)
@@ -13,7 +13,9 @@ erxes is an open source growth marketing platform. Marketing, sales, and custome
 [![Platform](https://img.shields.io/cocoapods/p/ErxesSDK.svg?style=flat)](https://cocoapods.org/pods/ErxesSDK)
 
 <p align="center">
-  <img src="https://i.imgur.com/7vAnNhX.jpg">
+  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-11.png" width="260">
+  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-22.png" width="260">
+  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-33.png" width="260">
 </p>
 
 
@@ -23,6 +25,43 @@ erxes is an open source growth marketing platform. Marketing, sales, and custome
 * <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Requirement">Requirement</a>
 * <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">Swift Installation Guide</a>
 * <a href="https://github.com/erxes/erxes-ios-sdk/wiki/Installation-with-Swift">Objective-C Installation Guide</a>
+
+## Deployment
+
+### Ubuntu 16.04/18.04 LTS
+Follow these deployment instructions.
+
+[![ubuntu](https://erxes-os.s3-us-west-2.amazonaws.com/github/ubuntu-logo.png)](https://docs.erxes.io/installation/ubuntu)
+
+### Debian 10
+Follow these deployment instructions.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/debian-logo.png)](https://docs.erxes.io/installation/debian10)
+
+### CentOS 8
+Follow these deployment instructions.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/centos-logo.png)](https://docs.erxes.io/installation/centos8)
+
+### Docker
+Follow these deployment instructions.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/docker-logo.png)](https://docs.erxes.io/installation/docker)
+
+### Heroku
+Host your own erxes server with One-Click Deploy.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/heroku.png)](https://heroku.com/deploy?template=https://github.com/erxes/erxes/tree/develop)
+
+### AWS Marketplace
+Launch an EC2 instance using erxes in the AWS Marketplace.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/aws-logo.png)](https://aws.amazon.com/marketplace/pp/B086MZ9FVS/)
+
+### DigitalOcean Droplet
+Deploy to a DigitalOcean droplet with our one-click install listing from the DigitalOcean Marketplace.
+
+[![debian](https://erxes-os.s3-us-west-2.amazonaws.com/github/droplet.png)](https://marketplace.digitalocean.com/apps/erxes)
 
 ## Contributors
 
