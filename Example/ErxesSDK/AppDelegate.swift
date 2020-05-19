@@ -9,13 +9,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
-
         //if you are Saas user you can setup as following
-//        Erxes.setupSaas(companyName: "companyName", brandCode: "brandCode")
+//        Erxes.setupSaas(companyName: "companyName", brandId: "brandCode")
        
         //if you are OpenSource user you can setup as following
-//         Erxes.setup(erxesApiUrl: "http://localhost:3300", brandCode: "xD6qgj")
-        Erxes.setup(erxesApiUrl: "https://api.office.erxes.io", brandId: "5fkS4v" )
+        Erxes.setup(erxesApiUrl: "http://localhost:3300", brandId: "xD6qgj")
         
         return true
     }
