@@ -62,13 +62,44 @@ public class WebSocketTransport {
     }
   }
 
+  public var security: SSLTrustValidator? {
+    get {
+      return websocket.security
+    }
+    set {
+      websocket.security = newValue
+    }
+  }
+
+  /// Determines whether a SOCKS proxy is enabled on the underlying request.
+  /// Mostly useful for debugging with tools like Charles Proxy.
+  /// Note: Will return `false` from the getter and no-op the setter for implementations that do not conform to `SOCKSProxyable`.
+  public var enableSOCKSProxy: Bool {
+    get {
+      guard let socket = self.websocket as? SOCKSProxyable else {
+        // If it's not proxyable, then the proxy can't be enabled
+        return false
+      }
+      
+      return socket.enableSOCKSProxy
+    }
+    set {
+      guard var socket = self.websocket as? SOCKSProxyable else {
+        // If it's not proxyable, there's nothing to do here.
+        return
+      }
+      
+      socket.enableSOCKSProxy = newValue
+    }
+  }
+
   /// Designated initializer
   ///
   /// - Parameter request: The connection URLRequest
   /// - Parameter clientName: The client name to use for this client. Defaults to `Self.defaultClientName`
   /// - Parameter clientVersion: The client version to use for this client. Defaults to `Self.defaultClientVersion`.
   /// - Parameter sendOperationIdentifiers: Whether or not to send operation identifiers with operations. Defaults to false.
-  /// - Paremeter reconnect: Wether to auto reconnect when websocket looses connection. Defaults to true.
+  /// - Parameter reconnect: Whether to auto reconnect when websocket looses connection. Defaults to true.
   /// - Parameter reconnectionInterval: How long to wait before attempting to reconnect. Defaults to half a second.
   /// - Parameter allowSendingDuplicates: Allow sending duplicate messages. Important when reconnected. Defaults to true.
   /// - Parameter connectingPayload: [optional] The payload to send on connection. Defaults to an empty `GraphQLMap`.
@@ -273,7 +304,7 @@ public class WebSocketTransport {
 // MARK: - HTTPNetworkTransport conformance
 
 extension WebSocketTransport: NetworkTransport {
-  public func send<Operation>(operation: Operation, completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation>,Error>) -> Void) -> Cancellable {
+  public func send<Operation: GraphQLOperation>(operation: Operation, completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation.Data>,Error>) -> Void) -> Cancellable {
     if let error = self.error.value {
       completionHandler(.failure(error))
       return EmptyCancellable()

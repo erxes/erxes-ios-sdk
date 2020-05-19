@@ -1,0 +1,52 @@
+query knowledgeBaseTopicDetail($id: String!) {
+    knowledgeBaseTopicDetail(_id: $id) {
+        ...KnowledgeBaseTopicModel
+    }
+}
+
+
+fragment KnowledgeBaseTopicModel on KnowledgeBaseTopic {
+    title
+    description
+    categories {
+        ...KnowledgeBaseCategoryModel
+    }
+}
+
+fragment KnowledgeBaseCategoryModel on KnowledgeBaseCategory {
+    _id
+    title
+    description
+    numOfArticles
+    icon
+    articles {
+        ...KBArticleModel
+    }
+}
+
+
+query knowledgeBaseCategoryDetail($id: String!) {
+    knowledgeBaseCategoryDetail(_id: $id) {
+        ...KBModel
+    }
+}
+
+fragment KBModel on KnowledgeBaseCategory {
+    _id
+    title
+    description
+    numOfArticles
+    icon
+    articles {
+        ...KBArticleModel
+    }
+}
+
+fragment KBArticleModel on KnowledgeBaseArticle {
+    _id
+    title
+    summary
+    content
+    createdDate
+}
+

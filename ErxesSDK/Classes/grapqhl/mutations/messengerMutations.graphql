@@ -1,0 +1,103 @@
+mutation connect(
+  $brandCode: String!
+  $email: String
+  $phone: String
+  $code: String
+  $isUser: Boolean
+  $data: JSON
+  $companyData: JSON
+  $cachedCustomerId: String
+) {
+  widgetsMessengerConnect(
+    brandCode: $brandCode
+    email: $email
+    phone: $phone
+    code: $code
+    isUser: $isUser
+    data: $data
+    companyData: $companyData
+    cachedCustomerId: $cachedCustomerId
+  ) {
+    ...ConnectResponseModel
+  }
+}
+
+fragment ConnectResponseModel on MessengerConnectResponse {
+  integrationId
+  messengerData
+  languageCode
+  uiOptions
+  customerId
+  brand {
+    ...BrandModel
+  }
+}
+
+fragment BrandModel on Brand {
+  _id
+  name
+  description
+}
+
+mutation widgetsSaveBrowserInfo($customerId: String!, $browserInfo: JSON!) {
+  widgetsSaveBrowserInfo(customerId: $customerId, browserInfo: $browserInfo) {
+    ...MessageModel
+  }
+}
+
+fragment MessageModel on ConversationMessage {
+  _id
+  customerId
+  conversationId
+  user {
+    ...UserModel
+  }
+  content
+  createdAt
+  internal
+  fromBot
+  contentType
+  videoCallData {
+    url
+    status
+  }
+  engageData {
+    content
+    kind
+    sentAs
+    messageId
+    brandId
+  }
+  messengerAppData
+  attachments {
+    url
+    name
+    size
+    type
+  }
+}
+
+mutation widgetsInsertMessage(
+  $integrationId: String!
+  $customerId: String!
+  $message: String
+  $contentType: String
+  $conversationId: String
+  $attachments: [AttachmentInput]
+) {
+  widgetsInsertMessage(
+    integrationId: $integrationId
+    customerId: $customerId
+    contentType: $contentType
+    message: $message
+    conversationId: $conversationId
+    attachments: $attachments
+  ) {
+    ...MessageModel
+  }
+}
+
+
+mutation widgetsReadConversationMessages($conversationId: String!) {
+    widgetsReadConversationMessages(conversationId: $conversationId)
+}

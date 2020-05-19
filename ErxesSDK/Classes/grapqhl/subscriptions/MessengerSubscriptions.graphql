@@ -1,0 +1,18 @@
+
+subscription conversationMessageInserted($id: String!) {
+    conversationMessageInserted(_id:$id) {
+        ...MessageModel
+    }
+}
+
+
+subscription conversationAdminMessageInserted($customerId: String!) {
+    conversationAdminMessageInserted(customerId:$customerId){
+        ...ConversationAdminMessageInsertedModel
+    }
+}
+
+fragment ConversationAdminMessageInsertedModel on ConversationAdminMessageInsertedResponse {
+    customerId
+    unreadCount
+}

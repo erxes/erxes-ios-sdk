@@ -22,8 +22,6 @@ class ViewController: UIViewController {
     
     @IBAction func btnClick(){
         Erxes.start()
-        
-        
     }
 
    

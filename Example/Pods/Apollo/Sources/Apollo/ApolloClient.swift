@@ -78,10 +78,10 @@ public class ApolloClient {
     }
   }
 
-  private func handleOperationResult<Operation>(shouldPublishResultToStore: Bool,
-                                                context: UnsafeMutableRawPointer?,
-                                                _ result: Result<GraphQLResponse<Operation>, Error>,
-                                                resultHandler: @escaping GraphQLResultHandler<Operation.Data>) {
+  private func handleOperationResult<Data: GraphQLSelectionSet>(shouldPublishResultToStore: Bool,
+                                                                context: UnsafeMutableRawPointer?,
+                                                                _ result: Result<GraphQLResponse<Data>, Error>,
+                                                                resultHandler: @escaping GraphQLResultHandler<Data>) {
     switch result {
     case .failure(let error):
       resultHandler(.failure(error))
@@ -254,7 +254,10 @@ private final class FetchQueryOperation<Query: GraphQLQuery>: AsynchronousOperat
       return
     }
 
-    client?.store.load(query: query) { result in
+    client?.store.load(query: query) { [weak self] result in
+      guard let self = self else {
+        return
+      }
       if self.isCancelled {
         self.state = .finished
         return
@@ -283,7 +286,10 @@ private final class FetchQueryOperation<Query: GraphQLQuery>: AsynchronousOperat
   func fetchFromNetwork() {
     networkTask = client?.send(operation: query,
                                shouldPublishResultToStore: true,
-                               context: context) { result in
+                               context: context) { [weak self] result in
+      guard let self = self else {
+        return
+      }
       self.resultHandler(result)
       self.state = .finished
       return

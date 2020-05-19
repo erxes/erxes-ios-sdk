@@ -49,21 +49,21 @@ public protocol HTTPNetworkTransportTaskCompletedDelegate: HTTPNetworkTransportD
 
 /// Methods which will be called if an error is receieved at the network level.
 public protocol HTTPNetworkTransportRetryDelegate: HTTPNetworkTransportDelegate {
-
+  
   /// Called when an error has been received after a request has been sent to the server to see if an operation should be retried or not.
-  /// NOTE: Don't just call the `retryHandler` with `true` all the time, or you can potentially wind up in an infinite loop of errors
+  /// NOTE: Don't just call the `continueHandler` with `.retry` all the time, or you can potentially wind up in an infinite loop of errors
   ///
   /// - Parameters:
   ///   - networkTransport: The network transport which received the error
   ///   - error: The received error
   ///   - request: The URLRequest which generated the error
   ///   - response: [Optional] Any response received when the error was generated
-  ///   - retryHandler: A closure indicating whether the operation should be retried. Asyncrhonous to allow for re-authentication or other async operations to complete.
+  ///   - continueHandler: A closure indicating whether the operation should be retried. Asyncrhonous to allow for re-authentication or other async operations to complete.
   func networkTransport(_ networkTransport: HTTPNetworkTransport,
                         receivedError error: Error,
                         for request: URLRequest,
                         response: URLResponse?,
-                        retryHandler: @escaping (_ shouldRetry: Bool) -> Void)
+                        continueHandler: @escaping (_ action: HTTPNetworkTransport.ContinueAction) -> Void)
 }
 
 // MARK: -
@@ -93,8 +93,17 @@ public protocol HTTPNetworkTransportGraphQLErrorDelegate: HTTPNetworkTransportDe
 
 /// A network transport that uses HTTP POST requests to send GraphQL operations to a server, and that uses `URLSession` as the networking implementation.
 public class HTTPNetworkTransport {
+  
+  /// The action to take when retrying
+  public enum ContinueAction {
+    /// Directly retry the action
+    case retry
+    /// Fail with the specified error.
+    case fail(_ error: Error)
+  }
+  
   let url: URL
-  let session: URLSession
+  let client: URLSessionClient
   let serializationFormat = JSONSerializationFormat.self
   let useGETForQueries: Bool
   let enableAutoPersistedQueries: Bool
@@ -118,14 +127,14 @@ public class HTTPNetworkTransport {
   ///   - enableAutoPersistedQueries: Whether to send persistedQuery extension. QueryDocument will be absent at 1st request, retry with QueryDocument if server respond PersistedQueryNotFound or PersistedQueryNotSupport. Defaults to false.
   ///   - useGETForPersistedQueryRetry: Whether to retry persistedQuery request with HttpGetMethod. Defaults to false.
   public init(url: URL,
-              session: URLSession = .shared,
+              client: URLSessionClient = URLSessionClient(),
               sendOperationIdentifiers: Bool = false,
               useGETForQueries: Bool = false,
               enableAutoPersistedQueries: Bool = false,
               useGETForPersistedQueryRetry: Bool = false,
               requestCreator: RequestCreator = ApolloRequestCreator()) {
     self.url = url
-    self.session = session
+    self.client = client
     self.sendOperationIdentifiers = sendOperationIdentifiers
     self.useGETForQueries = useGETForQueries
     self.enableAutoPersistedQueries = enableAutoPersistedQueries
@@ -133,10 +142,10 @@ public class HTTPNetworkTransport {
     self.requestCreator = requestCreator
   }
 
-  private func send<Operation>(operation: Operation,
-                               isPersistedQueryRetry: Bool,
-                               files: [GraphQLFile]?,
-                               completionHandler: @escaping (_ results: Result<GraphQLResponse<Operation>, Error>) -> Void) -> Cancellable {
+  private func send<Operation: GraphQLOperation>(operation: Operation,
+                                                 isPersistedQueryRetry: Bool,
+                                                 files: [GraphQLFile]?,
+                                                 completionHandler: @escaping (_ results: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) -> Cancellable {
     let request: URLRequest
     do {
       request = try self.createRequest(for: operation,
@@ -146,95 +155,74 @@ public class HTTPNetworkTransport {
       completionHandler(.failure(error))
       return EmptyCancellable()
     }
-
-    let task = session.dataTask(with: request) { [weak self] data, response, error in
+    
+    let task = self.client.sendRequest(request, rawTaskCompletionHandler: { [weak self] data, response, error in
+      self?.rawTaskCompleted(request: request, data: data, response: response, error: error)
+    }, completion: { [weak self] result in
       guard let self = self else {
         // None of the rest of this really matters
         return
       }
-
-      self.rawTaskCompleted(request: request,
-                            data: data,
-                            response: response,
-                            error: error)
-
-      if let receivedError = error {
-        self.handleErrorOrRetry(operation: operation,
-                                files: files,
-                                error: receivedError,
-                                for: request,
-                                response: response,
-                                completionHandler: completionHandler)
-        return
-      }
-
-      guard let httpResponse = response as? HTTPURLResponse else {
-        fatalError("Response should be an HTTPURLResponse")
-      }
-
-      guard httpResponse.isSuccessful else {
-        let unsuccessfulError = GraphQLHTTPResponseError(body: data,
-                                                         response: httpResponse,
-                                                         kind: .errorResponse)
-        self.handleErrorOrRetry(operation: operation,
-                                files: files,
-                                error: unsuccessfulError,
-                                for: request,
-                                response: response,
-                                completionHandler: completionHandler)
-        return
-      }
-
-      guard let data = data else {
-        let error = GraphQLHTTPResponseError(body: nil,
-                                             response: httpResponse,
-                                             kind: .invalidResponse)
+      
+      switch result {
+      case .failure(let error):
         self.handleErrorOrRetry(operation: operation,
                                 files: files,
                                 error: error,
                                 for: request,
-                                response: response,
+                                response: nil,
                                 completionHandler: completionHandler)
-        return
-      }
-
-      do {
-        guard let body = try self.serializationFormat.deserialize(data: data) as? JSONObject else {
-          throw GraphQLHTTPResponseError(body: data, response: httpResponse, kind: .invalidResponse)
+      case .success(let (data, httpResponse)):
+        guard httpResponse.isSuccessful == true else {
+          let unsuccessfulError = GraphQLHTTPResponseError(body: data,
+                                                           response: httpResponse,
+                                                           kind: .errorResponse)
+          self.handleErrorOrRetry(operation: operation,
+                                  files: files,
+                                  error: unsuccessfulError,
+                                  for: request,
+                                  response: httpResponse,
+                                  completionHandler: completionHandler)
+          return
         }
+        
+        do {
+          guard let body = try self.serializationFormat.deserialize(data: data) as? JSONObject else {
+            throw GraphQLHTTPResponseError(body: data, response: httpResponse, kind: .invalidResponse)
+          }
 
-        let graphQLResponse = GraphQLResponse(operation: operation, body: body)
+          let graphQLResponse = GraphQLResponse(operation: operation, body: body)
 
-        if let errors = graphQLResponse.parseErrorsOnlyFast() {
-          // Handle specific errors from response
-          self.handleGraphQLErrorsIfNeeded(operation: operation,
-                                           files: files,
-                                           for: request,
-                                           body: body,
-                                           errors: errors,
-                                           completionHandler: completionHandler)
-        } else {
-          completionHandler(.success(graphQLResponse))
+          if let errors = graphQLResponse.parseErrorsOnlyFast() {
+            // Handle specific errors from response
+            self.handleGraphQLErrorsIfNeeded(operation: operation,
+                                             files: files,
+                                             for: request,
+                                             body: body,
+                                             errors: errors,
+                                             completionHandler: completionHandler)
+          } else {
+            completionHandler(.success(graphQLResponse))
+          }
+        } catch let parsingError {
+          self.handleErrorOrRetry(operation: operation,
+                                  files: files,
+                                  error: parsingError,
+                                  for: request,
+                                  response: httpResponse,
+                                  completionHandler: completionHandler)
         }
-      } catch let parsingError {
-        self.handleErrorOrRetry(operation: operation,
-                                files: files,
-                                error: parsingError,
-                                for: request,
-                                response: response,
-                                completionHandler: completionHandler)
       }
-    }
+    })
 
-    task.resume()
-
+    // Task is resumed by underlying framework
     return task
   }
 
-  private func handleGraphQLErrorsOrComplete<Operation>(operation: Operation,
+  private func handleGraphQLErrorsOrComplete<Operation: GraphQLOperation>(operation: Operation,
                                                         files: [GraphQLFile]?,
-                                                        response: GraphQLResponse<Operation>,
-                                                        completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation>, Error>) -> Void) {
+                                                        response: GraphQLResponse<Operation.Data>,
+                                                        completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) {
     guard
       let delegate = self.delegate as? HTTPNetworkTransportGraphQLErrorDelegate,
       let graphQLErrors = response.parseErrorsOnlyFast(),
@@ -261,12 +249,12 @@ public class HTTPNetworkTransport {
     })
   }
 
-  private func handleGraphQLErrorsIfNeeded<Operation>(operation: Operation,
-                                                      files: [GraphQLFile]?,
-                                                      for request: URLRequest,
-                                                      body: JSONObject,
-                                                      errors: [GraphQLError],
-                                                      completionHandler: @escaping (_ results: Result<GraphQLResponse<Operation>, Error>) -> Void) {
+  private func handleGraphQLErrorsIfNeeded<Operation: GraphQLOperation>(operation: Operation,
+                                                                        files: [GraphQLFile]?,
+                                                                        for request: URLRequest,
+                                                                        body: JSONObject,
+                                                                        errors: [GraphQLError],
+                                                                        completionHandler: @escaping (_ results: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) {
 
     let errorMessages = errors.compactMap { $0.message }
     if self.enableAutoPersistedQueries,
@@ -283,12 +271,12 @@ public class HTTPNetworkTransport {
     }
   }
 
-  private func handleErrorOrRetry<Operation>(operation: Operation,
-                                             files: [GraphQLFile]?,
-                                             error: Error,
-                                             for request: URLRequest,
-                                             response: URLResponse?,
-                                             completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation>, Error>) -> Void) {
+  private func handleErrorOrRetry<Operation: GraphQLOperation>(operation: Operation,
+                                                               files: [GraphQLFile]?,
+                                                               error: Error,
+                                                               for request: URLRequest,
+                                                               response: URLResponse?,
+                                                               completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) {
     guard
       let delegate = self.delegate,
       let retrier = delegate as? HTTPNetworkTransportRetryDelegate else {
@@ -301,21 +289,21 @@ public class HTTPNetworkTransport {
       receivedError: error,
       for: request,
       response: response,
-      retryHandler: { [weak self] shouldRetry in
+      continueHandler: { [weak self] (action: HTTPNetworkTransport.ContinueAction) in
         guard let self = self else {
           // None of the rest of this really matters
           return
         }
 
-        guard shouldRetry else {
+        switch action {
+        case .retry:
+          _ = self.send(operation: operation,
+                        isPersistedQueryRetry: self.enableAutoPersistedQueries,
+                        files: files,
+                        completionHandler: completionHandler)
+        case .fail(let error):
           completionHandler(.failure(error))
-          return
         }
-
-        _ = self.send(operation: operation,
-                      isPersistedQueryRetry: self.enableAutoPersistedQueries,
-                      files: files,
-                      completionHandler: completionHandler)
     })
   }
 
@@ -350,6 +338,15 @@ public class HTTPNetworkTransport {
         autoPersistQueries = true
       } else {
         useGetMethod = self.useGETForQueries || (self.enableAutoPersistedQueries && self.useGETForPersistedQueryRetry)
+        sendQueryDocument = !self.enableAutoPersistedQueries
+        autoPersistQueries = self.enableAutoPersistedQueries
+      }
+    case .mutation:
+      useGetMethod = false
+      if isPersistedQueryRetry {
+        sendQueryDocument = true
+        autoPersistQueries = true
+      } else {
         sendQueryDocument = !self.enableAutoPersistedQueries
         autoPersistQueries = self.enableAutoPersistedQueries
       }
@@ -439,7 +436,7 @@ public class HTTPNetworkTransport {
 
 extension HTTPNetworkTransport: NetworkTransport {
 
-  public func send<Operation>(operation: Operation, completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation>, Error>) -> Void) -> Cancellable {
+  public func send<Operation: GraphQLOperation>(operation: Operation, completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) -> Cancellable {
     return send(operation: operation,
                 isPersistedQueryRetry: false,
                 files: nil,
@@ -451,9 +448,9 @@ extension HTTPNetworkTransport: NetworkTransport {
 
 extension HTTPNetworkTransport: UploadingNetworkTransport {
 
-  public func upload<Operation>(operation: Operation,
-                                files: [GraphQLFile],
-                                completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation>, Error>) -> Void) -> Cancellable {
+  public func upload<Operation: GraphQLOperation>(operation: Operation,
+                                                  files: [GraphQLFile],
+                                                  completionHandler: @escaping (_ result: Result<GraphQLResponse<Operation.Data>, Error>) -> Void) -> Cancellable {
     return send(operation: operation,
                 isPersistedQueryRetry: false,
                 files: files,
@@ -467,7 +464,7 @@ extension HTTPNetworkTransport: Equatable {
 
   public static func ==(lhs: HTTPNetworkTransport, rhs: HTTPNetworkTransport) -> Bool {
     return lhs.url == rhs.url
-      && lhs.session == rhs.session
+      && lhs.client == rhs.client
       && lhs.sendOperationIdentifiers == rhs.sendOperationIdentifiers
       && lhs.useGETForQueries == rhs.useGETForQueries
   }

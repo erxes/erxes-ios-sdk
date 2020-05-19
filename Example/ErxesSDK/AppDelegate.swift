@@ -1,6 +1,5 @@
 
 import UIKit
-import Apollo
 import ErxesSDK
 
 @UIApplicationMain
@@ -15,7 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Erxes.setupSaas(companyName: "companyName", brandCode: "brandCode")
        
         //if you are OpenSource user you can setup as following
-         Erxes.setup(erxesApiUrl: "http://localhost:3300", brandCode: "brandCode")
+//         Erxes.setup(erxesApiUrl: "http://localhost:3300", brandCode: "xD6qgj")
+        Erxes.setup(erxesApiUrl: "https://api.office.erxes.io", brandId: "5fkS4v" )
+        
         return true
     }
 

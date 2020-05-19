@@ -1,0 +1,108 @@
+query widgetsMessengerSupporters($integrationId: String!) {
+  widgetsMessengerSupporters(integrationId: $integrationId) {
+    ...UserModel
+  }
+}
+
+fragment UserModel on User {
+  _id
+  details {
+    avatar
+    fullName
+    shortName
+  }
+}
+
+fragment UserDetailModel on User {
+  _id
+  details {
+    avatar
+    fullName
+    shortName
+    description
+    position
+  }
+  links {
+    ...UserLinks
+  }
+}
+
+fragment UserLinks on UserLinksType {
+  facebook
+  twitter
+  youtube
+  linkedIn
+  github
+  website
+}
+
+query widgetsTotalUnreadCount($integrationId: String!, $customerId: String!) {
+  widgetsTotalUnreadCount(
+    integrationId: $integrationId
+    customerId: $customerId
+  )
+}
+
+query widgetsConversations($integrationId: String!, $customerId: String!) {
+  widgetsConversations(integrationId: $integrationId, customerId: $customerId) {
+    ...ConversationModel
+  }
+}
+
+fragment ConversationModel on Conversation {
+  _id
+  content
+  createdAt
+  assignedUser {
+    ...UserModel
+  }
+  participatedUsers {
+    ...UserDetailModel
+  }
+}
+
+query widgetsConversationDetail($_id: String, $integrationId: String!) {
+  widgetsConversationDetail(_id: $_id, integrationId: $integrationId) {
+    ...ConversationDetailModel
+  }
+}
+
+fragment ConversationDetailModel on ConversationDetailResponse {
+  _id
+  messages {
+    ...MessageModel
+  }
+  isOnline
+  supporters {
+    ...UserModel
+  }
+  participatedUsers {
+    ...UserDetailModel
+  }
+}
+
+query getConversationContent(
+  $conversationId: String!
+  $skip: Int
+  $limit: Int
+  $getFirst: Boolean
+) {
+  conversationMessages(
+    conversationId: $conversationId
+    skip: $skip
+    limit: $limit
+    getFirst: $getFirst
+  ) {
+    ...ConversationContent
+  }
+}
+
+fragment ConversationContent on ConversationMessage {
+  _id
+  content
+  contentType
+}
+
+query widgetsUnreadCount($conversationId: String) {
+  widgetsUnreadCount(conversationId: $conversationId)
+}

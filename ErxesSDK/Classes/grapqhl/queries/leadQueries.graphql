@@ -1,0 +1,26 @@
+query formDetail($_id: String!) {
+  formDetail(_id: $_id) {
+    ...FormModel
+  }
+}
+
+fragment FormModel on Form {
+  title
+  description
+  buttonText
+  fields {
+    ...FieldModel
+  }
+}
+
+fragment FieldModel on Field {
+  _id
+  name
+  type
+  text
+  description
+  options
+  isRequired
+  order
+  validation
+}

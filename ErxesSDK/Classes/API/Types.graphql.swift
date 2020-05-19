@@ -4,6 +4,65 @@
 import Apollo
 import Foundation
 
+public struct FieldValueInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _id
+  ///   - type
+  ///   - validation
+  ///   - text
+  ///   - value
+  public init(_id: String, type: Swift.Optional<String?> = nil, validation: Swift.Optional<String?> = nil, text: Swift.Optional<String?> = nil, value: Swift.Optional<String?> = nil) {
+    graphQLMap = ["_id": _id, "type": type, "validation": validation, "text": text, "value": value]
+  }
+
+  public var _id: String {
+    get {
+      return graphQLMap["_id"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_id")
+    }
+  }
+
+  public var type: Swift.Optional<String?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+
+  public var validation: Swift.Optional<String?> {
+    get {
+      return graphQLMap["validation"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "validation")
+    }
+  }
+
+  public var text: Swift.Optional<String?> {
+    get {
+      return graphQLMap["text"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "text")
+    }
+  }
+
+  public var value: Swift.Optional<String?> {
+    get {
+      return graphQLMap["value"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value")
+    }
+  }
+}
+
 public struct AttachmentInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 

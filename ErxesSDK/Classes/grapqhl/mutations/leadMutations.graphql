@@ -1,0 +1,50 @@
+mutation widgetsLeadConnect($brandCode: String!, $formCode: String!) {
+  widgetsLeadConnect(brandCode: $brandCode, formCode: $formCode) {
+    ...LeadResponseModel
+  }
+}
+
+fragment LeadResponseModel on FormConnectResponse {
+  form {
+    _id
+    title
+    description
+  }
+  integration {
+    _id
+    name
+    leadData
+  }
+}
+
+mutation widgetsSaveLead(
+  $integrationId: String!
+  $formId: String!
+  $submissions: [FieldValueInput]
+  $browserInfo: JSON!
+  $cachedCustomerId: String
+) {
+  widgetsSaveLead(
+    integrationId: $integrationId
+    formId: $formId
+    submissions: $submissions
+    browserInfo: $browserInfo
+    cachedCustomerId: $cachedCustomerId
+  ) {
+    ...FormResponseModel
+  }
+}
+
+fragment FormResponseModel on SaveFormResponse {
+  status
+  messageId
+  errors {
+    ...FieldError
+  }
+}
+
+fragment FieldError on Error {
+  fieldId
+  code
+  text
+}

@@ -1,25 +1,65 @@
 PODS:
   - Alamofire (4.8.2)
-  - Apollo (0.22.0):
-    - Apollo/Core (= 0.22.0)
-  - Apollo/Core (0.22.0)
-  - Apollo/SQLite (0.22.0):
+  - Apollo (0.27.1):
+    - Apollo/Core (= 0.27.1)
+  - Apollo/Core (0.27.1)
+  - Apollo/SQLite (0.27.1):
     - Apollo/Core
-    - SQLite.swift (= 0.12.2)
-  - Apollo/WebSocket (0.22.0):
+    - SQLite.swift (~> 0.12.2)
+  - Apollo/WebSocket (0.27.1):
     - Apollo/Core
-    - Starscream (= 3.1.1)
+    - Starscream (~> 3.1.1)
   - ErxesFont (1.0.1)
-  - ErxesSDK (0.11.0):
+  - ErxesSDK (0.12.0):
     - Alamofire (~> 4.8.0)
-    - Apollo (~> 0.22.0)
+    - Apollo (~> 0.27.1)
     - Apollo/SQLite
     - Apollo/WebSocket
     - ErxesFont (~> 1.0.1)
     - Fusuma (~> 1.3.0)
+    - GDCheckbox (~> 1.0.3)
+    - IQKeyboardManagerSwift (~> 6.5.5)
+    - "MaterialComponents/TextControls+FilledTextAreas"
+    - "MaterialComponents/TextControls+FilledTextFields"
     - SDWebImage (~> 5.1.0)
     - SnapKit (~> 4.2.0)
   - Fusuma (1.3.3)
+  - GDCheckbox (1.0.3)
+  - IQKeyboardManagerSwift (6.5.5)
+  - MaterialComponents/AnimationTiming (109.4.0)
+  - MaterialComponents/Availability (109.4.0)
+  - MaterialComponents/private/Math (109.4.0)
+  - "MaterialComponents/private/TextControlsPrivate+BaseStyle (109.4.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+FilledStyle (109.4.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Math
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+  - "MaterialComponents/private/TextControlsPrivate+Shared (109.4.0)":
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/private/Math
+    - "MaterialComponents/TextControls+Enums"
+  - "MaterialComponents/TextControls+BaseTextAreas (109.4.0)":
+    - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - MDFInternationalization
+  - "MaterialComponents/TextControls+BaseTextFields (109.4.0)":
+    - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
+    - "MaterialComponents/private/TextControlsPrivate+Shared"
+    - MDFInternationalization
+  - "MaterialComponents/TextControls+Enums (109.4.0)"
+  - "MaterialComponents/TextControls+FilledTextAreas (109.4.0)":
+    - MaterialComponents/Availability
+    - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
+    - "MaterialComponents/TextControls+BaseTextAreas"
+  - "MaterialComponents/TextControls+FilledTextFields (109.4.0)":
+    - MaterialComponents/Availability
+    - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
+    - "MaterialComponents/TextControls+BaseTextFields"
+  - MDFInternationalization (2.0.0)
   - SDWebImage (5.1.1):
     - SDWebImage/Core (= 5.1.1)
   - SDWebImage/Core (5.1.1)
@@ -38,6 +78,10 @@ SPEC REPOS:
     - Apollo
     - ErxesFont
     - Fusuma
+    - GDCheckbox
+    - IQKeyboardManagerSwift
+    - MaterialComponents
+    - MDFInternationalization
     - SDWebImage
     - SnapKit
     - SQLite.swift
@@ -49,10 +93,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Apollo: 8644d2d62bcb94d281379e99c26c22109afa67ed
+  Apollo: e5c057c155bf28bcfbf928e0d69e3ce643f1a1c6
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  ErxesSDK: 04d624d3b051bea4364907c1ac51be62bec35fa7
+  ErxesSDK: 0a92683f59d4db13e19e8ef2bc3a54a4a0aeff1f
   Fusuma: 3bd08c8c5341ec60c0074fa28570fea8765966f0
+  GDCheckbox: aa4a7fb70039fbeb774891d0795d6acce89dfb57
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  MaterialComponents: d4f75b4037cc114d71841ce9933b334c4b604a95
+  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   SDWebImage: 96d7f03415ccb28d299d765f93557ff8a617abd8
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
@@ -60,4 +108,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

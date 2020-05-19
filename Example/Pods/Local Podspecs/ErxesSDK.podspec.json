@@ -1,6 +1,6 @@
 {
   "name": "ErxesSDK",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "summary": "A short description of erxes-ios-sdk.",
   "swift_versions": "5.0",
   "description": "erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/erxes/erxes-ios-sdk.git",
-    "tag": "0.11.0"
+    "tag": "0.12.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -22,7 +22,7 @@
   "source_files": "ErxesSDK/Classes/**/*",
   "resource_bundles": {
     "ErxesSDK": [
-      "ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings,lproj}"
+      "ErxesSDK/Assets/**/*.{jpg,storyboard,png,ttf,gif,strings,lproj,json}"
     ]
   },
   "pod_target_xcconfig": {
@@ -32,7 +32,7 @@
   "frameworks": "Photos",
   "dependencies": {
     "Apollo": [
-      "~> 0.22.0"
+      "~> 0.27.1"
     ],
     "Apollo/WebSocket": [
 
@@ -54,6 +54,18 @@
     ],
     "ErxesFont": [
       "~> 1.0.1"
+    ],
+    "GDCheckbox": [
+      "~> 1.0.3"
+    ],
+    "IQKeyboardManagerSwift": [
+      "~> 6.5.5"
+    ],
+    "MaterialComponents/TextControls+FilledTextAreas": [
+
+    ],
+    "MaterialComponents/TextControls+FilledTextFields": [
+
     ]
   },
   "swift_version": "5.0"
