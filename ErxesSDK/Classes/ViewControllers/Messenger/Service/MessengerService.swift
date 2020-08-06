@@ -21,7 +21,6 @@ class MessengerService: MessengerServiceProtocol {
             case .success(let graphQLResult):
 
                 if let response = graphQLResult.data?.widgetsConversationDetail?.fragments.conversationDetailModel{
-                  
                     success(response)
                 }
 
@@ -46,8 +45,7 @@ class MessengerService: MessengerServiceProtocol {
                 
             case .success(let graphQLResult):
                 
-                if let response = graphQLResult.data?.widgetsMessengerSupporters?.compactMap({ $0?.fragments.userModel }) {
-                    
+                if let response = graphQLResult.data?.widgetsMessengerSupporters?.supporters!.compactMap({ $0?.fragments.userModel }) {
                     success(response)
                 }
                 

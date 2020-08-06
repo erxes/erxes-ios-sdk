@@ -11,7 +11,12 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
     query widgetsMessengerSupporters($integrationId: String!) {
       widgetsMessengerSupporters(integrationId: $integrationId) {
         __typename
-        ...UserModel
+        isOnline
+        serverTime
+        supporters {
+          __typename
+          ...UserModel
+        }
       }
     }
     """
@@ -34,7 +39,7 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
     public static let possibleTypes: [String] = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsMessengerSupporters", arguments: ["integrationId": GraphQLVariable("integrationId")], type: .list(.object(WidgetsMessengerSupporter.selections))),
+      GraphQLField("widgetsMessengerSupporters", arguments: ["integrationId": GraphQLVariable("integrationId")], type: .object(WidgetsMessengerSupporter.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -43,31 +48,37 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(widgetsMessengerSupporters: [WidgetsMessengerSupporter?]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "widgetsMessengerSupporters": widgetsMessengerSupporters.flatMap { (value: [WidgetsMessengerSupporter?]) -> [ResultMap?] in value.map { (value: WidgetsMessengerSupporter?) -> ResultMap? in value.flatMap { (value: WidgetsMessengerSupporter) -> ResultMap in value.resultMap } } }])
+    public init(widgetsMessengerSupporters: WidgetsMessengerSupporter? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "widgetsMessengerSupporters": widgetsMessengerSupporters.flatMap { (value: WidgetsMessengerSupporter) -> ResultMap in value.resultMap }])
     }
 
-    public var widgetsMessengerSupporters: [WidgetsMessengerSupporter?]? {
+    public var widgetsMessengerSupporters: WidgetsMessengerSupporter? {
       get {
-        return (resultMap["widgetsMessengerSupporters"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [WidgetsMessengerSupporter?] in value.map { (value: ResultMap?) -> WidgetsMessengerSupporter? in value.flatMap { (value: ResultMap) -> WidgetsMessengerSupporter in WidgetsMessengerSupporter(unsafeResultMap: value) } } }
+        return (resultMap["widgetsMessengerSupporters"] as? ResultMap).flatMap { WidgetsMessengerSupporter(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue.flatMap { (value: [WidgetsMessengerSupporter?]) -> [ResultMap?] in value.map { (value: WidgetsMessengerSupporter?) -> ResultMap? in value.flatMap { (value: WidgetsMessengerSupporter) -> ResultMap in value.resultMap } } }, forKey: "widgetsMessengerSupporters")
+        resultMap.updateValue(newValue?.resultMap, forKey: "widgetsMessengerSupporters")
       }
     }
 
     public struct WidgetsMessengerSupporter: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["User"]
+      public static let possibleTypes: [String] = ["MessengerSupportersResponse"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(UserModel.self),
+        GraphQLField("isOnline", type: .scalar(Bool.self)),
+        GraphQLField("serverTime", type: .scalar(String.self)),
+        GraphQLField("supporters", type: .list(.object(Supporter.selections))),
       ]
 
       public private(set) var resultMap: ResultMap
 
       public init(unsafeResultMap: ResultMap) {
         self.resultMap = unsafeResultMap
+      }
+
+      public init(isOnline: Bool? = nil, serverTime: String? = nil, supporters: [Supporter?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "MessengerSupportersResponse", "isOnline": isOnline, "serverTime": serverTime, "supporters": supporters.flatMap { (value: [Supporter?]) -> [ResultMap?] in value.map { (value: Supporter?) -> ResultMap? in value.flatMap { (value: Supporter) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -79,28 +90,79 @@ public final class WidgetsMessengerSupportersQuery: GraphQLQuery {
         }
       }
 
-      public var fragments: Fragments {
+      public var isOnline: Bool? {
         get {
-          return Fragments(unsafeResultMap: resultMap)
+          return resultMap["isOnline"] as? Bool
         }
         set {
-          resultMap += newValue.resultMap
+          resultMap.updateValue(newValue, forKey: "isOnline")
         }
       }
 
-      public struct Fragments {
+      public var serverTime: String? {
+        get {
+          return resultMap["serverTime"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "serverTime")
+        }
+      }
+
+      public var supporters: [Supporter?]? {
+        get {
+          return (resultMap["supporters"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Supporter?] in value.map { (value: ResultMap?) -> Supporter? in value.flatMap { (value: ResultMap) -> Supporter in Supporter(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [Supporter?]) -> [ResultMap?] in value.map { (value: Supporter?) -> ResultMap? in value.flatMap { (value: Supporter) -> ResultMap in value.resultMap } } }, forKey: "supporters")
+        }
+      }
+
+      public struct Supporter: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["User"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(UserModel.self),
+        ]
+
         public private(set) var resultMap: ResultMap
 
         public init(unsafeResultMap: ResultMap) {
           self.resultMap = unsafeResultMap
         }
 
-        public var userModel: UserModel {
+        public var __typename: String {
           get {
-            return UserModel(unsafeResultMap: resultMap)
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
+          }
+        }
+
+        public struct Fragments {
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public var userModel: UserModel {
+            get {
+              return UserModel(unsafeResultMap: resultMap)
+            }
+            set {
+              resultMap += newValue.resultMap
+            }
           }
         }
       }
@@ -173,7 +235,7 @@ public final class WidgetsConversationsQuery: GraphQLQuery {
 
   public let operationName: String = "widgetsConversations"
 
-  public var queryDocument: String { return operationDefinition.appending(ConversationModel.fragmentDefinition).appending(UserModel.fragmentDefinition).appending(UserDetailModel.fragmentDefinition).appending(UserLinks.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ConversationModel.fragmentDefinition).appending(UserModel.fragmentDefinition).appending(UserDetailModel.fragmentDefinition) }
 
   public var integrationId: String
   public var customerId: String
@@ -279,7 +341,7 @@ public final class WidgetsConversationDetailQuery: GraphQLQuery {
 
   public let operationName: String = "widgetsConversationDetail"
 
-  public var queryDocument: String { return operationDefinition.appending(ConversationDetailModel.fragmentDefinition).appending(MessageModel.fragmentDefinition).appending(UserModel.fragmentDefinition).appending(UserDetailModel.fragmentDefinition).appending(UserLinks.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ConversationDetailModel.fragmentDefinition).appending(MessageModel.fragmentDefinition).appending(UserModel.fragmentDefinition).appending(UserDetailModel.fragmentDefinition) }
 
   public var _id: String?
   public var integrationId: String
@@ -668,10 +730,7 @@ public struct UserDetailModel: GraphQLFragment {
         description
         position
       }
-      links {
-        __typename
-        ...UserLinks
-      }
+      links
     }
     """
 
@@ -681,7 +740,7 @@ public struct UserDetailModel: GraphQLFragment {
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
     GraphQLField("_id", type: .nonNull(.scalar(String.self))),
     GraphQLField("details", type: .object(Detail.selections)),
-    GraphQLField("links", type: .object(Link.selections)),
+    GraphQLField("links", type: .scalar(Scalar_JSON.self)),
   ]
 
   public private(set) var resultMap: ResultMap
@@ -690,8 +749,8 @@ public struct UserDetailModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(_id: String, details: Detail? = nil, links: Link? = nil) {
-    self.init(unsafeResultMap: ["__typename": "User", "_id": _id, "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }, "links": links.flatMap { (value: Link) -> ResultMap in value.resultMap }])
+  public init(_id: String, details: Detail? = nil, links: Scalar_JSON? = nil) {
+    self.init(unsafeResultMap: ["__typename": "User", "_id": _id, "details": details.flatMap { (value: Detail) -> ResultMap in value.resultMap }, "links": links])
   }
 
   public var __typename: String {
@@ -721,12 +780,12 @@ public struct UserDetailModel: GraphQLFragment {
     }
   }
 
-  public var links: Link? {
+  public var links: Scalar_JSON? {
     get {
-      return (resultMap["links"] as? ResultMap).flatMap { Link(unsafeResultMap: $0) }
+      return resultMap["links"] as? Scalar_JSON
     }
     set {
-      resultMap.updateValue(newValue?.resultMap, forKey: "links")
+      resultMap.updateValue(newValue, forKey: "links")
     }
   }
 
@@ -804,161 +863,6 @@ public struct UserDetailModel: GraphQLFragment {
       set {
         resultMap.updateValue(newValue, forKey: "position")
       }
-    }
-  }
-
-  public struct Link: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["UserLinksType"]
-
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(UserLinks.self),
-    ]
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(facebook: String? = nil, twitter: String? = nil, youtube: String? = nil, linkedIn: String? = nil, github: String? = nil, website: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "UserLinksType", "facebook": facebook, "twitter": twitter, "youtube": youtube, "linkedIn": linkedIn, "github": github, "website": website])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var fragments: Fragments {
-      get {
-        return Fragments(unsafeResultMap: resultMap)
-      }
-      set {
-        resultMap += newValue.resultMap
-      }
-    }
-
-    public struct Fragments {
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public var userLinks: UserLinks {
-        get {
-          return UserLinks(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-    }
-  }
-}
-
-public struct UserLinks: GraphQLFragment {
-  /// The raw GraphQL definition of this fragment.
-  public static let fragmentDefinition: String =
-    """
-    fragment UserLinks on UserLinksType {
-      __typename
-      facebook
-      twitter
-      youtube
-      linkedIn
-      github
-      website
-    }
-    """
-
-  public static let possibleTypes: [String] = ["UserLinksType"]
-
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("facebook", type: .scalar(String.self)),
-    GraphQLField("twitter", type: .scalar(String.self)),
-    GraphQLField("youtube", type: .scalar(String.self)),
-    GraphQLField("linkedIn", type: .scalar(String.self)),
-    GraphQLField("github", type: .scalar(String.self)),
-    GraphQLField("website", type: .scalar(String.self)),
-  ]
-
-  public private(set) var resultMap: ResultMap
-
-  public init(unsafeResultMap: ResultMap) {
-    self.resultMap = unsafeResultMap
-  }
-
-  public init(facebook: String? = nil, twitter: String? = nil, youtube: String? = nil, linkedIn: String? = nil, github: String? = nil, website: String? = nil) {
-    self.init(unsafeResultMap: ["__typename": "UserLinksType", "facebook": facebook, "twitter": twitter, "youtube": youtube, "linkedIn": linkedIn, "github": github, "website": website])
-  }
-
-  public var __typename: String {
-    get {
-      return resultMap["__typename"]! as! String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  public var facebook: String? {
-    get {
-      return resultMap["facebook"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "facebook")
-    }
-  }
-
-  public var twitter: String? {
-    get {
-      return resultMap["twitter"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "twitter")
-    }
-  }
-
-  public var youtube: String? {
-    get {
-      return resultMap["youtube"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "youtube")
-    }
-  }
-
-  public var linkedIn: String? {
-    get {
-      return resultMap["linkedIn"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "linkedIn")
-    }
-  }
-
-  public var github: String? {
-    get {
-      return resultMap["github"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "github")
-    }
-  }
-
-  public var website: String? {
-    get {
-      return resultMap["website"] as? String
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "website")
     }
   }
 }

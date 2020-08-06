@@ -40,11 +40,9 @@ class MessengerHeader: UIView {
             }
             
             
-
-            if let links = participatedUser?.links?.fragments.userLinks {
+            if let links = participatedUser?.links as? [String:String]{
                 for type in linkTypes {
-                    if let link = links.jsonObject[type] as? String, link.count != 0 {
-
+                    if let link = links[type], link.count != 0 {
                         let button = SocialButton()
                         let image = UIImage(named: String(format: "icon_%@", type),in: Erxes.erxesBundle(), compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
                         button.setImage(image, for: .normal)
@@ -76,8 +74,14 @@ class MessengerHeader: UIView {
 
     private var supporters = [UserModel]() {
         didSet {
+            
+            if supporters.count == 1 {
+                supportersView.addArrangedSubview(UIView())
+            }
+            
             for (i, supporter) in supporters.enumerated() {
                 let avatarView = AvatarView(frame: .zero)
+                avatarView.frame.size = CGSize(width: 50, height: 50)
                 let avatarViewCollapsed = AvatarView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 
                 avatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
@@ -112,8 +116,10 @@ class MessengerHeader: UIView {
                     make.centerX.equalTo(avatarView)
                     make.top.equalTo(supportersView.snp.bottom).offset(5)
                 }
-
-
+            }
+            
+            if supporters.count == 1 {
+                supportersView.addArrangedSubview(UIView())
             }
 
             self.setupLayout()
@@ -378,9 +384,9 @@ class MessengerHeader: UIView {
             make.left.equalTo(supporterAvatarView)
         }
 
-        if let links = participatedUser?.links?.fragments.userLinks {
+        if let links = participatedUser?.links as? [String:String]{
             for type in linkTypes {
-                if let link = links.jsonObject[type] as? String, link.count != 0 {
+                if let link = links[type], link.count != 0 {
                     linksView.snp.remakeConstraints { (make) in
                         make.width.equalTo(contentWidth)
                         make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
@@ -408,6 +414,7 @@ class MessengerHeader: UIView {
     }
 
     func setSupporter(supporter: UserDetailModel) {
+        
         self.participatedUser = supporter
     }
 
