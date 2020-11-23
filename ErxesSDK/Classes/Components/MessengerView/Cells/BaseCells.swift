@@ -119,7 +119,7 @@ class BaseCells: UICollectionViewCell {
 
     func updateView() {
         if let avatar = model?.user?.fragments.userModel.details?.avatar {
-            avatarView.sd_setImage(with: URL(string: avatar), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+            avatarView.sd_setImage(with: URL(string: avatar.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
         } else {
             avatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
         }

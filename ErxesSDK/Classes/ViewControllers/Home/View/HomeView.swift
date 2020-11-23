@@ -10,6 +10,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import Fusuma
 import CoreServices
+import MobileCoreServices
 
 class HomeView: AbstractViewController {
 
@@ -195,8 +196,8 @@ class HomeView: AbstractViewController {
         self.viewModel.cancelSubscription()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
         headerView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
@@ -219,7 +220,6 @@ class HomeView: AbstractViewController {
 
         scrollView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalToSuperview()
-//            make.top.equalTo(segmentContainer.snp.bottom).offset(10)
             make.top.equalToSuperview().offset(0)
         }
 
@@ -313,7 +313,7 @@ class HomeView: AbstractViewController {
         self.viewModel.didGetFormDetail = { data in
             self.formView.titleLabel.text = leadData?.callout?.title
             self.formView.descriptionLabel.text = leadData?.callout?.body
-            self.formView.thankMessage = leadData?.thankContent as! String
+            self.formView.thankMessage = leadData?.thankContent! ?? "Thank you"
             self.formView.button.setTitle(leadData?.callout?.buttonText, for: .normal)
             self.formView.button.addTarget(self, action: #selector(self.openForm(sender:)), for: .touchUpInside)
             self.formView.didTapOpenFile = {
@@ -322,6 +322,7 @@ class HomeView: AbstractViewController {
                 let fileAction = UIAlertAction(title: "Open file browser", style: .default) { (action) in
                     alertContoller.dismiss(animated: true) {
 
+//                        let fileBrowser = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
                         let fileBrowser = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
                         fileBrowser.delegate = self
                         fileBrowser.view.tintColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)
@@ -541,10 +542,10 @@ extension HomeView: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "KBCategoryCell", for: indexPath) as? KBCategoryCell {
-                if let model: KbArticleModel = self.searchArray[indexPath.row] {
+                let model = self.searchArray[indexPath.row] 
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
-                }
+                
                 return cell
             }
         }

@@ -32,7 +32,7 @@ class MessengerHeader: UIView {
             supporterAvatarView.image = UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil)
             if let avatarUrl = participatedUser?.details?.avatar {
 
-                supporterAvatarView.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                supporterAvatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
             }
 
             if let descriptionText = participatedUser?.details?.description {
@@ -90,8 +90,8 @@ class MessengerHeader: UIView {
                 avatarViewCollapsed.layer.borderWidth = 0.5
                 if let avatarUrl = supporter.details?.avatar {
 
-                    avatarView.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
-                    avatarViewCollapsed.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    avatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    avatarViewCollapsed.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
                 }
 
                 let nameLabel = UILabel()

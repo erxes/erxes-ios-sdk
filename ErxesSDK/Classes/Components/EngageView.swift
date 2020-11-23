@@ -49,7 +49,7 @@ class EngageView {
         let avatarView = UIImageView()
         avatarView.layer.cornerRadius = 22
         avatarView.clipsToBounds = true
-        avatarView.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+        avatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
 
         let nameLabel = UILabel(frame: CGRect.zero)
         nameLabel.textColor = UIColor.black

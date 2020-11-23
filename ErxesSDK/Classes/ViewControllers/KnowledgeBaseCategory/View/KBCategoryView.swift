@@ -63,8 +63,8 @@ class KBCategoryView: AbstractViewController {
     
    
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
      
         header.snp.makeConstraints { (make) in
             make.top.equalTo(containerView)
@@ -194,11 +194,11 @@ extension KBCategoryView: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
             }else {
-                if let model:KbArticleModel = self.searchArray[indexPath.row] {
+                let model = self.searchArray[indexPath.row]
                     
                     cell.setup(model: model)
                     cell.layoutIfNeeded()
-                }
+                
                 return cell
             }
             

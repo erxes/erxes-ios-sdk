@@ -187,7 +187,7 @@ class CheckView: UIView {
             values.removeAll(where: {$0 == self.options[sender.tag - 2000]})
         }
     
-        guard let value:String = self.values.joined(separator:",") else {return}
+        let value = self.values.joined(separator:",")
         
         delegate?.didSelectValues(values: value, sender: self)
     }

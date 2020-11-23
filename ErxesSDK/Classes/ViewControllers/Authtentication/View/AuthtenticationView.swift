@@ -110,8 +110,8 @@ class AuthtenticationView: AbstractViewController {
 
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         header.snp.makeConstraints { (make) in
             make.height.equalTo(64)
@@ -142,7 +142,7 @@ class AuthtenticationView: AbstractViewController {
                 self.containerView.snp.remakeConstraints({ (make) in
                     make.left.right.equalToSuperview()
                     make.height.equalTo(240)
-                    make.bottom.equalTo(self.bottomLayoutGuide.snp.top).offset(-keyboardFrame.size.height)
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-keyboardFrame.size.height)
                 })
                 self.containerView.layoutSubviews()
                 

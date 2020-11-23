@@ -7,23 +7,23 @@
 //
 
 import Foundation
-import  UIKit
+import UIKit
 
 extension UIView {
-    
-    
+
+
     func roundCorners(corners: UIRectCorner, radius: CGFloat) {
-              DispatchQueue.main.async {
-                  let path = UIBezierPath(roundedRect: self.bounds,
-                                          byRoundingCorners: corners,
-                                          cornerRadii: CGSize(width: radius, height: radius))
-                  let maskLayer = CAShapeLayer()
-                  maskLayer.frame = self.bounds
-                  maskLayer.path = path.cgPath
-                  self.layer.mask = maskLayer
-              }
-          }
-    
+        DispatchQueue.main.async {
+            let path = UIBezierPath(roundedRect: self.bounds,
+                                    byRoundingCorners: corners,
+                                    cornerRadii: CGSize(width: radius, height: radius))
+            let maskLayer = CAShapeLayer()
+            maskLayer.frame = self.bounds
+            maskLayer.path = path.cgPath
+            self.layer.mask = maskLayer
+        }
+    }
+
     func addConstraintsWithVisualStrings(format: String, views: UIView...) {
         var viewsDictionary = [String: UIView]()
         for (index, view) in views.enumerated() {
@@ -33,14 +33,14 @@ extension UIView {
         }
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
-    
+
     /** This method binds the view with frame of keyboard frame. So, The View will change its frame with the height of the keyboard's height */
     func bindToTheKeyboard(_ bottomConstaint: NSLayoutConstraint? = nil) {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: bottomConstaint)
     }
-    
+
     @objc func keyboardWillChange(_ notification: NSNotification) {
-        guard let duration: Double = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double else {return}
+        let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         let curveframe = (notification.userInfo![UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let targetFrame = (notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -50,34 +50,34 @@ extension UIView {
             UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions.init(rawValue: curve), animations: {
                 self.layoutIfNeeded()
             }, completion: nil)
-            
+
         } else {
             UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIView.KeyframeAnimationOptions.init(rawValue: curve), animations: {
                 self.frame.origin.y += deltaY
             }, completion: nil)
         }
     }
-    
+
     func dropShadow(scale: Bool = true) {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: -1, height: 1)
         layer.shadowRadius = 1
-        
+
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
-    
-   
+
+
     func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
         layer.masksToBounds = false
         layer.shadowColor = color.cgColor
         layer.shadowOpacity = opacity
         layer.shadowOffset = offSet
         layer.shadowRadius = radius
-        
+
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
@@ -86,46 +86,46 @@ extension UIView {
 
 
 extension UINavigationBar {
-    
+
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.size.width, height: 100.0)
     }
-    
+
 }
 
 
 extension UIImage {
-    
-    
+
+
     public func resizeImage(targetSize: CGSize) -> UIImage {
         let size = self.size
-        
-        let widthRatio  = targetSize.width  / self.size.width
+
+        let widthRatio = targetSize.width / self.size.width
         let heightRatio = targetSize.height / self.size.height
-        
+
         var newSize: CGSize
         if widthRatio > heightRatio {
             newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
         } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
         }
-        
+
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
+
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
         self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return newImage!
     }
-    
-    public func scale( by scale: CGFloat) -> UIImage? {
+
+    public func scale(by scale: CGFloat) -> UIImage? {
         let size = self.size
         let scaledSize = CGSize(width: size.width * scale, height: size.height * scale)
         return resizeImage(targetSize: scaledSize)
     }
-    
+
     // image with rounded corners
     public func withRoundedCorners(radius: CGFloat? = nil) -> UIImage? {
         let maxRadius = min(size.width, size.height) / 2
@@ -143,8 +143,8 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
-    
-    
+
+
     class func resize(_ image: UIImage) -> Data! {
         var actualHeight = Float(image.size.height)
         var actualWidth = Float(image.size.width)
@@ -192,7 +192,7 @@ public extension UIView {
                 let activityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
                 activityIndicatorView.style = .white
                 activityIndicatorView.color = .gray
-                
+
                 activityIndicatorView.hidesWhenStopped = true
                 addSubview(activityIndicatorView)
                 activityIndicatorView.center = self.center
@@ -200,11 +200,11 @@ public extension UIView {
                 return activityIndicatorView
             }
         }
-        
+
         set {
             addSubview(newValue)
-            
-            setAssociatedObject(newValue, associativeKey:&ActivityIndicatorViewAssociativeKey, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
+            setAssociatedObject(newValue, associativeKey: &ActivityIndicatorViewAssociativeKey, policy: .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
@@ -216,7 +216,7 @@ public extension NSObject {
             objc_setAssociatedObject(self, associativeKey, valueAsAnyObject, policy)
         }
     }
-    
+
     func getAssociatedObject(_ associativeKey: UnsafeRawPointer) -> Any? {
         guard let valueAsType = objc_getAssociatedObject(self, associativeKey) else {
             return nil
@@ -227,17 +227,17 @@ public extension NSObject {
 
 
 extension UIStackView {
-    
+
     func removeAllArrangedSubviews() {
-        
+
         let removedSubviews = arrangedSubviews.reduce([]) { (allSubviews, subview) -> [UIView] in
             self.removeArrangedSubview(subview)
             return allSubviews + [subview]
         }
-        
+
         // Deactivate all constraints
         NSLayoutConstraint.deactivate(removedSubviews.flatMap({ $0.constraints }))
-        
+
         // Remove the views from self
         removedSubviews.forEach({ $0.removeFromSuperview() })
     }

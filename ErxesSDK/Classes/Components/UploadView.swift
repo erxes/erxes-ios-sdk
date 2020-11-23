@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-
 
 protocol AttachmentUploadDelegate: class {
     func attachmentUploaded(file: AttachmentInput)
@@ -17,7 +15,7 @@ protocol AttachmentUploadDelegate: class {
 
 class UploadView: UIView {
 
-
+    let network = NetworkManager()
 
     weak var delegate: AttachmentUploadDelegate?
     var size = 0
@@ -28,10 +26,6 @@ class UploadView: UIView {
         }
     }
 
-
-
-    var sessionManager: SessionManager!
-
     lazy var imageView: UIImageView = {
         let imageview = UIImageView()
         imageview.contentMode = ContentMode.scaleAspectFit
@@ -39,19 +33,13 @@ class UploadView: UIView {
         imageview.center = self.center
         imageview.layer.cornerRadius = 6
         imageview.layer.borderWidth = 4
+        imageview.clipsToBounds = true
         imageview.layer.borderColor = UIColor.init(hexString: uiOptions?.color ?? defaultColorCode)?.cgColor
         return imageview
     }()
 
-    lazy var progressBar: UIProgressView = {
-        let progressView = UIProgressView()
-        progressView.progressViewStyle = UIProgressView.Style.bar
-        progressView.trackTintColor = .clear
-        progressView.progressTintColor = UIColor(hexString: uiOptions?.color ?? defaultColorCode)
-
-        return progressView
-    }()
-
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
+    
     var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage.erxes(with: .cancel, textColor: UIColor(hexString: uiOptions?.color ?? defaultColorCode)!, size: CGSize(width: 25, height: 25), backgroundColor: .clear), for: .normal)
@@ -65,7 +53,7 @@ class UploadView: UIView {
     }()
 
     @objc func closeAction() {
-        self.cancelUploadRequest()
+        self.network.cancelUpload()
         self.removeFromSuperview()
     }
 
@@ -82,6 +70,11 @@ class UploadView: UIView {
 
     convenience init(image: UIImage, filePath: URL? = nil) {
         self.init(frame: .zero)
+        
+        var uuid = UUID().uuidString
+        uuid = uuid.replacingOccurrences(of: "-", with: "")
+        uuid = uuid.map { $0.lowercased() }.joined()
+        
         if filePath == nil {
             self.imageFile = image
             self.imageView.image = image
@@ -92,18 +85,29 @@ class UploadView: UIView {
             let newHeight = w / ratio
             self.imageView.frame.size = CGSize(width: w, height: newHeight)
             self.imageView.center = self.center
-            self.uploadImage(image: image)
+            
+            guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+                return
+            }
+     
+            let fileInfo = NetworkManager.FileInfo(withFileData: imageData, filename: uuid, name: "file", mimetype: "image/jpg")
+            
+            self.upload(files: [fileInfo], toURL: URL(string: API_URL + "/upload-file"))
         } else {
             let w = SCREEN_WIDTH - 100
             self.imageFile = UIImage.erxes(with: .file, textColor: .gray)
-            self.imageView.image = UIImage.erxes(with: .file, textColor: .gray,size: CGSize(width: w-50, height: w-50))
+            self.imageView.image = UIImage.erxes(with: .file, textColor: .gray, size: CGSize(width: w - 50, height: w - 50))
             self.imageView.contentMode = .scaleAspectFit
             self.imageView.backgroundColor = .white
-            
+
 
             self.imageView.frame.size = CGSize(width: w, height: w)
             self.imageView.center = self.center
-            self.uploadFile(path: filePath!)
+            
+            let uuid = UUID().uuidString
+            let fileInfo = NetworkManager.FileInfo(withFileURL: filePath, filename: uuid, name: "file", mimetype: "application/pdf")
+            
+            self.upload(files: [fileInfo], toURL: URL(string: API_URL + "/upload-file"))
         }
 
     }
@@ -112,13 +116,21 @@ class UploadView: UIView {
         //Place your initialization code here
         self.frame = CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT)
         self.backgroundColor = UIColor.black.withAlphaComponent(0.75)
-        self.imageView.addSubview(progressBar)
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        
+        self.imageView.addSubview(spinner)
+        
+        spinner.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
         self.addSubview(closeButton)
 
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForResource = TimeInterval(15.0)
         configuration.timeoutIntervalForRequest = TimeInterval(15.0)
-        sessionManager = Alamofire.SessionManager(configuration: configuration)
+
     }
 
 
@@ -127,12 +139,6 @@ class UploadView: UIView {
         super.layoutSubviews()
 
         //Custom manually positioning layout goes here (auto-layout pass has already run first pass)
-        progressBar.snp.makeConstraints({ (make) in
-            make.bottom.equalToSuperview().offset(-4)
-            make.height.equalTo(4)
-            make.left.equalToSuperview().offset(4)
-            make.right.equalToSuperview().offset(-4)
-        })
 
         closeButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(40)
@@ -146,142 +152,45 @@ class UploadView: UIView {
         super.updateConstraints()
 
     }
-
-    func uploadFile(path: URL) {
-        let isSecured = path.startAccessingSecurityScopedResource() == true
-        self.progressBar.progress = 0
-        //        self.uploadLoader.startAnimating()
-
-        let fileName = path.lastPathComponent
-       
-        do {
-            let fileData: Data = try Data(contentsOf: path)
-            let mimeType = fileData.mimeType
-            size = fileData.count
-
-            let bcf = ByteCountFormatter()
-            bcf.allowedUnits = [.useKB]
-            bcf.countStyle = .file
-            //            self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
-
-            sessionManager.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(fileData, withName: path.deletingPathExtension().lastPathComponent, fileName: fileName, mimeType: mimeType)
-
-            },
-                                  to: uploadUrl) {
-                (result) in
-
-                switch result {
-                case .success(let upload, _, _):
-                    self.processUpload(upload, name: path.deletingPathExtension().lastPathComponent, mimeType: mimeType)
-                case .failure(let encodingError):
-                    self.delegate?.uploadFailed(errorMessage: encodingError.localizedDescription)
-                }
-            }
-
-        }
-        catch {
-            // Couldn't create audio player object, log the error
-            delegate?.uploadFailed(errorMessage: error.localizedDescription)
-        }
-        
-        if(isSecured){
-            path.stopAccessingSecurityScopedResource()
-        }
-
-    }
     
-  
+    func upload(files: [NetworkManager.FileInfo], toURL url: URL?) {
 
-    func uploadImage(image: UIImage) {
-//        self.uploadView.isHidden = false
-        self.progressBar.progress = 0
-//        self.uploadLoader.startAnimating()
-
-
-
-        if let imgData = UIImage.resize(image) {
-            size = imgData.count
-            let bcf = ByteCountFormatter()
-            bcf.allowedUnits = [.useKB]
-            bcf.countStyle = .file
-//            self.lblFilesize.text = bcf.string(fromByteCount: Int64(size))
-
-            sessionManager.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(imgData, withName: "file", fileName: "file.jpg", mimeType: "image/jpg")
-
-            },
-                                  to: uploadUrl) {
-                (result) in
+        let fileInfo = files.first
+        if let uploadURL = url {
+    
+            network.upload(files: files, toURL: uploadURL, withHttpMethod: .post) { [self] (results, failedFilesList) in
      
-                switch result {
-                case .success(let upload, _, _):
-                    self.processUpload(upload,name: "file", mimeType: "image/jpg")
-                case .failure(let encodingError):
-                    self.delegate?.uploadFailed(errorMessage: encodingError.localizedDescription)
+                if let error = results.error {
+                    self.delegate?.uploadFailed(errorMessage: error.localizedDescription)
                 }
-            }
-        }
-    }
-
-    func cancelUploadRequest() {
-        sessionManager.session.getTasksWithCompletionHandler { (_, uploadTasks, _) in
-            uploadTasks.forEach { $0.cancel() }
-        }
-    }
-
-    func processUpload(_ upload: UploadRequest, name:String, mimeType: String) {
-        upload.uploadProgress(closure: { (progress) in
-
-            self.progressBar.progress = Float(progress.fractionCompleted)
-        })
-
-        upload.responseString { response in
-            switch response.result {
-
-            case .success(_):
-                self.progressBar.progress = 1
-                if self.isValidUrl(url: response.value!) {
-         
-                    let file = AttachmentInput(url: response.value!, name: name, type: mimeType, size: Double(exactly: self.size))
+                
+                if let data = results.data {
+                    guard let fileUrl = String(data: data, encoding: .utf8) else { return }
+                    let file = AttachmentInput(url: fileUrl, name: (fileInfo?.filename)!, type: fileInfo?.mimetype)
                     self.delegate?.attachmentUploaded(file: file)
-
-                } else {
-                    self.delegate?.uploadFailed(errorMessage: "Check your server configuration")
                 }
-            case .failure(_):
-                self.delegate?.uploadFailed(errorMessage: response.error!.localizedDescription)
-            @unknown default:
-                 self.delegate?.uploadFailed(errorMessage: "unknown error has occured")
+                
+                if failedFilesList != nil {
+                    self.delegate?.uploadFailed(errorMessage: "Upload failed !!!")
+                }
             }
-
-
-
         }
     }
-
-    func isValidUrl(url: String) -> Bool {
-        let urlRegEx = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
-        let urlTest = NSPredicate(format: "SELF MATCHES %@", urlRegEx)
-        let result = urlTest.evaluate(with: url)
-        return result
-    }
-
 }
 
 
 extension Data {
-    private static let mimeTypeSignatures: [UInt8 : String] = [
-        0xFF : "image/jpeg",
-        0x89 : "image/png",
-        0x47 : "image/gif",
-        0x49 : "image/tiff",
-        0x4D : "image/tiff",
-        0x25 : "application/pdf",
-        0xD0 : "application/vnd",
-        0x46 : "text/plain",
+    private static let mimeTypeSignatures: [UInt8: String] = [
+        0xFF: "image/jpeg",
+        0x89: "image/png",
+        0x47: "image/gif",
+        0x49: "image/tiff",
+        0x4D: "image/tiff",
+        0x25: "application/pdf",
+        0xD0: "application/vnd",
+        0x46: "text/plain",
     ]
-    
+
     var mimeType: String {
         var c: UInt8 = 0
         copyBytes(to: &c, count: 1)

@@ -21,11 +21,10 @@ class HomeService: HomeServiceProtocol {
 
             case .success(let graphQLResult):
 
-                if let response = graphQLResult.data?.widgetsMessengerSupporters?.supporters!.compactMap({ $0?.fragments.userModel }) {
-
+                if let response = graphQLResult.data?.widgetsMessengerSupporters?.fragments.messengerSupportersModel.supporters?.compactMap({$0?.fragments.userModel}) {
                     success(response)
                 }
-
+                
                 if let errors = graphQLResult.errors {
 
                     let error = errors.compactMap({ $0.localizedDescription }).joined(separator: ", ")
@@ -49,7 +48,7 @@ class HomeService: HomeServiceProtocol {
             case .success(let graphQLResult):
 
                 if let response = graphQLResult.data?.widgetsConversations?.compactMap({ $0?.fragments.conversationModel }) {
-
+                    print("res = ",response)
                     success(response)
                 }
 

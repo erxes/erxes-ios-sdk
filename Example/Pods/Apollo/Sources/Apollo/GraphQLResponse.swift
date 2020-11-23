@@ -1,14 +1,37 @@
+import Foundation
+
 /// Represents a GraphQL response received from a server.
-public final class GraphQLResponse<Data: GraphQLSelectionSet> {
+public final class GraphQLResponse<Data: GraphQLSelectionSet>: Parseable {
+  
+  public init<T>(from data: Foundation.Data, decoder: T) throws where T : FlexibleDecoder {
+    // Giant hack to make all this conform to Parseable.
+    throw ParseableError.unsupportedInitializer
+  }
+  
   public let body: JSONObject
 
-  private let rootKey: String
-  private let variables: GraphQLMap?
+  private var rootKey: String
+  private var variables: GraphQLMap?
 
   public init<Operation: GraphQLOperation>(operation: Operation, body: JSONObject) where Operation.Data == Data {
     self.body = body
     rootKey = rootCacheKey(for: operation)
     variables = operation.variables
+  }
+  
+  func setupOperation<Operation: GraphQLOperation> (_ operation: Operation) {
+    self.rootKey = rootCacheKey(for: operation)
+    self.variables = operation.variables
+  }
+  
+  public func parseResultWithCompletion(cacheKeyForObject: CacheKeyForObject? = nil,
+                                        completion: (Result<(GraphQLResult<Data>, RecordSet?), Error>) -> Void) {
+    do {
+      let result = try parseResult(cacheKeyForObject: cacheKeyForObject).await()
+      completion(.success(result))
+    } catch {
+      completion(.failure(error))
+    }
   }
 
   func parseResult(cacheKeyForObject: CacheKeyForObject? = nil) throws -> Promise<(GraphQLResult<Data>, RecordSet?)>  {
@@ -19,6 +42,8 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
     } else {
       errors = nil
     }
+
+    let extensions = body["extensions"] as? JSONObject
 
     if let dataEntry = body["data"] as? JSONObject {
       let executor = GraphQLExecutor { object, info in
@@ -40,15 +65,17 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
         }.map { (data, records, dependentKeys) in
           (
             GraphQLResult(data: data,
-                         errors: errors,
-                         source: .server,
-                         dependentKeys: dependentKeys),
+                          extensions: extensions,
+                          errors: errors,
+                          source: .server,
+                          dependentKeys: dependentKeys),
             records
           )
       }
     } else {
       return Promise(fulfilled: (
         GraphQLResult(data: nil,
+                      extensions: extensions,
                       errors: errors,
                       source: .server,
                       dependentKeys: nil),
@@ -57,7 +84,7 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
     }
   }
 
-  func parseErrorsOnlyFast() -> [GraphQLError]? {
+  public func parseErrorsOnlyFast() -> [GraphQLError]? {
     guard let errorsEntry = self.body["errors"] as? [JSONObject] else {
       return nil
     }
@@ -65,8 +92,9 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
     return errorsEntry.map(GraphQLError.init)
   }
 
-  func parseResultFast() throws -> GraphQLResult<Data>  {
+  public func parseResultFast() throws -> GraphQLResult<Data>  {
     let errors = self.parseErrorsOnlyFast()
+    let extensions = body["extensions"] as? JSONObject
 
     if let dataEntry = body["data"] as? JSONObject {
       let data = try decode(selectionSet: Data.self,
@@ -74,11 +102,13 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
                             variables: variables)
 
       return GraphQLResult(data: data,
+                           extensions: extensions,
                            errors: errors,
                            source: .server,
                            dependentKeys: nil)
     } else {
       return GraphQLResult(data: nil,
+                           extensions: extensions,
                            errors: errors,
                            source: .server,
                            dependentKeys: nil)

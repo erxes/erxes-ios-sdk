@@ -196,6 +196,8 @@ extension MessengerView: FusumaDelegate {
     func fusumaCameraRollUnauthorized() {
 
     }
+    
+    
 
 
 }

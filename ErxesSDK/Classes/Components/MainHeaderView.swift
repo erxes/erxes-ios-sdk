@@ -20,7 +20,7 @@ class MainHeaderView: UIView {
 
                 if let avatarUrl = supporter.details?.avatar {
                    
-                    avatarView.sd_setImage(with: URL(string: avatarUrl), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    avatarView.sd_setImage(with: URL(string: avatarUrl.readFile()), placeholderImage: UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
                 }
                 supportersView.addArrangedSubview(avatarView)
 

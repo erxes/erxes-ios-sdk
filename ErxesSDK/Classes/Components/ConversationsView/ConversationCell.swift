@@ -113,7 +113,7 @@ class ConversationCell: UITableViewCell {
             if let user = users.last {
                 nameLabel.text = user.details?.fullName
                 if let avatar = user.details?.avatar {
-                    avatarView.sd_setImage(with: URL(string: avatar), placeholderImage:UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
+                    avatarView.sd_setImage(with: URL(string: avatar.readFile()), placeholderImage:UIImage(named: "ic_avatar",in: Erxes.erxesBundle(), compatibleWith: nil))
                 }
             }
         }

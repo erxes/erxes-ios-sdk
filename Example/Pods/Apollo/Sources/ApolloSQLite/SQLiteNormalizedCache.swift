@@ -31,6 +31,18 @@ public final class SQLiteNormalizedCache {
     try self.createTableIfNeeded()
   }
 
+  ///
+  /// Initializer that takes the Connection to use
+  /// - Parameters:
+  ///   - db: The database Connection to use
+  ///   - shouldVacuumOnClear: If the database should also be `VACCUM`ed on clear to remove all traces of info. Defaults to `false` since this involves a performance hit, but this should be used if you are storing any Personally Identifiable Information in the cache.
+  /// - Throws: Any errors attempting to access the database
+  public init(db: Connection, shouldVacuumOnClear: Bool = false) throws {
+    self.shouldVacuumOnClear = shouldVacuumOnClear
+    self.db = db
+    try self.createTableIfNeeded()
+  }
+
   private func recordCacheKey(forFieldCacheKey fieldCacheKey: CacheKey) -> CacheKey {
     let components = fieldCacheKey.components(separatedBy: ".")
     var updatedComponents = [String]()
@@ -117,7 +129,7 @@ extension SQLiteNormalizedCache: NormalizedCache {
       result = .failure(error)
     }
 
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+    DispatchQueue.apollo.returnResultAsyncIfNeeded(on: callbackQueue,
                                                    action: completion,
                                                    result: result)
   }
@@ -128,11 +140,12 @@ extension SQLiteNormalizedCache: NormalizedCache {
     let result: Swift.Result<[Record?], Error>
     do {
       let records = try self.selectRecords(forKeys: keys)
+      let recordsIndexMap = records.indices.reduce(into: [:]) { resultMap, index in
+        resultMap[records[index].key] = index
+      }
+
       let recordsOrNil: [Record?] = keys.map { key in
-        if let recordIndex = records.firstIndex(where: { $0.key == key }) {
-          return records[recordIndex]
-        }
-        return nil
+        recordsIndexMap[key].flatMap { records[$0] }
       }
 
       result = .success(recordsOrNil)
@@ -140,7 +153,7 @@ extension SQLiteNormalizedCache: NormalizedCache {
       result = .failure(error)
     }
 
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+    DispatchQueue.apollo.returnResultAsyncIfNeeded(on: callbackQueue,
                                                    action: completion,
                                                    result: result)
   }
@@ -148,14 +161,18 @@ extension SQLiteNormalizedCache: NormalizedCache {
   public func clear(callbackQueue: DispatchQueue?, completion: ((Swift.Result<Void, Error>) -> Void)?) {
     let result: Swift.Result<Void, Error>
     do {
-      try self.clearRecords()
+      try clearImmediately()
       result = .success(())
     } catch {
       result = .failure(error)
     }
 
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
+    DispatchQueue.apollo.returnResultAsyncIfNeeded(on: callbackQueue,
                                                    action: completion,
                                                    result: result)
+  }
+
+  public func clearImmediately() throws {
+    try clearRecords()
   }
 }

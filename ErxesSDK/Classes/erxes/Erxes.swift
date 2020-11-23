@@ -11,7 +11,7 @@ import Apollo
 import IQKeyboardManagerSwift
 
 var lang = "en"
-
+var API_URL = "http://localhost:3300"
 let screenSize = UIScreen.main.bounds
 let SCREEN_WIDTH = screenSize.width
 let SCREEN_HEIGHT = screenSize.height
@@ -24,10 +24,11 @@ var formCode: String!
 
 var customerEmail = ""
 var customerPhoneNumber = ""
-let defaultColorCode = "#5629B6"
+var customData:Scalar_JSON = [:]
+let defaultColorCode = "#EEEEEE"
 
-var uploadUrl = ""
 var isSaas = false
+var isUser = false
 var sender = UIView()
 
 var messengerData: MessengerData?
@@ -36,8 +37,6 @@ var uiOptions: UIOptions?
 var brand: BrandModel?
 
 @objc public class Erxes: NSObject {
-    
- 
     
     static func storeEmail(value: String) {
         customerEmail = value
@@ -52,7 +51,6 @@ var brand: BrandModel?
     }
     
     static func storeCustomerId(value: String) {
-        
         customerId = value
         UserDefaults().set(value, forKey: "customerId")
         UserDefaults().synchronize()
@@ -65,7 +63,6 @@ var brand: BrandModel?
     }
     
     static func storeThemeColor(hex: String) {
-        //        themeColor = UIColor.init(hexString: hex)
         UserDefaults().set(hex, forKey: "themeColor")
         UserDefaults().synchronize()
     }
@@ -87,42 +84,46 @@ var brand: BrandModel?
         if let customerid = defaults.string(forKey: "customerId") {
             customerId = customerid
         }
-        
-        
-        
     }
     
     @objc public static func setup(erxesApiUrl: String, brandId: String) {
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
+        
         restore()
         brandCode = brandId
-        uploadUrl = erxesApiUrl + "/upload-file"
-        var subscriptionUrl = ""
         
-        if erxesApiUrl.contains("http") {
-            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "http", with: "ws")
-        } else if erxesApiUrl.contains("https") {
-            subscriptionUrl = erxesApiUrl.replacingOccurrences(of: "https", with: "wss")
+        API_URL = erxesApiUrl
+        
+        if (erxesApiUrl.last == "/") {
+            API_URL = String(erxesApiUrl.dropLast())
         }
-        ErxesClient.shared.setupClient(widgetsApiUrl: erxesApiUrl, apiUrlString: subscriptionUrl)
-        self.connect(brandId: brandId)
-
-        //        self.supporter()
         
+        ErxesClient.shared.setupClient(apiUrlString: API_URL)
+       
+        let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+        connect(mutation: mutation)
     }
     
     @objc public static func setupSaas(companyName: String, brandId: String) {
         
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
+        
         restore()
         isSaas = true
-        let erxesWidgetsApiUrl = "https://\(companyName).app.erxes.io/api"
-        let erxesApiUrl = "wss://\(companyName).app.erxes.io/api"
-        uploadUrl = "https://\(companyName).app.erxes.io/api/upload-file"
+        API_URL = "https://\(companyName).app.erxes.io/api"
+
         brandCode = brandId
-        ErxesClient.shared.setupClient(widgetsApiUrl: erxesWidgetsApiUrl, apiUrlString: erxesApiUrl)
+        ErxesClient.shared.setupClient(apiUrlString: API_URL)
         
-        //        self.getMessengerIntegration(brandCode: brandCode)
-        self.connect(brandId: brandId)
-        //        self.supporter()
+        let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+        connect(mutation: mutation)
+        
     }
     
     @objc public static func setSender(view: UIView) {
@@ -133,21 +134,27 @@ var brand: BrandModel?
     @objc public static func prepare(parent: UIViewController, senderView: UIView) {
         sender = senderView
         if (integrationId != nil) || (customerId != nil) {
-            self.connect(brandId: brandCode)
-            
+          
+            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+            connect(mutation: mutation)
         }
     }
     
     
-    private static func connect(brandId: String) {
-       UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-        let mutation = ConnectMutation(brandCode: brandId, cachedCustomerId: customerId)
-        mutation.data = Scalar_JSON()
-        ErxesClient.shared.client.perform(mutation: mutation) { result in
+    private static func connect(mutation: ConnectMutation?) {
+        mutation?.isUser = isUser
+        mutation?.data = customData
+        mutation?.email = customerEmail
+        mutation?.phone = customerPhoneNumber
+        
+        ErxesClient.shared.client.perform(mutation: mutation!) { result in
+            print("result = ",result)
             switch result {
+            
             case .success(let graphQLResult):
                 if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
                     integrationId = responseModel.integrationId
+                    print("INTEGRATION ID = ",integrationId)
                     customerId = responseModel.customerId
                     storeCustomerId(value: responseModel.customerId!)
                     if let messengerDataJson = responseModel.messengerData {
@@ -165,7 +172,6 @@ var brand: BrandModel?
                             uiOptions = try UIOptions(from: uiOptionsJson) { decoder in
                                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                             }
-                            
                         } catch {
                             print("Error: \(error)")
                         }
@@ -201,7 +207,6 @@ var brand: BrandModel?
                     let fullName = response.user?.fragments.userModel.details?.fullName ?? "Operator"
                     guard let content = response.engageData?.content, content.count != 0 else { return }
                     
-                    let engageView = EngageView()
                     EngageView.show(avatarUrl, fullName: fullName, text: content)
                     
                 }
@@ -218,60 +223,72 @@ var brand: BrandModel?
     
     
     @objc public static func start() {
-        
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
-        
-        if integrationId.count == 0 || integrationId == nil {
+
+        if integrationId == nil || integrationId.count == 0  {
             let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
-            mutation.data = Scalar_JSON()
-            ErxesClient.shared.client.perform(mutation: mutation) { result in
-                switch result {
-                case .success(let graphQLResult):
-                    if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
-                        integrationId = responseModel.integrationId
-                        customerId = responseModel.customerId
-                        storeCustomerId(value: responseModel.customerId!)
-                        if let messengerDataJson = responseModel.messengerData {
-                            do {
-                                messengerData = try MessengerData(from: messengerDataJson) { decoder in
-                                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                                }
-                                formCode = messengerData?.formCode
-                            } catch {
-                                print("Error: \(error)")
-                            }
-                        }
-                        if let uiOptionsJson = responseModel.uiOptions {
-                            do {
-                                uiOptions = try UIOptions(from: uiOptionsJson) { decoder in
-                                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                                }
-                                
-                            } catch {
-                                print("Error: \(error)")
-                            }
-                        }
-                        if let languageCode = responseModel.languageCode {
-                            lang = languageCode
-                        }
-                        brand = responseModel.brand?.fragments.brandModel
-                        saveBrowserInfo()
-                        openErxes()
-                    }
-                    if let errors = graphQLResult.errors {
-                        print("Errors from server: \(errors)")
-                    }
-                case .failure(let error):
-                    print("Failure! Error: \(error)")
-                }
-            }
+            connect(mutation: mutation)
         } else {
             openErxes()
         }
-        
     }
     
+    @objc public static func start(email:String = "", phone:String = "", data:[String:Any] = [:]) {
+        if email.count > 0 {
+            customerEmail = email
+            isUser = true
+        }
+        
+        if phone.count > 0 {
+            customerPhoneNumber = phone
+            isUser = true
+        }
+        
+        if data.keys.count > 0 {
+            var processed = [String:Any]()
+            for (key, value) in data {
+                processed[key] = forceBridgeFromObjectiveC(value)
+            }
+            customData = processed
+        }
+        
+        if integrationId == nil || integrationId.count == 0 {
+            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+            connect(mutation: mutation)
+        } else {
+            openErxes()
+        }
+    }
+    
+    static func forceBridgeFromObjectiveC(_ value: Any) -> Any {
+        
+        if value == nil {
+            return value
+        }
+        
+        switch value {
+        
+        case is NSString:
+            return value as! String
+            
+        case is Bool:
+            return value as! Bool
+        case is Int:
+            return value as! Int
+        case is Int64:
+            return value as! Int64
+        case is Double:
+            return value as! Double
+        case is NSDictionary:
+            return Dictionary(uniqueKeysWithValues: (value as! NSDictionary).map { ($0.key as! AnyHashable, forceBridgeFromObjectiveC($0.value)) })
+        case is NSArray:
+            return (value as? NSArray).map { forceBridgeFromObjectiveC($0) }
+        default:
+            return value
+        }
+    }
+    
+    
+        
     @objc private static func openErxes() {
         
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -294,8 +311,6 @@ var brand: BrandModel?
                     
                     navigationController.viewControllers.insert(controller, at: 0)
                 }
-                
-                
             } else {
                 let controller = HomeView()
                 

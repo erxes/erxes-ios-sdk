@@ -44,7 +44,7 @@ class ImageViewer: UIView {
         self.init(frame: .zero)
         didLoad()
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.white
-        imageView.sd_setImage(with: URL(string: attachmentUrl))
+        imageView.sd_setImage(with: URL(string: attachmentUrl.readFile()))
     }
     
     func didLoad() {

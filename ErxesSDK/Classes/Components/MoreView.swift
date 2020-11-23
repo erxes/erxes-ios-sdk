@@ -57,8 +57,8 @@ class MoreView: UIViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
        
         
         closeButton.snp.makeConstraints { (make) in

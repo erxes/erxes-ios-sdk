@@ -86,7 +86,7 @@ class MessengerView: AbstractViewController {
         collection.register(OperatorChatCell.self, forCellWithReuseIdentifier: OperatorChatCell.identifier)
         collection.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.identifier)
         collection.register(VideoChatCell.self, forCellWithReuseIdentifier: VideoChatCell.identifier)
-        
+
         self.containerView.addSubview(collection)
         collection.snp.makeConstraints({ (make) in
             make.left.right.equalToSuperview()
@@ -110,12 +110,12 @@ class MessengerView: AbstractViewController {
     var messages = [MessageModel]()
 
     var participatedUser: UserDetailModel? {
-        didSet{
+        didSet {
             self.messengerHeader.setSupporter(supporter: self.participatedUser!)
         }
     }
     var supporters = [UserModel]() {
-        didSet{
+        didSet {
             self.messengerHeader.setSupporters(supporters: supporters)
         }
     }
@@ -140,8 +140,11 @@ class MessengerView: AbstractViewController {
 
 
         if let bg = uiOptions?.wallpaper {
-            self.collectionView.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg-\(bg)",in: Erxes.erxesBundle(), compatibleWith: nil)!)
-        }else {
+            guard let img = UIImage(named: "bg-\(bg)", in: Erxes.erxesBundle(), compatibleWith: nil) else {
+                return
+            }
+            self.collectionView.backgroundColor = UIColor.init(patternImage: img)
+        } else {
             self.collectionView.backgroundColor = .white
         }
 
@@ -155,10 +158,10 @@ class MessengerView: AbstractViewController {
         self.messengerHeader.backButtonHandler = {
             self.navigationController?.popViewController(animated: true)
         }
-        
+
         self.messengerHeader.moreButtonHandler = {
             self.view.endEditing(true)
-            self.moreAction(sender:self.messengerHeader.moreButton)
+            self.moreAction(sender: self.messengerHeader.moreButton)
         }
 
     }
@@ -176,7 +179,7 @@ class MessengerView: AbstractViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.viewModel.cancelSubscription()
@@ -208,7 +211,7 @@ class MessengerView: AbstractViewController {
         }
 
         self.viewModel.didGetConversationDetail = { conversationDetail in
-        
+
             self.messages = conversationDetail.messages?.compactMap({ $0?.fragments.messageModel }) as! [MessageModel]
 
             self.collectionView.reloadData()
@@ -220,7 +223,7 @@ class MessengerView: AbstractViewController {
         }
 
         self.viewModel.didSetIsOnline = { isOnline in
-            
+
             var h: CGFloat = 0
             if isOnline {
                 if let message = messengerData?.messages?.welcome {
@@ -239,13 +242,13 @@ class MessengerView: AbstractViewController {
         }
 
         self.viewModel.didReceiveMessage = { data in
-            
+
             if (self.conversationId == nil) || self.conversationId?.count == 0 {
                 self.conversationId = data.conversationId!
-              
+
                 self.viewModel.subscribe(conversationId: self.conversationId!)
             }
-           
+
             if self.isNewMessage(id: data._id) {
                 self.messages.append(data)
                 if self.messages.count > 1 {
@@ -260,12 +263,12 @@ class MessengerView: AbstractViewController {
 
             }
         }
-        
+
 
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
 
         messengerHeader.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
@@ -274,13 +277,15 @@ class MessengerView: AbstractViewController {
 
         textField.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(40)
         }
     }
 
     @objc func attachmentAction(sender: UIButton) {
 
+        self.view.endEditing(true)
+        
         let alertContoller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let fileAction = UIAlertAction(title: "Open file browser", style: .default) { (action) in
             alertContoller.dismiss(animated: true) {
@@ -320,7 +325,6 @@ class MessengerView: AbstractViewController {
         alertContoller.addAction(cancelAction)
         self.present(alertContoller, animated: true, completion: nil)
 
-//        self.present(self.picker, animated: true, completion: nil)
     }
 
     @objc func callAction(sender: UIButton) {
@@ -420,7 +424,7 @@ class MessengerView: AbstractViewController {
         if notification.name == UIResponder.keyboardWillHideNotification {
             UIView.animate(withDuration: 0.3) {
                 self.textField.snp.remakeConstraints { (make) in
-                    make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide)
                     make.height.equalTo(40)
                     make.left.right.equalToSuperview()
                 }
@@ -445,22 +449,27 @@ class MessengerView: AbstractViewController {
 
 extension MessengerView: AttachmentUploadDelegate {
     func attachmentUploaded(file: AttachmentInput) {
-        if let uploadView = self.view.viewWithTag(55) {
-            uploadView.removeFromSuperview()
+        DispatchQueue.main.async {
+            if let uploadView = self.view.viewWithTag(55) {
+                uploadView.removeFromSuperview()
+            }
+
+            self.viewModel.insertMessage(customerId: customerId, message: nil, attachments: [file], conversationId: self.conversationId)
+            self.textField.text = ""
         }
 
-        self.viewModel.insertMessage(customerId: customerId, message: nil, attachments: [file], conversationId: conversationId)
-        textField.text = ""
     }
 
     func uploadFailed(errorMessage: String) {
-        if let uploadView = self.view.viewWithTag(55) {
-            uploadView.removeFromSuperview()
+        DispatchQueue.main.async {
+            if let uploadView = self.view.viewWithTag(55) {
+                uploadView.removeFromSuperview()
+            }
+            let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "close", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-        let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "close", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 

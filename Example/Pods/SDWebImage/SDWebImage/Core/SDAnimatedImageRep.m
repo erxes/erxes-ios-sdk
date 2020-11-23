@@ -10,8 +10,11 @@
 
 #if SD_MAC
 
-#import "SDImageGIFCoderInternal.h"
-#import "SDImageAPNGCoderInternal.h"
+#import "SDImageIOAnimatedCoderInternal.h"
+#import "SDImageGIFCoder.h"
+#import "SDImageAPNGCoder.h"
+#import "SDImageHEICCoder.h"
+#import "SDImageAWebPCoder.h"
 
 @implementation SDAnimatedImageRep {
     CGImageSourceRef _imageSource;
@@ -24,13 +27,15 @@
     }
 }
 
-// `NSBitmapImageRep`'s `imageRepWithData:` is not designed initlizer
+// `NSBitmapImageRep`'s `imageRepWithData:` is not designed initializer
 + (instancetype)imageRepWithData:(NSData *)data {
     SDAnimatedImageRep *imageRep = [[SDAnimatedImageRep alloc] initWithData:data];
     return imageRep;
 }
 
-// We should override init method for `NSBitmapImageRep` to do initlize about animated image format
+// We should override init method for `NSBitmapImageRep` to do initialize about animated image format
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
 - (instancetype)initWithData:(NSData *)data {
     self = [super initWithData:data];
     if (self) {
@@ -49,13 +54,30 @@
         }
         if (CFStringCompare(type, kUTTypeGIF, 0) == kCFCompareEqualTo) {
             // GIF
-            // Do nothing because NSBitmapImageRep support it
+            // Fix the `NSBitmapImageRep` GIF loop count calculation issue
+            // Which will use 0 when there are no loop count information metadata in GIF data
+            NSUInteger loopCount = [SDImageGIFCoder imageLoopCountWithSource:imageSource];
+            [self setProperty:NSImageLoopCount withValue:@(loopCount)];
         } else if (CFStringCompare(type, kUTTypePNG, 0) == kCFCompareEqualTo) {
             // APNG
-            // Do initilize about frame count, current frame/duration and loop count
+            // Do initialize about frame count, current frame/duration and loop count
             [self setProperty:NSImageFrameCount withValue:@(frameCount)];
             [self setProperty:NSImageCurrentFrame withValue:@(0)];
-            NSUInteger loopCount = [[SDImageAPNGCoder sharedCoder] sd_imageLoopCountWithSource:imageSource];
+            NSUInteger loopCount = [SDImageAPNGCoder imageLoopCountWithSource:imageSource];
+            [self setProperty:NSImageLoopCount withValue:@(loopCount)];
+        } else if (CFStringCompare(type, kSDUTTypeHEICS, 0) == kCFCompareEqualTo) {
+            // HEIC
+            // Do initialize about frame count, current frame/duration and loop count
+            [self setProperty:NSImageFrameCount withValue:@(frameCount)];
+            [self setProperty:NSImageCurrentFrame withValue:@(0)];
+            NSUInteger loopCount = [SDImageHEICCoder imageLoopCountWithSource:imageSource];
+            [self setProperty:NSImageLoopCount withValue:@(loopCount)];
+        } else if (CFStringCompare(type, kSDUTTypeWebP, 0) == kCFCompareEqualTo) {
+            // WebP
+            // Do initialize about frame count, current frame/duration and loop count
+            [self setProperty:NSImageFrameCount withValue:@(frameCount)];
+            [self setProperty:NSImageCurrentFrame withValue:@(0)];
+            NSUInteger loopCount = [SDImageAWebPCoder imageLoopCountWithSource:imageSource];
             [self setProperty:NSImageLoopCount withValue:@(loopCount)];
         }
     }
@@ -77,13 +99,19 @@
             return;
         }
         NSUInteger index = [value unsignedIntegerValue];
-        float frameDuration = 0;
+        NSTimeInterval frameDuration = 0;
         if (CFStringCompare(type, kUTTypeGIF, 0) == kCFCompareEqualTo) {
             // GIF
-            frameDuration = [[SDImageGIFCoder sharedCoder] sd_frameDurationAtIndex:index source:imageSource];
+            frameDuration = [SDImageGIFCoder frameDurationAtIndex:index source:imageSource];
         } else if (CFStringCompare(type, kUTTypePNG, 0) == kCFCompareEqualTo) {
             // APNG
-            frameDuration = [[SDImageAPNGCoder sharedCoder] sd_frameDurationAtIndex:index source:imageSource];
+            frameDuration = [SDImageAPNGCoder frameDurationAtIndex:index source:imageSource];
+        } else if (CFStringCompare(type, kSDUTTypeHEICS, 0) == kCFCompareEqualTo) {
+            // HEIC
+            frameDuration = [SDImageHEICCoder frameDurationAtIndex:index source:imageSource];
+        } else if (CFStringCompare(type, kSDUTTypeWebP, 0) == kCFCompareEqualTo) {
+            // WebP
+            frameDuration = [SDImageAWebPCoder frameDurationAtIndex:index source:imageSource];
         }
         if (!frameDuration) {
             return;
@@ -92,6 +120,7 @@
         [super setProperty:NSImageCurrentFrameDuration withValue:@(frameDuration)];
     }
 }
+#pragma clang diagnostic pop
 
 @end
 

@@ -11,68 +11,74 @@ import Apollo
 
 class ErxesClient {
     static let shared = ErxesClient()
-    var widgetsApiUrlString = "http://localhost:3300"
-    var apiUrlString = "ws://localhost:3300"
 
-    func setupClient(widgetsApiUrl: String, apiUrlString: String) {
-        self.widgetsApiUrlString = widgetsApiUrl
-        self.apiUrlString = apiUrlString
+    var apiUrl = "http://localhost:3300"
+    var socketUrl = "ws://localhost:3300"
+    
+    func setupClient(apiUrlString: String) {
+        self.apiUrl = apiUrlString + "/graphql"
+        
+        if apiUrlString.contains("http") {
+            socketUrl = apiUrlString.replacingOccurrences(of: "http", with: "ws") + "/subscriptions"
+        } else if apiUrlString.contains("https") {
+            socketUrl = apiUrlString.replacingOccurrences(of: "https", with: "wss") + "/subscriptions"
+        }
     }
-
-
-    private lazy var networkTransport: HTTPNetworkTransport = {
-        let transport = HTTPNetworkTransport(url: URL(string: "\(widgetsApiUrlString)/graphql")!)
-        transport.delegate = self
-        return transport
+    
+    private lazy var webSocketTransport: WebSocketTransport = {
+        let url = URL(string: self.socketUrl)!
+        let request = URLRequest(url: url)
+        return WebSocketTransport(request: request)
     }()
-
-    private lazy var webSocket = WebSocketTransport(request: URLRequest(url: URL(string: "\(apiUrlString)/subscriptions")!), sendOperationIdentifiers: false, reconnectionInterval: 0.5, connectingPayload: nil)
-
-    private lazy var splitNetworkTransport = SplitNetworkTransport(httpNetworkTransport: self.networkTransport, webSocketNetworkTransport: self.webSocket)
-    private(set) lazy var client = ApolloClient(networkTransport: self.splitNetworkTransport)
-
-}
-
-extension ErxesClient: HTTPNetworkTransportPreflightDelegate {
-    func networkTransport(_ networkTransport: HTTPNetworkTransport, shouldSend request: URLRequest) -> Bool {
-        return true
-    }
-
-
-//  func networkTransport(_ networkTransport: HTTPNetworkTransport,
-//                          shouldSend request: URLRequest) -> Bool {
-//    // If there's an authenticated user, send the request. If not, don't.
-//    return UserManager.shared.hasAuthenticatedUser
-//  }
-
-    func networkTransport(_ networkTransport: HTTPNetworkTransport,
-                          willSend request: inout URLRequest) {
-
-        // Get the existing headers, or create new ones if they're nil
-        let headers = request.allHTTPHeaderFields ?? [String: String]()
-
-        // Add any new headers you need
-//    headers["Authorization"] = "Bearer \(UserManager.shared.currentAuthToken)"
-
-        // Re-assign the updated headers to the request.
-        request.allHTTPHeaderFields = headers
-
-      
-    }
+    
+    /// An HTTP transport to use for queries and mutations
+    private lazy var normalTransport: RequestChainNetworkTransport = {
+        let cache = InMemoryNormalizedCache()
+        let store = ApolloStore(cache: cache)
+        let url = URL(string: self.apiUrl)!
+        return RequestChainNetworkTransport(interceptorProvider: LegacyInterceptorProvider(store: store), endpointURL: url)
+    }()
+    
+    /// A split network transport to allow the use of both of the above
+    /// transports through a single `NetworkTransport` instance.
+    private lazy var splitNetworkTransport = SplitNetworkTransport(
+        uploadingNetworkTransport: self.normalTransport,
+        webSocketNetworkTransport: self.webSocketTransport
+    )
+    
+    private(set) lazy var client: ApolloClient = {
+        // The cache is necessary to set up the store, which we're going to hand to the provider
+        let cache = InMemoryNormalizedCache()
+        let store = ApolloStore(cache: cache)
+        return ApolloClient(networkTransport: splitNetworkTransport,
+                            store: store)
+    }()
 }
 
 
-
-
-
-extension ErxesClient: HTTPNetworkTransportTaskCompletedDelegate {
-    func networkTransport(_ networkTransport: HTTPNetworkTransport,
-                          didCompleteRawTaskForRequest request: URLRequest,
-                          withData data: Data?,
-                          response: URLResponse?,
-                          error: Error?) {
-
+struct NetworkInterceptorProvider: InterceptorProvider {
+    
+    // These properties will remain the same throughout the life of the `InterceptorProvider`, even though they
+    // will be handed to different interceptors.
+    private let store: ApolloStore
+    private let client: URLSessionClient
+    
+    init(store: ApolloStore,
+         client: URLSessionClient) {
+        self.store = store
+        self.client = client
+    }
+    
+    func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
+        return [
+            MaxRetryInterceptor(),
+            LegacyCacheReadInterceptor(store: self.store),
+            NetworkFetchInterceptor(client: self.client),
+            ResponseCodeInterceptor(),
+            LegacyParsingInterceptor(cacheKeyForObject: self.store.cacheKeyForObject),
+            AutomaticPersistedQueryInterceptor(),
+            LegacyCacheWriteInterceptor(store: self.store)
+        ]
     }
 }
-
 

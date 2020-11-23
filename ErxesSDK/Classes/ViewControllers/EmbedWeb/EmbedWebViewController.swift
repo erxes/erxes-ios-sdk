@@ -55,8 +55,8 @@ class EmbedWebViewController: AbstractViewController {
     }
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         header.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(64)

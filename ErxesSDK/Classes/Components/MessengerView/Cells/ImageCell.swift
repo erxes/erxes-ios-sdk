@@ -33,15 +33,15 @@ class ImageCell: BaseCells {
             if let attachment = attachments.first {
 
                 if let file = attachment {
-                    if let url: String = file.url {
+                    let url = file.url
                         if url.count != 0 {
-                            let imageURL = URL(string: url)
+                            let imageURL = URL(string: url.readFile())
                             indicator.startAnimating()
                             imageView.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder",in: Erxes.erxesBundle(), compatibleWith: nil), completed: { image, error, cacheType, imageUrl in
                                 self.indicator.stopAnimating()
                             })
                         }
-                    }
+                    
                 }
 
             }

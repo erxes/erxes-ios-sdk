@@ -77,6 +77,7 @@ class AuthtenticationViewModel {
     //MARK: -- Example Func
     func authenticate(type:String,value:String){
         self.service.authenticate(type: type, value: value, success: { (data) in
+            print("auth = ",data)
             self.didAuthenticate!(data)
         }) { (error) in
             self.serverErrorStatus!(error)

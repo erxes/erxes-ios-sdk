@@ -111,6 +111,14 @@ extension Optional: JSONEncodable {
   }
 }
 
+extension NSDictionary: JSONEncodable {
+  public var jsonValue: JSONValue { self }
+}
+
+extension NSNull: JSONEncodable {
+  public var jsonValue: JSONValue { self }
+}
+
 extension Dictionary: JSONEncodable {
   public var jsonValue: JSONValue {
     return jsonObject
@@ -129,9 +137,19 @@ extension Dictionary: JSONEncodable {
   }
 }
 
+extension Dictionary: JSONDecodable {
+    public init(jsonValue value: JSONValue) throws {
+        guard let dictionary = value as? Dictionary else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
+        }
+        
+        self = dictionary
+    }
+}
+
 extension Array: JSONEncodable {
   public var jsonValue: JSONValue {
-    return map() { element -> (JSONValue) in
+    return map { element -> JSONValue in
       if case let element as JSONEncodable = element {
         return element.jsonValue
       } else {

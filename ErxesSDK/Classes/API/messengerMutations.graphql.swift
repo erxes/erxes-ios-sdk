@@ -18,7 +18,7 @@ public final class ConnectMutation: GraphQLMutation {
 
   public let operationName: String = "connect"
 
-  public var queryDocument: String { return operationDefinition.appending(ConnectResponseModel.fragmentDefinition).appending(BrandModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + ConnectResponseModel.fragmentDefinition).appending("\n" + BrandModel.fragmentDefinition) }
 
   public var brandCode: String
   public var email: String?
@@ -47,9 +47,11 @@ public final class ConnectMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsMessengerConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "code": GraphQLVariable("code"), "isUser": GraphQLVariable("isUser"), "data": GraphQLVariable("data"), "companyData": GraphQLVariable("companyData"), "cachedCustomerId": GraphQLVariable("cachedCustomerId")], type: .object(WidgetsMessengerConnect.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("widgetsMessengerConnect", arguments: ["brandCode": GraphQLVariable("brandCode"), "email": GraphQLVariable("email"), "phone": GraphQLVariable("phone"), "code": GraphQLVariable("code"), "isUser": GraphQLVariable("isUser"), "data": GraphQLVariable("data"), "companyData": GraphQLVariable("companyData"), "cachedCustomerId": GraphQLVariable("cachedCustomerId")], type: .object(WidgetsMessengerConnect.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -73,10 +75,12 @@ public final class ConnectMutation: GraphQLMutation {
     public struct WidgetsMessengerConnect: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["MessengerConnectResponse"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(ConnectResponseModel.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(ConnectResponseModel.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -136,7 +140,7 @@ public final class WidgetsSaveBrowserInfoMutation: GraphQLMutation {
 
   public let operationName: String = "widgetsSaveBrowserInfo"
 
-  public var queryDocument: String { return operationDefinition.appending(MessageModel.fragmentDefinition).appending(UserModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + MessageModel.fragmentDefinition).appending("\n" + UserModel.fragmentDefinition) }
 
   public var customerId: String
   public var browserInfo: Scalar_JSON
@@ -153,9 +157,11 @@ public final class WidgetsSaveBrowserInfoMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsSaveBrowserInfo", arguments: ["customerId": GraphQLVariable("customerId"), "browserInfo": GraphQLVariable("browserInfo")], type: .object(WidgetsSaveBrowserInfo.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("widgetsSaveBrowserInfo", arguments: ["customerId": GraphQLVariable("customerId"), "browserInfo": GraphQLVariable("browserInfo")], type: .object(WidgetsSaveBrowserInfo.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -179,10 +185,12 @@ public final class WidgetsSaveBrowserInfoMutation: GraphQLMutation {
     public struct WidgetsSaveBrowserInfo: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ConversationMessage"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(MessageModel.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(MessageModel.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -242,7 +250,7 @@ public final class WidgetsInsertMessageMutation: GraphQLMutation {
 
   public let operationName: String = "widgetsInsertMessage"
 
-  public var queryDocument: String { return operationDefinition.appending(MessageModel.fragmentDefinition).appending(UserModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + MessageModel.fragmentDefinition).appending("\n" + UserModel.fragmentDefinition) }
 
   public var integrationId: String
   public var customerId: String
@@ -267,9 +275,11 @@ public final class WidgetsInsertMessageMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsInsertMessage", arguments: ["integrationId": GraphQLVariable("integrationId"), "customerId": GraphQLVariable("customerId"), "contentType": GraphQLVariable("contentType"), "message": GraphQLVariable("message"), "conversationId": GraphQLVariable("conversationId"), "attachments": GraphQLVariable("attachments")], type: .object(WidgetsInsertMessage.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("widgetsInsertMessage", arguments: ["integrationId": GraphQLVariable("integrationId"), "customerId": GraphQLVariable("customerId"), "contentType": GraphQLVariable("contentType"), "message": GraphQLVariable("message"), "conversationId": GraphQLVariable("conversationId"), "attachments": GraphQLVariable("attachments")], type: .object(WidgetsInsertMessage.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -293,10 +303,12 @@ public final class WidgetsInsertMessageMutation: GraphQLMutation {
     public struct WidgetsInsertMessage: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ConversationMessage"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(MessageModel.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(MessageModel.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -366,9 +378,11 @@ public final class WidgetsReadConversationMessagesMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsReadConversationMessages", arguments: ["conversationId": GraphQLVariable("conversationId")], type: .scalar(Scalar_JSON.self)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("widgetsReadConversationMessages", arguments: ["conversationId": GraphQLVariable("conversationId")], type: .scalar(Scalar_JSON.self)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -419,9 +433,11 @@ public final class WidgetsSaveCustomerGetNotifiedMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Mutation"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("widgetsSaveCustomerGetNotified", arguments: ["customerId": GraphQLVariable("customerId"), "type": GraphQLVariable("type"), "value": GraphQLVariable("value")], type: .scalar(Scalar_JSON.self)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("widgetsSaveCustomerGetNotified", arguments: ["customerId": GraphQLVariable("customerId"), "type": GraphQLVariable("type"), "value": GraphQLVariable("value")], type: .scalar(Scalar_JSON.self)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -464,15 +480,17 @@ public struct ConnectResponseModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["MessengerConnectResponse"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("integrationId", type: .scalar(String.self)),
-    GraphQLField("messengerData", type: .scalar(Scalar_JSON.self)),
-    GraphQLField("languageCode", type: .scalar(String.self)),
-    GraphQLField("uiOptions", type: .scalar(Scalar_JSON.self)),
-    GraphQLField("customerId", type: .scalar(String.self)),
-    GraphQLField("brand", type: .object(Brand.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("integrationId", type: .scalar(String.self)),
+      GraphQLField("messengerData", type: .scalar(Scalar_JSON.self)),
+      GraphQLField("languageCode", type: .scalar(String.self)),
+      GraphQLField("uiOptions", type: .scalar(Scalar_JSON.self)),
+      GraphQLField("customerId", type: .scalar(String.self)),
+      GraphQLField("brand", type: .object(Brand.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -550,10 +568,12 @@ public struct ConnectResponseModel: GraphQLFragment {
   public struct Brand: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Brand"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(BrandModel.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(BrandModel.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -616,12 +636,14 @@ public struct BrandModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["Brand"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("_id", type: .nonNull(.scalar(String.self))),
-    GraphQLField("name", type: .scalar(String.self)),
-    GraphQLField("description", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+      GraphQLField("name", type: .scalar(String.self)),
+      GraphQLField("description", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -714,22 +736,24 @@ public struct MessageModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["ConversationMessage"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("_id", type: .nonNull(.scalar(String.self))),
-    GraphQLField("customerId", type: .scalar(String.self)),
-    GraphQLField("conversationId", type: .scalar(String.self)),
-    GraphQLField("user", type: .object(User.selections)),
-    GraphQLField("content", type: .scalar(String.self)),
-    GraphQLField("createdAt", type: .scalar(Scalar_Date.self)),
-    GraphQLField("internal", type: .scalar(Bool.self)),
-    GraphQLField("fromBot", type: .scalar(Bool.self)),
-    GraphQLField("contentType", type: .scalar(String.self)),
-    GraphQLField("videoCallData", type: .object(VideoCallDatum.selections)),
-    GraphQLField("engageData", type: .object(EngageDatum.selections)),
-    GraphQLField("messengerAppData", type: .scalar(Scalar_JSON.self)),
-    GraphQLField("attachments", type: .list(.object(Attachment.selections))),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+      GraphQLField("customerId", type: .scalar(String.self)),
+      GraphQLField("conversationId", type: .scalar(String.self)),
+      GraphQLField("user", type: .object(User.selections)),
+      GraphQLField("content", type: .scalar(String.self)),
+      GraphQLField("createdAt", type: .scalar(Scalar_Date.self)),
+      GraphQLField("internal", type: .scalar(Bool.self)),
+      GraphQLField("fromBot", type: .scalar(Bool.self)),
+      GraphQLField("contentType", type: .scalar(String.self)),
+      GraphQLField("videoCallData", type: .object(VideoCallDatum.selections)),
+      GraphQLField("engageData", type: .object(EngageDatum.selections)),
+      GraphQLField("messengerAppData", type: .scalar(Scalar_JSON.self)),
+      GraphQLField("attachments", type: .list(.object(Attachment.selections))),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -870,10 +894,12 @@ public struct MessageModel: GraphQLFragment {
   public struct User: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["User"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(UserModel.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(UserModel.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -920,11 +946,13 @@ public struct MessageModel: GraphQLFragment {
   public struct VideoCallDatum: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["VideoCallData"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("url", type: .scalar(String.self)),
-      GraphQLField("status", type: .scalar(String.self)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("url", type: .scalar(String.self)),
+        GraphQLField("status", type: .scalar(String.self)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -967,14 +995,16 @@ public struct MessageModel: GraphQLFragment {
   public struct EngageDatum: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["EngageData"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("content", type: .scalar(String.self)),
-      GraphQLField("kind", type: .scalar(String.self)),
-      GraphQLField("sentAs", type: .scalar(String.self)),
-      GraphQLField("messageId", type: .scalar(String.self)),
-      GraphQLField("brandId", type: .scalar(String.self)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("content", type: .scalar(String.self)),
+        GraphQLField("kind", type: .scalar(String.self)),
+        GraphQLField("sentAs", type: .scalar(String.self)),
+        GraphQLField("messageId", type: .scalar(String.self)),
+        GraphQLField("brandId", type: .scalar(String.self)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1044,13 +1074,15 @@ public struct MessageModel: GraphQLFragment {
   public struct Attachment: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Attachment"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("url", type: .nonNull(.scalar(String.self))),
-      GraphQLField("name", type: .scalar(String.self)),
-      GraphQLField("size", type: .scalar(Double.self)),
-      GraphQLField("type", type: .nonNull(.scalar(String.self))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("url", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .scalar(String.self)),
+        GraphQLField("size", type: .scalar(Double.self)),
+        GraphQLField("type", type: .nonNull(.scalar(String.self))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 

@@ -18,6 +18,24 @@ extension NSMutableAttributedString {
 
 
 extension String {
+    
+    func isValidURL (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+    }
+    
+    func readFile() -> String{
+        
+        if (isValidURL(urlString: self) || self.contains("/")) {
+            return self;
+        }
+        
+        return "\(API_URL)/read-file?key=\(self)";
+    }
 
     func widthOfString(usingFont font: UIFont) -> CGFloat {
         let fontAttributes = [NSAttributedString.Key.font: font]
@@ -27,10 +45,8 @@ extension String {
 
     var html2Attributed: NSMutableAttributedString? {
         do {
-            guard let data:Data = Data(self.utf8),( self.count != 0) else {
-                return nil
-            }
-            
+            let data = Data(self.utf8)
+          
             return try NSMutableAttributedString(data: data,
                                                  options: [.documentType: NSMutableAttributedString.DocumentType.html,
                                                                .characterEncoding: String.Encoding.utf8.rawValue],
