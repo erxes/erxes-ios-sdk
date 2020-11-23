@@ -72,7 +72,6 @@ class NetworkManager {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             let targetURL = self?.addURLQueryParameters(toURL: url)
             guard let boundary = self?.createBoundary() else { completion(Results(withError: CustomError.failedToCreateBoundary), nil); return }
-            print(boundary)
             self?.requestHttpHeaders.add(value: "multipart/form-data; boundary=\(boundary)", forKey: "content-type")
             
             guard var body = self?.getHttpBody(withBoundary: boundary) else { completion(Results(withError: CustomError.failedToCreateHttpBody), nil); return }

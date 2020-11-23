@@ -48,7 +48,7 @@ class HomeService: HomeServiceProtocol {
             case .success(let graphQLResult):
 
                 if let response = graphQLResult.data?.widgetsConversations?.compactMap({ $0?.fragments.conversationModel }) {
-                    print("res = ",response)
+ 
                     success(response)
                 }
 

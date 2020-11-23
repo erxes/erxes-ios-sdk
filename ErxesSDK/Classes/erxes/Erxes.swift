@@ -148,13 +148,13 @@ var brand: BrandModel?
         mutation?.phone = customerPhoneNumber
         
         ErxesClient.shared.client.perform(mutation: mutation!) { result in
-            print("result = ",result)
+          
             switch result {
             
             case .success(let graphQLResult):
                 if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
                     integrationId = responseModel.integrationId
-                    print("INTEGRATION ID = ",integrationId)
+                    
                     customerId = responseModel.customerId
                     storeCustomerId(value: responseModel.customerId!)
                     if let messengerDataJson = responseModel.messengerData {
