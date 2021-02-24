@@ -168,9 +168,11 @@ extension MessengerView: UICollectionViewDelegateFlowLayout {
 extension MessengerView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
+        if ((textField.text != nil) && textField.text!.count > 0) {
+            self.viewModel.insertMessage(customerId: customerId, visitorId: visitorId, message: textField.text, attachments: nil, conversationId: conversationId)
+            textField.text = ""
+        }
         
-        self.viewModel.insertMessage(customerId: customerId, message: textField.text, attachments: nil, conversationId: conversationId)
-        textField.text = ""
         return true
     }
 }

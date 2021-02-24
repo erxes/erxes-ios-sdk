@@ -96,8 +96,8 @@ class MessengerViewModel {
         }
     }
 
-    func insertMessage(customerId: String, message: String?, attachments: [AttachmentInput]?, conversationId: String?, contentType: String? = "text") {
-        self.service.insertMessage(customerId: customerId, message: message, attachments: attachments, conversationId: conversationId, contentType: contentType!, success: { (data) in
+    func insertMessage(customerId: String?, visitorId: String?, message: String?, attachments: [AttachmentInput]?, conversationId: String?, contentType: String? = "text") {
+        self.service.insertMessage(customerId: customerId,visitorId: visitorId, message: message, attachments: attachments, conversationId: conversationId, contentType: contentType!, success: { (data) in
             self.didReceiveMessage!(data)
         }) { (error) in
             self.serverErrorStatus!(error)

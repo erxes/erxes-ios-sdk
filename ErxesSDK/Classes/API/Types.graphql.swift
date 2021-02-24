@@ -13,8 +13,9 @@ public struct FieldValueInput: GraphQLMapConvertible {
   ///   - validation
   ///   - text
   ///   - value
-  public init(_id: String, type: Swift.Optional<String?> = nil, validation: Swift.Optional<String?> = nil, text: Swift.Optional<String?> = nil, value: Swift.Optional<String?> = nil) {
-    graphQLMap = ["_id": _id, "type": type, "validation": validation, "text": text, "value": value]
+  ///   - associatedFieldId
+  public init(_id: String, type: Swift.Optional<String?> = nil, validation: Swift.Optional<String?> = nil, text: Swift.Optional<String?> = nil, value: Swift.Optional<String?> = nil, associatedFieldId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["_id": _id, "type": type, "validation": validation, "text": text, "value": value, "associatedFieldId": associatedFieldId]
   }
 
   public var _id: String {
@@ -59,6 +60,15 @@ public struct FieldValueInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "value")
+    }
+  }
+
+  public var associatedFieldId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["associatedFieldId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "associatedFieldId")
     }
   }
 }

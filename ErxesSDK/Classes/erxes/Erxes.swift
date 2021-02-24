@@ -18,6 +18,7 @@ let SCREEN_HEIGHT = screenSize.height
 
 
 var customerId: String!
+var visitorId: String!
 var brandCode: String!
 var integrationId: String!
 var formCode: String!
@@ -35,6 +36,10 @@ var messengerData: MessengerData?
 var leadData: LeadData?
 var uiOptions: UIOptions?
 var brand: BrandModel?
+
+func clearVisitorId(){
+    visitorId = nil
+}
 
 @objc public class Erxes: NSObject {
     
@@ -67,6 +72,10 @@ var brand: BrandModel?
         UserDefaults().synchronize()
     }
     
+    static func getVisitorId() -> String{
+        return UIDevice.current.identifierForVendor!.uuidString
+    }
+    
     static func restore() {
         let defaults = UserDefaults()
         
@@ -83,6 +92,8 @@ var brand: BrandModel?
         
         if let customerid = defaults.string(forKey: "customerId") {
             customerId = customerid
+        }else {
+            visitorId = getVisitorId()
         }
     }
     
@@ -108,7 +119,6 @@ var brand: BrandModel?
     }
     
     @objc public static func setupSaas(companyName: String, brandId: String) {
-        
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
         IQKeyboardManager.shared.enable = true
@@ -121,7 +131,7 @@ var brand: BrandModel?
         brandCode = brandId
         ErxesClient.shared.setupClient(apiUrlString: API_URL)
         
-        let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+        let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId, visitorId: visitorId)
         connect(mutation: mutation)
         
     }
@@ -135,7 +145,7 @@ var brand: BrandModel?
         sender = senderView
         if (integrationId != nil) || (customerId != nil) {
           
-            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId, visitorId: visitorId)
             connect(mutation: mutation)
         }
     }
@@ -146,6 +156,8 @@ var brand: BrandModel?
         mutation?.data = customData
         mutation?.email = customerEmail
         mutation?.phone = customerPhoneNumber
+        mutation?.visitorId = visitorId
+        mutation?.cachedCustomerId = customerId
         
         ErxesClient.shared.client.perform(mutation: mutation!) { result in
           
@@ -155,8 +167,10 @@ var brand: BrandModel?
                 if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
                     integrationId = responseModel.integrationId
                     
-                    customerId = responseModel.customerId
-                    storeCustomerId(value: responseModel.customerId!)
+                    if let customerId = responseModel.customerId {
+                        storeCustomerId(value: customerId)
+                    }
+                    
                     if let messengerDataJson = responseModel.messengerData {
                         do {
                             messengerData = try MessengerData(from: messengerDataJson) { decoder in
@@ -193,7 +207,7 @@ var brand: BrandModel?
     
     @objc private static func saveBrowserInfo() {
         let browserInfo = ["userAgent": UIDevice.modelName]
-        let mutation = WidgetsSaveBrowserInfoMutation(customerId: customerId, browserInfo: browserInfo)
+        let mutation = WidgetsSaveBrowserInfoMutation(customerId: customerId, visitorId: getVisitorId(), browserInfo: browserInfo)
         
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             
@@ -225,7 +239,7 @@ var brand: BrandModel?
     @objc public static func start() {
 
         if integrationId == nil || integrationId.count == 0  {
-            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+            let mutation = ConnectMutation(brandCode: brandCode)
             connect(mutation: mutation)
         } else {
             openErxes()
@@ -252,7 +266,7 @@ var brand: BrandModel?
         }
         
         if integrationId == nil || integrationId.count == 0 {
-            let mutation = ConnectMutation(brandCode: brandCode, cachedCustomerId: customerId)
+            let mutation = ConnectMutation(brandCode: brandCode)
             connect(mutation: mutation)
         } else {
             openErxes()
@@ -333,10 +347,10 @@ var brand: BrandModel?
         defaults.synchronize()
         customerEmail = ""
         customerPhoneNumber = ""
-        customerId = ""
+        customerId = nil
         integrationId = ""
         IQKeyboardManager.shared.enable = false
-       
+        visitorId = getVisitorId()
         completionHandler()
     }
     

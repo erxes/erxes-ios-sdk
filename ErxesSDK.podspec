@@ -1,6 +1,6 @@
 Pod::Spec.new do|spec|
   spec.name='ErxesSDK'
-  spec.version='0.20.0'
+  spec.version='0.20.1'
   spec.summary='A short description of erxes-ios-sdk.'
   spec.swift_version='5.3'
   spec.description='erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/'

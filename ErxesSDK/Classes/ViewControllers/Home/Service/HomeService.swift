@@ -21,7 +21,7 @@ class HomeService: HomeServiceProtocol {
 
             case .success(let graphQLResult):
 
-                if let response = graphQLResult.data?.widgetsMessengerSupporters?.fragments.messengerSupportersModel.supporters?.compactMap({$0?.fragments.userModel}) {
+                if let response = graphQLResult.data?.widgetsMessengerSupporters?.supporters?.compactMap({$0?.fragments.userModel}) {
                     success(response)
                 }
                 
@@ -39,8 +39,8 @@ class HomeService: HomeServiceProtocol {
 
     func widgetsConversations(success: @escaping ([ConversationModel]) -> (), failure: @escaping (String) -> ()) {
 
-        let query = WidgetsConversationsQuery(integrationId: integrationId, customerId: customerId)
-
+        let query = WidgetsConversationsQuery(integrationId: integrationId, customerId: customerId, visitorId: visitorId)
+  
         ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheCompletely) { result in
 
             switch result {
@@ -48,7 +48,6 @@ class HomeService: HomeServiceProtocol {
             case .success(let graphQLResult):
 
                 if let response = graphQLResult.data?.widgetsConversations?.compactMap({ $0?.fragments.conversationModel }) {
- 
                     success(response)
                 }
 

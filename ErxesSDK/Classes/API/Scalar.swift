@@ -63,6 +63,10 @@ struct MessengerData: Decodable {
     let formCode: String?
 }
 
+struct BodData: Decodable {
+    let text: String?
+}
+
 
 struct SocialLinks: Decodable {
     let twitter: String?

@@ -18,7 +18,7 @@ public final class ConversationMessageInsertedSubscription: GraphQLSubscription 
 
   public let operationName: String = "conversationMessageInserted"
 
-  public var queryDocument: String { return operationDefinition.appending("\n" + MessageModel.fragmentDefinition).appending("\n" + UserModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(MessageModel.fragmentDefinition).appending(UserModel.fragmentDefinition) }
 
   public var id: String
 
@@ -33,11 +33,9 @@ public final class ConversationMessageInsertedSubscription: GraphQLSubscription 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Subscription"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("conversationMessageInserted", arguments: ["_id": GraphQLVariable("id")], type: .object(ConversationMessageInserted.selections)),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("conversationMessageInserted", arguments: ["_id": GraphQLVariable("id")], type: .object(ConversationMessageInserted.selections)),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -61,12 +59,10 @@ public final class ConversationMessageInsertedSubscription: GraphQLSubscription 
     public struct ConversationMessageInserted: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ConversationMessage"]
 
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(MessageModel.self),
-        ]
-      }
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(MessageModel.self),
+      ]
 
       public private(set) var resultMap: ResultMap
 
@@ -126,7 +122,7 @@ public final class ConversationAdminMessageInsertedSubscription: GraphQLSubscrip
 
   public let operationName: String = "conversationAdminMessageInserted"
 
-  public var queryDocument: String { return operationDefinition.appending("\n" + ConversationAdminMessageInsertedModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(ConversationAdminMessageInsertedModel.fragmentDefinition) }
 
   public var customerId: String
 
@@ -141,11 +137,9 @@ public final class ConversationAdminMessageInsertedSubscription: GraphQLSubscrip
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Subscription"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("conversationAdminMessageInserted", arguments: ["customerId": GraphQLVariable("customerId")], type: .object(ConversationAdminMessageInserted.selections)),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("conversationAdminMessageInserted", arguments: ["customerId": GraphQLVariable("customerId")], type: .object(ConversationAdminMessageInserted.selections)),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -169,12 +163,10 @@ public final class ConversationAdminMessageInsertedSubscription: GraphQLSubscrip
     public struct ConversationAdminMessageInserted: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ConversationAdminMessageInsertedResponse"]
 
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(ConversationAdminMessageInsertedModel.self),
-        ]
-      }
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(ConversationAdminMessageInsertedModel.self),
+      ]
 
       public private(set) var resultMap: ResultMap
 
@@ -182,7 +174,7 @@ public final class ConversationAdminMessageInsertedSubscription: GraphQLSubscrip
         self.resultMap = unsafeResultMap
       }
 
-      public init(customerId: String, unreadCount: Int? = nil) {
+      public init(customerId: String? = nil, unreadCount: Int? = nil) {
         self.init(unsafeResultMap: ["__typename": "ConversationAdminMessageInsertedResponse", "customerId": customerId, "unreadCount": unreadCount])
       }
 
@@ -237,13 +229,11 @@ public struct ConversationAdminMessageInsertedModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["ConversationAdminMessageInsertedResponse"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("customerId", type: .nonNull(.scalar(String.self))),
-      GraphQLField("unreadCount", type: .scalar(Int.self)),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("customerId", type: .scalar(String.self)),
+    GraphQLField("unreadCount", type: .scalar(Int.self)),
+  ]
 
   public private(set) var resultMap: ResultMap
 
@@ -251,7 +241,7 @@ public struct ConversationAdminMessageInsertedModel: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(customerId: String, unreadCount: Int? = nil) {
+  public init(customerId: String? = nil, unreadCount: Int? = nil) {
     self.init(unsafeResultMap: ["__typename": "ConversationAdminMessageInsertedResponse", "customerId": customerId, "unreadCount": unreadCount])
   }
 
@@ -264,9 +254,9 @@ public struct ConversationAdminMessageInsertedModel: GraphQLFragment {
     }
   }
 
-  public var customerId: String {
+  public var customerId: String? {
     get {
-      return resultMap["customerId"]! as! String
+      return resultMap["customerId"] as? String
     }
     set {
       resultMap.updateValue(newValue, forKey: "customerId")

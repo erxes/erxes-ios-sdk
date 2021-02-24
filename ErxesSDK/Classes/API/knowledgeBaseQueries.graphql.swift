@@ -18,7 +18,7 @@ public final class KnowledgeBaseTopicDetailQuery: GraphQLQuery {
 
   public let operationName: String = "knowledgeBaseTopicDetail"
 
-  public var queryDocument: String { return operationDefinition.appending("\n" + KnowledgeBaseTopicModel.fragmentDefinition).appending("\n" + KnowledgeBaseCategoryModel.fragmentDefinition).appending("\n" + KbArticleModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(KnowledgeBaseTopicModel.fragmentDefinition).appending(KnowledgeBaseCategoryModel.fragmentDefinition).appending(KbArticleModel.fragmentDefinition) }
 
   public var id: String
 
@@ -33,11 +33,9 @@ public final class KnowledgeBaseTopicDetailQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("knowledgeBaseTopicDetail", arguments: ["_id": GraphQLVariable("id")], type: .object(KnowledgeBaseTopicDetail.selections)),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("knowledgeBaseTopicDetail", arguments: ["_id": GraphQLVariable("id")], type: .object(KnowledgeBaseTopicDetail.selections)),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -61,12 +59,10 @@ public final class KnowledgeBaseTopicDetailQuery: GraphQLQuery {
     public struct KnowledgeBaseTopicDetail: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["KnowledgeBaseTopic"]
 
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(KnowledgeBaseTopicModel.self),
-        ]
-      }
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(KnowledgeBaseTopicModel.self),
+      ]
 
       public private(set) var resultMap: ResultMap
 
@@ -126,7 +122,7 @@ public final class KnowledgeBaseCategoryDetailQuery: GraphQLQuery {
 
   public let operationName: String = "knowledgeBaseCategoryDetail"
 
-  public var queryDocument: String { return operationDefinition.appending("\n" + KbModel.fragmentDefinition).appending("\n" + KbArticleModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(KbModel.fragmentDefinition).appending(KbArticleModel.fragmentDefinition) }
 
   public var id: String
 
@@ -141,11 +137,9 @@ public final class KnowledgeBaseCategoryDetailQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("knowledgeBaseCategoryDetail", arguments: ["_id": GraphQLVariable("id")], type: .object(KnowledgeBaseCategoryDetail.selections)),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("knowledgeBaseCategoryDetail", arguments: ["_id": GraphQLVariable("id")], type: .object(KnowledgeBaseCategoryDetail.selections)),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -169,12 +163,10 @@ public final class KnowledgeBaseCategoryDetailQuery: GraphQLQuery {
     public struct KnowledgeBaseCategoryDetail: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["KnowledgeBaseCategory"]
 
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(KbModel.self),
-        ]
-      }
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(KbModel.self),
+      ]
 
       public private(set) var resultMap: ResultMap
 
@@ -237,14 +229,12 @@ public struct KnowledgeBaseTopicModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["KnowledgeBaseTopic"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("title", type: .scalar(String.self)),
-      GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("categories", type: .list(.object(Category.selections))),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("title", type: .scalar(String.self)),
+    GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("categories", type: .list(.object(Category.selections))),
+  ]
 
   public private(set) var resultMap: ResultMap
 
@@ -295,12 +285,10 @@ public struct KnowledgeBaseTopicModel: GraphQLFragment {
   public struct Category: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["KnowledgeBaseCategory"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(KnowledgeBaseCategoryModel.self),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(KnowledgeBaseCategoryModel.self),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -365,17 +353,15 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["KnowledgeBaseCategory"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("_id", type: .scalar(String.self)),
-      GraphQLField("title", type: .scalar(String.self)),
-      GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("numOfArticles", type: .scalar(Double.self)),
-      GraphQLField("icon", type: .scalar(String.self)),
-      GraphQLField("articles", type: .list(.object(Article.selections))),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("_id", type: .scalar(String.self)),
+    GraphQLField("title", type: .scalar(String.self)),
+    GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("numOfArticles", type: .scalar(Double.self)),
+    GraphQLField("icon", type: .scalar(String.self)),
+    GraphQLField("articles", type: .list(.object(Article.selections))),
+  ]
 
   public private(set) var resultMap: ResultMap
 
@@ -453,12 +439,10 @@ public struct KnowledgeBaseCategoryModel: GraphQLFragment {
   public struct Article: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["KnowledgeBaseArticle"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(KbArticleModel.self),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(KbArticleModel.self),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -527,17 +511,15 @@ public struct KbModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["KnowledgeBaseCategory"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("_id", type: .scalar(String.self)),
-      GraphQLField("title", type: .scalar(String.self)),
-      GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("numOfArticles", type: .scalar(Double.self)),
-      GraphQLField("icon", type: .scalar(String.self)),
-      GraphQLField("articles", type: .list(.object(Article.selections))),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("_id", type: .scalar(String.self)),
+    GraphQLField("title", type: .scalar(String.self)),
+    GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("numOfArticles", type: .scalar(Double.self)),
+    GraphQLField("icon", type: .scalar(String.self)),
+    GraphQLField("articles", type: .list(.object(Article.selections))),
+  ]
 
   public private(set) var resultMap: ResultMap
 
@@ -615,12 +597,10 @@ public struct KbModel: GraphQLFragment {
   public struct Article: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["KnowledgeBaseArticle"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(KbArticleModel.self),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(KbArticleModel.self),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -685,16 +665,14 @@ public struct KbArticleModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["KnowledgeBaseArticle"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("_id", type: .scalar(String.self)),
-      GraphQLField("title", type: .scalar(String.self)),
-      GraphQLField("summary", type: .scalar(String.self)),
-      GraphQLField("content", type: .scalar(String.self)),
-      GraphQLField("createdDate", type: .scalar(Scalar_Date.self)),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("_id", type: .scalar(String.self)),
+    GraphQLField("title", type: .scalar(String.self)),
+    GraphQLField("summary", type: .scalar(String.self)),
+    GraphQLField("content", type: .scalar(String.self)),
+    GraphQLField("createdDate", type: .scalar(Scalar_Date.self)),
+  ]
 
   public private(set) var resultMap: ResultMap
 

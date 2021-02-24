@@ -80,6 +80,7 @@ class ConversationsView: UIView {
             make.height.equalTo((conversations.count + 1) * 70)
             make.bottom.equalToSuperview()
         }
+
         tableView.reloadData()
     }
 

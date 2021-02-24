@@ -179,8 +179,10 @@ class HomeView: AbstractViewController {
         self.viewModel.getConversations()
         self.containerView.bringSubviewToFront(segmentContainer)
         self.scrollView.setContentOffset(CGPoint(x: 0, y: -scrollInsetHeight), animated: true)
+
         if customerId != nil {
             self.viewModel.subscribe(customerId: customerId)
+            self.viewModel.getConversations()
         }
 
         if knowledgeBaseTableView.alpha == 0 {

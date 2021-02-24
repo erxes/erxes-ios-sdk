@@ -146,7 +146,7 @@ class NormalHeaderView: UIView {
     }
     
     @objc func backAction(sender: UIButton) {
- 
+    
         if let handle = backButtonHandler {
    
             handle()

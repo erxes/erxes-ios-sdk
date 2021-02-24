@@ -15,12 +15,13 @@ class MessengerService: MessengerServiceProtocol {
         let query = WidgetsConversationDetailQuery(_id: conversationId, integrationId: integrationId)
       
         ErxesClient.shared.client.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
-        
+
             switch result {
                 
             case .success(let graphQLResult):
 
                 if let response = graphQLResult.data?.widgetsConversationDetail?.fragments.conversationDetailModel{
+                    
                     success(response)
                 }
 
@@ -45,7 +46,7 @@ class MessengerService: MessengerServiceProtocol {
                 
             case .success(let graphQLResult):
                 
-                if let response = graphQLResult.data?.widgetsMessengerSupporters?.fragments.messengerSupportersModel.supporters?.compactMap({$0?.fragments.userModel}) {
+                if let response = graphQLResult.data?.widgetsMessengerSupporters?.supporters?.compactMap({$0?.fragments.userModel}) {
                     success(response)
                 }
 //                
@@ -61,12 +62,13 @@ class MessengerService: MessengerServiceProtocol {
         }
     }
     
-    func insertMessage(customerId: String, message: String?, attachments: [AttachmentInput]?, conversationId: String?, contentType:String,success: @escaping (MessageModel) -> (), failure: @escaping (String) -> ()) {
+    func insertMessage(customerId: String?, visitorId: String?, message: String?, attachments: [AttachmentInput]?, conversationId: String?, contentType:String,success: @escaping (MessageModel) -> (), failure: @escaping (String) -> ()) {
         let mutation = WidgetsInsertMessageMutation(integrationId: integrationId, customerId: customerId)
         mutation.attachments = attachments
         mutation.message = message
         mutation.conversationId = conversationId
         mutation.contentType = contentType
+        mutation.visitorId = visitorId
         
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             
@@ -75,7 +77,9 @@ class MessengerService: MessengerServiceProtocol {
             case .success(let graphQLResult):
                 
                 if let response = graphQLResult.data?.widgetsInsertMessage?.fragments.messageModel {
-                    
+                    UserDefaults().set(response.customerId, forKey: "customerId")
+                    UserDefaults().synchronize()
+                    clearVisitorId()
                     success(response)
                 }
                 

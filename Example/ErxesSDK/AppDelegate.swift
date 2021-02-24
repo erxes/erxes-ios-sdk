@@ -13,9 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Erxes.setupSaas(companyName: "companyName", brandId: "brandCode")
        
         //if you are OpenSource user you can setup as following
-//        Erxes.setup(erxesApiUrl: "http://c38134f7ae61.ngrok.io", brandId: "iGHfGX")
-//        Erxes.setup(erxesApiUrl: "https://api.office.erxes.io", brandId: "5fkS4v")
-        Erxes.setup(erxesApiUrl: "https://erxesappapi.golomtbank.com", brandId: "H7AQbY")
+
+        Erxes.setup(erxesApiUrl: "http://localhost:3300", brandId: "ga8K58")
         
         return true
     }

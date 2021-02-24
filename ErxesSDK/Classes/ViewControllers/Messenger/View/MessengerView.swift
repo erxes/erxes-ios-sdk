@@ -15,7 +15,23 @@ class MessengerView: AbstractViewController {
 
     // OUTLETS HERE
     var messengerHeader = MessengerHeader()
-
+    
+    let backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage.erxes(with: .leftarrow3, textColor: .white, size: CGSize(width: 27, height: 27)), for: .normal)
+        button.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        return button
+    }()
+    
+    let moreButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "ic_more",in: Erxes.erxesBundle(), compatibleWith: nil), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 0)
+        button.imageView!.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(moreAction(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var picker = FusumaViewController()
     lazy var cameraPicker = FusumaViewController()
     lazy var flowLayout: MessengerFlowLayout = {
@@ -127,6 +143,8 @@ class MessengerView: AbstractViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHandler), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.containerView.addSubview(messengerHeader)
         self.containerView.addSubview(textField)
+        self.containerView.addSubview(backButton)
+        self.containerView.addSubview(moreButton)
         self.setupViewModel()
 
 
@@ -155,20 +173,17 @@ class MessengerView: AbstractViewController {
 
         picker.allowMultipleSelection = false
         cameraPicker.allowMultipleSelection = false
-        self.messengerHeader.backButtonHandler = {
-            self.navigationController?.popViewController(animated: true)
-        }
+    }
+    
+    @objc func backAction() {
 
-        self.messengerHeader.moreButtonHandler = {
-            self.view.endEditing(true)
-            self.moreAction(sender: self.messengerHeader.moreButton)
-        }
-
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
+       
         if (conversationId != nil) {
             self.viewModel.conversationDetail(conversationId: conversationId)
             self.viewModel.subscribe(conversationId: conversationId!)
@@ -188,8 +203,7 @@ class MessengerView: AbstractViewController {
     fileprivate func setupViewModel() {
 
         self.viewModel.showAlertClosure = {
-            let alert = self.viewModel.alertMessage ?? ""
-       
+
         }
 
         self.viewModel.updateLoadingStatus = {
@@ -210,10 +224,12 @@ class MessengerView: AbstractViewController {
             // show UI Server is Error
         }
 
-        self.viewModel.didGetConversationDetail = { conversationDetail in
+        self.viewModel.didGetConversationDetail = {  conversationDetail in
 
-            self.messages = conversationDetail.messages?.compactMap({ $0?.fragments.messageModel }) as! [MessageModel]
+            self.messages = conversationDetail.messages?.compactMap({ $0?.fragments.messageModel }) ?? []
 
+            self.messages = self.messages.filter({$0.botData == nil})
+            
             self.collectionView.reloadData()
             self.forceScrollToBottom()
         }
@@ -243,6 +259,10 @@ class MessengerView: AbstractViewController {
 
         self.viewModel.didReceiveMessage = { data in
 
+            if ((data.customerId != nil) && (customerId == nil)) {
+                customerId = data.customerId
+            }
+            
             if (self.conversationId == nil) || self.conversationId?.count == 0 {
                 self.conversationId = data.conversationId!
 
@@ -279,6 +299,18 @@ class MessengerView: AbstractViewController {
             make.left.right.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(40)
+        }
+        
+        backButton.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(8)
+            make.top.equalToSuperview().offset(10)
+            make.width.height.equalTo(44)
+        }
+        
+        moreButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-8)
+            make.top.equalToSuperview().offset(10)
+            make.width.height.equalTo(44)
         }
     }
 
@@ -329,7 +361,7 @@ class MessengerView: AbstractViewController {
 
     @objc func callAction(sender: UIButton) {
 
-        self.viewModel.insertMessage(customerId: customerId, message: "", attachments: nil, conversationId: conversationId, contentType: "videoCallRequest")
+        self.viewModel.insertMessage(customerId: customerId, visitorId: visitorId, message: "", attachments: nil, conversationId: conversationId, contentType: "videoCallRequest")
         textField.text = ""
     }
 
@@ -454,7 +486,7 @@ extension MessengerView: AttachmentUploadDelegate {
                 uploadView.removeFromSuperview()
             }
 
-            self.viewModel.insertMessage(customerId: customerId, message: nil, attachments: [file], conversationId: self.conversationId)
+            self.viewModel.insertMessage(customerId: customerId, visitorId: visitorId, message: nil, attachments: [file], conversationId: self.conversationId)
             self.textField.text = ""
         }
 

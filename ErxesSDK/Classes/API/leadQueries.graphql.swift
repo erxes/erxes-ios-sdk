@@ -18,7 +18,7 @@ public final class FormDetailQuery: GraphQLQuery {
 
   public let operationName: String = "formDetail"
 
-  public var queryDocument: String { return operationDefinition.appending("\n" + FormModel.fragmentDefinition).appending("\n" + FieldModel.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending(FormModel.fragmentDefinition).appending(FieldModel.fragmentDefinition) }
 
   public var _id: String
 
@@ -33,11 +33,9 @@ public final class FormDetailQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Query"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("formDetail", arguments: ["_id": GraphQLVariable("_id")], type: .object(FormDetail.selections)),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("formDetail", arguments: ["_id": GraphQLVariable("_id")], type: .object(FormDetail.selections)),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -61,12 +59,10 @@ public final class FormDetailQuery: GraphQLQuery {
     public struct FormDetail: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Form"]
 
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(FormModel.self),
-        ]
-      }
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(FormModel.self),
+      ]
 
       public private(set) var resultMap: ResultMap
 
@@ -130,15 +126,13 @@ public struct FormModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["Form"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("title", type: .scalar(String.self)),
-      GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("buttonText", type: .scalar(String.self)),
-      GraphQLField("fields", type: .list(.object(Field.selections))),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("title", type: .scalar(String.self)),
+    GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("buttonText", type: .scalar(String.self)),
+    GraphQLField("fields", type: .list(.object(Field.selections))),
+  ]
 
   public private(set) var resultMap: ResultMap
 
@@ -198,12 +192,10 @@ public struct FormModel: GraphQLFragment {
   public struct Field: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["Field"]
 
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(FieldModel.self),
-      ]
-    }
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLFragmentSpread(FieldModel.self),
+    ]
 
     public private(set) var resultMap: ResultMap
 
@@ -272,20 +264,18 @@ public struct FieldModel: GraphQLFragment {
 
   public static let possibleTypes: [String] = ["Field"]
 
-  public static var selections: [GraphQLSelection] {
-    return [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("_id", type: .nonNull(.scalar(String.self))),
-      GraphQLField("name", type: .scalar(String.self)),
-      GraphQLField("type", type: .scalar(String.self)),
-      GraphQLField("text", type: .scalar(String.self)),
-      GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("options", type: .list(.scalar(String.self))),
-      GraphQLField("isRequired", type: .scalar(Bool.self)),
-      GraphQLField("order", type: .scalar(Int.self)),
-      GraphQLField("validation", type: .scalar(String.self)),
-    ]
-  }
+  public static let selections: [GraphQLSelection] = [
+    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+    GraphQLField("_id", type: .nonNull(.scalar(String.self))),
+    GraphQLField("name", type: .scalar(String.self)),
+    GraphQLField("type", type: .scalar(String.self)),
+    GraphQLField("text", type: .scalar(String.self)),
+    GraphQLField("description", type: .scalar(String.self)),
+    GraphQLField("options", type: .list(.scalar(String.self))),
+    GraphQLField("isRequired", type: .scalar(Bool.self)),
+    GraphQLField("order", type: .scalar(Int.self)),
+    GraphQLField("validation", type: .scalar(String.self)),
+  ]
 
   public private(set) var resultMap: ResultMap
 

@@ -14,7 +14,7 @@ class AuthtenticationService: AuthtenticationServiceProtocol {
 
     func authenticate(type: String, value: String, success: @escaping (Scalar_JSON) -> (), failure: @escaping (String) -> ()) {
         
-        let mutation = WidgetsSaveCustomerGetNotifiedMutation(customerId: customerId, type: type, value: value)
+        let mutation = WidgetsSaveCustomerGetNotifiedMutation(customerId: customerId, visitorId: visitorId, type: type, value: value)
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             switch result {
                 

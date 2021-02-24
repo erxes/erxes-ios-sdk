@@ -78,7 +78,7 @@ class AbstractViewController: UIViewController {
 
     }
 
-    func moreAction(sender: UIButton) {
+    @objc func moreAction(sender: UIButton) {
         let moreView = MoreView()
         moreView.delegate = self
         self.presentViewControllerAsPopover(viewController: moreView, from: sender)

@@ -412,6 +412,10 @@ class MessengerHeader: UIView {
     func setSupporters(supporters: [UserModel]) {
         self.supporters = supporters
     }
+    
+    func setBackButtonHandler(handler: @escaping () -> Void) {
+        self.backButtonHandler = handler
+    }
 
     func setSupporter(supporter: UserDetailModel) {
         
