@@ -1,6 +1,6 @@
 {
   "name": "ErxesSDK",
-  "version": "0.14.0",
+  "version": "0.20.1",
   "summary": "A short description of erxes-ios-sdk.",
   "swift_versions": "5.3",
   "description": "erxes for IOS SDK, for integrating erxes into your iOS application https://erxes.io/",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/erxes/erxes-ios-sdk.git",
-    "tag": "0.14.0"
+    "tag": "0.20.1"
   },
   "platforms": {
     "ios": "11.0"

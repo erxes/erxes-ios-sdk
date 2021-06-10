@@ -14,6 +14,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //if you are Saas user you can setup as following
+        //        Erxes.setupSaas(companyName: "companyName", brandId: "brandCode")
+        
+        //if you are OpenSource user you can setup as following
+        
+        Erxes.setup(erxesApiUrl: "api url", brandId: "brand id", email: "optional", phone: "optional", code: "optional", data: ["key":"value"], companyData: ["key": "value"])
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,11 +27,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnClick(){
-        
         Erxes.start()
-//        Erxes.start(em)
     }
-
-   
-    
 }

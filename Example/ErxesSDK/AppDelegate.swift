@@ -1,6 +1,6 @@
 
 import UIKit
-import ErxesSDK
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,14 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       
-        //if you are Saas user you can setup as following
-//        Erxes.setupSaas(companyName: "companyName", brandId: "brandCode")
-       
-        //if you are OpenSource user you can setup as following
-
-        Erxes.setup(erxesApiUrl: "http://localhost:3300", brandId: "ga8K58")
-        
+               
         return true
     }
 

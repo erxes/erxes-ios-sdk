@@ -9,7 +9,7 @@ PODS:
     - Apollo/Core
     - Starscream (~> 3.1.1)
   - ErxesFont (1.0.1)
-  - ErxesSDK (0.14.0):
+  - ErxesSDK (0.20.1):
     - Apollo (~> 0.37.0)
     - Apollo/SQLite
     - Apollo/WebSocket
@@ -101,7 +101,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Apollo: 9b386f7bda8f97f4980c939b7d1aa6da30e6602c
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  ErxesSDK: 1be5c144eb60d03db962ea4c51e45732671a443f
+  ErxesSDK: 454dcf5cfd49f946818efc55dd61ed72b37849f5
   Fusuma: 3bd08c8c5341ec60c0074fa28570fea8765966f0
   GDCheckbox: aa4a7fb70039fbeb774891d0795d6acce89dfb57
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe

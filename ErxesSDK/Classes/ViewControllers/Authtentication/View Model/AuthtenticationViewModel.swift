@@ -12,11 +12,7 @@ class AuthtenticationViewModel {
 
     private let service: AuthtenticationServiceProtocol
 
-    private var model: [AuthtenticationModel] = [AuthtenticationModel]() {
-        didSet {
-            self.count = self.model.count
-        }
-    }
+
 
     /// Count your data in model
     var count: Int = 0
@@ -50,8 +46,6 @@ class AuthtenticationViewModel {
         }
     }
 
-    /// Define selected model
-    var selectedObject: AuthtenticationModel?
 
     //MARK: -- Closure Collection
     var showAlertClosure: (() -> ())?
