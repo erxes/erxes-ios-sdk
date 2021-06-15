@@ -16,7 +16,6 @@ let screenSize = UIScreen.main.bounds
 let SCREEN_WIDTH = screenSize.width
 let SCREEN_HEIGHT = screenSize.height
 
-
 var customerId: String!
 var visitorId: String!
 var brandCode: String!
@@ -100,63 +99,26 @@ func clearVisitorId() {
         }
     }
 
-    @objc public static func setup(erxesApiUrl: String, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: Any? = nil, companyData: Any? = nil) {
+    @objc public static func setup(erxesApiUrl: String? = nil, organizationName: String? = nil, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: Any? = nil, companyData: Any? = nil) {
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-
+  
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
 
         restore()
         brandCode = brandId
 
-        API_URL = erxesApiUrl
-
-        if (erxesApiUrl.last == "/") {
-            API_URL = String(erxesApiUrl.dropLast())
+        API_URL = erxesApiUrl ?? ""
+        
+        if let subdomain = organizationName {
+            isSaas = true
+            API_URL = "https://\(subdomain).app.erxes.io/api"
         }
-
-        ErxesClient.shared.setupClient(apiUrlString: API_URL)
-
-        let mutation = ConnectMutation(brandCode: brandCode)
-
-        if ((email) != nil) {
-            customerEmail = email!
+                
+        if (API_URL.last == "/") {
+            API_URL = String(API_URL.dropLast())
         }
-
-        if ((phone) != nil) {
-            customerPhoneNumber = phone!
-        }
-
-        if ((code) != nil) {
-            customerCode = code!
-        }
-
-        if ((data) != nil) {
-            customData = (data as! Scalar_JSON)
-        }
-
-        if ((companyData) != nil) {
-            companyCustomData = (companyData as! Scalar_JSON)
-        }
-
-        if ((email != nil && email!.count > 0) || (phone != nil && phone!.count > 0) || (code != nil && code!.count > 0)) {
-            isUser = true
-        }
-
-        connect(mutation: mutation)
-    }
-
-    @objc public static func setupSaas(companyName: String, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: Any? = nil, companyData: Any? = nil) {
-        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
-
-        restore()
-        isSaas = true
-        API_URL = "https://\(companyName).app.erxes.io/api"
-
-        brandCode = brandId
+        
         ErxesClient.shared.setupClient(apiUrlString: API_URL)
 
         let mutation = ConnectMutation(brandCode: brandCode)
@@ -220,14 +182,12 @@ func clearVisitorId() {
         mutation.cachedCustomerId = customerId
 
         ErxesClient.shared.client.perform(mutation: mutation) { result in
-
-            print(result)
             switch result {
 
             case .success(let graphQLResult):
                 if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
                     integrationId = responseModel.integrationId
-                    print("responseModel: ", responseModel)
+                    
                     if let customerId = responseModel.customerId {
                         storeCustomerId(value: customerId)
                     }
