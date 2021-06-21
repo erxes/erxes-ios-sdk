@@ -14,8 +14,11 @@ public struct FieldValueInput: GraphQLMapConvertible {
   ///   - text
   ///   - value
   ///   - associatedFieldId
-  public init(_id: String, type: Swift.Optional<String?> = nil, validation: Swift.Optional<String?> = nil, text: Swift.Optional<String?> = nil, value: Swift.Optional<String?> = nil, associatedFieldId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["_id": _id, "type": type, "validation": validation, "text": text, "value": value, "associatedFieldId": associatedFieldId]
+  ///   - stageId
+  ///   - groupId
+  ///   - column
+  public init(_id: String, type: Swift.Optional<String?> = nil, validation: Swift.Optional<String?> = nil, text: Swift.Optional<String?> = nil, value: Swift.Optional<Scalar_JSON?> = nil, associatedFieldId: Swift.Optional<String?> = nil, stageId: Swift.Optional<String?> = nil, groupId: Swift.Optional<String?> = nil, column: Swift.Optional<Int?> = nil) {
+    graphQLMap = ["_id": _id, "type": type, "validation": validation, "text": text, "value": value, "associatedFieldId": associatedFieldId, "stageId": stageId, "groupId": groupId, "column": column]
   }
 
   public var _id: String {
@@ -54,9 +57,9 @@ public struct FieldValueInput: GraphQLMapConvertible {
     }
   }
 
-  public var value: Swift.Optional<String?> {
+  public var value: Swift.Optional<Scalar_JSON?> {
     get {
-      return graphQLMap["value"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+      return graphQLMap["value"] as? Swift.Optional<Scalar_JSON?> ?? Swift.Optional<Scalar_JSON?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "value")
@@ -69,6 +72,33 @@ public struct FieldValueInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "associatedFieldId")
+    }
+  }
+
+  public var stageId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["stageId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stageId")
+    }
+  }
+
+  public var groupId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["groupId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "groupId")
+    }
+  }
+
+  public var column: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["column"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "column")
     }
   }
 }

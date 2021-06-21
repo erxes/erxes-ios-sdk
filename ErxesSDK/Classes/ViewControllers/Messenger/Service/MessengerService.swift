@@ -63,7 +63,7 @@ class MessengerService: MessengerServiceProtocol {
     }
     
     func insertMessage(customerId: String?, visitorId: String?, message: String?, attachments: [AttachmentInput]?, conversationId: String?, contentType:String,success: @escaping (MessageModel) -> (), failure: @escaping (String) -> ()) {
-        let mutation = WidgetsInsertMessageMutation(integrationId: integrationId, customerId: customerId)
+        let mutation = WidgetsInsertMessageMutation(integrationId: integrationId, customerId: customerId!)
         mutation.attachments = attachments
         mutation.message = message
         mutation.conversationId = conversationId

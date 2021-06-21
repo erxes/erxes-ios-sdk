@@ -1,16 +1,16 @@
 PODS:
-  - Apollo (0.37.0):
-    - Apollo/Core (= 0.37.0)
-  - Apollo/Core (0.37.0)
-  - Apollo/SQLite (0.37.0):
+  - Apollo (0.44.0):
+    - Apollo/Core (= 0.44.0)
+  - Apollo/Core (0.44.0)
+  - Apollo/SQLite (0.44.0):
     - Apollo/Core
     - SQLite.swift (~> 0.12.2)
-  - Apollo/WebSocket (0.37.0):
+  - Apollo/WebSocket (0.44.0):
     - Apollo/Core
-    - Starscream (~> 3.1.1)
+    - Starscream (~> 4.0.4)
   - ErxesFont (1.0.1)
-  - ErxesSDK (0.20.1):
-    - Apollo (~> 0.37.0)
+  - ErxesSDK (0.20.3):
+    - Apollo
     - Apollo/SQLite
     - Apollo/WebSocket
     - ErxesFont (~> 1.0.1)
@@ -24,58 +24,58 @@ PODS:
   - Fusuma (1.3.3)
   - GDCheckbox (1.0.3)
   - IQKeyboardManagerSwift (6.5.6)
-  - MaterialComponents/AnimationTiming (119.1.1)
-  - MaterialComponents/Availability (119.1.1)
-  - MaterialComponents/private/Math (119.1.1)
-  - "MaterialComponents/private/TextControlsPrivate+BaseStyle (119.1.1)":
+  - MaterialComponents/AnimationTiming (124.2.0)
+  - MaterialComponents/Availability (124.2.0)
+  - MaterialComponents/private/Math (124.2.0)
+  - "MaterialComponents/private/TextControlsPrivate+BaseStyle (124.2.0)":
     - MaterialComponents/AnimationTiming
     - MaterialComponents/private/Math
     - "MaterialComponents/private/TextControlsPrivate+Shared"
-  - "MaterialComponents/private/TextControlsPrivate+FilledStyle (119.1.1)":
+  - "MaterialComponents/private/TextControlsPrivate+FilledStyle (124.2.0)":
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Availability
     - MaterialComponents/private/Math
     - "MaterialComponents/private/TextControlsPrivate+Shared"
     - "MaterialComponents/private/TextControlsPrivate+UnderlinedStyle"
-  - "MaterialComponents/private/TextControlsPrivate+Shared (119.1.1)":
+  - "MaterialComponents/private/TextControlsPrivate+Shared (124.2.0)":
     - MaterialComponents/AnimationTiming
     - MaterialComponents/private/Math
     - "MaterialComponents/TextControls+Enums"
-  - "MaterialComponents/private/TextControlsPrivate+TextFields (119.1.1)":
+  - "MaterialComponents/private/TextControlsPrivate+TextFields (124.2.0)":
     - MaterialComponents/private/Math
     - "MaterialComponents/private/TextControlsPrivate+Shared"
-  - "MaterialComponents/private/TextControlsPrivate+UnderlinedStyle (119.1.1)":
+  - "MaterialComponents/private/TextControlsPrivate+UnderlinedStyle (124.2.0)":
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Availability
     - MaterialComponents/private/Math
     - "MaterialComponents/private/TextControlsPrivate+Shared"
-  - "MaterialComponents/TextControls+BaseTextAreas (119.1.1)":
+  - "MaterialComponents/TextControls+BaseTextAreas (124.2.0)":
     - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
     - "MaterialComponents/private/TextControlsPrivate+Shared"
     - MDFInternationalization
-  - "MaterialComponents/TextControls+BaseTextFields (119.1.1)":
+  - "MaterialComponents/TextControls+BaseTextFields (124.2.0)":
     - "MaterialComponents/private/TextControlsPrivate+BaseStyle"
     - "MaterialComponents/private/TextControlsPrivate+Shared"
     - "MaterialComponents/private/TextControlsPrivate+TextFields"
     - MDFInternationalization
-  - "MaterialComponents/TextControls+Enums (119.1.1)"
-  - "MaterialComponents/TextControls+FilledTextAreas (119.1.1)":
+  - "MaterialComponents/TextControls+Enums (124.2.0)"
+  - "MaterialComponents/TextControls+FilledTextAreas (124.2.0)":
     - MaterialComponents/Availability
     - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
     - "MaterialComponents/TextControls+BaseTextAreas"
-  - "MaterialComponents/TextControls+FilledTextFields (119.1.1)":
+  - "MaterialComponents/TextControls+FilledTextFields (124.2.0)":
     - MaterialComponents/Availability
     - "MaterialComponents/private/TextControlsPrivate+FilledStyle"
     - "MaterialComponents/TextControls+BaseTextFields"
-  - MDFInternationalization (2.0.0)
-  - SDWebImage (5.9.5):
-    - SDWebImage/Core (= 5.9.5)
-  - SDWebImage/Core (5.9.5)
+  - MDFInternationalization (3.0.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
   - SnapKit (5.0.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
-  - Starscream (3.1.1)
+  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - ErxesSDK (from `../`)
@@ -99,19 +99,19 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Apollo: 9b386f7bda8f97f4980c939b7d1aa6da30e6602c
+  Apollo: cc5cfeafb38e9409a8d8904f543627778719835b
   ErxesFont: 273febbd20994324f57d848c9315ee704f818fe6
-  ErxesSDK: 454dcf5cfd49f946818efc55dd61ed72b37849f5
+  ErxesSDK: f56370aa77c71e80438a62d219333f84e3a4dd02
   Fusuma: 3bd08c8c5341ec60c0074fa28570fea8765966f0
   GDCheckbox: aa4a7fb70039fbeb774891d0795d6acce89dfb57
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  MaterialComponents: 75e8c6bcf6223ce5b53ffeabc55feae95ce90c05
-  MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
-  SDWebImage: 0b2ba0d56479bf6a45ecddbfd5558bea93150d25
+  MaterialComponents: 1a9b2d9d45b1601ae544de85089adc4c464306d4
+  MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
 PODFILE CHECKSUM: e2aef1c576425d26c3ff63ede0e5b515d9281c9a
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

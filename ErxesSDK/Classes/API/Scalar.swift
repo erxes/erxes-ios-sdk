@@ -8,7 +8,7 @@
 
 import Apollo
 
-public typealias Scalar_JSON = [String: Any?]
+public typealias Scalar_JSON = [String: Any]
 public typealias Scalar_Date = Date
 
 extension Date: JSONDecodable, JSONEncodable {
@@ -37,15 +37,15 @@ extension Date: JSONDecodable, JSONEncodable {
     }
 }
 
-extension Dictionary: JSONDecodable {
-    /// Custom `init` extension so Apollo can decode custom scalar type `CurrentMissionChallenge `
-    public init(jsonValue value: JSONValue) throws {
-        guard let dictionary = value as? Dictionary else {
-            throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
-        }
-        self = dictionary
-    }
-}
+//extension Dictionary: JSONDecodable {
+//    /// Custom `init` extension so Apollo can decode custom scalar type `CurrentMissionChallenge `
+//    public init(jsonValue value: JSONValue) throws {
+//        guard let dictionary = value as? Dictionary else {
+//            throw JSONDecodingError.couldNotConvert(value: value, to: Dictionary.self)
+//        }
+//        self = dictionary
+//    }
+//}
 
 
 struct MessengerData: Decodable {
@@ -113,7 +113,7 @@ struct UIOptions: Decodable {
 
 struct LeadData: Decodable {
     let adminEmails: [String?]?
-    let rules:[String?]?
+    let rules: [String?]?
     let loadType: String?
     let successAction: String?
     let fromEmail: String?
@@ -129,14 +129,14 @@ struct LeadData: Decodable {
 }
 
 
-struct CallOut:Decodable {
+struct CallOut: Decodable {
     let title: String?
     let body: String?
     let buttonText: String?
     let featuredImage: String?
-    let skip:Bool?
+    let skip: Bool?
 }
-    
+
 
 
 

@@ -7,6 +7,7 @@ mutation connect(
   $data: JSON
   $companyData: JSON
   $cachedCustomerId: String
+  $visitorId: String
 ) {
   widgetsMessengerConnect(
     brandCode: $brandCode
@@ -17,6 +18,7 @@ mutation connect(
     data: $data
     companyData: $companyData
     cachedCustomerId: $cachedCustomerId
+    visitorId: $visitorId
   ) {
     ...ConnectResponseModel
   }
@@ -39,8 +41,8 @@ fragment BrandModel on Brand {
   description
 }
 
-mutation widgetsSaveBrowserInfo($customerId: String!, $browserInfo: JSON!) {
-  widgetsSaveBrowserInfo(customerId: $customerId, browserInfo: $browserInfo) {
+mutation widgetsSaveBrowserInfo($customerId: String, $visitorId: String $browserInfo: JSON!) {
+  widgetsSaveBrowserInfo(customerId: $customerId, visitorId: $visitorId, browserInfo: $browserInfo) {
     ...MessageModel
   }
 }
@@ -61,6 +63,7 @@ fragment MessageModel on ConversationMessage {
     url
     status
   }
+  botData
   engageData {
     content
     kind
@@ -79,7 +82,8 @@ fragment MessageModel on ConversationMessage {
 
 mutation widgetsInsertMessage(
   $integrationId: String!
-  $customerId: String!
+  $customerId: String
+  $visitorId: String
   $message: String
   $contentType: String
   $conversationId: String
@@ -88,6 +92,7 @@ mutation widgetsInsertMessage(
   widgetsInsertMessage(
     integrationId: $integrationId
     customerId: $customerId
+    visitorId: $visitorId
     contentType: $contentType
     message: $message
     conversationId: $conversationId
@@ -100,4 +105,18 @@ mutation widgetsInsertMessage(
 
 mutation widgetsReadConversationMessages($conversationId: String!) {
     widgetsReadConversationMessages(conversationId: $conversationId)
+}
+
+mutation widgetsSaveCustomerGetNotified(
+  $customerId: String
+  $visitorId: String
+  $type: String!
+  $value: String!
+) {
+  widgetsSaveCustomerGetNotified(
+    customerId: $customerId
+    visitorId: $visitorId
+    type: $type
+    value: $value
+  )
 }

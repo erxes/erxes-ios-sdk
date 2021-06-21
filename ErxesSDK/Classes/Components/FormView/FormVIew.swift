@@ -225,7 +225,7 @@ class FormVIew: UIView {
         }
 
         guard let field = self.form.fields?.compactMap({ $0?.fragments.fieldModel })[textField!.tag] else { return }
-        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: file.url)
+        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: ["url":file.url])
 
         if let index = self.submissions.firstIndex(where: { $0?._id == field._id }) {
             self.submissions[index] = valueInput
@@ -418,7 +418,7 @@ class FormVIew: UIView {
         self.endEditing(true)
         guard let field = self.form.fields?.compactMap({ $0?.fragments.fieldModel })[sender.tag] else { return }
 
-        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: sender.text)
+        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: ["text":sender.text])
 
         if let index = self.submissions.firstIndex(where: { $0?._id == field._id }) {
             self.submissions[index] = valueInput
@@ -496,7 +496,7 @@ extension FormVIew: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
 
         guard let field = self.form.fields?.compactMap({ $0?.fragments.fieldModel })[textView.tag] else { return }
-        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: textView.text)
+        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: ["text": textView.text])
         if let index = self.submissions.firstIndex(where: { $0?._id == field._id }) {
             self.submissions[index] = valueInput
         }
@@ -511,7 +511,7 @@ extension FormVIew: UITextViewDelegate {
 extension FormVIew: RadioViewDelegate {
     func didSelectValue(value: String, sender: UIView) {
         guard let field = self.form.fields?.compactMap({ $0?.fragments.fieldModel })[sender.tag] else { return }
-        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: value)
+        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: ["value: ":value])
         if let index = self.submissions.firstIndex(where: { $0?._id == field._id }) {
             self.submissions[index] = valueInput
         }
@@ -522,7 +522,7 @@ extension FormVIew: CheckViewDelegate {
     func didSelectValues(values: String, sender: UIView) {
 
         guard let field = self.form.fields?.compactMap({ $0?.fragments.fieldModel })[sender.tag] else { return }
-        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: values)
+        let valueInput = FieldValueInput(_id: field._id, type: field.type, validation: field.validation, text: field.text, value: ["values":values])
         if let index = self.submissions.firstIndex(where: { $0?._id == field._id }) {
             self.submissions[index] = valueInput
         }

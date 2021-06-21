@@ -1,6 +1,11 @@
 query widgetsMessengerSupporters($integrationId: String!) {
   widgetsMessengerSupporters(integrationId: $integrationId) {
-    ...UserModel
+   supporters{
+      ...UserModel
+    }
+    isOnline
+    serverTime
+    
   }
 }
 
@@ -22,19 +27,10 @@ fragment UserDetailModel on User {
     description
     position
   }
-  links {
-    ...UserLinks
-  }
+  links
 }
 
-fragment UserLinks on UserLinksType {
-  facebook
-  twitter
-  youtube
-  linkedIn
-  github
-  website
-}
+
 
 query widgetsTotalUnreadCount($integrationId: String!, $customerId: String!) {
   widgetsTotalUnreadCount(
@@ -43,8 +39,8 @@ query widgetsTotalUnreadCount($integrationId: String!, $customerId: String!) {
   )
 }
 
-query widgetsConversations($integrationId: String!, $customerId: String!) {
-  widgetsConversations(integrationId: $integrationId, customerId: $customerId) {
+query widgetsConversations($integrationId: String!, $customerId: String, $visitorId: String) {
+  widgetsConversations(integrationId: $integrationId, customerId: $customerId, visitorId: $visitorId) {
     ...ConversationModel
   }
 }

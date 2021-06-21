@@ -99,9 +99,9 @@ func clearVisitorId() {
         }
     }
 
-    @objc public static func setup(erxesApiUrl: String? = nil, organizationName: String? = nil, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: Any? = nil, companyData: Any? = nil) {
+    @objc public static func setup(erxesApiUrl: String? = nil, organizationName: String? = nil, brandId: String, email: String? = nil, phone: String? = nil, code: String? = nil, data: String? = nil, companyData: String? = nil) {
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
-  
+
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.disabledToolbarClasses.append(MessengerView.self)
 
@@ -109,16 +109,16 @@ func clearVisitorId() {
         brandCode = brandId
 
         API_URL = erxesApiUrl ?? ""
-        
+
         if let subdomain = organizationName {
             isSaas = true
             API_URL = "https://\(subdomain).app.erxes.io/api"
         }
-                
+
         if (API_URL.last == "/") {
             API_URL = String(API_URL.dropLast())
         }
-        
+
         ErxesClient.shared.setupClient(apiUrlString: API_URL)
 
         let mutation = ConnectMutation(brandCode: brandCode)
@@ -135,12 +135,30 @@ func clearVisitorId() {
             customerCode = code!
         }
 
-        if ((data) != nil) {
-            customData = (data as! Scalar_JSON)
-        }
+        if let jsonString = data {
+            let jsonData = Data(jsonString.utf8)
 
-        if ((companyData) != nil) {
-            companyCustomData = (companyData as! Scalar_JSON)
+            do {
+                // make sure this JSON is in the format we expect
+                customData = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: String] ?? [:]
+                
+
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+        
+        if let jsonCompanyString = companyData {
+            let jsonData = Data(jsonCompanyString.utf8)
+            
+            do {
+                // make sure this JSON is in the format we expect
+                companyCustomData = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: String] ?? [:]
+                
+                
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
         }
 
         if ((email != nil && email!.count > 0) || (phone != nil && phone!.count > 0) || (code != nil && code!.count > 0)) {
@@ -171,7 +189,7 @@ func clearVisitorId() {
         if ((customerId) != nil) {
             visitorId = nil
         }
-
+        
         mutation.isUser = isUser
         mutation.data = customData
         mutation.companyData = companyCustomData
@@ -180,14 +198,14 @@ func clearVisitorId() {
         mutation.code = customerCode
         mutation.visitorId = visitorId
         mutation.cachedCustomerId = customerId
-
+        
         ErxesClient.shared.client.perform(mutation: mutation) { result in
             switch result {
 
             case .success(let graphQLResult):
                 if let responseModel = graphQLResult.data?.widgetsMessengerConnect?.fragments.connectResponseModel {
                     integrationId = responseModel.integrationId
-                    
+
                     if let customerId = responseModel.customerId {
                         storeCustomerId(value: customerId)
                     }
@@ -215,9 +233,9 @@ func clearVisitorId() {
                         lang = languageCode
                     }
                     brand = responseModel.brand?.fragments.brandModel
-                    
+
                     UserDefaults.standard.setValue(true, forKey: "authenticated")
-                    
+
                     saveBrowserInfo()
                 }
                 if let errors = graphQLResult.errors {
