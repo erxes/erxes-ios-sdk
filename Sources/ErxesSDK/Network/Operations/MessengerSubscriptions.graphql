@@ -1,0 +1,36 @@
+# Real-time new message in a conversation.
+subscription conversationMessageInserted($_id: String!) {
+    conversationMessageInserted(_id: $_id) {
+        _id
+        conversationId
+        customerId
+        content
+        createdAt
+        internal
+        fromBot
+        contentType
+        botData
+        messengerAppData
+        attachments {
+            url
+            name
+            size
+            type
+        }
+        user {
+            _id
+            details {
+                avatar
+                fullName
+            }
+        }
+    }
+}
+
+# Bot is currently typing indicator.
+subscription conversationBotTypingStatus($_id: String!) {
+    conversationBotTypingStatus(_id: $_id) {
+        _id
+        typing
+    }
+}

@@ -1,0 +1,31 @@
+name: ErxesExample
+options:
+  bundleIdPrefix: com.erxes
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  ErxesExample:
+    type: application
+    platform: iOS
+    sources:
+      - ErxesExample
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.erxes.example
+        INFOPLIST_FILE: ErxesExample/Info.plist
+    dependencies:
+      - package: ErxesSDK
+        product: ErxesSDK
+
+packages:
+  ErxesSDK:
+    path: ..
