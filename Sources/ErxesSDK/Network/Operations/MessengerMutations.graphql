@@ -183,6 +183,21 @@ mutation editCustomer(
     }
 }
 
+# Store customer email/phone for follow-up notifications (e.g. email opt-in).
+mutation widgetsSaveCustomerGetNotified(
+    $customerId: String
+    $visitorId: String
+    $type: String!
+    $value: String!
+) {
+    widgetsSaveCustomerGetNotified(
+        customerId: $customerId
+        visitorId: $visitorId
+        type: $type
+        value: $value
+    )
+}
+
 # ── Lead / Form widget ────────────────────────────────────────────────────────
 
 mutation widgetsLeadConnect(

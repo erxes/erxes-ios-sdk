@@ -1,5 +1,7 @@
 import SwiftUI
 
+// Legacy wrapper — MessagesView is now the primary conversations screen.
+// Kept for direct NavigationStack usage if needed.
 struct ConversationListView: View {
     @ObservedObject var viewModel: ConversationListViewModel
     @Binding var selectedConversation: Conversation?
@@ -7,8 +9,7 @@ struct ConversationListView: View {
     var body: some View {
         Group {
             if viewModel.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewModel.conversations.isEmpty {
                 emptyState
             } else {
@@ -18,12 +19,12 @@ struct ConversationListView: View {
     }
 
     private var list: some View {
-        List(viewModel.conversations) { conversation in
-            NavigationLink(value: conversation) {
-                ConversationRowView(conversation: conversation)
+        List(viewModel.conversations) { conv in
+            NavigationLink(value: conv) {
+                ConversationRowView(conversation: conv)
             }
+            .listRowInsets(EdgeInsets())
             .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
     }
@@ -35,11 +36,6 @@ struct ConversationListView: View {
                 .foregroundStyle(.secondary)
             Text("No conversations yet")
                 .font(.headline)
-            Text("Tap the compose button to start a new conversation.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

@@ -34,3 +34,30 @@ subscription conversationBotTypingStatus($_id: String!) {
         typing
     }
 }
+
+# Customer's own message echoed back (deduplication).
+subscription conversationClientMessageInserted($userId: String!) {
+    conversationClientMessageInserted(userId: $userId) {
+        _id
+        conversationId
+        content
+        createdAt
+        contentType
+    }
+}
+
+# Admin/operator sends a direct message to a visitor.
+subscription adminMessageInserted($customerId: String!) {
+    conversationAdminMessageInserted(customerId: $customerId) {
+        customerId
+        unreadCount
+    }
+}
+
+# Conversation status changes (e.g. resolved → open).
+subscription conversationChanged($conversationId: String!) {
+    conversationChanged(conversationId: $conversationId) {
+        conversationId
+        type
+    }
+}

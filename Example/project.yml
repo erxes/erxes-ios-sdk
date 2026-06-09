@@ -2,7 +2,7 @@ name: ErxesExample
 options:
   bundleIdPrefix: com.erxes
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "26.0"
   xcodeVersion: "15.0"
   createIntermediateGroups: true
 

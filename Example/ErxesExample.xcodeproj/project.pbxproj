@@ -15,7 +15,7 @@
 /* Begin PBXFileReference section */
 		198D0C0A349F64C068D293AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2D4C8DDDC1DDBEA885C3733A /* sdk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sdk; path = ..; sourceTree = SOURCE_ROOT; };
-		976FDC14B8A98B81527C1984 /* ErxesExample.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ErxesExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		976FDC14B8A98B81527C1984 /* ErxesExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ErxesExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB3460A820A63CD10782B71 /* ErxesExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErxesExampleApp.swift; sourceTree = "<group>"; };
 		F728A983CFD20EA00E2190B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,8 +97,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 461301A8459876BBCB7EE3AC /* Build configuration list for PBXProject "ErxesExample" */;
 			developmentRegion = en;
@@ -198,6 +196,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z4Y4UX444M;
 				INFOPLIST_FILE = ErxesExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -279,6 +278,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z4Y4UX444M;
 				INFOPLIST_FILE = ErxesExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

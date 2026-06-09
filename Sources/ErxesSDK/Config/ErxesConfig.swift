@@ -7,6 +7,10 @@ public struct ErxesConfig {
     /// Integration ID from erxes dashboard → Settings → Integrations → iOS App
     public let integrationId: String
 
+    /// Base URL for serving files (avatars, attachments).
+    /// Defaults to `endpoint`. Override only if your file server differs.
+    public let fileEndpoint: String
+
     /// Optional: cached customer ID from a previous session (persisted in Keychain)
     public var cachedCustomerId: String?
 
@@ -15,11 +19,13 @@ public struct ErxesConfig {
     public init(
         endpoint: String,
         integrationId: String,
+        fileEndpoint: String? = nil,
         cachedCustomerId: String? = nil,
         appearance: Appearance = .init()
     ) {
         self.endpoint = endpoint
         self.integrationId = integrationId
+        self.fileEndpoint = fileEndpoint ?? endpoint
         self.cachedCustomerId = cachedCustomerId
         self.appearance = appearance
     }

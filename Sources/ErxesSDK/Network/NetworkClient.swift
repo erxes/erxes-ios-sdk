@@ -10,29 +10,20 @@ final class NetworkClient {
     private init() {}
 
     func configure(endpoint: String) {
-        guard let url = URL(string: "\(endpoint)/graphql") else { return }
+        // erxes gateway always lives at /gateway/graphql (fileEndpoint, no w. subdomain)
+        let base = endpoint.hasSuffix("/") ? String(endpoint.dropLast()) : endpoint
+        guard let url = URL(string: "\(base)/gateway/graphql") else { return }
 
         let store = ApolloStore()
-        let sessionClient = URLSessionClient()
         let provider = DefaultInterceptorProvider(store: store)
         let transport = RequestChainNetworkTransport(
             interceptorProvider: provider,
             endpointURL: url
         )
 
-        guard let wsURL = URL(string: endpoint.replacingOccurrences(of: "http", with: "ws") + "/graphql") else {
-            apollo = ApolloClient(networkTransport: transport, store: store)
-            return
-        }
-
-        let webSocket = WebSocket(url: wsURL, protocol: .graphql_ws)
-        let wsTransport = WebSocketTransport(websocket: webSocket)
-        let splitTransport = SplitNetworkTransport(
-            uploadingNetworkTransport: transport,
-            webSocketNetworkTransport: wsTransport
-        )
-
-        apollo = ApolloClient(networkTransport: splitTransport, store: store)
+        // WebSocket is only needed for subscriptions; skip it for now to avoid
+        // "Connection invalid" errors at launch while subscriptions are not yet wired up.
+        apollo = ApolloClient(networkTransport: transport, store: store)
     }
 
     var client: ApolloClient {

@@ -4,40 +4,59 @@ struct ConversationRowView: View {
     let conversation: Conversation
 
     var body: some View {
-        HStack(spacing: 12) {
-            Circle()
-                .fill(Color.secondary.opacity(0.2))
+        HStack(spacing: 14) {
+            // Initial avatar
+            Text(initial)
+                .font(.headline.weight(.semibold))
+                .foregroundStyle(.white)
                 .frame(width: 44, height: 44)
-                .overlay {
-                    Image(systemName: "person.fill")
-                        .foregroundStyle(.secondary)
-                }
+                .background(Color(.systemGray3), in: Circle())
 
             VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("Support")
-                        .font(.headline)
+                HStack(alignment: .firstTextBaseline) {
+                    Text(displayName)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
                     Spacer()
-                    Text(conversation.createdAt, style: .relative)
+                    Text(timeAgo)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-                if let content = conversation.content {
+                if let content = conversation.content, !content.isEmpty {
                     Text(content)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(1)
                 }
             }
-
-            if conversation.unreadCount > 0 {
-                Text("\(conversation.unreadCount)")
-                    .font(.caption2.bold())
-                    .foregroundStyle(.white)
-                    .padding(6)
-                    .background(Color.accentColor, in: Circle())
-            }
         }
-        .padding(.vertical, 4)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .contentShape(Rectangle())
+    }
+
+    // MARK: - Helpers
+
+    private var displayName: String {
+        conversation.messages.first?.isFromCustomer == false
+            ? "Support"
+            : "You"
+    }
+
+    private var initial: String {
+        String(displayName.prefix(1)).uppercased()
+    }
+
+    private var timeAgo: String {
+        let diff = Date().timeIntervalSince(conversation.createdAt)
+        switch diff {
+        case ..<60:              return "just now"
+        case ..<3_600:           return "\(Int(diff / 60))m ago"
+        case ..<86_400:          return "\(Int(diff / 3_600))h ago"
+        case ..<(86_400 * 7):   return "\(Int(diff / 86_400)) days ago"
+        default:
+            let f = DateFormatter(); f.dateStyle = .medium; f.timeStyle = .none
+            return f.string(from: conversation.createdAt)
+        }
     }
 }
