@@ -1,6 +1,6 @@
-name: ErxesExample
+name: MessengerExample
 options:
-  bundleIdPrefix: com.erxes
+  bundleIdPrefix: com.messenger
   deploymentTarget:
     iOS: "26.0"
   xcodeVersion: "15.0"
@@ -13,19 +13,19 @@ settings:
     CURRENT_PROJECT_VERSION: "1"
 
 targets:
-  ErxesExample:
+  MessengerExample:
     type: application
     platform: iOS
     sources:
-      - ErxesExample
+      - MessengerExample
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.erxes.example
-        INFOPLIST_FILE: ErxesExample/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.messenger.example
+        INFOPLIST_FILE: MessengerExample/Info.plist
     dependencies:
-      - package: ErxesSDK
-        product: ErxesSDK
+      - package: MessengerSDK
+        product: MessengerSDK
 
 packages:
-  ErxesSDK:
+  MessengerSDK:
     path: ..

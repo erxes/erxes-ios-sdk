@@ -1,0 +1,108 @@
+import UIKit
+import SwiftUI
+import Combine
+
+@MainActor
+public final class MessengerSDK: ObservableObject {
+    public static let shared = MessengerSDK()
+
+    private(set) var config: MessengerConfig?
+    private(set) var currentUser: MessengerUser?
+
+    /// True once the initial connect handshake succeeds.
+    /// Observe this to show/hide your launcher button.
+    @Published public private(set) var isReady = false
+
+    /// The cached AppViewModel reused across sheet presentations.
+    private var appVM: AppViewModel?
+
+    private init() {}
+
+    // MARK: - Configuration
+
+    /// Call once at app startup. Automatically starts the connect handshake.
+    public static func configure(_ config: MessengerConfig) {
+        shared.config = config
+        NetworkClient.shared.configure(endpoint: config.endpoint)
+        // Auto-connect so launcher appears as soon as handshake succeeds
+        startConnect()
+    }
+
+    /// Set the logged-in user so conversations are linked to them.
+    public static func setUser(_ user: MessengerUser) {
+        shared.currentUser = user
+    }
+
+    /// Clear the current user (e.g. on logout).
+    public static func clearUser() {
+        shared.currentUser = nil
+    }
+
+    // MARK: - Internal connect
+
+    private static func startConnect() {
+        guard let config = shared.config else { return }
+        let vm = AppViewModel()
+        shared.appVM = vm
+        Task { @MainActor in
+            await vm.connect(config: config, user: shared.currentUser)
+            shared.isReady = true
+        }
+    }
+
+    // MARK: - Show messenger
+
+    /// Present the messenger. Uses the already-connected AppViewModel — opens instantly.
+    public static func showMessenger(from viewController: UIViewController, onDismiss: (() -> Void)? = nil) {
+        guard let config = shared.config else {
+            assertionFailure("MessengerSDK.configure() must be called before showMessenger()")
+            return
+        }
+
+        // If already ready use cached VM; otherwise connect fresh
+        if let vm = shared.appVM, shared.isReady {
+            present(vm, from: viewController, onDismiss: onDismiss)
+        } else {
+            let vm = shared.appVM ?? AppViewModel()
+            shared.appVM = vm
+            Task { @MainActor in
+                await vm.connect(config: config, user: shared.currentUser)
+                shared.isReady = true
+                present(vm, from: viewController, onDismiss: onDismiss)
+            }
+        }
+    }
+
+    private static func present(
+        _ appVM: AppViewModel,
+        from viewController: UIViewController,
+        onDismiss: (() -> Void)?
+    ) {
+        let root = MessengerContainerView(appVM: appVM)
+        let hostingVC = DismissCallbackHostingController(rootView: root, onDismiss: onDismiss)
+        hostingVC.modalPresentationStyle = .pageSheet
+        if let sheet = hostingVC.sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.prefersGrabberVisible = true
+        }
+        viewController.present(hostingVC, animated: true)
+    }
+}
+
+// MARK: - Hosting controller that fires a callback on dismiss
+
+private final class DismissCallbackHostingController<Content: View>: UIHostingController<Content> {
+    private let onDismiss: (() -> Void)?
+
+    init(rootView: Content, onDismiss: (() -> Void)?) {
+        self.onDismiss = onDismiss
+        super.init(rootView: rootView)
+    }
+
+    @MainActor required dynamic init?(coder: NSCoder) { fatalError() }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if isBeingDismissed { onDismiss?() }
+    }
+}

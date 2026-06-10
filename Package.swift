@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "ErxesSDK",
+    name: "MessengerSDK",
     platforms: [
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "ErxesSDK",
-            targets: ["ErxesSDK"]
+            name: "MessengerSDK",
+            targets: ["MessengerSDK"]
         ),
     ],
     dependencies: [
@@ -18,21 +18,21 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ErxesSDK",
+            name: "MessengerSDK",
             dependencies: [
                 .product(name: "Apollo", package: "apollo-ios"),
                 .product(name: "ApolloWebSocket", package: "apollo-ios"),
                 .product(name: "SDWebImageSwiftUI", package: "SDWebImageSwiftUI"),
             ],
-            path: "Sources/ErxesSDK",
+            path: "Sources/MessengerSDK",
             resources: [
                 .process("Resources")
             ]
         ),
         .testTarget(
-            name: "ErxesSDKTests",
-            dependencies: ["ErxesSDK"],
-            path: "Tests/ErxesSDKTests"
+            name: "MessengerSDKTests",
+            dependencies: ["MessengerSDK"],
+            path: "Tests/MessengerSDKTests"
         ),
     ]
 )
