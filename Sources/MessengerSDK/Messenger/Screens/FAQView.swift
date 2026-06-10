@@ -79,6 +79,8 @@ struct FAQView: View {
             .foregroundStyle(.primary)
         }
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
     }
 
     // MARK: - Article list for a category
@@ -96,6 +98,8 @@ struct FAQView: View {
             .foregroundStyle(.primary)
         }
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
     }
 
     // MARK: - Article content
@@ -104,13 +108,13 @@ struct FAQView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 Text(article.title).font(.title2.bold())
-                // HTML content — render as plain text for now
-                // TODO: use WKWebView or AttributedString HTML parsing for rich content
                 Text(article.content.strippingHTML())
                     .font(.body)
             }
             .padding()
         }
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
     }
 
     private var navigationTitle: String {

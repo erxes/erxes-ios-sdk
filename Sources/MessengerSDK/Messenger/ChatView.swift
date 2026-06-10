@@ -83,6 +83,8 @@ struct ChatView: View {
                 )
                 // Dragging the conversation up dismisses the keyboard the instant
                 // the drag begins — the standard Messages-app behavior.
+                .scrollContentBackground(.hidden)
+                .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
                 .scrollDismissesKeyboard(.immediately)
                 // The input bar lives in a bottom safe-area inset. SwiftUI's native
                 // keyboard avoidance lifts this inset above the keyboard inside the

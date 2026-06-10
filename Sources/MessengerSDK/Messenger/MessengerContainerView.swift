@@ -42,10 +42,12 @@ struct MessengerContainerView: View {
                 legacyTabView(primary: primaryColor)
             }
         }
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
+        .preferredColorScheme(appVM.effectiveColorScheme)
         .tint(primaryColor)
         .environmentObject(appVM)
         .onAppear {
-            // Color is already set (connect ran before sheet presented), just sync it
+            // Colors are already set (connect ran before sheet presented), just sync them
             primaryColor = Color(appVM.effectivePrimaryColor)
         }
     }

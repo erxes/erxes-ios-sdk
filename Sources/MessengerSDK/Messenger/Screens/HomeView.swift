@@ -30,6 +30,8 @@ struct HomeView: View {
                 Spacer().frame(height: 20)
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
         // Stop the keyboard's safe-area change from reaching GeometryReader
         // inside heroSection — that was causing full gradient rebuilds on every

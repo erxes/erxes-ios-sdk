@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftUI
 
 @MainActor
 public final class AppViewModel: ObservableObject {
@@ -388,7 +389,9 @@ public final class AppViewModel: ObservableObject {
         return color
     }
 
-    /// Background color for the hero section. Server returns e.g. "#000".
+    /// Background color used for both the hero base and all container areas.
+    /// Server value wins; falls back to a fixed dark near-black so the SDK never
+    /// inherits the host app's light/dark theme.
     var effectiveBackgroundColor: UIColor {
         let key = uiOptions.backgroundColor ?? "_default_"
         if let cached = backgroundColorCache, cached.key == key { return cached.color }
@@ -401,6 +404,16 @@ public final class AppViewModel: ObservableObject {
         }
         backgroundColorCache = (key, color)
         return color
+    }
+
+    /// Alias kept so all call-sites compile without changes.
+    var effectiveContainerBackgroundColor: UIColor { effectiveBackgroundColor }
+
+    /// ColorScheme derived from effectiveBackgroundColor so the entire SDK
+    /// ignores the device's light/dark setting and always looks correct against
+    /// the configured background.
+    var effectiveColorScheme: ColorScheme {
+        effectiveBackgroundColor.isLight ? .light : .dark
     }
 
     /// Text color used on the hero/gradient background.

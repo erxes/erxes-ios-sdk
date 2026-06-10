@@ -141,6 +141,10 @@ extension UIColor {
     convenience init?(hex: String) {
         var cleaned = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         if cleaned.hasPrefix("#") { cleaned = String(cleaned.dropFirst()) }
+        // Expand 3-char shorthand: "000" → "000000", "abc" → "aabbcc"
+        if cleaned.count == 3 {
+            cleaned = cleaned.flatMap { [$0, $0] }.map(String.init).joined()
+        }
         guard cleaned.count == 6, let value = UInt64(cleaned, radix: 16) else { return nil }
         self.init(
             red:   CGFloat((value >> 16) & 0xFF) / 255,
@@ -148,5 +152,12 @@ extension UIColor {
             blue:  CGFloat( value        & 0xFF) / 255,
             alpha: 1
         )
+    }
+
+    /// Perceived luminance — true when the color reads as light to the human eye.
+    var isLight: Bool {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.5
     }
 }

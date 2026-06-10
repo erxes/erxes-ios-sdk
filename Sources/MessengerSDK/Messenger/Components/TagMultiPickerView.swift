@@ -4,6 +4,7 @@ struct TagMultiPickerView: View {
     let tags: [TicketTag]
     @Binding var selected: Set<String>
     let primary: Color
+    var backgroundColor: Color = Color(.systemBackground)
 
     @Environment(\.dismiss) private var dismiss
 
@@ -35,6 +36,8 @@ struct TagMultiPickerView: View {
                 }
             }
             .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(backgroundColor.ignoresSafeArea())
             .navigationTitle("Select Tags")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -45,6 +45,8 @@ struct TicketsView: View {
                 Spacer().frame(height: 80)
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .onAppear { viewModel.load(appVM: appVM) }

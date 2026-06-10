@@ -54,6 +54,8 @@ struct MessagesView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
         .ignoresSafeArea(edges: .top)
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .onAppear { listVM.load(appVM: appVM) }

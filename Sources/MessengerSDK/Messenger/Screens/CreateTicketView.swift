@@ -48,7 +48,8 @@ struct CreateTicketView: View {
                 }
                 .padding(20)
             }
-            .background(Color(.systemBackground))
+            .scrollContentBackground(.hidden)
+            .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -187,7 +188,8 @@ struct CreateTicketView: View {
                     TagMultiPickerView(
                         tags: formVM.availableTags,
                         selected: $formVM.selectedTagIds,
-                        primary: primary
+                        primary: primary,
+                        backgroundColor: Color(appVM.effectiveContainerBackgroundColor)
                     )
                     .presentationDetents([.medium, .large])
                 }
