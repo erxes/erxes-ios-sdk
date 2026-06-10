@@ -43,7 +43,10 @@ struct MessengerContainerView: View {
             }
         }
         .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
-        .preferredColorScheme(appVM.effectiveColorScheme)
+        // Inject colorScheme directly into the SwiftUI environment so materials
+        // (ultraThinMaterial, regularMaterial, glassEffect) pick up the correct
+        // dark/light appearance instead of inheriting the host app's scheme.
+        .environment(\.colorScheme, appVM.effectiveColorScheme)
         .tint(primaryColor)
         .environmentObject(appVM)
         .onAppear {

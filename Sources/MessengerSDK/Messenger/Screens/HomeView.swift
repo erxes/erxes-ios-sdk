@@ -21,11 +21,11 @@ struct HomeView: View {
                     .overlay(alignment: .bottom) {
                         askAQuestionCard(primary: primary)
                             .padding(.horizontal, 20)
-                            .offset(y: 30) // half of ~60pt card height
+                            .offset(y: 36) // half of ~72pt card height
                     }
 
                 cardsSection(primary: primary)
-                    .padding(.top, 46) // 30 (overlap) + 16 (gap)
+                    .padding(.top, 72) // 36 (overlap) + 36 (gap)
 
                 Spacer().frame(height: 20)
             }
@@ -49,48 +49,43 @@ struct HomeView: View {
     private func heroSection(primary: Color, textColor: Color) -> some View {
         let bg = Color(appVM.effectiveBackgroundColor)
 
-        return ZStack(alignment: .top) {
-            // ── Background ────────────────────────────────────────────────────
+        // Content drives the height — background is attached via .background()
+        // so the GeometryReader sizes to match the content, not the screen.
+        return VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(appVM.messengerData?.messages?.greetTitle ?? "Hi there 👋")
+                    .font(.system(size: 28, weight: .bold, design: .rounded))
+                    .foregroundStyle(textColor)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(appVM.messengerData?.messages?.greet
+                     ?? "Get answers on pricing, deployment, and migration.")
+                    .font(.subheadline)
+                    .foregroundStyle(textColor.opacity(0.65))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            welcomeBubble(textColor: textColor)
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 24)
+        .padding(.bottom, 72)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
             GeometryReader { geo in
                 heroBackground(bg: bg, primary: primary, size: geo.size)
             }
             .ignoresSafeArea(edges: .top)
-
-            // ── Content ───────────────────────────────────────────────────────
-            VStack(alignment: .leading, spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(appVM.messengerData?.messages?.greetTitle ?? "Hi there 👋")
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundStyle(textColor)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(appVM.messengerData?.messages?.greet
-                         ?? "Get answers on pricing, deployment, and migration.")
-                        .font(.subheadline)
-                        .foregroundStyle(textColor.opacity(0.65))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                welcomeBubble(textColor: textColor)
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 24)
-            .padding(.bottom, 52)
         }
-        .frame(minHeight: 260)
     }
 
     // MARK: - Hero background
-    // Dark base from server backgroundColor + two radial glows using UnitPoint
-    // (no scaleEffect — UnitPoint handles out-of-bounds centers natively)
 
     @ViewBuilder
     private func heroBackground(bg: Color, primary: Color, size: CGSize) -> some View {
         ZStack {
-            // 1. Base solid from server
             bg.ignoresSafeArea()
 
-            // 2. Primary glow — top-right, large soft bloom
             RadialGradient(
                 colors: [primary.opacity(0.45), .clear],
                 center: UnitPoint(x: 1.15, y: -0.05),
@@ -99,7 +94,6 @@ struct HomeView: View {
             )
             .blendMode(.plusLighter)
 
-            // 3. Warm accent — bottom-left edge, subtle
             RadialGradient(
                 colors: [Color(red: 0.85, green: 0.25, blue: 0.35).opacity(0.30), .clear],
                 center: UnitPoint(x: -0.1, y: 1.15),
@@ -108,7 +102,6 @@ struct HomeView: View {
             )
             .blendMode(.plusLighter)
 
-            // 4. Bottom fade-out so cards section blends in cleanly
             LinearGradient(
                 colors: [.clear, bg.opacity(0.6)],
                 startPoint: UnitPoint(x: 0.5, y: 0.55),

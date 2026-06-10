@@ -28,9 +28,9 @@ MessengerSDK is a secure, lightweight, and customizable iOS SDK that lets you em
 </p>
 
 <p align="center">
-  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-11.png" width="260">
-  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-22.png" width="260">
-  <img src="https://erxes-os.s3-us-west-2.amazonaws.com/github/mobile/ios-33.png" width="260">
+  <img src="screenshots/home.png" width="220" alt="Home">
+  <img src="screenshots/messages.png" width="220" alt="Messages">
+  <img src="screenshots/tickets.png" width="220" alt="Tickets">
 </p>
 
 ## Features
