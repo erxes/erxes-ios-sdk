@@ -29,6 +29,9 @@ public struct MessengerLaunchButton: View {
     @State private var dragOffsetY: CGFloat = 0
     /// Pressed-in scale for haptic feedback feel.
     @State private var isPressed = false
+    /// Drives a one-time in-place scale/opacity pop when the button first appears,
+    /// so the entrance happens AT the corner instead of flying in from elsewhere.
+    @State private var hasAppeared = false
 
     public init(
         horizontalPadding: CGFloat = 16,
@@ -45,14 +48,26 @@ public struct MessengerLaunchButton: View {
     public var body: some View {
         GeometryReader { geo in
             button
+                .scaleEffect(hasAppeared ? 1 : 0.5)
+                .opacity(hasAppeared ? 1 : 0)
                 .position(buttonPosition(in: geo))
                 .offset(y: dragOffsetY)
                 .gesture(dragGesture(in: geo))
+                // Keep the resting position rock-stable: the only thing allowed to
+                // animate the position is the explicit snap spring in dragGesture.
+                // This stops an inherited/ambient animation from sliding the button
+                // when the GeometryReader resolves its size on the first layout pass.
+                .animation(nil, value: geo.size.height)
         }
         // GeometryReader fills its parent; ignore safe-area so position()
         // works in full-screen coordinates.
         .ignoresSafeArea()
         .allowsHitTesting(true)
+        .onAppear {
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) {
+                hasAppeared = true
+            }
+        }
     }
 
     // MARK: - Button

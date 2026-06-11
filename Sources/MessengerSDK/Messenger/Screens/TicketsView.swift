@@ -17,6 +17,12 @@ struct TicketsView: View {
                 if viewModel.isLoading {
                     ProgressView()
                         .padding(.top, 60)
+                } else if appVM.messengerData?.ticketConfig == nil {
+                    // No ticket pipeline configured for this integration — nothing to
+                    // create against, so show guidance instead of the create UI.
+                    notConfiguredState
+                        .padding(.top, 60)
+                        .padding(.horizontal, 32)
                 } else if viewModel.tickets.isEmpty {
                     emptyState
                         .padding(.top, 60)
@@ -69,6 +75,29 @@ struct TicketsView: View {
             }
         }
         .padding(.horizontal, 16)
+    }
+
+    // MARK: - Not-configured state
+
+    private var notConfiguredState: some View {
+        VStack(spacing: 20) {
+            Image(systemName: "ticket")
+                .font(.system(size: 40, weight: .light))
+                .foregroundStyle(.secondary)
+                .frame(width: 84, height: 84)
+                .background(Color.secondary.opacity(0.08), in: Circle())
+                .overlay(Circle().strokeBorder(Color.secondary.opacity(0.15), lineWidth: 1))
+
+            VStack(spacing: 8) {
+                Text("Ticket not configured")
+                    .font(.system(size: 18, weight: .semibold))
+                Text("Select a Ticket config in your config to display articles here.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(2)
+            }
+        }
     }
 
     // MARK: - Empty state

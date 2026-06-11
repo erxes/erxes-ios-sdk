@@ -15,6 +15,14 @@ public final class AppViewModel: ObservableObject {
     @Published private(set) var isConnected = false
     @Published private(set) var connectError: String?
 
+    /// True once the visitor has an identity (host-provided email/phone, a previously
+    /// captured requireAuth contact, or a registered customerId). Gates the auth form.
+    @Published private(set) var isIdentified = false
+
+    /// When the integration's messengerData requires auth, visitors must supply an
+    /// email/phone before starting a conversation.
+    var requireAuth: Bool { messengerData?.requireAuth ?? false }
+
     // ── Active conversation ───────────────────────────────────────────────
     @Published var activeConversationId: String? {
         didSet { SessionManager.shared.lastConversationId = activeConversationId }
@@ -39,8 +47,16 @@ public final class AppViewModel: ObservableObject {
         // Batch initial non-network state into one render pass
         self.config = config
         self.integrationId = config.integrationId
+        // Reset persisted identity if the integration changed, so we don't reuse the
+        // previous integration's customerId (which would surface its tickets/chats).
+        SessionManager.shared.bind(integrationId: config.integrationId)
         self.visitorId = SessionManager.shared.visitorId
         self.activeConversationId = SessionManager.shared.lastConversationId
+        // A host-provided email/phone, or a contact captured on a previous launch,
+        // counts as already identified — skip the requireAuth form in those cases.
+        self.isIdentified = SessionManager.shared.isIdentified
+            || (user?.email?.isEmpty == false)
+            || (user?.phone?.isEmpty == false)
         self.isConnected = true   // show UI immediately; colours fill in after network
 
         NetworkClient.shared.configure(endpoint: config.endpoint)
@@ -62,6 +78,79 @@ public final class AppViewModel: ObservableObject {
         }
     }
 
+    // MARK: - requireAuth identity capture
+
+    enum ContactKind: String { case email, phone }
+
+    /// Saves the visitor's email/phone (and optional name) onto the customer record
+    /// created by connect, via the `widgetsTicketCustomersEdit` mutation. The returned
+    /// `_id` is persisted as the cachedCustomerId so the next connect re-identifies the
+    /// same customer. Used by the requireAuth form before a conversation can start.
+    func identify(kind: ContactKind, value: String, firstName: String?, lastName: String?) async throws {
+        guard let config else { throw GraphQL.GraphQLError(message: "Not connected") }
+        // CustomersEdit edits an existing customer — connect always returns one (even
+        // for anonymous visitors), so this should be populated by now.
+        guard let customerId = self.customerId ?? SessionManager.shared.cachedCustomerId else {
+            throw GraphQL.GraphQLError(message: "No customer to identify")
+        }
+
+        var variables: [String: Any] = ["customerId": customerId]
+        if let f = firstName, !f.isEmpty { variables["firstName"] = f }
+        if let l = lastName,  !l.isEmpty { variables["lastName"]  = l }
+        switch kind {
+        case .email: variables["emails"] = [value]
+        case .phone: variables["phones"] = [value]
+        }
+
+        let obj = try await GraphQL.object(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsTicketCustomersEdit",
+            query: Self.customersEditMutation,
+            variables: variables,
+            field: "widgetsTicketCustomersEdit"
+        )
+
+        if let cid = obj["_id"] as? String, !cid.isEmpty {
+            SessionManager.shared.cachedCustomerId = cid
+            self.customerId = cid
+        }
+        SessionManager.shared.isIdentified = true
+        self.isIdentified = true
+    }
+
+    /// Edits the connect-created customer with the requireAuth contact details.
+    /// The returned `_id` becomes the cachedCustomerId passed to the next connect.
+    private static let customersEditMutation = """
+    mutation CustomersEdit($customerId: String!, $firstName: String, $lastName: String, $emails: [String], $phones: [String]) {
+      widgetsTicketCustomersEdit(customerId: $customerId, firstName: $firstName, lastName: $lastName, emails: $emails, phones: $phones) {
+        _id
+        email
+        emails
+        firstName
+        lastName
+        phone
+        phones
+        primaryEmail
+        primaryPhone
+      }
+    }
+    """
+
+    /// Shared connect mutation — used by both the initial handshake and identify().
+    private static let connectMutation = """
+    mutation connect($integrationId: String!, $visitorId: String, $cachedCustomerId: String, $email: String, $phone: String, $data: JSON) {
+      widgetsMessengerConnect(integrationId: $integrationId, visitorId: $visitorId, cachedCustomerId: $cachedCustomerId, email: $email, phone: $phone, data: $data) {
+        integrationId
+        customerId
+        visitorId
+        languageCode
+        uiOptions
+        messengerData
+        ticketConfig
+      }
+    }
+    """
+
     // MARK: - REST connect call
     // Uses URLSession directly against the widget endpoint while Apollo codegen is pending.
     // Mirrors the `connect` GraphQL mutation in MessengerMutations.graphql.
@@ -73,19 +162,7 @@ public final class AppViewModel: ObservableObject {
             throw URLError(.badURL)
         }
 
-        let mutation = """
-        mutation connect($integrationId: String!, $visitorId: String, $cachedCustomerId: String, $email: String, $phone: String, $data: JSON) {
-          widgetsMessengerConnect(integrationId: $integrationId, visitorId: $visitorId, cachedCustomerId: $cachedCustomerId, email: $email, phone: $phone, data: $data) {
-            integrationId
-            customerId
-            visitorId
-            languageCode
-            uiOptions
-            messengerData
-            ticketConfig
-          }
-        }
-        """
+        let mutation = Self.connectMutation
 
         var variables: [String: Any] = [
             "integrationId": config.integrationId,
@@ -248,6 +325,7 @@ public final class AppViewModel: ObservableObject {
             ),
             links:                  socialLinks,
             ticketConfig:           ticketConfig,
+            knowledgeBaseTopicId:   (md?["knowledgeBaseTopicId"] as? String).flatMap { $0.isEmpty ? nil : $0 },
             websiteApps:            websiteApps,
             responseRate:           md?["responseRate"] as? String,
             requireAuth:            (md?["requireAuth"] as? Bool) ?? false,
@@ -271,8 +349,6 @@ public final class AppViewModel: ObservableObject {
 
     func fetchSupporters() async {
         guard let config else { return }
-        let base = config.fileEndpoint.hasSuffix("/") ? String(config.fileEndpoint.dropLast()) : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else { return }
 
         let query = """
         query widgetsMessengerSupporters($integrationId: String!) {
@@ -286,24 +362,17 @@ public final class AppViewModel: ObservableObject {
           }
         }
         """
-        let body: [String: Any] = [
-            "query": query,
-            "variables": ["integrationId": config.integrationId]
-        ]
-        guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = bodyData
 
-        guard let (data, _) = try? await URLSession.shared.data(for: request) else { return }
-        let raw = String(data: data, encoding: .utf8) ?? "<non-utf8>"
-        SDKLogger.debug("supporters response → \(raw.prefix(500))")
+        guard let json = try? await GraphQL.send(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsMessengerSupporters",
+            query: query,
+            variables: ["integrationId": config.integrationId]
+        ) else { return }
 
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let result = (json["data"] as? [String: Any])?["widgetsMessengerSupporters"] as? [String: Any],
+        guard let result = (json["data"] as? [String: Any])?["widgetsMessengerSupporters"] as? [String: Any],
               let list = result["supporters"] as? [[String: Any]] else {
-            SDKLogger.error("supporters: unexpected body → \(raw.prefix(300))")
+            SDKLogger.error("supporters: unexpected body")
             return
         }
 
@@ -322,8 +391,6 @@ public final class AppViewModel: ObservableObject {
 
     func saveBrowserInfo() async {
         guard let config else { return }
-        let base = config.fileEndpoint.hasSuffix("/") ? String(config.fileEndpoint.dropLast()) : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else { return }
 
         let mutation = """
         mutation saveBrowserInfo($customerId: String, $visitorId: String, $browserInfo: JSON!) {
@@ -342,13 +409,12 @@ public final class AppViewModel: ObservableObject {
         if let cid = customerId     { variables["customerId"] = cid }
         else                        { variables["visitorId"]  = visitorId }
 
-        let body: [String: Any] = ["query": mutation, "variables": variables]
-        guard let bodyData = try? JSONSerialization.data(withJSONObject: body) else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = bodyData
-        _ = try? await URLSession.shared.data(for: request)
+        _ = try? await GraphQL.send(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsSaveBrowserInfo",
+            query: mutation,
+            variables: variables
+        )
     }
 
     // MARK: - Disconnect
@@ -416,6 +482,14 @@ public final class AppViewModel: ObservableObject {
         effectiveBackgroundColor.isLight ? .light : .dark
     }
 
+    /// Standard UI label color resolved against the SDK's effective appearance.
+    /// Use for body content (e.g. article HTML) that sits on the container
+    /// background, rather than the hero textColor which is tuned for the gradient.
+    var effectiveLabelColor: UIColor {
+        let style: UIUserInterfaceStyle = effectiveColorScheme == .dark ? .dark : .light
+        return UIColor.label.resolvedColor(with: UITraitCollection(userInterfaceStyle: style))
+    }
+
     /// Text color used on the hero/gradient background.
     /// Falls back to white when not set (works on any dark background).
     var effectiveTextColor: UIColor {
@@ -442,5 +516,8 @@ public final class AppViewModel: ObservableObject {
         }
     }
 
-    var showFAQTab: Bool { false }
+    /// The Help (knowledge base) tab is shown only when the integration has a
+    /// knowledge base topic configured on its messengerData.
+    var knowledgeBaseTopicId: String? { messengerData?.knowledgeBaseTopicId }
+    var showHelpTab: Bool { knowledgeBaseTopicId != nil }
 }

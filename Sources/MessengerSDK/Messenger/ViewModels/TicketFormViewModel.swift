@@ -27,9 +27,6 @@ final class TicketFormViewModel: ObservableObject {
     }
 
     private func fetchTags(configId: String, parentId: String?, endpoint: String) async -> [TicketTag] {
-        let base = endpoint.hasSuffix("/") ? String(endpoint.dropLast()) : endpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else { return [] }
-
         let query = """
         query WidgetsGetTicketTags($configId: String, $parentId: String) {
           widgetsGetTicketTags(configId: $configId, parentId: $parentId) {
@@ -43,17 +40,13 @@ final class TicketFormViewModel: ObservableObject {
         var variables: [String: Any] = ["configId": configId]
         if let pid = parentId { variables["parentId"] = pid }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let body = try? JSONSerialization.data(withJSONObject: ["query": query, "variables": variables]) else { return [] }
-        request.httpBody = body
-
-        guard let (data, _) = try? await URLSession.shared.data(for: request),
-              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let list = (json["data"] as? [String: Any])?["widgetsGetTicketTags"] as? [[String: Any]] else {
-            return []
-        }
+        guard let list = try? await GraphQL.array(
+            endpoint: endpoint,
+            operation: "widgetsGetTicketTags",
+            query: query,
+            variables: variables,
+            field: "widgetsGetTicketTags"
+        ) else { return [] }
 
         return list.compactMap { t in
             guard let id = t["_id"] as? String, let name = t["name"] as? String else { return nil }

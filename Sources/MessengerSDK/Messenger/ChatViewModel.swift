@@ -76,7 +76,36 @@ final class ChatViewModel: ObservableObject {
             }
             isLoading = false
             hasLoaded = true
-            if !conversationId.isEmpty { startSubscription(config: config) }
+            if !conversationId.isEmpty {
+                startSubscription(config: config)
+                markAsRead(config: config)
+            }
+        }
+    }
+
+    /// Marks all messages in this conversation as read (`widgetsReadConversationMessages`).
+    /// Fire-and-forget: failures are logged but never surfaced to the user, since a failed
+    /// read receipt should not interrupt the chat.
+    private func markAsRead(config: MessengerConfig) {
+        guard !conversationId.isEmpty else { return }
+        let cid = conversationId
+        Task {
+            let mutation = """
+            mutation WidgetsReadConversationMessages($conversationId: String) {
+              widgetsReadConversationMessages(conversationId: $conversationId)
+            }
+            """
+            do {
+                try await GraphQL.send(
+                    endpoint: config.fileEndpoint,
+                    operation: "widgetsReadConversationMessages",
+                    query: mutation,
+                    variables: ["conversationId": cid]
+                )
+                SDKLogger.debug("Marked conversation \(cid) as read")
+            } catch {
+                SDKLogger.error("widgetsReadConversationMessages failed: \(error)")
+            }
         }
     }
 
@@ -208,6 +237,9 @@ final class ChatViewModel: ObservableObject {
                 return
             }
         }
+        // No ack within 10 frames — throw so the manager task reconnects instead of
+        // subscribing over a half-open connection.
+        throw GraphQL.GraphQLError(message: "WebSocket connection_ack not received")
     }
 
     /// Returns `true` when the server sends "complete" (clean stop, no reconnect needed).
@@ -231,6 +263,11 @@ final class ChatViewModel: ObservableObject {
             if msg.fromBot == true { isBot = true }
             rebuildRows()
             SDKLogger.debug("WS ← new message \(msg.id)")
+            // An inbound message (from an agent/bot, not the customer) means there's
+            // something new to mark read while the chat is open.
+            if !msg.isFromCustomer, let config = MessengerSDK.shared.config {
+                markAsRead(config: config)
+            }
             return false
 
         case "error":
@@ -251,8 +288,6 @@ final class ChatViewModel: ObservableObject {
     private func fetchMessages(config: MessengerConfig) async throws -> [Message] {
         // New conversation — no ID yet, nothing to fetch
         guard !conversationId.isEmpty else { return [] }
-        let base = config.fileEndpoint.hasSuffix("/") ? String(config.fileEndpoint.dropLast()) : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else { return [] }
 
         let query = """
         query WidgetsConversationDetail($_id: String, $integrationId: String!) {
@@ -282,25 +317,17 @@ final class ChatViewModel: ObservableObject {
           }
         }
         """
-        let variables: [String: Any] = [
-            "_id": conversationId,
-            "integrationId": config.integrationId
-        ]
+        let json = try await GraphQL.send(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsConversationDetail",
+            query: query,
+            variables: [
+                "_id": conversationId,
+                "integrationId": config.integrationId
+            ]
+        )
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: [
-            "query": query,
-            "variables": variables
-        ])
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-        SDKLogger.debug("widgetsConversationDetail HTTP \(statusCode)")
-
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let detail = ((json["data"] as? [String: Any])?["widgetsConversationDetail"]) as? [String: Any],
+        guard let detail = ((json["data"] as? [String: Any])?["widgetsConversationDetail"]) as? [String: Any],
               let rawMessages = detail["messages"] as? [[String: Any]] else { return [] }
 
         return rawMessages.compactMap { parseMessage($0) }
@@ -309,9 +336,11 @@ final class ChatViewModel: ObservableObject {
     private func parseMessage(_ m: [String: Any]) -> Message? {
         guard let id = m["_id"] as? String else { return nil }
         let content = (m["content"] as? String) ?? ""
-        let createdAt = parseDate(m["createdAt"]) ?? Date()
+        let createdAt = DateParsing.date(from: m["createdAt"]) ?? Date()
         let customerId = m["customerId"] as? String
-        let isFromCustomer = customerId != nil
+        // A message is "from customer" only when customerId is present AND non-empty;
+        // an empty string would otherwise render an agent message on the customer side.
+        let isFromCustomer = !(customerId?.isEmpty ?? true)
         let fromBot = m["fromBot"] as? Bool
 
         // Attachments
@@ -356,28 +385,6 @@ final class ChatViewModel: ObservableObject {
             isCustomerRead: nil,
             user: messageUser
         )
-    }
-
-    private func parseDate(_ value: Any?) -> Date? {
-        if let ms = value as? Double {
-            return Date(timeIntervalSince1970: ms / 1000)
-        }
-        if let ms = value as? Int {
-            return Date(timeIntervalSince1970: Double(ms) / 1000)
-        }
-        if let str = value as? String {
-            // Try numeric string (milliseconds)
-            if let ms = Double(str) {
-                return Date(timeIntervalSince1970: ms / 1000)
-            }
-            // Try ISO8601
-            let iso = ISO8601DateFormatter()
-            iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            if let d = iso.date(from: str) { return d }
-            iso.formatOptions = [.withInternetDateTime]
-            return iso.date(from: str)
-        }
-        return nil
     }
 
     // MARK: - Send
@@ -449,11 +456,6 @@ final class ChatViewModel: ObservableObject {
         customerId: String?,
         visitorId: String
     ) async throws -> Message {
-        let base = config.fileEndpoint.hasSuffix("/") ? String(config.fileEndpoint.dropLast()) : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else {
-            throw URLError(.badURL)
-        }
-
         let mutation = """
         mutation WidgetsInsertMessage(
           $integrationId: String!
@@ -520,28 +522,15 @@ final class ChatViewModel: ObservableObject {
             ]}
         }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: [
-            "query": mutation,
-            "variables": variables
-        ])
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-        SDKLogger.debug("widgetsInsertMessage HTTP \(statusCode)")
-
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw NSError(domain: "MessengerSDK", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])
-        }
-        if let errors = json["errors"] as? [[String: Any]], !errors.isEmpty {
-            let msg = errors.first?["message"] as? String ?? "Unknown error"
-            throw NSError(domain: "MessengerSDK", code: 1, userInfo: [NSLocalizedDescriptionKey: msg])
-        }
-        guard let raw = ((json["data"] as? [String: Any])?["widgetsInsertMessage"]) as? [String: Any],
-              let parsed = parseMessage(raw) else {
-            throw NSError(domain: "MessengerSDK", code: 2, userInfo: [NSLocalizedDescriptionKey: "Failed to parse message"])
+        let raw = try await GraphQL.object(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsInsertMessage",
+            query: mutation,
+            variables: variables,
+            field: "widgetsInsertMessage"
+        )
+        guard let parsed = parseMessage(raw) else {
+            throw GraphQL.GraphQLError(message: "Failed to parse message")
         }
         return parsed
     }
@@ -550,6 +539,10 @@ final class ChatViewModel: ObservableObject {
 
     func attachPhoto(_ item: PhotosPickerItem, appVM: AppViewModel) async {
         guard let config = MessengerSDK.shared.config else { return }
+
+        // Declared outside the do/catch so the failure path can remove this exact
+        // placeholder without touching other in-flight uploads.
+        let placeholderID = UUID()
 
         do {
             // 1. Decode image locally (fast, no network).
@@ -567,7 +560,6 @@ final class ChatViewModel: ObservableObject {
 
             // 3. Insert placeholder (uploaded = nil → isUploading = true).
             //    The strip shows this instantly with a spinner overlay.
-            let placeholderID = UUID()
             pendingAttachments.append(
                 PendingAttachment(id: placeholderID, uploaded: nil, thumbnail: thumb)
             )
@@ -596,8 +588,8 @@ final class ChatViewModel: ObservableObject {
             }
         } catch {
             SDKLogger.error("Photo upload failed: \(error.localizedDescription)")
-            // Remove the placeholder so the strip doesn't show a stuck spinner.
-            pendingAttachments.removeAll { $0.uploaded == nil }
+            // Remove only THIS placeholder so a concurrent upload's spinner survives.
+            pendingAttachments.removeAll { $0.id == placeholderID }
         }
     }
 

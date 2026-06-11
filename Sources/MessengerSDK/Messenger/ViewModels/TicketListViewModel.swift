@@ -24,11 +24,6 @@ final class TicketListViewModel: ObservableObject {
     // MARK: - GraphQL
 
     private func fetchTickets(config: MessengerConfig, customerId: String?) async throws -> [Ticket] {
-        let base = config.fileEndpoint.hasSuffix("/")
-            ? String(config.fileEndpoint.dropLast())
-            : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else { throw URLError(.badURL) }
-
         let query = """
         query WidgetTicketsByCustomer($customerId: String) {
           widgetTicketsByCustomer(customerId: $customerId) {
@@ -68,28 +63,13 @@ final class TicketListViewModel: ObservableObject {
         var variables: [String: Any] = [:]
         if let cid = customerId, !cid.isEmpty { variables["customerId"] = cid }
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: [
-            "query": query,
-            "variables": variables
-        ])
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-        SDKLogger.debug("widgetTicketsByCustomer HTTP \(statusCode)")
-
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw URLError(.cannotParseResponse)
-        }
-        if let errs = json["errors"] as? [[String: Any]] {
-            SDKLogger.error("widgetTicketsByCustomer errors: \(errs)")
-        }
-
-        guard let list = (json["data"] as? [String: Any])?["widgetTicketsByCustomer"] as? [[String: Any]] else {
-            return []
-        }
+        let list = try await GraphQL.array(
+            endpoint: config.fileEndpoint,
+            operation: "widgetTicketsByCustomer",
+            query: query,
+            variables: variables,
+            field: "widgetTicketsByCustomer"
+        )
 
         return list.compactMap { parseTicket($0) }
             .sorted { ($0.createdAt) > ($1.createdAt) }
@@ -137,25 +117,12 @@ final class TicketListViewModel: ObservableObject {
             labelIds: d["labelIds"] as? [String] ?? [],
             tagIds: d["tagIds"] as? [String] ?? [],
             number: d["number"] as? Int,
-            startDate: parseDate(d["startDate"]),
-            targetDate: parseDate(d["targetDate"]),
-            createdAt: parseDate(d["createdAt"]) ?? Date(),
-            updatedAt: parseDate(d["updatedAt"]),
+            startDate: DateParsing.date(from: d["startDate"]),
+            targetDate: DateParsing.date(from: d["targetDate"]),
+            createdAt: DateParsing.date(from: d["createdAt"]) ?? Date(),
+            updatedAt: DateParsing.date(from: d["updatedAt"]),
             status: status,
             assignee: assignee
         )
-    }
-
-    private func parseDate(_ value: Any?) -> Date? {
-        if let ms = value as? Double { return Date(timeIntervalSince1970: ms / 1_000) }
-        if let ms = value as? Int    { return Date(timeIntervalSince1970: Double(ms) / 1_000) }
-        if let str = value as? String {
-            let f = ISO8601DateFormatter()
-            f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            if let d = f.date(from: str) { return d }
-            f.formatOptions = [.withInternetDateTime]
-            return f.date(from: str)
-        }
-        return nil
     }
 }

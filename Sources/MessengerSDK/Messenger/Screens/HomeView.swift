@@ -5,6 +5,7 @@ struct HomeView: View {
     @EnvironmentObject var appVM: AppViewModel
     let onStartConversation: () -> Void
     var onOpenTickets: () -> Void = {}
+    var onOpenHelp: () -> Void = {}
 
     @State private var webAppURL: URL?
 
@@ -170,6 +171,31 @@ struct HomeView: View {
         .buttonStyle(.plain)
     }
 
+    // MARK: - Help center card (knowledge base)
+
+    private var helpCenterCard: some View {
+        glassCard(action: onOpenHelp) {
+            HStack(spacing: 14) {
+                Image(systemName: "books.vertical.fill")
+                    .font(.title3)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 40, height: 40)
+                    .background(Color(.systemGray5), in: Circle())
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("POPULAR ARTICLES")
+                        .font(.caption.weight(.bold)).foregroundStyle(.secondary)
+                    Text("Browse our help center").font(.subheadline)
+                }
+
+                Spacer()
+
+                Image(systemName: "arrow.right")
+                    .foregroundStyle(.secondary).font(.system(size: 14, weight: .semibold))
+            }
+        }
+    }
+
     // MARK: - Cards
 
     private func cardsSection(primary: Color) -> some View {
@@ -198,6 +224,11 @@ struct HomeView: View {
                             Image(systemName: "arrow.right")
                                 .foregroundStyle(.secondary).font(.system(size: 14, weight: .semibold))
                         }
+                    }
+
+                    // Help center / knowledge base — only when configured
+                    if appVM.showHelpTab {
+                        helpCenterCard
                     }
                 }
                 .padding(.horizontal, 16)

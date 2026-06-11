@@ -34,6 +34,7 @@ public struct MessengerData {
     public let messages: GreetingMessages?
     public let links: SocialLinks?
     public let ticketConfig: TicketConfig?
+    public let knowledgeBaseTopicId: String?
     public let websiteApps: [WebsiteApp]
     public let responseRate: String?         // "minutes" | "hours" | "days"
     public let requireAuth: Bool

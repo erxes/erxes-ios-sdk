@@ -7,14 +7,23 @@ struct MessengerContainerView: View {
     @State private var primaryColor: Color = Color(UIColor(red: 0.25, green: 0.47, blue: 0.85, alpha: 1))
     @State private var homeText = ""
 
+    /// Tickets tab is only shown when the integration has a ticket pipeline
+    /// configured — otherwise there's nothing to create or list against.
+    private var showTickets: Bool { appVM.messengerData?.ticketConfig != nil }
+
+    /// Help (knowledge base) tab is only shown when the integration has a
+    /// knowledgeBaseTopicId configured.
+    private var showHelp: Bool { appVM.showHelpTab }
+
     enum AppTab: Hashable, CaseIterable, Identifiable {
-        case home, messages, tickets
+        case home, messages, help, tickets
         var id: Self { self }
 
         var label: String {
             switch self {
             case .home:     return "Home"
             case .messages: return "Messages"
+            case .help:     return "Help"
             case .tickets:  return "Tickets"
             }
         }
@@ -22,6 +31,7 @@ struct MessengerContainerView: View {
             switch self {
             case .home:     return "house"
             case .messages: return "bubble.left"
+            case .help:     return "questionmark.circle"
             case .tickets:  return "ticket"
             }
         }
@@ -29,6 +39,7 @@ struct MessengerContainerView: View {
             switch self {
             case .home:     return "house.fill"
             case .messages: return "bubble.left.fill"
+            case .help:     return "questionmark.circle.fill"
             case .tickets:  return "ticket.fill"
             }
         }
@@ -65,7 +76,8 @@ struct MessengerContainerView: View {
             SwiftUI.Tab("Home", systemImage: "house", value: AppTab.home) {
                 HomeView(
                     onStartConversation: { selectedTab = .messages },
-                    onOpenTickets: { selectedTab = .tickets }
+                    onOpenTickets: { selectedTab = .tickets },
+                    onOpenHelp: { selectedTab = .help }
                 )
                 .environmentObject(appVM)
                 // Input bar sits above the tab bar, inside the home tab's safe area
@@ -79,9 +91,18 @@ struct MessengerContainerView: View {
                     .environmentObject(appVM)
             }
 
-            SwiftUI.Tab("Tickets", systemImage: "ticket", value: AppTab.tickets) {
-                TicketsView()
-                    .environmentObject(appVM)
+            if showHelp {
+                SwiftUI.Tab("Help", systemImage: "questionmark.circle", value: AppTab.help) {
+                    HelpView()
+                        .environmentObject(appVM)
+                }
+            }
+
+            if showTickets {
+                SwiftUI.Tab("Tickets", systemImage: "ticket", value: AppTab.tickets) {
+                    TicketsView()
+                        .environmentObject(appVM)
+                }
             }
         }
     }
@@ -95,14 +116,18 @@ struct MessengerContainerView: View {
                 if selectedTab == .home {
                     HomeView(
                         onStartConversation: { selectedTab = .messages },
-                        onOpenTickets: { selectedTab = .tickets }
+                        onOpenTickets: { selectedTab = .tickets },
+                        onOpenHelp: { selectedTab = .help }
                     )
                     .environmentObject(appVM)
                 }
                 if selectedTab == .messages {
                     MessagesView().environmentObject(appVM)
                 }
-                if selectedTab == .tickets {
+                if selectedTab == .help && showHelp {
+                    HelpView().environmentObject(appVM)
+                }
+                if selectedTab == .tickets && showTickets {
                     TicketsView().environmentObject(appVM)
                 }
             }
@@ -121,7 +146,9 @@ struct MessengerContainerView: View {
 
     private func legacyBar(primary: Color) -> some View {
         HStack(spacing: 0) {
-            ForEach(AppTab.allCases) { tab in
+            ForEach(AppTab.allCases.filter {
+                ($0 != .tickets || showTickets) && ($0 != .help || showHelp)
+            }) { tab in
                 let isActive = selectedTab == tab
                 Button {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -159,29 +186,51 @@ struct MessengerContainerView: View {
     // MARK: - Home input bar (shared)
 
     private func homeInputBar(primary: Color) -> some View {
-        HStack(spacing: 12) {
-            TextField("How can I help you today?", text: $homeText, axis: .vertical)
-                .font(.subheadline)
-                .lineLimit(1...4)
-                .submitLabel(.send)
-                .onSubmit { sendHomeMessage() }
-
-            Button {
-                if homeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    selectedTab = .messages
-                } else {
-                    sendHomeMessage()
+        Group {
+            if appVM.requireAuth && !appVM.isIdentified {
+                // requireAuth: composing from home isn't possible until the
+                // visitor is identified, so the bar just routes to the Messages
+                // tab where the inline identity form is shown.
+                Button { selectedTab = .messages } label: {
+                    HStack(spacing: 12) {
+                        Text("How can I help you today?")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Spacer(minLength: 0)
+                        Image(systemName: "arrow.up")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundStyle(.white)
+                            .frame(width: 34, height: 34)
+                            .background(primary, in: Circle())
+                    }
                 }
-            } label: {
-                Image(systemName: "arrow.up")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 34, height: 34)
-                    .background(
-                        homeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                            ? Color.secondary : primary,
-                        in: Circle()
-                    )
+                .buttonStyle(.plain)
+            } else {
+                HStack(spacing: 12) {
+                    TextField("How can I help you today?", text: $homeText, axis: .vertical)
+                        .font(.subheadline)
+                        .lineLimit(1...4)
+                        .submitLabel(.send)
+                        .onSubmit { sendHomeMessage() }
+
+                    Button {
+                        if homeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            selectedTab = .messages
+                        } else {
+                            sendHomeMessage()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundStyle(.white)
+                            .frame(width: 34, height: 34)
+                            .background(
+                                homeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                                    ? Color.secondary : primary,
+                                in: Circle()
+                            )
+                    }
+                }
             }
         }
         .padding(.horizontal, 16)

@@ -48,10 +48,14 @@ struct ContentView: View {
         // Only shown once the SDK has connected.
         .overlay {
             if sdk.isReady {
+                // Fade the full-screen launcher container in place. A scale
+                // transition here would scale the whole GeometryReader about the
+                // screen center, making the corner button appear to fly in. The
+                // button does its own in-place pop (see MessengerLaunchButton).
                 MessengerLaunchButton()
-                    .transition(.scale(scale: 0.5).combined(with: .opacity))
+                    .transition(.opacity)
             }
         }
-        .animation(.spring(response: 0.4, dampingFraction: 0.7), value: sdk.isReady)
+        .animation(.easeOut(duration: 0.25), value: sdk.isReady)
     }
 }

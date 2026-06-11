@@ -34,13 +34,6 @@ final class ConversationListViewModel: ObservableObject {
         customerId: String?,
         visitorId: String?
     ) async throws -> [Conversation] {
-        let base = config.fileEndpoint.hasSuffix("/")
-            ? String(config.fileEndpoint.dropLast())
-            : config.fileEndpoint
-        guard let url = URL(string: "\(base)/gateway/graphql") else {
-            throw URLError(.badURL)
-        }
-
         let query = """
         query widgetsConversations($integrationId: String!, $customerId: String, $visitorId: String) {
           widgetsConversations(
@@ -90,33 +83,21 @@ final class ConversationListViewModel: ObservableObject {
         """
 
         var variables: [String: Any] = ["integrationId": config.integrationId]
-        // TODO: remove hardcoded test customerId
-        let resolvedCustomerId = "uRXZqhB7iT5AKii3IzC8d"
-        variables["customerId"] = resolvedCustomerId
-        _ = customerId; _ = visitorId
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: [
-            "query": query,
-            "variables": variables
-        ])
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-        SDKLogger.debug("widgetsConversations HTTP \(statusCode)")
-
-        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            throw URLError(.cannotParseResponse)
-        }
-        if let errs = json["errors"] as? [[String: Any]] {
-            SDKLogger.error("widgetsConversations errors: \(errs)")
+        // Mirror the identity rule: prefer the registered customerId, fall back
+        // to the guest visitorId. They are mutually exclusive on the backend.
+        if let customerId, !customerId.isEmpty {
+            variables["customerId"] = customerId
+        } else if let visitorId, !visitorId.isEmpty {
+            variables["visitorId"] = visitorId
         }
 
-        guard let list = (json["data"] as? [String: Any])?["widgetsConversations"] as? [[String: Any]] else {
-            return []
-        }
+        let list = try await GraphQL.array(
+            endpoint: config.fileEndpoint,
+            operation: "widgetsConversations",
+            query: query,
+            variables: variables,
+            field: "widgetsConversations"
+        )
 
         return list.compactMap { parseConversation($0) }
             .sorted { $0.createdAt > $1.createdAt }
@@ -127,7 +108,7 @@ final class ConversationListViewModel: ObservableObject {
     private func parseConversation(_ d: [String: Any]) -> Conversation? {
         guard let rawId = d["_id"] as? String else { return nil }
 
-        let createdAt = parseDate(d["createdAt"]) ?? Date()
+        let createdAt = DateParsing.date(from: d["createdAt"]) ?? Date()
 
         let users: [ParticipatedUser] = (d["participatedUsers"] as? [[String: Any]] ?? [])
             .compactMap { u in
@@ -186,7 +167,7 @@ final class ConversationListViewModel: ObservableObject {
         return Message(
             id: mid,
             content: content,
-            createdAt: parseDate(d["createdAt"]) ?? Date(),
+            createdAt: DateParsing.date(from: d["createdAt"]) ?? Date(),
             isFromCustomer: isFromCustomer,
             attachments: attachments,
             fromBot: d["fromBot"] as? Bool,
@@ -206,19 +187,5 @@ final class ConversationListViewModel: ObservableObject {
             position:    d["position"]  as? String,
             shortName:   d["shortName"] as? String
         )
-    }
-
-    /// Handles ISO8601 strings ("2024-01-15T10:30:00.000Z") and Unix ms numbers.
-    private func parseDate(_ value: Any?) -> Date? {
-        if let ms = value as? Double  { return Date(timeIntervalSince1970: ms / 1_000) }
-        if let ms = value as? Int     { return Date(timeIntervalSince1970: Double(ms) / 1_000) }
-        if let str = value as? String {
-            let f = ISO8601DateFormatter()
-            f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            if let d = f.date(from: str) { return d }
-            f.formatOptions = [.withInternetDateTime]
-            return f.date(from: str)
-        }
-        return nil
     }
 }
