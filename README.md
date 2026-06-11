@@ -76,7 +76,7 @@ Or add it directly to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Munkhorgilb/ios-sdk", from: "1.0.0")
+    .package(url: "https://github.com/Munkhorgilb/ios-sdk", from: "0.0.1")
 ],
 targets: [
     .target(
