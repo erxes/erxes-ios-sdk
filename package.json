@@ -1,0 +1,26 @@
+{
+  "name": "react-native-erxes-sdk",
+  "version": "0.30.0",
+  "description": "React Native wrapper for the erxes Messenger iOS SDK — headless <ErxesSDK> with a native-owned floating launcher.",
+  "main": "src/index.tsx",
+  "source": "src/index.tsx",
+  "files": [
+    "src",
+    "ios",
+    "react-native-erxes-sdk.podspec",
+    "!ios/build"
+  ],
+  "keywords": ["react-native", "ios", "erxes", "messenger", "chat"],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.81.0"
+  },
+  "codegenConfig": {
+    "name": "NativeErxesSdkSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "ios": {
+      "componentProvider": {}
+    }
+  }
+}

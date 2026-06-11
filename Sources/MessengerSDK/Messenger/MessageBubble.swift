@@ -98,8 +98,34 @@ struct MessageBubble: View {
 
     // MARK: - Bubble
 
+    private var hasText: Bool {
+        !message.content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
     @ViewBuilder
     private var bubbleContent: some View {
+        VStack(alignment: message.isFromCustomer ? .trailing : .leading, spacing: 6) {
+            // Text bubble — skipped for attachment-only messages so we don't show an
+            // empty pill.
+            if hasText {
+                textBubble
+            }
+
+            // Attachments
+            if !message.attachments.isEmpty {
+                ForEach(message.attachments) { attachment in
+                    AttachmentItemView(
+                        attachment: attachment,
+                        fileEndpoint: appVM.config?.fileEndpoint ?? "",
+                        isFromCustomer: message.isFromCustomer
+                    )
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var textBubble: some View {
         if message.isFromCustomer {
             MessageContentView(content: message.content, isFromCustomer: true)
                 .padding(.horizontal, 14)

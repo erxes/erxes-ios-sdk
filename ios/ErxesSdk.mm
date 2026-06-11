@@ -1,0 +1,65 @@
+#import "ErxesSdk.h"
+
+#ifdef RCT_NEW_ARCH_ENABLED
+// Codegen-generated TurboModule spec (from src/NativeErxesSdk.ts). The folder
+// name matches `codegenConfig.name` in package.json ("NativeErxesSdkSpec").
+#import <NativeErxesSdkSpec/NativeErxesSdkSpec.h>
+#endif
+
+// Swift bridge generated header. The module name ("ErxesSdk") must match the
+// `name` in package.json's `codegenConfig` / the pod name; this header is emitted
+// from `ErxesSdkBridge.swift`.
+#if __has_include("ErxesSdk-Swift.h")
+#import "ErxesSdk-Swift.h"
+#else
+#import <ErxesSdk/ErxesSdk-Swift.h>
+#endif
+
+@implementation ErxesSdk {
+  ErxesSdkBridge *_bridge;
+}
+
+RCT_EXPORT_MODULE()
+
+- (instancetype)init {
+  if (self = [super init]) {
+    _bridge = [ErxesSdkBridge new];
+  }
+  return self;
+}
+
+// All UI work happens on the main queue inside the Swift bridge; nothing here
+// needs the JS thread, so request the main queue to avoid an extra hop.
++ (BOOL)requiresMainQueueSetup { return YES; }
+
+RCT_EXPORT_METHOD(configure : (NSDictionary *)config) {
+  [_bridge configure:config];
+}
+
+RCT_EXPORT_METHOD(setUser : (NSDictionary *)user) {
+  [_bridge setUser:user];
+}
+
+RCT_EXPORT_METHOD(clearUser) {
+  [_bridge clearUser];
+}
+
+RCT_EXPORT_METHOD(showLauncher) {
+  [_bridge showLauncher];
+}
+
+RCT_EXPORT_METHOD(hideLauncher) {
+  [_bridge hideLauncher];
+}
+
+// New-architecture TurboModule registration. `NativeErxesSdkSpecJSI` is generated
+// by codegen from `src/NativeErxesSdk.ts`; the import path follows your
+// codegenConfig `name`.
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params {
+  return std::make_shared<facebook::react::NativeErxesSdkSpecJSI>(params);
+}
+#endif
+
+@end

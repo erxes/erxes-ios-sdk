@@ -22,7 +22,9 @@ public enum MessageGrouper {
     public static func buildChatRows(messages: [Message]) -> [ChatRow] {
         var rows: [ChatRow] = []
 
-        let filtered = messages.filter { !$0.content.isEmpty }
+        // Keep messages that have text OR attachments — an attachment-only message
+        // has empty content but must still render its image/file.
+        let filtered = messages.filter { !$0.content.isEmpty || !$0.attachments.isEmpty }
         guard !filtered.isEmpty else { return rows }
 
         var currentDateKey = ""

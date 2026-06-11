@@ -76,7 +76,7 @@ Or add it directly to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Munkhorgilb/ios-sdk", from: "0.0.1")
+    .package(url: "https://github.com/Munkhorgilb/ios-sdk", from: "0.30.0")
 ],
 targets: [
     .target(
@@ -97,8 +97,8 @@ import MessengerSDK
 
 MessengerSDK.configure(
     MessengerConfig(
-        integrationId: "YOUR_INTEGRATION_ID",
-        serverUrl: "https://your.erxes.instance"
+        endpoint: "https://your.erxes.instance",
+        integrationId: "YOUR_INTEGRATION_ID"
     )
 )
 ```
@@ -137,7 +137,16 @@ struct ContentView: View {
 
 The button snaps to the top-right or bottom-right corner — users can drag it between the two positions.
 
-### 4. Or open the messenger programmatically
+### 4. Or float the launcher from a UIKit / non-SwiftUI host
+
+If your app isn't SwiftUI (UIKit, React Native, Flutter), call `showLauncher()` to float the same draggable button in a transparent overlay window above your content. Touches outside the button pass straight through, and it appears automatically once the connect handshake succeeds.
+
+```swift
+MessengerSDK.showLauncher()   // e.g. in AppDelegate / SceneDelegate after configure()
+MessengerSDK.hideLauncher()   // remove it (e.g. on logout)
+```
+
+### 5. Or open the messenger programmatically
 
 ```swift
 MessengerSDK.showMessenger(from: yourViewController)

@@ -136,9 +136,26 @@ public struct MessengerLaunchButton: View {
     // MARK: - Open
 
     private func openMessenger() {
-        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let root  = scene.windows.first?.rootViewController else { return }
-        MessengerSDK.showMessenger(from: root)
+        guard let presenter = Self.topPresenter() else { return }
+        MessengerSDK.showMessenger(from: presenter)
+    }
+
+    /// Find the view controller that should present the messenger sheet: the topmost
+    /// already-presented controller on the app's key window. Resolving this explicitly
+    /// avoids picking the transparent launcher overlay window (or any wrong window)
+    /// when several windows are on screen.
+    private static func topPresenter() -> UIViewController? {
+        let windows = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+        // The launcher overlay is never made key, so the key window is the app's.
+        let keyWindow = windows.first { $0.isKeyWindow } ?? windows.first
+
+        var top = keyWindow?.rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        return top
     }
 }
 

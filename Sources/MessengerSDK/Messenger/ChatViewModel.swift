@@ -349,9 +349,9 @@ final class ChatViewModel: ObservableObject {
             return Attachment(
                 id: ObjectIdGenerator.generate(),
                 url: url,
-                type: "image",
+                type: (a["type"] as? String) ?? "image",
                 name: a["name"] as? String,
-                size: nil
+                size: a["size"] as? Int
             )
         }
 

@@ -38,6 +38,21 @@ public final class MessengerSDK: ObservableObject {
         shared.currentUser = nil
     }
 
+    // MARK: - Floating launcher (native overlay)
+
+    /// Present the floating launcher in a transparent overlay window above the host
+    /// app's content. Use this from non-SwiftUI hosts (UIKit, React Native, Flutter).
+    /// The button only appears once the connect handshake succeeds (`isReady`), and
+    /// touches outside the button pass straight through to your app.
+    public static func showLauncher() {
+        LauncherWindow.shared.show()
+    }
+
+    /// Remove the floating launcher overlay window.
+    public static func hideLauncher() {
+        LauncherWindow.shared.hide()
+    }
+
     // MARK: - Internal connect
 
     private static func startConnect() {
