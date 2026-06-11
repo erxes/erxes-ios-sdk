@@ -14,7 +14,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
-        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: "3.0.0"),
     ],
     targets: [
         .target(
@@ -22,7 +21,6 @@ let package = Package(
             dependencies: [
                 .product(name: "Apollo", package: "apollo-ios"),
                 .product(name: "ApolloWebSocket", package: "apollo-ios"),
-                .product(name: "SDWebImageSwiftUI", package: "SDWebImageSwiftUI"),
             ],
             path: "Sources/MessengerSDK",
             resources: [
