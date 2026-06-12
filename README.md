@@ -1,6 +1,6 @@
 # erxes - IOS SDK
 
-MessengerSDK is a secure, lightweight, and customizable iOS SDK that lets you embed a fully-featured customer messenger into your iOS application. Built on Swift and SwiftUI, it connects to the erxes platform and gives your users real-time chat, AI agent support, knowledge base access, and more — all inside your app.
+erxes iOS SDK is a secure, lightweight, and customizable iOS SDK that lets you embed a fully-featured customer messenger into your iOS application. Built on Swift and SwiftUI, it connects to the erxes platform and gives your users real-time chat, AI agent support, knowledge base access, and more — all inside your app.
 
 <a href="https://docs.erxes.io/docs/intro">Documentation</a> <b>| </b> <a href="https://discord.com/invite/aaGzy3gQK5">Join our community</a>
 
