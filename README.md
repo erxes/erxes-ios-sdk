@@ -7,8 +7,8 @@ MessengerSDK is a secure, lightweight, and customizable iOS SDK that lets you em
 ## Status
 
 <p align="center">
-  <a href="https://github.com/erxes/erxes/blob/master/LICENSE.md">
-    <img alt="License Badge" src="https://img.shields.io/badge/license-AGPLv3-brightgreen">
+  <a href="./LICENSE">
+    <img alt="License Badge" src="https://img.shields.io/badge/license-GPLv3%20%2B%20Commons%20Clause-brightgreen">
   </a>
   <a href="#">
     <img alt="iOS 16+" src="https://img.shields.io/badge/iOS-16%2B-blue">
@@ -167,4 +167,4 @@ For general help using erxes, please refer to the [erxes documentation](https://
 
 ## License
 
-See the [LICENSE](https://github.com/erxes/erxes/blob/master/LICENSE.md) file for licensing information.
+This project is licensed under the GNU General Public License v3.0 with the Commons Clause. See the [LICENSE](./LICENSE) file for licensing information.
