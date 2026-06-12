@@ -2,7 +2,6 @@ import SwiftUI
 import MessengerSDK
 
 struct ContentView: View {
-    @ObservedObject private var sdk = MessengerSDK.shared
     @State private var isLoggedIn = false
     @State private var email = ""
 
@@ -44,18 +43,11 @@ struct ContentView: View {
             .padding()
             .navigationTitle("Demo")
         }
-        // Floating 48×48 launcher — draggable between top-right and bottom-right.
-        // Only shown once the SDK has connected.
-        .overlay {
-            if sdk.isReady {
-                // Fade the full-screen launcher container in place. A scale
-                // transition here would scale the whole GeometryReader about the
-                // screen center, making the corner button appear to fly in. The
-                // button does its own in-place pop (see MessengerLaunchButton).
-                MessengerLaunchButton()
-                    .transition(.opacity)
-            }
-        }
-        .animation(.easeOut(duration: 0.25), value: sdk.isReady)
+        // Use the native overlay-window launcher — the SAME path RN/Flutter hosts
+        // drive via showLauncher(). This makes the Example reproduce the floating
+        // passthrough-window behaviour (hit-testing, key-window, sheet presentation)
+        // so launcher fixes can be verified here before cutting a release.
+        .onAppear { MessengerSDK.showLauncher() }
+        .onDisappear { MessengerSDK.hideLauncher() }
     }
 }
