@@ -93,6 +93,12 @@ public final class MessengerSDK: ObservableObject {
         from viewController: UIViewController,
         onDismiss: (() -> Void)?
     ) {
+        // The launcher button lives in its own overlay window. Tapping it can make
+        // that window key, so the caller may hand us a presenter that lives inside
+        // it — presenting from there (and then hiding it) would put the sheet in a
+        // hidden window. Redirect to the app's own window in that case.
+        let presenter = safePresenter(viewController)
+
         // Hide the floating launcher while the sheet is up so it doesn't overlay it,
         // and restore it on dismiss only if it was visible to begin with.
         let launcherWasVisible = LauncherWindow.shared.isVisible
@@ -108,7 +114,43 @@ public final class MessengerSDK: ObservableObject {
             sheet.detents = [.large()]
             sheet.prefersGrabberVisible = true
         }
-        viewController.present(hostingVC, animated: true)
+        presenter.present(hostingVC, animated: true)
+    }
+
+    // MARK: - Presenter resolution
+
+    /// Use the caller's presenter unless it belongs to the launcher overlay window,
+    /// in which case fall back to the top view controller of the app's own window.
+    private static func safePresenter(_ preferred: UIViewController) -> UIViewController {
+        let window = preferred.viewIfLoaded?.window
+        if window != nil && !LauncherWindow.shared.owns(window) {
+            return preferred
+        }
+        return topViewController(from: appPresentationWindow()?.rootViewController) ?? preferred
+    }
+
+    /// The app's foreground window, excluding the launcher overlay window.
+    private static func appPresentationWindow() -> UIWindow? {
+        let candidates = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .filter { !$0.isHidden && !LauncherWindow.shared.owns($0) }
+        return candidates.first { $0.isKeyWindow }
+            ?? candidates.first { $0.windowLevel == .normal }
+            ?? candidates.first
+    }
+
+    private static func topViewController(from root: UIViewController?) -> UIViewController? {
+        if let nav = root as? UINavigationController {
+            return topViewController(from: nav.visibleViewController)
+        }
+        if let tab = root as? UITabBarController {
+            return topViewController(from: tab.selectedViewController)
+        }
+        if let presented = root?.presentedViewController {
+            return topViewController(from: presented)
+        }
+        return root
     }
 }
 

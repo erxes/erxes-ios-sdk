@@ -51,6 +51,10 @@ final class LauncherWindow {
     /// Restore a launcher hidden by `suspend()`.
     func resume() { window?.isHidden = false }
 
+    /// Whether `candidate` is the launcher's own overlay window. Used to keep the
+    /// messenger sheet from being presented into (and hidden with) this window.
+    func owns(_ candidate: UIWindow?) -> Bool { candidate != nil && candidate === window }
+
     private static var activeWindowScene: UIWindowScene? {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -94,6 +98,11 @@ private struct LauncherOverlay: View {
 /// the button into the single `_UIHostingView` (which *is* the root view), so doing
 /// so would discard the button's own taps.
 private final class PassthroughWindow: UIWindow {
+    // Never become the key window. Touches are still delivered via hit-testing, but
+    // the app's own window stays key — so presenting the messenger resolves the app
+    // window as the presenter instead of this transparent overlay.
+    override var canBecomeKey: Bool { false }
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hit = super.hitTest(point, with: event)
         // Over empty space the hosting view hit-tests to `nil`, so UIWindow falls
