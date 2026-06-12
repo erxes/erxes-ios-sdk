@@ -154,7 +154,7 @@ MessengerSDK.showMessenger(from: yourViewController)
 
 ## Contributing
 
-Please read our [contributing guide](https://github.com/erxes/erxes/blob/master/CONTRIBUTING.md) before submitting a Pull Request to the project.
+Please read our [contributing guide](./CONTRIBUTING.md) and [code of conduct](./CODE_OF_CONDUCT.md) before submitting a Pull Request to the project. To report a security issue, see our [security policy](./SECURITY.md).
 
 ## Community Support
 
