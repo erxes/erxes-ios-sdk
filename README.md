@@ -69,14 +69,14 @@ MessengerSDK is a secure, lightweight, and customizable iOS SDK that lets you em
 In Xcode: **File → Add Package Dependencies…** and enter:
 
 ```
-https://github.com/Munkhorgilb/ios-sdk
+https://github.com/erxes/erxes-ios-sdk
 ```
 
 Or add it directly to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Munkhorgilb/ios-sdk", from: "0.30.0")
+    .package(url: "https://github.com/erxes/erxes-ios-sdk", from: "0.30.0")
 ],
 targets: [
     .target(
@@ -161,8 +161,8 @@ Please read our [contributing guide](https://github.com/erxes/erxes/blob/master/
 For general help using erxes, please refer to the [erxes documentation](https://docs.erxes.io). For additional help, you can use one of these channels:
 
 - **[Discord](https://discord.com/invite/aaGzy3gQK5)** — Live discussion with the community
-- **[GitHub](https://github.com/Munkhorgilb/ios-sdk)** — Bug reports and contributions
-- **[Feedback / Issues](https://github.com/Munkhorgilb/ios-sdk/issues)** — Feature requests and bug reports
+- **[GitHub](https://github.com/erxes/erxes-ios-sdk)** — Bug reports and contributions
+- **[Feedback / Issues](https://github.com/erxes/erxes-ios-sdk/issues)** — Feature requests and bug reports
 - **[Twitter](https://twitter.com/erxeshq)** — Get the news fast
 
 ## License
