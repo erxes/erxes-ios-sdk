@@ -93,8 +93,16 @@ public final class MessengerSDK: ObservableObject {
         from viewController: UIViewController,
         onDismiss: (() -> Void)?
     ) {
+        // Hide the floating launcher while the sheet is up so it doesn't overlay it,
+        // and restore it on dismiss only if it was visible to begin with.
+        let launcherWasVisible = LauncherWindow.shared.isVisible
+        LauncherWindow.shared.suspend()
+
         let root = MessengerContainerView(appVM: appVM)
-        let hostingVC = DismissCallbackHostingController(rootView: root, onDismiss: onDismiss)
+        let hostingVC = DismissCallbackHostingController(rootView: root) {
+            if launcherWasVisible { LauncherWindow.shared.resume() }
+            onDismiss?()
+        }
         hostingVC.modalPresentationStyle = .pageSheet
         if let sheet = hostingVC.sheetPresentationController {
             sheet.detents = [.large()]

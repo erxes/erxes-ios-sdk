@@ -40,6 +40,17 @@ final class LauncherWindow {
         window = nil
     }
 
+    /// Whether the launcher overlay is currently on screen.
+    var isVisible: Bool { window?.isHidden == false }
+
+    /// Temporarily hide the launcher without tearing down the window — used while the
+    /// messenger sheet is presented so the button doesn't float over it. Pair with
+    /// `resume()`. No-op when the launcher isn't shown.
+    func suspend() { window?.isHidden = true }
+
+    /// Restore a launcher hidden by `suspend()`.
+    func resume() { window?.isHidden = false }
+
     private static var activeWindowScene: UIWindowScene? {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
@@ -55,7 +66,12 @@ private struct LauncherOverlay: View {
     @ObservedObject private var sdk = MessengerSDK.shared
 
     var body: some View {
+        // The full-screen background must NOT capture touches, otherwise SwiftUI's
+        // hosting view claims every point and the window can't tell the button apart
+        // from empty space. With it non-interactive, the hosting view hit-tests to
+        // `nil` over empty areas and to the button only where the button is drawn.
         Color.clear
+            .allowsHitTesting(false)
             .overlay {
                 if sdk.isReady {
                     MessengerLaunchButton()
@@ -68,14 +84,21 @@ private struct LauncherOverlay: View {
 
 // MARK: - Pass-through window
 
-/// A window that only "catches" touches on its subviews (the button). Touches that
-/// land on the empty root view return `nil` from `hitTest`, so UIKit forwards them
-/// to the window underneath — the host app stays fully interactive.
+/// A window that only "catches" touches on the launcher button. The hosting view
+/// runs SwiftUI's own hit testing — because the background is marked non-interactive
+/// it returns `nil` for the transparent areas and the hosting view only where the
+/// button is drawn. We forward that result directly: button taps are delivered, and
+/// every other touch falls through to the app window underneath.
+///
+/// NOTE: we must NOT special-case `rootViewController.view` here. SwiftUI flattens
+/// the button into the single `_UIHostingView` (which *is* the root view), so doing
+/// so would discard the button's own taps.
 private final class PassthroughWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard let hit = super.hitTest(point, with: event) else { return nil }
-        // The root view controller's own view is the transparent background — let
-        // those touches fall through. Anything else is real launcher UI.
-        return rootViewController?.view === hit ? nil : hit
+        let hit = super.hitTest(point, with: event)
+        // Over empty space the hosting view hit-tests to `nil`, so UIWindow falls
+        // back to returning itself — treat that as a pass-through. Anywhere SwiftUI
+        // claims the point (the button) it returns the hosting view, which we deliver.
+        return hit === self ? nil : hit
     }
 }
