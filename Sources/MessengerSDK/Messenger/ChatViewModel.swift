@@ -572,7 +572,7 @@ final class ChatViewModel: ObservableObject {
                 ? originalName : "\(originalName).jpg"
 
             let uploaded = try await FileUploader.shared.upload(
-                imageData: jpegData,
+                fileData: jpegData,
                 filename: filename,
                 mimeType: "image/jpeg",
                 fileEndpoint: config.fileEndpoint

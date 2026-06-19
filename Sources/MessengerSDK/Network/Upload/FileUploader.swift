@@ -28,9 +28,13 @@ final class FileUploader {
     static let shared = FileUploader()
     private init() {}
 
-    private let allowedMimeTypes: Set<String> = ["image/png", "image/jpeg"]
+    private let allowedMimeTypes: Set<String> = [
+        "image/png", "image/jpeg",
+        // Voice messages — recorded as AAC in an .m4a container.
+        "audio/m4a", "audio/x-m4a", "audio/mp4", "audio/aac", "audio/mpeg", "audio/wav"
+    ]
 
-    func upload(imageData: Data, filename: String, mimeType: String, fileEndpoint: String) async throws -> UploadedAttachment {
+    func upload(fileData: Data, filename: String, mimeType: String, fileEndpoint: String) async throws -> UploadedAttachment {
         guard allowedMimeTypes.contains(mimeType.lowercased()) else {
             throw UploadError.unsupportedFormat
         }
@@ -50,7 +54,7 @@ final class FileUploader {
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
         body.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-        body.append(imageData)
+        body.append(fileData)
         body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
         request.httpBody = body
 
@@ -69,7 +73,7 @@ final class FileUploader {
             url: key,
             name: filename,
             type: mimeType,
-            size: imageData.count
+            size: fileData.count
         )
     }
 }

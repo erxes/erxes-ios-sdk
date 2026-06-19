@@ -24,10 +24,20 @@ struct AttachmentItemView: View {
             .contains { probe.hasSuffix(".\($0)") }
     }
 
+    /// Audio (voice message) when the API type says so, or by file extension.
+    private var isAudio: Bool {
+        if attachment.type.lowercased().contains("audio") { return true }
+        let probe = (attachment.name ?? attachment.url).lowercased()
+        return ["m4a", "mp3", "wav", "aac", "caf", "ogg"]
+            .contains { probe.hasSuffix(".\($0)") }
+    }
+
     var body: some View {
         Group {
             if isImage {
                 imageView
+            } else if isAudio {
+                AudioMessageView(url: url, isFromCustomer: isFromCustomer)
             } else {
                 fileChip
             }

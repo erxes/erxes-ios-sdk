@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import NativeErxesSdk from './NativeErxesSdk';
+import type { ActionItem } from './NativeErxesSdk';
+
+export type { ActionItem };
 
 export type ErxesUser = {
   email?: string;
@@ -21,6 +24,17 @@ export type ErxesSDKProps = {
    * handshake completes. Defaults to true.
    */
   visible?: boolean;
+  /**
+   * UI shell. 'classic' (default) is the 4-tab widget shown as a sheet; 'chat'
+   * is a ChatGPT/Claude-style full-screen shell with a left conversation drawer.
+   */
+  displayMode?: 'classic' | 'chat';
+  /** Chat-mode header-right actions. Ignored in classic mode. */
+  homeActions?: ActionItem[];
+  /** Chat-mode drawer top action rows. Ignored in classic mode. */
+  drawerActions?: ActionItem[];
+  /** Called with the action `id` when a home/drawer action is tapped. */
+  onAction?: (id: string) => void;
 };
 
 /**
@@ -45,11 +59,31 @@ export function ErxesSDK({
   primaryColor,
   user,
   visible = true,
+  displayMode,
+  homeActions,
+  drawerActions,
+  onAction,
 }: ErxesSDKProps): null {
   // Configure + (re)connect whenever the connection inputs change.
   useEffect(() => {
-    NativeErxesSdk.configure({ integrationId, serverUrl, fileEndpoint, primaryColor });
-  }, [integrationId, serverUrl, fileEndpoint, primaryColor]);
+    NativeErxesSdk.configure({
+      integrationId,
+      serverUrl,
+      fileEndpoint,
+      primaryColor,
+      displayMode,
+      homeActions,
+      drawerActions,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [integrationId, serverUrl, fileEndpoint, primaryColor, displayMode]);
+
+  // Subscribe to chat-mode action taps.
+  useEffect(() => {
+    if (!onAction) return;
+    const sub = NativeErxesSdk.onAction((e) => onAction(e.id));
+    return () => sub.remove();
+  }, [onAction]);
 
   // Push the identified user separately so changing the user doesn't reconnect.
   useEffect(() => {

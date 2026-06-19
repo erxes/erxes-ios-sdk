@@ -8,6 +8,11 @@ import MessengerSDK
 @objc(ErxesSdkBridge)
 public final class ErxesSdkBridge: NSObject {
 
+    /// Set by the Objective-C++ TurboModule. Invoked (on the main thread) whenever
+    /// a chat-mode action is tapped, with the action's `id`, so the module can emit
+    /// the `onAction` event to JS.
+    @objc public var onAction: ((String) -> Void)?
+
     @objc
     public func configure(_ config: [String: Any]) {
         let integrationId = config["integrationId"] as? String ?? ""
@@ -19,15 +24,26 @@ public final class ErxesSdkBridge: NSObject {
             primaryColor: Self.color(fromHex: primaryHex) ?? MessengerConfig.Appearance().primaryColor
         )
 
+        let displayMode = DisplayMode(rawValue: config["displayMode"] as? String ?? "") ?? .classic
+        let homeActions = Self.actions(config["homeActions"])
+        let drawerActions = Self.actions(config["drawerActions"])
+
         DispatchQueue.main.async {
             MessengerSDK.configure(
                 MessengerConfig(
                     endpoint: serverUrl,
                     integrationId: integrationId,
                     fileEndpoint: fileEndpoint,
-                    appearance: appearance
+                    appearance: appearance,
+                    displayMode: displayMode,
+                    homeActions: homeActions,
+                    drawerActions: drawerActions
                 )
             )
+            // Forward SDK action taps to JS via the TurboModule's event emitter.
+            MessengerSDK.shared.onAction = { [weak self] id in
+                self?.onAction?(id)
+            }
         }
     }
 
@@ -57,6 +73,17 @@ public final class ErxesSdkBridge: NSObject {
     }
 
     // MARK: - Helpers
+
+    /// Parses an array of `{ id, title, systemIcon }` dictionaries from JS into
+    /// `ActionItem`s, skipping any entry missing an `id` or `systemIcon`.
+    private static func actions(_ raw: Any?) -> [ActionItem] {
+        guard let arr = raw as? [[String: Any]] else { return [] }
+        return arr.compactMap { d in
+            guard let id = d["id"] as? String,
+                  let icon = d["systemIcon"] as? String else { return nil }
+            return ActionItem(id: id, title: d["title"] as? String ?? "", systemIcon: icon)
+        }
+    }
 
     private static func color(fromHex hex: String?) -> UIColor? {
         guard var s = hex?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
