@@ -27,10 +27,19 @@ erxes iOS SDK is a secure, lightweight, and customizable iOS SDK that lets you e
   </a>
 </p>
 
+**Classic mode** (`displayMode: .classic`)
+
 <p align="center">
   <img src="screenshots/home.png" width="220" alt="Home">
   <img src="screenshots/messages.png" width="220" alt="Messages">
   <img src="screenshots/tickets.png" width="220" alt="Tickets">
+</p>
+
+**Chat mode** (`displayMode: .chat`)
+
+<p align="center">
+  <img src="screenshots/new-chat.png" width="220" alt="New Chat">
+  <img src="screenshots/recent-chats.png" width="220" alt="Recent Chats">
 </p>
 
 ## Features
