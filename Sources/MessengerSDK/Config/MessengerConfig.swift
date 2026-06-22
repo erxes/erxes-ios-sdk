@@ -4,7 +4,7 @@ import UIKit
 public enum DisplayMode: String {
     /// The classic 4-tab widget (Home / Messages / Help / Tickets), shown as a sheet.
     case classic
-    /// A ChatGPT/Claude-style shell: new-chat home, a left drawer holding the
+    /// An AI-assistant-style shell: new-chat home, a left drawer holding the
     /// conversation list, and inline full-screen chats. Presented full-screen.
     case chat
 }
