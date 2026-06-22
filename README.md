@@ -27,10 +27,19 @@ erxes iOS SDK is a secure, lightweight, and customizable iOS SDK that lets you e
   </a>
 </p>
 
+**Classic mode** (`displayMode: .classic`)
+
 <p align="center">
   <img src="screenshots/home.png" width="220" alt="Home">
   <img src="screenshots/messages.png" width="220" alt="Messages">
   <img src="screenshots/tickets.png" width="220" alt="Tickets">
+</p>
+
+**Chat mode** (`displayMode: .chat`)
+
+<p align="center">
+  <img src="screenshots/new-chat.png" width="220" alt="New Chat">
+  <img src="screenshots/recent-chats.png" width="220" alt="Recent Chats">
 </p>
 
 ## Features
@@ -102,6 +111,36 @@ MessengerSDK.configure(
     )
 )
 ```
+
+### Chat Mode
+
+By default the SDK shows the **classic** 4-tab widget as a sheet. Set `displayMode: .chat` to switch to an AI-assistant-style full-screen shell instead — a new-chat home, a left drawer with the conversation list, and inline full-screen chats. In chat mode there is no floating launcher: the messenger presents itself full-screen automatically as soon as the connect handshake succeeds.
+
+```swift
+MessengerSDK.configure(
+    MessengerConfig(
+        endpoint: "https://your.erxes.instance",
+        integrationId: "YOUR_INTEGRATION_ID",
+        displayMode: .chat,
+        homeActions: [
+            ActionItem(id: "search", title: "Search", systemIcon: "magnifyingglass")
+        ],
+        drawerActions: [
+            ActionItem(id: "profile", title: "Profile", systemIcon: "person.circle"),
+            ActionItem(id: "settings", title: "Settings", systemIcon: "gearshape")
+        ]
+    )
+)
+
+// Fired when a homeActions/drawerActions item is tapped, with the action's id.
+MessengerSDK.shared.onAction = { id in
+    print("chat-mode action tapped:", id)
+}
+```
+
+- `homeActions` — icon buttons rendered in the chat-mode header. Ignored in `.classic`.
+- `drawerActions` — action rows rendered at the top of the conversation drawer. Ignored in `.classic`.
+- `showLauncher()` / `hideLauncher()` are no-ops in `.chat` mode, since there's no floating launcher to show.
 
 ### 2. Identify the user (optional)
 

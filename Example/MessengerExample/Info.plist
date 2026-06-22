@@ -33,5 +33,9 @@
     </array>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Send photos in chat</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Dictate messages with your voice</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Transcribe your voice to text</string>
 </dict>
 </plist>

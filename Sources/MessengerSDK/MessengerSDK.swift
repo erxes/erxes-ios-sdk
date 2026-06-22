@@ -13,6 +13,11 @@ public final class MessengerSDK: ObservableObject {
     /// Observe this to show/hide your launcher button.
     @Published public private(set) var isReady = false
 
+    /// Invoked when a chat-mode action (a `homeActions`/`drawerActions` item) is
+    /// tapped, with the action's `id`. The React Native bridge wires this to a JS
+    /// event; native hosts can set it directly.
+    public var onAction: ((String) -> Void)?
+
     /// The cached AppViewModel reused across sheet presentations.
     private var appVM: AppViewModel?
 
@@ -23,8 +28,10 @@ public final class MessengerSDK: ObservableObject {
     /// Call once at app startup. Automatically starts the connect handshake.
     public static func configure(_ config: MessengerConfig) {
         shared.config = config
+        shared.didAutoPresentChat = false
         NetworkClient.shared.configure(endpoint: config.endpoint)
-        // Auto-connect so launcher appears as soon as handshake succeeds
+        // Auto-connect so launcher appears (or chat mode auto-opens) as soon as
+        // the handshake succeeds.
         startConnect()
     }
 
@@ -44,7 +51,11 @@ public final class MessengerSDK: ObservableObject {
     /// app's content. Use this from non-SwiftUI hosts (UIKit, React Native, Flutter).
     /// The button only appears once the connect handshake succeeds (`isReady`), and
     /// touches outside the button pass straight through to your app.
+    ///
+    /// In `.chat` mode there is no floating launcher — the messenger opens itself
+    /// full-screen as soon as the connect handshake succeeds, so this is a no-op.
     public static func showLauncher() {
+        guard shared.config?.displayMode != .chat else { return }
         LauncherWindow.shared.show()
     }
 
@@ -59,10 +70,46 @@ public final class MessengerSDK: ObservableObject {
         guard let config = shared.config else { return }
         let vm = AppViewModel()
         shared.appVM = vm
+        // Chat mode is a full-screen, app-like experience — present it right away
+        // (it fades in) and show a loading indicator inside until the handshake
+        // completes, rather than blocking on the network or a launcher tap.
+        if config.displayMode == .chat {
+            autoPresentChatModeIfNeeded()
+        }
         Task { @MainActor in
             await vm.connect(config: config, user: shared.currentUser)
             shared.isReady = true
         }
+    }
+
+    // MARK: - Chat-mode auto-present
+
+    /// Guards against re-presenting chat mode after the host dismisses it.
+    private var didAutoPresentChat = false
+
+    /// Presents chat mode full-screen from the app's own window. The window may not
+    /// exist yet right after `configure()` (e.g. called from `App.init`), so this
+    /// retries briefly until a presentable view controller is available.
+    @MainActor
+    private static func autoPresentChatModeIfNeeded(retriesLeft: Int = 20) {
+        guard shared.config?.displayMode == .chat,
+              let vm = shared.appVM,
+              !shared.didAutoPresentChat else { return }
+
+        guard let presenter = topViewController(from: appPresentationWindow()?.rootViewController) else {
+            // No window/root yet — try again shortly (stays on the main actor).
+            guard retriesLeft > 0 else { return }
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 250_000_000)
+                autoPresentChatModeIfNeeded(retriesLeft: retriesLeft - 1)
+            }
+            return
+        }
+        // Don't stack on top of an already-presented messenger.
+        guard presenter.presentedViewController == nil else { return }
+
+        shared.didAutoPresentChat = true
+        present(vm, from: presenter, onDismiss: nil)
     }
 
     // MARK: - Show messenger
@@ -104,15 +151,40 @@ public final class MessengerSDK: ObservableObject {
         let launcherWasVisible = LauncherWindow.shared.isVisible
         LauncherWindow.shared.suspend()
 
-        let root = MessengerContainerView(appVM: appVM)
-        let hostingVC = DismissCallbackHostingController(rootView: root) {
-            if launcherWasVisible { LauncherWindow.shared.resume() }
-            onDismiss?()
-        }
-        hostingVC.modalPresentationStyle = .pageSheet
-        if let sheet = hostingVC.sheetPresentationController {
-            sheet.detents = [.large()]
-            sheet.prefersGrabberVisible = true
+        let isChatMode = shared.config?.displayMode == .chat
+
+        // Chat mode is a full-screen app-like experience; the classic widget is a
+        // large sheet with a grabber. Build the matching root view for each.
+        let hostingVC: DismissCallbackHostingController<AnyView> = {
+            let onDismissAll: () -> Void = {
+                if launcherWasVisible { LauncherWindow.shared.resume() }
+                onDismiss?()
+            }
+            if isChatMode {
+                return DismissCallbackHostingController(
+                    rootView: AnyView(
+                        MessengerChatModeView(appVM: appVM, showsCloseButton: launcherWasVisible)
+                    ),
+                    onDismiss: onDismissAll
+                )
+            }
+            return DismissCallbackHostingController(
+                rootView: AnyView(MessengerContainerView(appVM: appVM)),
+                onDismiss: onDismissAll
+            )
+        }()
+
+        if isChatMode {
+            // Full-screen with a fade (cross-dissolve) instead of the default
+            // slide-up; the view shows a loading indicator until connected.
+            hostingVC.modalPresentationStyle = .fullScreen
+            hostingVC.modalTransitionStyle = .crossDissolve
+        } else {
+            hostingVC.modalPresentationStyle = .pageSheet
+            if let sheet = hostingVC.sheetPresentationController {
+                sheet.detents = [.large()]
+                sheet.prefersGrabberVisible = true
+            }
         }
         presenter.present(hostingVC, animated: true)
     }

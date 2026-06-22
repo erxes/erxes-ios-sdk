@@ -36,7 +36,7 @@ struct ConversationRowView: View {
             }
 
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 14)
         .padding(.vertical, 14)
         .contentShape(Rectangle())
     }

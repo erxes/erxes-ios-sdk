@@ -5,6 +5,8 @@ struct MessageBubble: View {
     let primaryColor: UIColor
     var isFirstInGroup: Bool = true
     var isLastInGroup: Bool = true
+    /// Called when the user long-presses the text bubble and taps Copy.
+    var onCopy: (() -> Void)? = nil
 
     @EnvironmentObject private var appVM: AppViewModel
 
@@ -132,6 +134,8 @@ struct MessageBubble: View {
                 .padding(.vertical, 10)
                 .background(primary, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                 .foregroundStyle(.white)
+                .contentShape(Rectangle())
+                .onLongPressGesture(minimumDuration: 0.4) { copyToClipboard() }
         } else {
             MessageContentView(content: message.content, isFromCustomer: false)
                 .padding(.horizontal, 14)
@@ -141,7 +145,15 @@ struct MessageBubble: View {
                     shadowRadius: 2
                 )
                 .foregroundStyle(.primary)
+                .contentShape(Rectangle())
+                .onLongPressGesture(minimumDuration: 0.4) { copyToClipboard() }
         }
+    }
+
+    private func copyToClipboard() {
+        UIPasteboard.general.string = MessageContentView.plainText(from: message.content)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        onCopy?()
     }
 
     // MARK: - Helpers

@@ -28,10 +28,30 @@ struct DismissKeyboardOnTap: ViewModifier {
     }
 }
 
+struct DismissKeyboardOnVerticalDrag: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 8)
+                    .onChanged { value in
+                        let horizontal = abs(value.translation.width)
+                        let vertical = abs(value.translation.height)
+                        guard vertical > horizontal else { return }
+                        dismissKeyboard()
+                    }
+            )
+    }
+}
+
 extension View {
     /// Dismisses the keyboard when the user taps anywhere in this view.
     /// Buttons, scroll gestures, and other interactions still work normally.
     func dismissKeyboardOnTap() -> some View {
         modifier(DismissKeyboardOnTap())
+    }
+
+    /// Dismisses the keyboard as soon as the user starts a vertical drag.
+    func dismissKeyboardOnVerticalDrag() -> some View {
+        modifier(DismissKeyboardOnVerticalDrag())
     }
 }

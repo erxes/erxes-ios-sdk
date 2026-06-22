@@ -1,5 +1,15 @@
-import type { TurboModule } from 'react-native';
+import type { EventEmitter, TurboModule } from 'react-native';
 import { TurboModuleRegistry } from 'react-native';
+
+/** A chat-mode action descriptor (header-right button or drawer top row). */
+export type ActionItem = {
+  /** Host-defined id, echoed back via the `onAction` event. */
+  id: string;
+  /** Display title (drawer rows) / accessibility label (header icons). */
+  title: string;
+  /** SF Symbol name, e.g. "magnifyingglass". */
+  systemIcon: string;
+};
 
 /**
  * TurboModule spec for the erxes Messenger SDK (RN 0.81+, new architecture).
@@ -22,7 +32,16 @@ export interface Spec extends TurboModule {
     fileEndpoint?: string;
     /** Launcher tint, hex string e.g. "#7C3AED". */
     primaryColor?: string;
+    /** UI shell: 'classic' (4-tab widget, default) or 'chat' (ChatGPT-style). */
+    displayMode?: string;
+    /** Chat-mode header-right actions. Ignored in classic mode. */
+    homeActions?: ActionItem[];
+    /** Chat-mode drawer top action rows. Ignored in classic mode. */
+    drawerActions?: ActionItem[];
   }): void;
+
+  /** Fires when a chat-mode `homeActions`/`drawerActions` item is tapped. */
+  readonly onAction: EventEmitter<{ id: string }>;
 
   /** Identify the logged-in user. */
   setUser(user: {
