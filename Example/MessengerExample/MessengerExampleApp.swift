@@ -7,7 +7,7 @@ struct MessengerExampleApp: App {
         MessengerSDK.configure(
             MessengerConfig(
                 endpoint: "https://officenext.erxes.io",
-                integrationId: "Z3MLJqFpkS70NgIpTkb6M",
+                integrationId: "9S6seo9wawN6cou8v",
                 displayMode: .chat,
                 homeActions: [
                     ActionItem(id: "search", title: "Search", systemIcon: "magnifyingglass")

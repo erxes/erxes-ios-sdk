@@ -29,8 +29,25 @@ final class ChatViewModel: ObservableObject {
     @Published private(set) var isBotTyping = false
     @Published private(set) var persistentMenu: [PersistentMenuItem] = []
     @Published var pendingAttachments: [PendingAttachment] = []
+    /// Unsent composer text. Lives on the (cached) view model rather than the
+    /// view's local @State so it survives switching to another conversation
+    /// and back, instead of being wiped when `ChatContentView` is recreated.
+    @Published var draftText = ""
     @Published private(set) var isLoading = false
     @Published private(set) var isBot = false
+    @Published private(set) var isLoadingMore = false
+
+    /// The backend's `widgetsConversationDetail` query has no limit/offset —
+    /// it always returns the full conversation in one shot. Until it grows
+    /// pagination args, we fetch everything once and window the rows we
+    /// actually render client-side, so long conversations don't pay for
+    /// laying out (and grouping) thousands of rows up front.
+    private let pageSize = 30
+    /// Index into `messages` of the oldest message currently rendered.
+    /// `messages[oldestVisibleIndex...]` is what `chatRows` is built from.
+    @Published private(set) var oldestVisibleIndex = 0
+
+    var hasMoreMessages: Bool { oldestVisibleIndex > 0 }
 
     // Mutable so new-conversation sends can update it after the first reply.
     // `private(set)` lets MessagesView read the assigned ID after first send.
@@ -69,6 +86,7 @@ final class ChatViewModel: ObservableObject {
                 // Pre-warm content parser cache so first SwiftUI render is instant
                 ContentParser.warmCache(contents: fetched.map(\.content))
                 messages = fetched
+                oldestVisibleIndex = max(0, fetched.count - pageSize)
                 isBot = fetched.contains { $0.fromBot == true }
                 rebuildRows()
             } catch {
@@ -427,9 +445,17 @@ final class ChatViewModel: ObservableObject {
                     customerId: appVM.customerId,
                     visitorId: SessionManager.shared.visitorId
                 )
-                // Replace optimistic with real message
+                // Replace optimistic with real message — unless the WebSocket
+                // subscription already delivered this same message (it doesn't
+                // know about our temp ID, so its own dedup check can't catch
+                // this case). If so, just drop the placeholder instead of
+                // inserting a second row with the same id.
                 if let idx = messages.firstIndex(where: { $0.id == optimisticId }) {
-                    messages[idx] = sent
+                    if messages.contains(where: { $0.id == sent.id }) {
+                        messages.remove(at: idx)
+                    } else {
+                        messages[idx] = sent
+                    }
                 }
                 // For new conversations: store the returned conversationId and
                 // start the WebSocket subscription so future messages arrive live.
@@ -593,9 +619,30 @@ final class ChatViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Pagination
+
+    /// Reveals the previous page of already-fetched messages. Called when the
+    /// chat scrolls to its topmost row. Pure client-side windowing today — the
+    /// brief delay just keeps the loading affordance consistent with what a
+    /// real network page-fetch would feel like, so this slots in unchanged if
+    /// the backend ever adds limit/offset to `widgetsConversationDetail`.
+    func loadOlderMessagesIfNeeded() {
+        guard !isLoadingMore, hasMoreMessages else { return }
+        isLoadingMore = true
+        Task {
+            try? await Task.sleep(nanoseconds: 250_000_000)
+            oldestVisibleIndex = max(0, oldestVisibleIndex - pageSize)
+            rebuildRows()
+            isLoadingMore = false
+        }
+    }
+
     // MARK: - Helpers
 
     private func rebuildRows() {
-        chatRows = MessageGrouper.buildChatRows(messages: messages)
+        // Clamp defensively — an optimistic-message rollback can shrink
+        // `messages` by one without touching `oldestVisibleIndex`.
+        let start = min(oldestVisibleIndex, messages.count)
+        chatRows = MessageGrouper.buildChatRows(messages: Array(messages[start...]))
     }
 }

@@ -5,7 +5,7 @@ import SwiftUI
 ///
 /// Layout (empty): [+] · text field · mic
 /// Layout (text):  [+] · text field · ⬆︎ send
-/// Layout (dictating): [⏹ stop] · live transcript · animated waveform
+/// Layout (dictating): [waveform] · live transcript · ⏹ stop
 ///
 /// Owns the live speech-to-text dictation; the transcript streams into the bound
 /// `text` (preserving anything already typed). Sending is delegated to `onSend`.
@@ -47,6 +47,11 @@ struct MessageComposerBar: View {
             shape: RoundedRectangle(cornerRadius: 28, style: .continuous),
             shadowRadius: 8
         )
+        // Grows a touch wider while focused (keyboard open), settles back when
+        // the keyboard is dismissed — mirrors the subtle "expand" feel of
+        // Messages.app's input field.
+        .scaleEffect(x: focused.wrappedValue ? 1.015 : 1, y: 1, anchor: .center)
+        .animation(.spring(response: 0.3, dampingFraction: 0.75), value: focused.wrappedValue)
         .animation(.easeInOut(duration: 0.2), value: transcriber.isRecording)
         // Live dictation streams into the field (preserving any pre-typed text).
         .onChange(of: transcriber.transcript) { newValue in
@@ -55,19 +60,14 @@ struct MessageComposerBar: View {
         .onDisappear { transcriber.cancel() }
     }
 
-    // MARK: - Leading ("+" / stop)
+    // MARK: - Leading ("+" / waveform)
 
     @ViewBuilder
     private var leading: some View {
         if transcriber.isRecording {
-            Button { transcriber.stop() } label: {
-                Image(systemName: "stop.fill")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 34, height: 34)
-                    .background(Color.red, in: Circle())
-            }
-            .accessibilityLabel("Stop dictation")
+            // "Audio flow" — animated waveform while dictation is active.
+            RecordingWaveformView(color: primary)
+                .frame(width: 40, height: 34)
         } else if showsAttachment {
             Button(action: onPlus) {
                 Image(systemName: "plus")
@@ -90,14 +90,19 @@ struct MessageComposerBar: View {
             .frame(minHeight: 34, alignment: .center)
     }
 
-    // MARK: - Trailing (send / mic / audio flow)
+    // MARK: - Trailing (send / mic / stop)
 
     @ViewBuilder
     private var trailing: some View {
         if transcriber.isRecording {
-            // "Audio flow" — animated waveform while dictation is active.
-            RecordingWaveformView(color: primary)
-                .frame(width: 40, height: 34)
+            Button { transcriber.stop() } label: {
+                Image(systemName: "stop.fill")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 34, height: 34)
+                    .background(Color.red, in: Circle())
+            }
+            .accessibilityLabel("Stop dictation")
         } else if canSend {
             Button(action: onSend) {
                 Image(systemName: "arrow.up")

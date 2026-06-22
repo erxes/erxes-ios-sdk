@@ -31,19 +31,19 @@ struct MessengerChatModeView: View {
     @State private var activeConversation: Conversation?
     @State private var activeVM: ChatViewModel?
     @State private var activeAutoSend: String?
+    /// Set when the draft conversation was started by tapping "+" on the home
+    /// composer (rather than by sending text) — tells `ChatContentView` to open
+    /// the photo picker as soon as it appears.
+    @State private var activeAutoOpenPhotoPicker = false
     @State private var chatVMCache: [String: ChatViewModel] = [:]
 
     // ── New-chat home input ─────────────────────────────────────────────────────
     @State private var homeText = ""
     @FocusState private var homeFocused: Bool
 
-    // ── requireAuth ───────────────────────────────────────────────────────────
-    @State private var showAuth = false
-    @State private var pendingAutoSendAfterAuth: String?
-
     // ── Drawer ──────────────────────────────────────────────────────────────────
     @State private var drawerOpen = false
-    @GestureState private var dragTranslation: CGFloat = 0
+    @State private var dragTranslation: CGFloat = 0
 
     private var primary: Color { Color(appVM.effectivePrimaryColor) }
 
@@ -63,18 +63,6 @@ struct MessengerChatModeView: View {
         .tint(primary)
         .environmentObject(appVM)
         .onAppear { listVM.load(appVM: appVM) }
-        .sheet(isPresented: $showAuth, onDismiss: {
-            // GetNotifiedView flips appVM.isIdentified on success; only then proceed.
-            guard appVM.isIdentified, let text = pendingAutoSendAfterAuth else { return }
-            pendingAutoSendAfterAuth = nil
-            startNewChat(autoSend: text)
-        }) {
-            GetNotifiedView {
-                showAuth = false   // success → onDismiss opens the chat
-            }
-            .environmentObject(appVM)
-            .presentationDetents([.medium, .large])
-        }
     }
 
     /// Centered spinner shown over the container background while connecting.
@@ -131,16 +119,11 @@ struct MessengerChatModeView: View {
     // MARK: - Top bar
 
     private var topBar: some View {
-        HStack(spacing: 12) {
-            Button { setDrawer(true) } label: {
-                Image(systemName: "line.3.horizontal")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(.primary)
-                    .frame(width: 36, height: 36)
-            }
-
-            Spacer(minLength: 8)
-
+        // A ZStack centers the title on the bar itself rather than in the
+        // leftover space between the leading/trailing buttons — those two
+        // sides have unequal widths (trailing grows with header actions), so
+        // an HStack-with-spacers layout would push the title off-center.
+        ZStack {
             Group {
                 if let conv = activeConversation, let vm = activeVM {
                     ChatTitleView(conversation: conv, viewModel: vm)
@@ -151,35 +134,47 @@ struct MessengerChatModeView: View {
                         .foregroundStyle(.primary)
                 }
             }
+            .frame(maxWidth: .infinity)
 
-            Spacer(minLength: 8)
+            HStack(spacing: 12) {
+                Button { setDrawer(true) } label: {
+                    Image(systemName: "line.3.horizontal")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(.primary)
+                        .frame(width: 38, height: 38)
+                        .liquidGlass(shape: Circle())
+                }
 
-            HStack(spacing: 6) {
-                // Host-configured header-right actions appear only inside a
-                // conversation — the new-chat home keeps a clean top bar (the
-                // ChatGPT layout). New chat lives in the drawer's floating button.
-                if activeConversation != nil {
-                    ForEach(headerActions) { item in
-                        Button { MessengerSDK.shared.onAction?(item.id) } label: {
-                            Image(systemName: item.systemIcon)
-                                .font(.system(size: 17, weight: .medium))
+                Spacer(minLength: 8)
+
+                HStack(spacing: 6) {
+                    // Host-configured header-right actions appear only inside a
+                    // conversation — the new-chat home keeps a clean top bar (the
+                    // ChatGPT layout). New chat lives in the drawer's floating button.
+                    if activeConversation != nil {
+                        ForEach(headerActions) { item in
+                            Button { MessengerSDK.shared.onAction?(item.id) } label: {
+                                Image(systemName: item.systemIcon)
+                                    .font(.system(size: 18, weight: .medium))
+                                    .foregroundStyle(.primary)
+                                    .frame(width: 38, height: 38)
+                                    .liquidGlass(shape: Circle())
+                            }
+                            .accessibilityLabel(item.title)
+                        }
+                    }
+
+                    // Close the full-screen messenger — only when there's a launcher
+                    // to return to (hidden in launcher-less chat mode).
+                    if showsCloseButton {
+                        Button { dismiss() } label: {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(.primary)
                                 .frame(width: 32, height: 36)
                         }
-                        .accessibilityLabel(item.title)
+                        .accessibilityLabel("Close")
                     }
-                }
-
-                // Close the full-screen messenger — only when there's a launcher
-                // to return to (hidden in launcher-less chat mode).
-                if showsCloseButton {
-                    Button { dismiss() } label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(.primary)
-                            .frame(width: 32, height: 36)
-                    }
-                    .accessibilityLabel("Close")
                 }
             }
         }
@@ -192,7 +187,12 @@ struct MessengerChatModeView: View {
     @ViewBuilder
     private var mainContent: some View {
         if let conv = activeConversation, let vm = activeVM {
-            ChatContentView(conversation: conv, viewModel: vm, autoSendMessage: activeAutoSend)
+            ChatContentView(
+                conversation: conv,
+                viewModel: vm,
+                autoSendMessage: activeAutoSend,
+                autoOpenPhotoPicker: activeAutoOpenPhotoPicker
+            )
                 .environmentObject(appVM)
                 // Re-identify by conversation id so switching chats rebuilds state.
                 .id(vm.conversationId.isEmpty ? "new" : vm.conversationId)
@@ -230,65 +230,34 @@ struct MessengerChatModeView: View {
         .dismissKeyboardOnTap()
     }
 
-    @ViewBuilder
     private var homeInputBar: some View {
-        Group {
-            if appVM.requireAuth && !appVM.isIdentified {
-                // Composing isn't possible until identified — tapping starts the
-                // identity capture flow.
-                Button { beginSend(text: "") } label: {
-                    HStack(spacing: 12) {
-                        Text("How can I help you today?")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                        Spacer(minLength: 0)
-                        Image(systemName: "arrow.up")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundStyle(.white)
-                            .frame(width: 34, height: 34)
-                            .background(primary, in: Circle())
-                    }
-                }
-                .buttonStyle(.plain)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .liquidGlass(
-                    shape: RoundedRectangle(cornerRadius: 28, style: .continuous),
-                    shadowRadius: 8
-                )
-            } else {
-                // Shared composer: same mic / dictation controls as the
-                // in-conversation bar. Sending starts a new conversation.
-                MessageComposerBar(
-                    text: $homeText,
-                    placeholder: "Ask anything…",
-                    primary: primary,
-                    focused: $homeFocused,
-                    showsAttachment: false,
-                    onSend: { beginSend(text: homeText) }
-                )
-            }
-        }
+        // Shared composer: same mic / dictation / attachment controls as the
+        // in-conversation bar. Sending or attaching starts a new conversation.
+        MessageComposerBar(
+            text: $homeText,
+            placeholder: "Ask anything…",
+            primary: primary,
+            focused: $homeFocused,
+            showsAttachment: true,
+            onPlus: { startNewChatForAttachment() },
+            onSend: { beginSend(text: homeText) }
+        )
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
     }
 
     // MARK: - Drawer
 
-    private var drawerPanel: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            // Header
-            HStack {
-                Text("Chats")
-                    .font(.title2.weight(.bold))
-                Spacer()
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 8)
-            .padding(.bottom, 12)
+    /// Header height the scrolling list reserves space for underneath the sticky bar.
+    private let drawerHeaderHeight: CGFloat = 80
 
+    private var drawerPanel: some View {
+        ZStack(alignment: .top) {
+            // Conversation list scrolls underneath the sticky header below.
             ScrollView {
                 VStack(alignment: .leading, spacing: 4) {
+                    Color.clear.frame(height: drawerHeaderHeight)
+
                     // Host-configured drawer action rows (like ChatGPT's Projects/Images)
                     ForEach(drawerActions) { item in
                         drawerRow(icon: item.systemIcon, title: item.title) {
@@ -331,6 +300,32 @@ struct MessengerChatModeView: View {
                 }
                 // Leave room so the floating button doesn't cover the last row.
                 .padding(.bottom, 96)
+            }
+
+            // Sticky header — solid, opaque, same surface as the drawer (not a
+            // blurred material) with a long soft fade below so scrolling rows
+            // dissolve into it the way ChatGPT's sidebar title bar does.
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Chats")
+                        .font(.largeTitle.weight(.bold))
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+                .padding(.bottom, 12)
+                .background(Color(appVM.effectiveContainerBackgroundColor))
+
+                LinearGradient(
+                    stops: [
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor), location: 0),
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.8), location: 0.4),
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0), location: 1)
+                    ],
+                    startPoint: .top, endPoint: .bottom
+                )
+                .frame(height: 28)
+                .allowsHitTesting(false)
             }
         }
         .padding(.top, 8)
@@ -386,6 +381,7 @@ struct MessengerChatModeView: View {
     private func startNewChat(autoSend: String? = nil) {
         graduateActiveVM()
         setDrawer(false)
+        activeAutoOpenPhotoPicker = false
         if let text = autoSend, !text.isEmpty {
             let vm = ChatViewModel(conversationId: "")
             activeVM = vm
@@ -398,6 +394,20 @@ struct MessengerChatModeView: View {
         }
     }
 
+    /// Tapping "+" on the new-chat home composer, before any text was sent.
+    /// Starts a draft conversation (mirroring `startNewChat(autoSend:)`) so the
+    /// shared `ChatContentView` — and its attachment strip — takes over, then
+    /// opens the photo picker as soon as it appears.
+    private func startNewChatForAttachment() {
+        graduateActiveVM()
+        setDrawer(false)
+        let vm = ChatViewModel(conversationId: "")
+        activeVM = vm
+        activeConversation = Conversation(id: "", content: nil, createdAt: Date())
+        activeAutoSend = nil
+        activeAutoOpenPhotoPicker = true
+    }
+
     private func openConversation(_ conv: Conversation) {
         graduateActiveVM()
         let vm = chatVMCache[conv.id] ?? ChatViewModel(conversationId: conv.id)
@@ -405,6 +415,7 @@ struct MessengerChatModeView: View {
         activeVM = vm
         activeConversation = conv
         activeAutoSend = nil
+        activeAutoOpenPhotoPicker = false
         setDrawer(false)
     }
 
@@ -417,14 +428,9 @@ struct MessengerChatModeView: View {
         }
     }
 
-    /// Home composer send. Gated behind the identity form when requireAuth is on.
+    /// Home composer send.
     private func beginSend(text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if appVM.requireAuth && !appVM.isIdentified {
-            pendingAutoSendAfterAuth = trimmed
-            showAuth = true
-            return
-        }
         guard !trimmed.isEmpty else { return }
         homeText = ""
         startNewChat(autoSend: trimmed)
@@ -436,6 +442,7 @@ struct MessengerChatModeView: View {
         dismissKeyboard()
         withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
             drawerOpen = open
+            dragTranslation = 0
         }
     }
 
@@ -451,21 +458,24 @@ struct MessengerChatModeView: View {
 
     private func edgeOpenGesture(width: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 10)
-            .updating($dragTranslation) { value, state, _ in
+            .onChanged { value in
                 // Only track rightward drags from the edge.
-                state = max(0, value.translation.width)
+                dragTranslation = max(0, value.translation.width)
             }
             .onEnded { value in
                 let projected = value.translation.width + value.predictedEndTranslation.width * 0.25
+                // Reset the drag offset in the same animation as the open/close
+                // commit so the drawer continues smoothly from where the finger
+                // left it, instead of @GestureState snapping it back to 0 first.
                 setDrawer(projected > width * 0.25)
             }
     }
 
     private func drawerCloseGesture(width: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 10)
-            .updating($dragTranslation) { value, state, _ in
+            .onChanged { value in
                 // Only track leftward drags while open.
-                state = min(0, value.translation.width)
+                dragTranslation = min(0, value.translation.width)
             }
             .onEnded { value in
                 let projected = value.translation.width + value.predictedEndTranslation.width * 0.25

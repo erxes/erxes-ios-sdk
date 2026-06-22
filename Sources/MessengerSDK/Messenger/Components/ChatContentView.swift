@@ -13,16 +13,21 @@ struct ChatContentView: View {
     let conversation: Conversation
     /// When set, this message is sent automatically once the chat finishes loading.
     let autoSendMessage: String?
+    /// When true, the photo picker opens automatically once the chat finishes
+    /// loading — used when the user tapped "+" before any conversation existed
+    /// (the new-chat home composer).
+    let autoOpenPhotoPicker: Bool
 
     @ObservedObject var viewModel: ChatViewModel
     @EnvironmentObject var appVM: AppViewModel
 
-    @State private var messageText = ""
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var showPhotoPicker = false
     @FocusState private var inputFocused: Bool
     /// Prevents double-firing the auto-send
     @State private var didAutoSend = false
+    /// Prevents double-firing the auto-opened photo picker
+    @State private var didAutoOpenPhotoPicker = false
 
 
     // Swipe-to-reveal timestamps (Instagram style)
@@ -32,10 +37,35 @@ struct ChatContentView: View {
     @State private var scrollLocked = false
     private let timestampColumnWidth: CGFloat = 72
 
-    init(conversation: Conversation, viewModel: ChatViewModel, autoSendMessage: String? = nil) {
+    /// Tracks whether the bottom marker is currently visible, i.e. the user
+    /// is scrolled to (or near) the end of the chat. Drives the floating
+    /// "scroll to bottom" button.
+    @State private var isAtBottom = true
+    private let bottomMarkerID = "ChatContentView.bottomMarker"
+
+    // Pagination — reveals older already-fetched messages as the user
+    // scrolls to the top. `isPaginating` suppresses the "new message"
+    // auto-scroll-to-bottom while older rows are being prepended, and
+    // `topAnchorID` is the row to re-anchor to once they land, so the list
+    // doesn't visually jump.
+    private let topMarkerID = "ChatContentView.topMarker"
+    @State private var isPaginating = false
+    @State private var topAnchorID: String?
+
+    // "Copied" toast shown after long-pressing a message and tapping Copy.
+    @State private var showCopiedToast = false
+    @State private var toastDismissTask: Task<Void, Never>?
+
+    init(
+        conversation: Conversation,
+        viewModel: ChatViewModel,
+        autoSendMessage: String? = nil,
+        autoOpenPhotoPicker: Bool = false
+    ) {
         self.conversation = conversation
         self.viewModel = viewModel
         self.autoSendMessage = autoSendMessage
+        self.autoOpenPhotoPicker = autoOpenPhotoPicker
     }
 
     private var primary: UIColor { appVM.effectivePrimaryColor }
@@ -44,6 +74,20 @@ struct ChatContentView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 4) {
+                    // Top sentinel — reaching it loads the previous page of
+                    // already-fetched messages. Disappears for good once the
+                    // start of the conversation is reached.
+                    if viewModel.hasMoreMessages {
+                        Color.clear
+                            .frame(height: 1)
+                            .id(topMarkerID)
+                            .onAppear { beginLoadOlderMessages() }
+                    }
+                    if viewModel.isLoadingMore {
+                        ProgressView()
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                    }
                     if let welcome = appVM.messengerData?.messages?.welcome {
                         WelcomeMessageView(message: welcome, primaryColor: primary)
                             .padding(.top, 8)
@@ -51,6 +95,13 @@ struct ChatContentView: View {
                     ForEach(viewModel.chatRows) { row in
                         chatRow(row)
                     }
+                    // Invisible sentinel — its visibility tells us whether the
+                    // user is scrolled to the end of the chat.
+                    Color.clear
+                        .frame(height: 1)
+                        .id(bottomMarkerID)
+                        .onAppear { isAtBottom = true }
+                        .onDisappear { isAtBottom = false }
                 }
                 .padding(.vertical, 8)
                 // Shift the whole content left to reveal the timestamp column
@@ -85,11 +136,23 @@ struct ChatContentView: View {
                         scrollLocked = false
                     }
             )
-            // Dragging the conversation up dismisses the keyboard the instant
-            // the drag begins — the standard Messages-app behavior.
             .scrollContentBackground(.hidden)
             .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
-            .scrollDismissesKeyboard(.immediately)
+            // Dragging down past the keyboard's height dismisses it interactively
+            // (ChatGPT/Messages-style, follows the gesture 1:1) — plus an explicit
+            // tap on the chat background as a fallback. simultaneousGesture so the
+            // tap doesn't steal touches from scrolling or message long-press/copy.
+            .scrollDismissesKeyboard(.interactively)
+            .simultaneousGesture(TapGesture().onEnded { inputFocused = false })
+            .overlay(alignment: .bottom) { scrollToBottomButton(proxy: proxy) }
+            .overlay(alignment: .top) {
+                if showCopiedToast {
+                    CopiedToastView()
+                        .padding(.top, 8)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+            }
+            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showCopiedToast)
             // The input bar lives in a bottom safe-area inset. SwiftUI's native
             // keyboard avoidance lifts this inset above the keyboard inside the
             // SAME animation transaction as the keyboard itself, so the bar and
@@ -106,9 +169,23 @@ struct ChatContentView: View {
                     scrollToBottom(proxy: proxy)
                 }
             }
-            // New message arrived
+            // New message arrived — but not when the row count grew because
+            // an older page was just prepended (that's handled separately,
+            // and would otherwise yank the scroll position back down).
             .onChange(of: viewModel.chatRows.count) { _ in
+                guard !isPaginating else { return }
                 scrollToBottom(proxy: proxy)
+            }
+            // Older page finished loading — restore the scroll position to
+            // the row the user was already looking at, now that more rows
+            // exist above it, instead of letting the list jump.
+            .onChange(of: viewModel.isLoadingMore) { loading in
+                guard !loading, isPaginating else { return }
+                if let anchor = topAnchorID {
+                    proxy.scrollTo(anchor, anchor: .top)
+                }
+                isPaginating = false
+                topAnchorID = nil
             }
             // Attachment strip appeared or disappeared — the safeAreaInset
             // height changed, so the last message may now be behind the bar.
@@ -125,6 +202,10 @@ struct ChatContentView: View {
                     if !didAutoSend, let text = autoSendMessage {
                         didAutoSend = true
                         viewModel.sendMessage(text, appVM: appVM)
+                    }
+                    if !didAutoOpenPhotoPicker && autoOpenPhotoPicker {
+                        didAutoOpenPhotoPicker = true
+                        showPhotoPicker = true
                     }
                 }
             }
@@ -165,7 +246,8 @@ struct ChatContentView: View {
                 message: msg,
                 primaryColor: primary,
                 isFirstInGroup: isFirst,
-                isLastInGroup: isLast
+                isLastInGroup: isLast,
+                onCopy: { presentCopiedToast() }
             )
             .environmentObject(appVM)
             .id(msg.id)
@@ -201,13 +283,53 @@ struct ChatContentView: View {
 
     // MARK: - Scroll helpers
 
-    private func scrollToBottom(proxy: ScrollViewProxy, animated: Bool = true) {
-        guard case .message(let id, _, _, _) = viewModel.chatRows.last else { return }
-        if animated {
-            withAnimation { proxy.scrollTo(id, anchor: .bottom) }
-        } else {
-            proxy.scrollTo(id, anchor: .bottom)
+    // MARK: - Copy toast
+
+    private func presentCopiedToast() {
+        toastDismissTask?.cancel()
+        showCopiedToast = true
+        toastDismissTask = Task {
+            try? await Task.sleep(nanoseconds: 1_400_000_000)
+            if !Task.isCancelled { showCopiedToast = false }
         }
+    }
+
+    // MARK: - Pagination
+
+    private func beginLoadOlderMessages() {
+        guard !isPaginating, !viewModel.isLoadingMore, viewModel.hasMoreMessages else { return }
+        isPaginating = true
+        // Remember what the user is currently looking at so we can
+        // re-anchor the scroll position to it once older rows land above.
+        topAnchorID = viewModel.chatRows.first?.id
+        viewModel.loadOlderMessagesIfNeeded()
+    }
+
+    private func scrollToBottom(proxy: ScrollViewProxy, animated: Bool = true) {
+        if animated {
+            withAnimation { proxy.scrollTo(bottomMarkerID, anchor: .bottom) }
+        } else {
+            proxy.scrollTo(bottomMarkerID, anchor: .bottom)
+        }
+    }
+
+    /// Floating button shown once the user has scrolled away from the latest
+    /// message, mirroring the "jump to bottom" affordance in apps like ChatGPT.
+    private func scrollToBottomButton(proxy: ScrollViewProxy) -> some View {
+        Button {
+            scrollToBottom(proxy: proxy)
+        } label: {
+            Image(systemName: "chevron.down")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: 32, height: 32)
+                .background(Color.black.opacity(0.6), in: Circle())
+        }
+        .padding(.bottom, 8)
+        .opacity(isAtBottom ? 0 : 1)
+        .scaleEffect(isAtBottom ? 0.8 : 1)
+        .animation(.easeInOut(duration: 0.2), value: isAtBottom)
+        .allowsHitTesting(!isAtBottom)
     }
 
     // MARK: - Input bar
@@ -284,7 +406,7 @@ struct ChatContentView: View {
 
     private func inputBar(primary: Color) -> some View {
         MessageComposerBar(
-            text: $messageText,
+            text: $viewModel.draftText,
             placeholder: "Message…",
             primary: primary,
             hasAttachments: !viewModel.pendingAttachments.isEmpty,
@@ -292,13 +414,33 @@ struct ChatContentView: View {
             showsAttachment: true,
             onPlus: { showPhotoPicker = true },
             onSend: {
-                let text = messageText.trimmingCharacters(in: .whitespacesAndNewlines)
-                messageText = ""
+                let text = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+                viewModel.draftText = ""
                 viewModel.sendMessage(text, appVM: appVM)
             }
         )
         .padding(.horizontal, 12)
-        .padding(.bottom, 20)
+        .padding(.bottom, inputFocused ? 8 : 4)
+    }
+}
+
+// MARK: - Copied toast
+
+/// Mimics iOS's native "Copied to Clipboard" pill — there's no public API for
+/// it on writes (only the system shows one automatically on paste), so we
+/// replicate the look: dark capsule, checkmark, auto-dismisses.
+private struct CopiedToastView: View {
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "checkmark.circle.fill")
+            Text("Copied")
+        }
+        .font(.subheadline.weight(.medium))
+        .foregroundStyle(.white)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(Color.black.opacity(0.85), in: Capsule())
+        .shadow(color: .black.opacity(0.2), radius: 6, y: 2)
     }
 }
 

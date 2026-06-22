@@ -44,6 +44,15 @@ struct ChatView: View {
                     ChatTitleView(conversation: conversation, viewModel: viewModel)
                         .environmentObject(appVM)
                 }
+                // Invisible trailing item matching the leading button's width so the
+                // bar's leading/trailing slots are balanced and the principal title
+                // is actually centered, not just centered in the leftover space.
+                ToolbarItem(placement: .topBarTrailing) {
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 16, weight: .semibold))
+                        .opacity(0)
+                        .allowsHitTesting(false)
+                }
             }
         }
     }
