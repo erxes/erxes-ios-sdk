@@ -24,49 +24,13 @@ final class TicketListViewModel: ObservableObject {
     // MARK: - GraphQL
 
     private func fetchTickets(config: MessengerConfig, customerId: String?) async throws -> [Ticket] {
-        let query = """
-        query WidgetTicketsByCustomer($customerId: String) {
-          widgetTicketsByCustomer(customerId: $customerId) {
-            _id
-            name
-            description
-            pipelineId
-            statusId
-            priority
-            labelIds
-            tagIds
-            number
-            startDate
-            targetDate
-            createdAt
-            updatedAt
-            status {
-              _id
-              color
-              name
-              description
-              type
-            }
-            assignee {
-              _id
-              details {
-                avatar
-                firstName
-                lastName
-                fullName
-              }
-            }
-          }
-        }
-        """
-
         var variables: [String: Any] = [:]
         if let cid = customerId, !cid.isEmpty { variables["customerId"] = cid }
 
         let list = try await GraphQL.array(
             endpoint: config.fileEndpoint,
             operation: "widgetTicketsByCustomer",
-            query: query,
+            query: MessengerGraphQL.ticketsByCustomer,
             variables: variables,
             field: "widgetTicketsByCustomer"
         )

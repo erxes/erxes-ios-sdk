@@ -12,16 +12,10 @@ let package = Package(
             targets: ["MessengerSDK"]
         ),
     ],
-    dependencies: [
-        .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "MessengerSDK",
-            dependencies: [
-                .product(name: "Apollo", package: "apollo-ios"),
-                .product(name: "ApolloWebSocket", package: "apollo-ios"),
-            ],
             path: "Sources/MessengerSDK",
             resources: [
                 .process("Resources")

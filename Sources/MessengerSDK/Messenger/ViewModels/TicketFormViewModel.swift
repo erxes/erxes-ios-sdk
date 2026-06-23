@@ -27,23 +27,13 @@ final class TicketFormViewModel: ObservableObject {
     }
 
     private func fetchTags(configId: String, parentId: String?, endpoint: String) async -> [TicketTag] {
-        let query = """
-        query WidgetsGetTicketTags($configId: String, $parentId: String) {
-          widgetsGetTicketTags(configId: $configId, parentId: $parentId) {
-            _id
-            name
-            type
-            description
-          }
-        }
-        """
         var variables: [String: Any] = ["configId": configId]
         if let pid = parentId { variables["parentId"] = pid }
 
         guard let list = try? await GraphQL.array(
             endpoint: endpoint,
             operation: "widgetsGetTicketTags",
-            query: query,
+            query: MessengerGraphQL.ticketTags,
             variables: variables,
             field: "widgetsGetTicketTags"
         ) else { return [] }

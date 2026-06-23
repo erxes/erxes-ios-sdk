@@ -1,6 +1,6 @@
 {
   "name": "react-native-erxes-sdk",
-  "version": "0.30.7",
+  "version": "0.30.8",
   "description": "React Native wrapper for the erxes Messenger iOS SDK — headless <ErxesSDK> with a native-owned floating launcher.",
   "main": "src/index.tsx",
   "source": "src/index.tsx",

@@ -108,16 +108,11 @@ final class ChatViewModel: ObservableObject {
         guard !conversationId.isEmpty else { return }
         let cid = conversationId
         Task {
-            let mutation = """
-            mutation WidgetsReadConversationMessages($conversationId: String) {
-              widgetsReadConversationMessages(conversationId: $conversationId)
-            }
-            """
             do {
                 try await GraphQL.send(
                     endpoint: config.fileEndpoint,
                     operation: "widgetsReadConversationMessages",
-                    query: mutation,
+                    query: MessengerGraphQL.readConversationMessages,
                     variables: ["conversationId": cid]
                 )
                 SDKLogger.debug("Marked conversation \(cid) as read")
@@ -199,32 +194,7 @@ final class ChatViewModel: ObservableObject {
             "id": subscriptionId,
             "type": "subscribe",
             "payload": [
-                "query": """
-                subscription ConversationMessageInserted($_id: String!) {
-                  conversationMessageInserted(_id: $_id) {
-                    _id
-                    content
-                    createdAt
-                    customerId
-                    userId
-                    isCustomerRead
-                    fromBot
-                    user {
-                      _id
-                      details {
-                        avatar
-                        fullName
-                      }
-                    }
-                    attachments {
-                      url
-                      name
-                      size
-                      type
-                    }
-                  }
-                }
-                """,
+                "query": MessengerGraphQL.conversationMessageInserted,
                 "variables": ["_id": conversationId]
             ]
         ]
@@ -307,38 +277,10 @@ final class ChatViewModel: ObservableObject {
         // New conversation — no ID yet, nothing to fetch
         guard !conversationId.isEmpty else { return [] }
 
-        let query = """
-        query WidgetsConversationDetail($_id: String, $integrationId: String!) {
-          widgetsConversationDetail(_id: $_id, integrationId: $integrationId) {
-            _id
-            messages {
-              _id
-              conversationId
-              customerId
-              attachments {
-                name
-                url
-              }
-              user {
-                _id
-                details {
-                  avatar
-                  fullName
-                }
-              }
-              content
-              createdAt
-              fromBot
-              contentType
-              internal
-            }
-          }
-        }
-        """
         let json = try await GraphQL.send(
             endpoint: config.fileEndpoint,
             operation: "widgetsConversationDetail",
-            query: query,
+            query: MessengerGraphQL.conversationDetail,
             variables: [
                 "_id": conversationId,
                 "integrationId": config.integrationId
@@ -482,49 +424,6 @@ final class ChatViewModel: ObservableObject {
         customerId: String?,
         visitorId: String
     ) async throws -> Message {
-        let mutation = """
-        mutation WidgetsInsertMessage(
-          $integrationId: String!
-          $customerId: String
-          $visitorId: String
-          $conversationId: String
-          $contentType: String
-          $message: String
-          $attachments: [AttachmentInput]
-        ) {
-          widgetsInsertMessage(
-            integrationId: $integrationId
-            customerId: $customerId
-            visitorId: $visitorId
-            conversationId: $conversationId
-            contentType: $contentType
-            message: $message
-            attachments: $attachments
-          ) {
-            _id
-            conversationId
-            customerId
-            user {
-              _id
-              details {
-                avatar
-                fullName
-              }
-            }
-            content
-            createdAt
-            fromBot
-            contentType
-            attachments {
-              url
-              name
-              size
-              type
-            }
-          }
-        }
-        """
-
         var variables: [String: Any] = [
             "integrationId": config.integrationId,
             "visitorId": visitorId,
@@ -551,7 +450,7 @@ final class ChatViewModel: ObservableObject {
         let raw = try await GraphQL.object(
             endpoint: config.fileEndpoint,
             operation: "widgetsInsertMessage",
-            query: mutation,
+            query: MessengerGraphQL.insertMessage,
             variables: variables,
             field: "widgetsInsertMessage"
         )

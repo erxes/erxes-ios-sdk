@@ -44,66 +44,10 @@ final class HelpViewModel: ObservableObject {
     // MARK: - GraphQL
 
     private func fetchTopic(config: MessengerConfig, topicId: String) async throws -> KBTopic {
-        let query = """
-        query cpKnowledgeBaseTopicDetail($_id: String!) {
-          cpKnowledgeBaseTopicDetail(_id: $_id) {
-            _id
-            title
-            description
-            color
-            code
-            categories {
-              _id
-              title
-              description
-              numOfArticles(status: "publish")
-              countArticles
-              parentCategoryId
-              icon
-              articles(status: "publish") {
-                viewCount
-                topicId
-                title
-                summary
-                status
-                publishedAt
-                modifiedDate
-                content
-                code
-                categoryId
-                _id
-              }
-            }
-            parentCategories {
-              _id
-              title
-              description
-              numOfArticles(status: "publish")
-              parentCategoryId
-              icon
-              childrens { _id }
-              articles {
-                viewCount
-                topicId
-                title
-                summary
-                status
-                publishedAt
-                modifiedDate
-                content
-                code
-                categoryId
-                _id
-              }
-            }
-          }
-        }
-        """
-
         let obj = try await GraphQL.object(
             endpoint: config.fileEndpoint,
             operation: "cpKnowledgeBaseTopicDetail",
-            query: query,
+            query: MessengerGraphQL.knowledgeBaseTopicDetail,
             variables: ["_id": topicId],
             field: "cpKnowledgeBaseTopicDetail"
         )

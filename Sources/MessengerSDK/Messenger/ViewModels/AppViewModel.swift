@@ -59,8 +59,6 @@ public final class AppViewModel: ObservableObject {
             || (user?.phone?.isEmpty == false)
         self.isConnected = true   // show UI immediately; colours fill in after network
 
-        NetworkClient.shared.configure(endpoint: config.endpoint)
-
         do {
             let response = try await performConnect(config: config, user: user)
             if let cid = response.customerId {
@@ -105,7 +103,7 @@ public final class AppViewModel: ObservableObject {
         let obj = try await GraphQL.object(
             endpoint: config.fileEndpoint,
             operation: "widgetsTicketCustomersEdit",
-            query: Self.customersEditMutation,
+            query: MessengerGraphQL.customersEdit,
             variables: variables,
             field: "widgetsTicketCustomersEdit"
         )
@@ -118,42 +116,9 @@ public final class AppViewModel: ObservableObject {
         self.isIdentified = true
     }
 
-    /// Edits the connect-created customer with the requireAuth contact details.
-    /// The returned `_id` becomes the cachedCustomerId passed to the next connect.
-    private static let customersEditMutation = """
-    mutation CustomersEdit($customerId: String!, $firstName: String, $lastName: String, $emails: [String], $phones: [String]) {
-      widgetsTicketCustomersEdit(customerId: $customerId, firstName: $firstName, lastName: $lastName, emails: $emails, phones: $phones) {
-        _id
-        email
-        emails
-        firstName
-        lastName
-        phone
-        phones
-        primaryEmail
-        primaryPhone
-      }
-    }
-    """
-
-    /// Shared connect mutation — used by both the initial handshake and identify().
-    private static let connectMutation = """
-    mutation connect($integrationId: String!, $visitorId: String, $cachedCustomerId: String, $email: String, $phone: String, $data: JSON) {
-      widgetsMessengerConnect(integrationId: $integrationId, visitorId: $visitorId, cachedCustomerId: $cachedCustomerId, email: $email, phone: $phone, data: $data) {
-        integrationId
-        customerId
-        visitorId
-        languageCode
-        uiOptions
-        messengerData
-        ticketConfig
-      }
-    }
-    """
-
     // MARK: - REST connect call
-    // Uses URLSession directly against the widget endpoint while Apollo codegen is pending.
-    // Mirrors the `connect` GraphQL mutation in MessengerMutations.graphql.
+    // Uses URLSession directly against the widget endpoint so the raw response can be
+    // inspected/parsed leniently (connect returns dynamic JSON for uiOptions/messengerData).
 
     private func performConnect(config: MessengerConfig, user: MessengerUser?) async throws -> ConnectResponse {
         // GraphQL lives on fileEndpoint (no w. subdomain) — w. returns 405
@@ -162,7 +127,7 @@ public final class AppViewModel: ObservableObject {
             throw URLError(.badURL)
         }
 
-        let mutation = Self.connectMutation
+        let mutation = MessengerGraphQL.connect
 
         var variables: [String: Any] = [
             "integrationId": config.integrationId,
@@ -350,23 +315,10 @@ public final class AppViewModel: ObservableObject {
     func fetchSupporters() async {
         guard let config else { return }
 
-        let query = """
-        query widgetsMessengerSupporters($integrationId: String!) {
-          widgetsMessengerSupporters(integrationId: $integrationId) {
-            supporters {
-              _id
-              details { avatar fullName }
-              isOnline
-            }
-            isOnline
-          }
-        }
-        """
-
         guard let json = try? await GraphQL.send(
             endpoint: config.fileEndpoint,
             operation: "widgetsMessengerSupporters",
-            query: query,
+            query: MessengerGraphQL.supporters,
             variables: ["integrationId": config.integrationId]
         ) else { return }
 
@@ -392,13 +344,6 @@ public final class AppViewModel: ObservableObject {
     func saveBrowserInfo() async {
         guard let config else { return }
 
-        let mutation = """
-        mutation saveBrowserInfo($customerId: String, $visitorId: String, $browserInfo: JSON!) {
-          widgetsSaveBrowserInfo(customerId: $customerId, visitorId: $visitorId, browserInfo: $browserInfo) {
-            _id content createdAt
-          }
-        }
-        """
         var variables: [String: Any] = [
             "browserInfo": [
                 "url": "ios-app",
@@ -412,7 +357,7 @@ public final class AppViewModel: ObservableObject {
         _ = try? await GraphQL.send(
             endpoint: config.fileEndpoint,
             operation: "widgetsSaveBrowserInfo",
-            query: mutation,
+            query: MessengerGraphQL.saveBrowserInfo,
             variables: variables
         )
     }

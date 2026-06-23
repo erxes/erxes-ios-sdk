@@ -17,29 +17,6 @@ struct TicketMutations {
         attachments: [[String: Any]]? = nil,
         tagIds: [String]? = nil
     ) async throws -> CreatedTicket {
-        let mutation = """
-        mutation WidgetTicketCreated(
-          $name: String!
-          $statusId: String!
-          $customerIds: [String!]!
-          $description: String
-          $attachments: [AttachmentInput]
-          $tagIds: [String!]
-        ) {
-          widgetTicketCreated(
-            name: $name
-            statusId: $statusId
-            customerIds: $customerIds
-            description: $description
-            attachments: $attachments
-            tagIds: $tagIds
-          ) {
-            _id
-            number
-          }
-        }
-        """
-
         var variables: [String: Any] = [
             "name":        name,
             "statusId":    statusId,
@@ -52,7 +29,7 @@ struct TicketMutations {
         let ticket = try await GraphQL.object(
             endpoint: config.fileEndpoint,
             operation: "widgetTicketCreated",
-            query: mutation,
+            query: MessengerGraphQL.createTicket,
             variables: variables,
             field: "widgetTicketCreated"
         )

@@ -34,54 +34,6 @@ final class ConversationListViewModel: ObservableObject {
         customerId: String?,
         visitorId: String?
     ) async throws -> [Conversation] {
-        let query = """
-        query widgetsConversations($integrationId: String!, $customerId: String, $visitorId: String) {
-          widgetsConversations(
-            integrationId: $integrationId
-            customerId: $customerId
-            visitorId: $visitorId
-          ) {
-            _id
-            content
-            createdAt
-            idleTime
-            participatedUsers {
-              _id
-              details {
-                avatar
-                fullName
-                shortName
-              }
-              isOnline
-            }
-            messages {
-              _id
-              createdAt
-              content
-              fromBot
-              customerId
-              isCustomerRead
-              userId
-              attachments {
-                url
-                name
-                size
-                type
-              }
-              user {
-                _id
-                isOnline
-                details {
-                  avatar
-                  fullName
-                  shortName
-                }
-              }
-            }
-          }
-        }
-        """
-
         var variables: [String: Any] = ["integrationId": config.integrationId]
         // Mirror the identity rule: prefer the registered customerId, fall back
         // to the guest visitorId. They are mutually exclusive on the backend.
@@ -94,7 +46,7 @@ final class ConversationListViewModel: ObservableObject {
         let list = try await GraphQL.array(
             endpoint: config.fileEndpoint,
             operation: "widgetsConversations",
-            query: query,
+            query: MessengerGraphQL.conversations,
             variables: variables,
             field: "widgetsConversations"
         )

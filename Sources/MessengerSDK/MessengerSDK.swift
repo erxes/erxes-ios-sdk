@@ -33,7 +33,6 @@ public final class MessengerSDK: ObservableObject {
     public static func configure(_ config: MessengerConfig) {
         shared.config = config
         shared.didAutoPresentChat = false
-        NetworkClient.shared.configure(endpoint: config.endpoint)
         // Auto-connect so launcher appears (or chat mode auto-opens) as soon as
         // the handshake succeeds.
         startConnect()
