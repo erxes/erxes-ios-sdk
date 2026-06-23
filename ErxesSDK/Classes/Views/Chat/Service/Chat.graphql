@@ -1,0 +1,70 @@
+
+mutation widgetsInsertMessage($integrationId:String!,$customerId:String!,$conversationId:String,$message:String, $attachments:[AttachmentInput]){
+    widgetsInsertMessage(integrationId:$integrationId, customerId:$customerId,conversationId:$conversationId,message:$message,attachments:$attachments){
+        ...MessageModel
+    }
+}
+
+query widgetsMessages($conversationId: String!) {
+    widgetsMessages(conversationId: $conversationId) {
+        ...MessageModel
+    }
+}
+
+query widgetsConversationDetail($id:String,$integrationId:String!) {
+    widgetsConversationDetail(_id:$id,integrationId:$integrationId){
+        ...DetailResponse
+    }
+}
+
+fragment DetailResponse on ConversationDetailResponse {
+    isOnline
+}
+
+fragment MessageModel on ConversationMessage {
+    _id
+    conversationId
+    
+    user {
+        ...UserModel
+    }
+    customerId
+    content
+    createdAt
+    attachments {
+        url
+        name
+        type
+        size
+    }
+}
+
+fragment AttachmentModel on Attachment {
+    url
+    name
+    type
+    size
+}
+
+mutation widgetsReadConversationMessages($conversationId: String!) {
+    widgetsReadConversationMessages(conversationId: $conversationId)
+}
+
+
+subscription conversationMessageInserted($id: String!) {
+    conversationMessageInserted(_id:$id) {
+        ...MessageModel
+    }
+}
+
+
+subscription conversationAdminMessageInserted($customerId: String!) {
+    conversationAdminMessageInserted(customerId:$customerId){
+        ...ConversationAdminMessageInsertedModel
+    }
+}
+
+fragment ConversationAdminMessageInsertedModel on ConversationAdminMessageInsertedResponse {
+    customerId
+    unreadCount
+}
