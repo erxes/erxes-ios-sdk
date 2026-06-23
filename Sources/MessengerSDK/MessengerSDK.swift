@@ -25,6 +25,14 @@ public final class MessengerSDK: ObservableObject {
     /// sheet), tracked weakly so a host can dismiss it via `hideMessenger()`.
     private weak var presentedMessengerVC: UIViewController?
 
+    /// Chat-mode controller retained across hide/show so its SwiftUI `@State`
+    /// (active conversation, drafts, drawer) survives a `hideMessenger()` /
+    /// `showMessenger()` cycle. Without this, re-presenting builds a fresh view
+    /// that resets to the new-chat home — the visible "back to initial" flash.
+    /// Held strongly (unlike `presentedMessengerVC`) so the dismissed controller
+    /// isn't deallocated while hidden. Cleared on `configure()`.
+    private var cachedChatVC: UIViewController?
+
     private init() {}
 
     // MARK: - Configuration
@@ -33,6 +41,9 @@ public final class MessengerSDK: ObservableObject {
     public static func configure(_ config: MessengerConfig) {
         shared.config = config
         shared.didAutoPresentChat = false
+        // New configuration = a fresh messenger; drop any retained chat view so
+        // it rebuilds against the new config instead of restoring stale state.
+        shared.cachedChatVC = nil
         // Auto-connect so launcher appears (or chat mode auto-opens) as soon as
         // the handshake succeeds.
         startConnect()
@@ -73,6 +84,10 @@ public final class MessengerSDK: ObservableObject {
     /// chat mode has no built-in close control. No-op if nothing is presented.
     ///
     /// A subsequent `configure()` (e.g. revisiting the screen) re-opens chat mode.
+    ///
+    /// In chat mode the dismissed controller is kept in `cachedChatVC`, so a later
+    /// `showMessenger()` restores the exact screen the user left rather than
+    /// resetting to the new-chat home.
     public static func hideMessenger() {
         guard let vc = shared.presentedMessengerVC else { return }
         vc.dismiss(animated: true)
@@ -161,12 +176,24 @@ public final class MessengerSDK: ObservableObject {
         // hidden window. Redirect to the app's own window in that case.
         let presenter = safePresenter(viewController)
 
+        let isChatMode = shared.config?.displayMode == .chat
+
+        // Re-presenting after a hide: reuse the retained chat-mode controller so
+        // SwiftUI `@State` survives and the user returns to the exact screen they
+        // left — no rebuild, no reset to the new-chat home. `presentingViewController`
+        // is nil once the previous dismiss completed, confirming it's free to show.
+        if isChatMode,
+           let cached = shared.cachedChatVC,
+           cached.presentingViewController == nil {
+            shared.presentedMessengerVC = cached
+            presenter.present(cached, animated: true)
+            return
+        }
+
         // Hide the floating launcher while the sheet is up so it doesn't overlay it,
         // and restore it on dismiss only if it was visible to begin with.
         let launcherWasVisible = LauncherWindow.shared.isVisible
         LauncherWindow.shared.suspend()
-
-        let isChatMode = shared.config?.displayMode == .chat
 
         // Chat mode is a full-screen app-like experience; the classic widget is a
         // large sheet with a grabber. Build the matching root view for each.
@@ -202,6 +229,11 @@ public final class MessengerSDK: ObservableObject {
             }
         }
         shared.presentedMessengerVC = hostingVC
+        // Retain the chat-mode controller for reuse on the next show (see top of
+        // this method). The classic sheet is cheap to rebuild, so it isn't cached.
+        if isChatMode {
+            shared.cachedChatVC = hostingVC
+        }
         presenter.present(hostingVC, animated: true)
     }
 
