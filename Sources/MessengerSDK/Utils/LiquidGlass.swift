@@ -22,6 +22,8 @@ extension View {
         } else {
             self
                 .background(shape.fill(.ultraThinMaterial))
+                .overlay(shape.fill(tint))
+                .overlay(shape.stroke(Color.white.opacity(0.18), lineWidth: 1))
                 .shadow(radius: shadowRadius)
         }
     }
@@ -37,6 +39,8 @@ extension View {
             self.glassEffect(Glass.regular.tint(tint).interactive(), in: s)
         } else {
             self.background(s.fill(.regularMaterial))
+                .overlay(s.fill(tint))
+                .overlay(s.stroke(Color.white.opacity(0.16), lineWidth: 1))
                 .clipShape(s)
         }
     }

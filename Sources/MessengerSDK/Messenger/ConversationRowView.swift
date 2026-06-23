@@ -3,20 +3,23 @@ import SwiftUI
 struct ConversationRowView: View {
     @EnvironmentObject var appVM: AppViewModel
     let conversation: Conversation
+    var compact: Bool = false
 
     private var isBot: Bool { conversation.lastMessage?.fromBot == true }
+    private var avatarSize: CGFloat { compact ? 32 : 44 }
+    private var avatarCornerRadius: CGFloat { compact ? 10 : 14 }
 
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: compact ? 10 : 14) {
             // ── Avatar ────────────────────────────────────────────────────────
             avatarView
-                .frame(width: 44, height: 44)
+                .frame(width: avatarSize, height: avatarSize)
 
             // ── Text content ──────────────────────────────────────────────────
             VStack(alignment: .leading, spacing: 4) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(displayName)
-                        .font(.subheadline.weight(.semibold))
+                        .font(compact ? .system(size: 15, weight: .medium) : .subheadline.weight(.semibold))
                         .lineLimit(1)
                     Spacer()
                     Text(timeAgo)
@@ -25,7 +28,7 @@ struct ConversationRowView: View {
                 }
 
                 Text(previewText)
-                    .font(.subheadline)
+                    .font(compact ? .caption : .subheadline)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
 
@@ -36,8 +39,8 @@ struct ConversationRowView: View {
             }
 
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 14)
+        .padding(.horizontal, compact ? 12 : 14)
+        .padding(.vertical, compact ? 8 : 14)
         .contentShape(Rectangle())
     }
 
@@ -69,8 +72,8 @@ struct ConversationRowView: View {
                   let url = AttachmentURL.resolve(avatarKey, fileEndpoint: base) {
             CachedAsyncImage(url: url, maxPixel: 44) { img in
                 img.resizable().scaledToFill()
-                    .frame(width: 44, height: 44)
-                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .frame(width: avatarSize, height: avatarSize)
+                    .clipShape(RoundedRectangle(cornerRadius: avatarCornerRadius, style: .continuous))
             } placeholder: {
                 initialsAvatar
             }
@@ -83,26 +86,26 @@ struct ConversationRowView: View {
     private var botAvatar: some View {
         let primary = Color(appVM.effectivePrimaryColor)
         return Image(systemName: "sparkles")
-            .font(.system(size: 20, weight: .semibold))
+            .font(.system(size: compact ? 15 : 20, weight: .semibold))
             .foregroundStyle(.white)
-            .frame(width: 44, height: 44)
+            .frame(width: avatarSize, height: avatarSize)
             .background(
                 LinearGradient(
                     colors: [primary, primary.opacity(0.70)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 ),
-                in: RoundedRectangle(cornerRadius: 14, style: .continuous)
+                in: RoundedRectangle(cornerRadius: avatarCornerRadius, style: .continuous)
             )
     }
 
     private var initialsAvatar: some View {
         Text(initials)
-            .font(.headline.weight(.semibold))
+            .font(compact ? .subheadline.weight(.semibold) : .headline.weight(.semibold))
             .foregroundStyle(.white)
-            .frame(width: 44, height: 44)
+            .frame(width: avatarSize, height: avatarSize)
             .background(Color(appVM.effectivePrimaryColor).opacity(0.75),
-                        in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        in: RoundedRectangle(cornerRadius: avatarCornerRadius, style: .continuous))
     }
 
     // MARK: - Helpers

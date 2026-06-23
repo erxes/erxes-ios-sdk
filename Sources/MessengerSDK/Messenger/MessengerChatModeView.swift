@@ -91,10 +91,12 @@ struct MessengerChatModeView: View {
 
             ZStack(alignment: .leading) {
                 // ── Main column ─────────────────────────────────────────────────
-                VStack(spacing: 0) {
-                    topBar
-                    Divider().opacity(0.4)
+                ZStack(alignment: .top) {
                     mainContent
+                    topBarBlurBackdrop
+                    GlassContainer {
+                        topBar
+                    }
                 }
                 .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
 
@@ -159,7 +161,7 @@ struct MessengerChatModeView: View {
                 HStack(spacing: 6) {
                     // Host-configured home actions appear only on the new-chat home —
                     // a conversation keeps a clean top bar so its title/controls stay
-                    // uncluttered. New chat lives in the drawer's floating button.
+                    // uncluttered, except for the edit/new-chat affordance.
                     if activeConversation == nil {
                         ForEach(homeActions) { item in
                             Button { MessengerSDK.shared.onAction?(item.id) } label: {
@@ -171,6 +173,15 @@ struct MessengerChatModeView: View {
                             }
                             .accessibilityLabel(item.title)
                         }
+                    } else {
+                        Button { startNewChat() } label: {
+                            Image(systemName: "square.and.pencil")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundStyle(.primary)
+                                .frame(width: 38, height: 38)
+                                .liquidGlass(shape: Circle())
+                        }
+                        .accessibilityLabel("New chat")
                     }
 
                     // Close the full-screen messenger — only when there's a launcher
@@ -180,7 +191,8 @@ struct MessengerChatModeView: View {
                             Image(systemName: "xmark")
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundStyle(.primary)
-                                .frame(width: 32, height: 36)
+                                .frame(width: 38, height: 38)
+                                .liquidGlass(shape: Circle())
                         }
                         .accessibilityLabel("Close")
                     }
@@ -189,6 +201,55 @@ struct MessengerChatModeView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
+    }
+
+    private var topBarBlurBackdrop: some View {
+        GeometryReader { geo in
+            let height = geo.safeAreaInsets.top + 96
+
+            ZStack(alignment: .top) {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .mask(headerFadeMask)
+
+                LinearGradient(
+                    stops: [
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.66), location: 0),
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.38), location: 0.48),
+                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0), location: 1)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+
+                LinearGradient(
+                    stops: [
+                        .init(color: Color.white.opacity(appVM.effectiveColorScheme == .dark ? 0.05 : 0.12), location: 0),
+                        .init(color: Color.white.opacity(0), location: 0.72)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .blendMode(.screen)
+            }
+            .frame(height: height)
+            .frame(maxHeight: .infinity, alignment: .top)
+        }
+        .ignoresSafeArea(edges: .top)
+        .allowsHitTesting(false)
+    }
+
+    private var headerFadeMask: some View {
+        LinearGradient(
+            stops: [
+                .init(color: .black, location: 0),
+                .init(color: .black.opacity(0.96), location: 0.36),
+                .init(color: .black.opacity(0.52), location: 0.70),
+                .init(color: .clear, location: 1)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
     }
 
     // MARK: - Main content (home vs. active chat)
@@ -296,14 +357,16 @@ struct MessengerChatModeView: View {
                             .padding(.bottom, 2)
                         ForEach(listVM.conversations) { conv in
                             Button { openConversation(conv) } label: {
-                                ConversationRowView(conversation: conv)
+                                ConversationRowView(conversation: conv, compact: true)
                                     .environmentObject(appVM)
                             }
                             .buttonStyle(.plain)
                             .background(
-                                activeConversation?.id == conv.id
-                                    ? primary.opacity(0.12) : Color.clear
+                                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                    .fill(activeConversation?.id == conv.id
+                                        ? primary.opacity(0.12) : Color.clear)
                             )
+                            .padding(.horizontal, 8)
                         }
                     }
                 }
@@ -311,9 +374,8 @@ struct MessengerChatModeView: View {
                 .padding(.bottom, 96)
             }
 
-            // Sticky header — solid, opaque, same surface as the drawer (not a
-            // blurred material) with a long soft fade below so scrolling rows
-            // dissolve into it the way ChatGPT's sidebar title bar does.
+            // Sticky header matches the native chat-detail toolbar: translucent
+            // glass with a soft blur fade where rows scroll underneath it.
             VStack(spacing: 0) {
                 HStack {
                     Text("Chats")
@@ -323,18 +385,11 @@ struct MessengerChatModeView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
                 .padding(.bottom, 12)
-                .background(Color(appVM.effectiveContainerBackgroundColor))
+                .background {
+                    Color(appVM.effectiveContainerBackgroundColor).opacity(0.82)
+                }
 
-                LinearGradient(
-                    stops: [
-                        .init(color: Color(appVM.effectiveContainerBackgroundColor), location: 0),
-                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.8), location: 0.4),
-                        .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0), location: 1)
-                    ],
-                    startPoint: .top, endPoint: .bottom
-                )
-                .frame(height: 28)
-                .allowsHitTesting(false)
+                drawerHeaderFade
             }
         }
         .padding(.top, 8)
@@ -342,7 +397,21 @@ struct MessengerChatModeView: View {
         .overlay(alignment: .bottomTrailing) { newChatButton }
     }
 
-    /// White-on-dark (inverted) pill that starts a fresh conversation.
+    private var drawerHeaderFade: some View {
+        LinearGradient(
+            stops: [
+                .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.82), location: 0),
+                .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0.45), location: 0.45),
+                .init(color: Color(appVM.effectiveContainerBackgroundColor).opacity(0), location: 1)
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+            .frame(height: 28)
+            .allowsHitTesting(false)
+    }
+
+    /// Floating glass pill that starts a fresh conversation.
     private var newChatButton: some View {
         Button { startNewChat() } label: {
             HStack(spacing: 8) {
@@ -351,10 +420,14 @@ struct MessengerChatModeView: View {
                 Text("New chat")
                     .font(.subheadline.weight(.semibold))
             }
-            .foregroundStyle(Color(appVM.effectiveContainerBackgroundColor))
+            .foregroundStyle(.primary)
             .padding(.horizontal, 18)
             .padding(.vertical, 13)
-            .background(Color.primary, in: Capsule())
+            .liquidGlass(
+                tint: primary.opacity(0.16),
+                shape: Capsule(),
+                shadowRadius: 12
+            )
             .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 4)
         }
         .padding(.trailing, 20)
@@ -363,18 +436,18 @@ struct MessengerChatModeView: View {
 
     private func drawerRow(icon: String, title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 16) {
+            HStack(spacing: 14) {
                 Image(systemName: icon)
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(.primary)
-                    .frame(width: 28)
+                    .font(.system(size: 17, weight: .medium))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 24)
                 Text(title)
-                    .font(.body)
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.primary)
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .padding(.vertical, 12)
+            .padding(.vertical, 11)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
