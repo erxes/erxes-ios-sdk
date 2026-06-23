@@ -65,6 +65,10 @@ RCT_EXPORT_METHOD(hideLauncher) {
   [_bridge hideLauncher];
 }
 
+RCT_EXPORT_METHOD(hideMessenger) {
+  [_bridge hideMessenger];
+}
+
 // New-architecture TurboModule registration. `NativeErxesSdkSpecJSI` is generated
 // by codegen from `src/NativeErxesSdk.ts`; the import path follows your
 // codegenConfig `name`.

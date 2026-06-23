@@ -58,6 +58,13 @@ export interface Spec extends TurboModule {
 
   /** Hide the native floating launcher overlay window. */
   hideLauncher(): void;
+
+  /**
+   * Dismiss the presented messenger (the full-screen chat shell or the classic
+   * sheet) if one is up. Use this to close chat mode from a host-handled action,
+   * e.g. a `homeActions` "close" button. No-op if nothing is presented.
+   */
+  hideMessenger(): void;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('ErxesSdk');

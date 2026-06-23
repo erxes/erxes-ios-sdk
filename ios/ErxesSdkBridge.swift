@@ -72,6 +72,11 @@ public final class ErxesSdkBridge: NSObject {
         DispatchQueue.main.async { MessengerSDK.hideLauncher() }
     }
 
+    @objc
+    public func hideMessenger() {
+        DispatchQueue.main.async { MessengerSDK.hideMessenger() }
+    }
+
     // MARK: - Helpers
 
     /// Parses an array of `{ id, title, systemIcon }` dictionaries from JS into

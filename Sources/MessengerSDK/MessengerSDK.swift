@@ -21,6 +21,10 @@ public final class MessengerSDK: ObservableObject {
     /// The cached AppViewModel reused across sheet presentations.
     private var appVM: AppViewModel?
 
+    /// The currently presented messenger controller (chat full-screen or classic
+    /// sheet), tracked weakly so a host can dismiss it via `hideMessenger()`.
+    private weak var presentedMessengerVC: UIViewController?
+
     private init() {}
 
     // MARK: - Configuration
@@ -62,6 +66,18 @@ public final class MessengerSDK: ObservableObject {
     /// Remove the floating launcher overlay window.
     public static func hideLauncher() {
         LauncherWindow.shared.hide()
+    }
+
+    /// Dismiss the presented messenger — the full-screen chat shell or the classic
+    /// sheet — if one is up. Use this to close the messenger from a host-handled
+    /// action (e.g. a chat-mode `homeActions` "close" button), since launcher-less
+    /// chat mode has no built-in close control. No-op if nothing is presented.
+    ///
+    /// A subsequent `configure()` (e.g. revisiting the screen) re-opens chat mode.
+    public static func hideMessenger() {
+        guard let vc = shared.presentedMessengerVC else { return }
+        vc.dismiss(animated: true)
+        shared.presentedMessengerVC = nil
     }
 
     // MARK: - Internal connect
@@ -186,6 +202,7 @@ public final class MessengerSDK: ObservableObject {
                 sheet.prefersGrabberVisible = true
             }
         }
+        shared.presentedMessengerVC = hostingVC
         presenter.present(hostingVC, animated: true)
     }
 

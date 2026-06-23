@@ -148,11 +148,11 @@ struct MessengerChatModeView: View {
                 Spacer(minLength: 8)
 
                 HStack(spacing: 6) {
-                    // Host-configured header-right actions appear only inside a
-                    // conversation — the new-chat home keeps a clean top bar (the
-                    // ChatGPT layout). New chat lives in the drawer's floating button.
-                    if activeConversation != nil {
-                        ForEach(headerActions) { item in
+                    // Host-configured home actions appear only on the new-chat home —
+                    // a conversation keeps a clean top bar so its title/controls stay
+                    // uncluttered. New chat lives in the drawer's floating button.
+                    if activeConversation == nil {
+                        ForEach(homeActions) { item in
                             Button { MessengerSDK.shared.onAction?(item.id) } label: {
                                 Image(systemName: item.systemIcon)
                                     .font(.system(size: 18, weight: .medium))
@@ -373,7 +373,7 @@ struct MessengerChatModeView: View {
 
     // MARK: - Actions
 
-    private var headerActions: [ActionItem] { appVM.config?.homeActions ?? [] }
+    private var homeActions: [ActionItem] { appVM.config?.homeActions ?? [] }
     private var drawerActions: [ActionItem] { appVM.config?.drawerActions ?? [] }
 
     /// Starts a brand-new conversation (returns to the home composer, optionally
