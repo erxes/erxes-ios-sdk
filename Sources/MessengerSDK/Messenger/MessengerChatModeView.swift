@@ -62,7 +62,16 @@ struct MessengerChatModeView: View {
         .environment(\.colorScheme, appVM.effectiveColorScheme)
         .tint(primary)
         .environmentObject(appVM)
-        .onAppear { listVM.load(appVM: appVM) }
+        // Load conversations only once connected — the fetch keys off the
+        // customerId/visitorId established during the connect handshake. Firing
+        // on bare `onAppear` runs before connect resolves, so it fetches with no
+        // identity, gets an empty list, and never refetches (the "Recent empty
+        // on first render" bug). Load now if already connected (a re-present of
+        // the cached chat VC), otherwise wait for the handshake to flip ready.
+        .onAppear { if sdk.isReady { listVM.load(appVM: appVM) } }
+        .onChange(of: sdk.isReady) { ready in
+            if ready { listVM.load(appVM: appVM) }
+        }
     }
 
     /// Centered spinner shown over the container background while connecting.
