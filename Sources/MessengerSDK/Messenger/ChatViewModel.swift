@@ -35,19 +35,29 @@ final class ChatViewModel: ObservableObject {
     @Published var draftText = ""
     @Published private(set) var isLoading = false
     @Published private(set) var isBot = false
-    @Published private(set) var isLoadingMore = false
 
-    /// The backend's `widgetsConversationDetail` query has no limit/offset —
-    /// it always returns the full conversation in one shot. Until it grows
-    /// pagination args, we fetch everything once and window the rows we
-    /// actually render client-side, so long conversations don't pay for
-    /// laying out (and grouping) thousands of rows up front.
-    private let pageSize = 30
-    /// Index into `messages` of the oldest message currently rendered.
-    /// `messages[oldestVisibleIndex...]` is what `chatRows` is built from.
-    @Published private(set) var oldestVisibleIndex = 0
+    // The backend's `widgetsConversationDetail` query has no limit/offset — it
+    // always returns the full conversation in one shot, and we render all of it
+    // at once. Client-side windowing was removed: it forced a top "load older"
+    // sentinel that fired during the initial layout and fought the open-at-bottom
+    // scroll, glitching long conversations on open.
 
-    var hasMoreMessages: Bool { oldestVisibleIndex > 0 }
+    // "Copied" toast shown after long-pressing a message and tapping Copy.
+    // Lives here (rather than as local @State on ChatContentView) so chat
+    // mode's outer ZStack — which floats a glass top bar above
+    // ChatContentView — can render the toast above that bar instead of
+    // underneath it.
+    @Published var showCopiedToast = false
+    private var toastDismissTask: Task<Void, Never>?
+
+    func presentCopiedToast() {
+        toastDismissTask?.cancel()
+        showCopiedToast = true
+        toastDismissTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 1_400_000_000)
+            if !Task.isCancelled { showCopiedToast = false }
+        }
+    }
 
     // Mutable so new-conversation sends can update it after the first reply.
     // `private(set)` lets MessagesView read the assigned ID after first send.
@@ -56,6 +66,12 @@ final class ChatViewModel: ObservableObject {
     /// Set to true after first successful load. Re-opening the sheet reuses the
     /// cached ViewModel — skip fetch + WS reconnect when already live.
     private var hasLoaded = false
+
+    /// Whether the first load has already completed. Lets the view tell a cached
+    /// VM (whose `isLoading` never flips again) apart from a fresh one, so it can
+    /// scroll to the bottom / reveal on appear without waiting for a load that
+    /// won't happen.
+    var isLoaded: Bool { hasLoaded }
 
     // WebSocket subscription
     private var wsTask: URLSessionWebSocketTask?
@@ -86,7 +102,6 @@ final class ChatViewModel: ObservableObject {
                 // Pre-warm content parser cache so first SwiftUI render is instant
                 ContentParser.warmCache(contents: fetched.map(\.content))
                 messages = fetched
-                oldestVisibleIndex = max(0, fetched.count - pageSize)
                 isBot = fetched.contains { $0.fromBot == true }
                 rebuildRows()
             } catch {
@@ -295,7 +310,14 @@ final class ChatViewModel: ObservableObject {
 
     private func parseMessage(_ m: [String: Any]) -> Message? {
         guard let id = m["_id"] as? String else { return nil }
-        let content = (m["content"] as? String) ?? ""
+        // Bot messages arrive with `content: null` and carry their text in `botData`
+        // (an array of `{ type, text }` entries). Fall back to that so they render.
+        var content = (m["content"] as? String) ?? ""
+        if content.isEmpty, let botData = m["botData"] as? [[String: Any]] {
+            content = botData
+                .compactMap { $0["text"] as? String }
+                .joined(separator: "\n")
+        }
         let createdAt = DateParsing.date(from: m["createdAt"]) ?? Date()
         let customerId = m["customerId"] as? String
         // A message is "from customer" only when customerId is present AND non-empty;
@@ -518,30 +540,9 @@ final class ChatViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Pagination
-
-    /// Reveals the previous page of already-fetched messages. Called when the
-    /// chat scrolls to its topmost row. Pure client-side windowing today — the
-    /// brief delay just keeps the loading affordance consistent with what a
-    /// real network page-fetch would feel like, so this slots in unchanged if
-    /// the backend ever adds limit/offset to `widgetsConversationDetail`.
-    func loadOlderMessagesIfNeeded() {
-        guard !isLoadingMore, hasMoreMessages else { return }
-        isLoadingMore = true
-        Task {
-            try? await Task.sleep(nanoseconds: 250_000_000)
-            oldestVisibleIndex = max(0, oldestVisibleIndex - pageSize)
-            rebuildRows()
-            isLoadingMore = false
-        }
-    }
-
     // MARK: - Helpers
 
     private func rebuildRows() {
-        // Clamp defensively — an optimistic-message rollback can shrink
-        // `messages` by one without touching `oldestVisibleIndex`.
-        let start = min(oldestVisibleIndex, messages.count)
-        chatRows = MessageGrouper.buildChatRows(messages: Array(messages[start...]))
+        chatRows = MessageGrouper.buildChatRows(messages: messages)
     }
 }

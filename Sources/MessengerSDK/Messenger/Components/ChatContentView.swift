@@ -17,6 +17,12 @@ struct ChatContentView: View {
     /// loading — used when the user tapped "+" before any conversation existed
     /// (the new-chat home composer).
     let autoOpenPhotoPicker: Bool
+    /// Extra space reserved at the top of the message list so the first rows
+    /// aren't hidden behind a floating header. Chat mode (`MessengerChatModeView`)
+    /// renders this view under a custom glass top bar that overlays the content,
+    /// so it passes the bar's height here; the classic sheet (`ChatView`) uses a
+    /// real navigation toolbar that already provides safe-area, so it leaves this 0.
+    let topContentInset: CGFloat
 
     @ObservedObject var viewModel: ChatViewModel
     @EnvironmentObject var appVM: AppViewModel
@@ -43,29 +49,24 @@ struct ChatContentView: View {
     @State private var isAtBottom = true
     private let bottomMarkerID = "ChatContentView.bottomMarker"
 
-    // Pagination — reveals older already-fetched messages as the user
-    // scrolls to the top. `isPaginating` suppresses the "new message"
-    // auto-scroll-to-bottom while older rows are being prepended, and
-    // `topAnchorID` is the row to re-anchor to once they land, so the list
-    // doesn't visually jump.
-    private let topMarkerID = "ChatContentView.topMarker"
-    @State private var isPaginating = false
-    @State private var topAnchorID: String?
-
-    // "Copied" toast shown after long-pressing a message and tapping Copy.
-    @State private var showCopiedToast = false
-    @State private var toastDismissTask: Task<Void, Never>?
+    /// The whole conversation is rendered at once (no windowing), and we open at
+    /// the bottom. The list is kept hidden until that first scroll-to-bottom has
+    /// settled, then faded in — so the brief layout settling of long messages
+    /// isn't visible as a jump.
+    @State private var revealed = false
 
     init(
         conversation: Conversation,
         viewModel: ChatViewModel,
         autoSendMessage: String? = nil,
-        autoOpenPhotoPicker: Bool = false
+        autoOpenPhotoPicker: Bool = false,
+        topContentInset: CGFloat = 0
     ) {
         self.conversation = conversation
         self.viewModel = viewModel
         self.autoSendMessage = autoSendMessage
         self.autoOpenPhotoPicker = autoOpenPhotoPicker
+        self.topContentInset = topContentInset
     }
 
     private var primary: UIColor { appVM.effectivePrimaryColor }
@@ -74,19 +75,11 @@ struct ChatContentView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 4) {
-                    // Top sentinel — reaching it loads the previous page of
-                    // already-fetched messages. Disappears for good once the
-                    // start of the conversation is reached.
-                    if viewModel.hasMoreMessages {
-                        Color.clear
-                            .frame(height: 1)
-                            .id(topMarkerID)
-                            .onAppear { beginLoadOlderMessages() }
-                    }
-                    if viewModel.isLoadingMore {
-                        ProgressView()
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 12)
+                    // Clears a floating header (chat mode). Scrolls with the
+                    // content so messages still slide under the glass bar, but
+                    // keeps the topmost rows fully visible when scrolled up.
+                    if topContentInset > 0 {
+                        Color.clear.frame(height: topContentInset)
                     }
                     if let welcome = appVM.messengerData?.messages?.welcome {
                         WelcomeMessageView(message: welcome, primaryColor: primary)
@@ -107,6 +100,9 @@ struct ChatContentView: View {
                 // Shift the whole content left to reveal the timestamp column
                 .offset(x: swipeOffset)
             }
+            // Hidden until the initial open-at-bottom scroll has settled, so the
+            // brief layout settling of long messages isn't seen as a jump.
+            .opacity(revealed ? 1 : 0)
             // Lock vertical scroll while a horizontal swipe is active so the
             // two axes don't fight. scrollDisabled is flipped once direction
             // is determined and reset when the gesture ends.
@@ -146,13 +142,22 @@ struct ChatContentView: View {
             .simultaneousGesture(TapGesture().onEnded { inputFocused = false })
             .overlay(alignment: .bottom) { scrollToBottomButton(proxy: proxy) }
             .overlay(alignment: .top) {
-                if showCopiedToast {
+                // Chat mode (topContentInset > 0) floats a glass top bar
+                // above this view in an outer ZStack — rendering the toast
+                // here would draw it underneath that bar. Chat mode renders
+                // its own copy of this toast above the bar instead; see
+                // `MessengerChatModeView.copiedToastOverlay`.
+                if topContentInset == 0, viewModel.showCopiedToast {
                     CopiedToastView()
                         .padding(.top, 8)
-                        .transition(.move(edge: .top).combined(with: .opacity))
+                        // Grows out from the top edge rather than sliding
+                        // down — matches how system Dynamic Island alerts
+                        // (e.g. Now Playing) animate in.
+                        .transition(CopiedToastView.transition)
+                        .zIndex(1)
                 }
             }
-            .animation(.spring(response: 0.35, dampingFraction: 0.8), value: showCopiedToast)
+            .animation(.spring(response: 0.4, dampingFraction: 0.7), value: viewModel.showCopiedToast)
             // The input bar lives in a bottom safe-area inset. SwiftUI's native
             // keyboard avoidance lifts this inset above the keyboard inside the
             // SAME animation transaction as the keyboard itself, so the bar and
@@ -169,23 +174,9 @@ struct ChatContentView: View {
                     scrollToBottom(proxy: proxy)
                 }
             }
-            // New message arrived — but not when the row count grew because
-            // an older page was just prepended (that's handled separately,
-            // and would otherwise yank the scroll position back down).
+            // New message arrived — keep the latest message in view.
             .onChange(of: viewModel.chatRows.count) { _ in
-                guard !isPaginating else { return }
                 scrollToBottom(proxy: proxy)
-            }
-            // Older page finished loading — restore the scroll position to
-            // the row the user was already looking at, now that more rows
-            // exist above it, instead of letting the list jump.
-            .onChange(of: viewModel.isLoadingMore) { loading in
-                guard !loading, isPaginating else { return }
-                if let anchor = topAnchorID {
-                    proxy.scrollTo(anchor, anchor: .top)
-                }
-                isPaginating = false
-                topAnchorID = nil
             }
             // Attachment strip appeared or disappeared — the safeAreaInset
             // height changed, so the last message may now be behind the bar.
@@ -195,10 +186,11 @@ struct ChatContentView: View {
                     scrollToBottom(proxy: proxy)
                 }
             }
-            // Initial load finished
+            // Initial load finished — jump to the bottom, then reveal.
             .onChange(of: viewModel.isLoading) { loading in
                 if !loading {
                     scrollToBottom(proxy: proxy, animated: false)
+                    revealAfterSettle()
                     if !didAutoSend, let text = autoSendMessage {
                         didAutoSend = true
                         viewModel.sendMessage(text, appVM: appVM)
@@ -207,6 +199,19 @@ struct ChatContentView: View {
                         didAutoOpenPhotoPicker = true
                         showPhotoPicker = true
                     }
+                }
+            }
+            // The view model may already be loaded when this view appears — in
+            // chat mode VMs are cached so their WebSocket survives, so re-opening
+            // (or switching back to) a conversation reuses a VM whose `isLoading`
+            // is already false. The onChange above never fires in that case, so
+            // scroll to the bottom (and reveal) explicitly for the loaded path.
+            .onAppear {
+                if viewModel.isLoaded {
+                    if !viewModel.chatRows.isEmpty {
+                        scrollToBottom(proxy: proxy, animated: false)
+                    }
+                    revealAfterSettle()
                 }
             }
         }
@@ -247,7 +252,7 @@ struct ChatContentView: View {
                 primaryColor: primary,
                 isFirstInGroup: isFirst,
                 isLastInGroup: isLast,
-                onCopy: { presentCopiedToast() }
+                onCopy: { viewModel.presentCopiedToast() }
             )
             .environmentObject(appVM)
             .id(msg.id)
@@ -283,33 +288,43 @@ struct ChatContentView: View {
 
     // MARK: - Scroll helpers
 
-    // MARK: - Copy toast
-
-    private func presentCopiedToast() {
-        toastDismissTask?.cancel()
-        showCopiedToast = true
-        toastDismissTask = Task {
-            try? await Task.sleep(nanoseconds: 1_400_000_000)
-            if !Task.isCancelled { showCopiedToast = false }
+    /// Fades the list in once the open-at-bottom scroll has settled. The list is
+    /// rendered hidden so the brief layout settling of long messages (and the
+    /// scroll passes that chase it) happens off-screen rather than as a visible
+    /// jump. Idempotent — only the first call schedules the reveal.
+    private func revealAfterSettle() {
+        guard !revealed else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            withAnimation(.easeOut(duration: 0.15)) { revealed = true }
         }
     }
 
-    // MARK: - Pagination
-
-    private func beginLoadOlderMessages() {
-        guard !isPaginating, !viewModel.isLoadingMore, viewModel.hasMoreMessages else { return }
-        isPaginating = true
-        // Remember what the user is currently looking at so we can
-        // re-anchor the scroll position to it once older rows land above.
-        topAnchorID = viewModel.chatRows.first?.id
-        viewModel.loadOlderMessagesIfNeeded()
-    }
-
     private func scrollToBottom(proxy: ScrollViewProxy, animated: Bool = true) {
+        // A single scrollTo can land short of the real bottom: if the list is
+        // still decelerating from a flick, the ScrollView swallows the
+        // programmatic scroll; and because the bottom marker lives in a
+        // LazyVStack, rows below the viewport may only get realized *during*
+        // the scroll, changing the total height after the target was computed.
+        // Issuing the scroll again on the next run loop overrides any in-flight
+        // deceleration and re-targets the now-correct bottom.
+        let jump = { proxy.scrollTo(bottomMarkerID, anchor: .bottom) }
         if animated {
-            withAnimation { proxy.scrollTo(bottomMarkerID, anchor: .bottom) }
-        } else {
-            proxy.scrollTo(bottomMarkerID, anchor: .bottom)
+            withAnimation { jump() }
+            DispatchQueue.main.async { withAnimation { jump() } }
+            return
+        }
+        // The non-animated path runs on first open / chat switch. Two things make
+        // a single jump land short:
+        //  • the bottom marker lives in a LazyVStack, so rows below the viewport
+        //    are realized only *during* the scroll, growing the total height; and
+        //  • a long last message reports its final (much taller) text height a few
+        //    frames after its row first appears, so an immediate jump computes the
+        //    bottom against an underestimated height and stops mid-message.
+        // Re-issue the jump on a spread-out schedule so a later pass re-targets the
+        // now-correct bottom once layout has settled.
+        jump()
+        for delay in [0.016, 0.05, 0.1, 0.2, 0.35, 0.5] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: jump)
         }
     }
 
@@ -426,10 +441,20 @@ struct ChatContentView: View {
 
 // MARK: - Copied toast
 
-/// Mimics iOS's native "Copied to Clipboard" pill — there's no public API for
-/// it on writes (only the system shows one automatically on paste), so we
-/// replicate the look: dark capsule, checkmark, auto-dismisses.
-private struct CopiedToastView: View {
+/// Mimics a Dynamic Island alert — there's no public API for a native
+/// "Copied" pill on writes (only the system shows one automatically on
+/// paste), so we replicate the look: a black capsule that sits right at the
+/// island and grows out of it, rather than a generic toast sliding in from
+/// the top edge.
+struct CopiedToastView: View {
+    /// Distinct open vs. close: grows out of the island on appear, then snaps
+    /// back up faster on dismiss so it doesn't linger. Reused by every render
+    /// site (ChatContentView overlay + chat mode's `CopiedToastHost`).
+    static let transition: AnyTransition = .asymmetric(
+        insertion: .scale(scale: 0.4, anchor: .top).combined(with: .opacity),
+        removal: .scale(scale: 0.6, anchor: .top).combined(with: .opacity)
+    )
+
     var body: some View {
         HStack(spacing: 6) {
             Image(systemName: "checkmark.circle.fill")
@@ -437,10 +462,10 @@ private struct CopiedToastView: View {
         }
         .font(.subheadline.weight(.medium))
         .foregroundStyle(.white)
-        .padding(.horizontal, 14)
-        .padding(.vertical, 8)
-        .background(Color.black.opacity(0.85), in: Capsule())
-        .shadow(color: .black.opacity(0.2), radius: 6, y: 2)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .background(Color.black, in: Capsule())
+        .shadow(color: .black.opacity(0.3), radius: 8, y: 3)
     }
 }
 

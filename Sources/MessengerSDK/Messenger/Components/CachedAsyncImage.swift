@@ -36,19 +36,33 @@ enum RemoteImageCache {
         if failed.object(forKey: url as NSURL) != nil { return nil }
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
+            let http = response as? HTTPURLResponse
+            SDKLogger.debug("Image load — status=\(http?.statusCode ?? -1) type=\(http?.mimeType ?? "?") bytes=\(data.count) url=\(url.absoluteString)")
             // Treat non-2xx (e.g. an HTML 404 page) as a failure so we don't try
             // to decode it and don't retry it.
-            if let http = response as? HTTPURLResponse, !(200...299).contains(http.statusCode) {
+            if let http, !(200...299).contains(http.statusCode) {
+                SDKLogger.error("Image load failed — non-2xx status \(http.statusCode) for \(url.absoluteString)")
                 failed.setObject(1, forKey: url as NSURL)
                 return nil
             }
             guard let image = downsample(data: data, maxPixel: maxPixel) ?? UIImage(data: data) else {
+                SDKLogger.error("Image load failed — could not decode \(data.count) bytes (type=\(http?.mimeType ?? "?")) for \(url.absoluteString)")
                 failed.setObject(1, forKey: url as NSURL)
                 return nil
             }
             memory.setObject(image, forKey: url as NSURL)
             return image
+        } catch is CancellationError {
+            // A SwiftUI re-render cancelled the `.task`. This is transient — do NOT
+            // mark the URL as failed, or it would be skipped forever and the spinner
+            // would spin indefinitely. Let the next render retry.
+            return nil
+        } catch let urlError as URLError where urlError.code == .cancelled {
+            // URLSession surfaces cancellation as URLError.cancelled, not
+            // CancellationError — same handling: transient, don't blacklist.
+            return nil
         } catch {
+            SDKLogger.error("Image load failed — \(error.localizedDescription) for \(url.absoluteString)")
             failed.setObject(1, forKey: url as NSURL)
             return nil
         }

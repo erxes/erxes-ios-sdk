@@ -4,6 +4,8 @@ import MessengerSDK
 @main
 struct MessengerExampleApp: App {
     init() {
+        // Identify the visitor by email so connect re-identifies them.
+        MessengerSDK.setUser(MessengerUser(email: "test@example.com"))
         MessengerSDK.configure(
             MessengerConfig(
                 endpoint: "https://officenext.erxes.io",

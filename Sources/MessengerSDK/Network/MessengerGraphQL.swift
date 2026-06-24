@@ -109,6 +109,7 @@ enum MessengerGraphQL {
           createdAt
           content
           fromBot
+          botData
           customerId
           isCustomerRead
           userId
@@ -136,6 +137,7 @@ enum MessengerGraphQL {
           content
           createdAt
           fromBot
+          botData
           contentType
           internal
         }
@@ -191,6 +193,7 @@ enum MessengerGraphQL {
         userId
         isCustomerRead
         fromBot
+        botData
         user { \(Fragments.userBrief) }
         attachments { \(Fragments.attachmentFields) }
       }

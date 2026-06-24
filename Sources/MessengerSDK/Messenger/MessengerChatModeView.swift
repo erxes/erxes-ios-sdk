@@ -97,6 +97,11 @@ struct MessengerChatModeView: View {
                     GlassContainer {
                         topBar
                     }
+                    // Drawn last so it composites above the glass top bar —
+                    // ChatContentView suppresses its own copy of this toast
+                    // while embedded here (see its `topContentInset` check)
+                    // because that one would render underneath the bar.
+                    copiedToastOverlay
                 }
                 .background(Color(appVM.effectiveContainerBackgroundColor).ignoresSafeArea())
 
@@ -128,6 +133,11 @@ struct MessengerChatModeView: View {
     }
 
     // MARK: - Top bar
+
+    /// Height of the floating top bar (38pt controls + 6pt vertical padding each
+    /// side). The message list reserves this much space up top so its first rows
+    /// clear the bar — see `ChatContentView.topContentInset`.
+    private let topBarHeight: CGFloat = 50
 
     private var topBar: some View {
         // A ZStack centers the title on the bar itself rather than in the
@@ -203,6 +213,17 @@ struct MessengerChatModeView: View {
         .padding(.vertical, 6)
     }
 
+    // `activeVM` is plain @State holding a reference, so this view doesn't
+    // observe its @Published properties on its own — wrap it in a small
+    // @ObservedObject host so the toast actually reacts to
+    // `showCopiedToast` changes.
+    @ViewBuilder
+    private var copiedToastOverlay: some View {
+        if let vm = activeVM {
+            CopiedToastHost(viewModel: vm)
+        }
+    }
+
     private var topBarBlurBackdrop: some View {
         GeometryReader { geo in
             let height = geo.safeAreaInsets.top + 96
@@ -261,7 +282,10 @@ struct MessengerChatModeView: View {
                 conversation: conv,
                 viewModel: vm,
                 autoSendMessage: activeAutoSend,
-                autoOpenPhotoPicker: activeAutoOpenPhotoPicker
+                autoOpenPhotoPicker: activeAutoOpenPhotoPicker,
+                // Reserve room for the floating glass top bar (≈38pt controls +
+                // 12pt vertical padding) so the first message isn't hidden behind it.
+                topContentInset: topBarHeight
             )
                 .environmentObject(appVM)
                 // Re-identify by conversation id so switching chats rebuilds state.
@@ -563,5 +587,25 @@ struct MessengerChatModeView: View {
                 let projected = value.translation.width + value.predictedEndTranslation.width * 0.25
                 setDrawer(projected > -width * 0.25)
             }
+    }
+}
+
+/// Wraps `viewModel` as `@ObservedObject` so this small subtree re-renders
+/// on `showCopiedToast` changes — the parent only holds the view model in
+/// plain `@State`, which wouldn't otherwise observe its `@Published` properties.
+private struct CopiedToastHost: View {
+    @ObservedObject var viewModel: ChatViewModel
+
+    var body: some View {
+        Group {
+            if viewModel.showCopiedToast {
+                CopiedToastView()
+                    .padding(.top, 8)
+                    .transition(CopiedToastView.transition)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .top)
+        .allowsHitTesting(false)
+        .animation(.spring(response: 0.4, dampingFraction: 0.7), value: viewModel.showCopiedToast)
     }
 }

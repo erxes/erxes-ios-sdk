@@ -24,7 +24,14 @@ enum AttachmentURL {
         }
 
         let base = fileEndpoint.hasSuffix("/") ? String(fileEndpoint.dropLast()) : fileEndpoint
-        let encoded = keyOrURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? keyOrURL
+        // Encode the key as a query *value*: `.urlQueryAllowed` leaves "/" (and other
+        // reserved chars) unescaped, but the gateway needs the key's slash as "%2F" —
+        // e.g. "office-erxes-io/photo.png" → "office-erxes-io%2Fphoto.png". With a
+        // literal slash the gateway can't find the file and returns an empty body,
+        // so the image never decodes and the spinner spins forever.
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove(charactersIn: "/+&=?#%")
+        let encoded = keyOrURL.addingPercentEncoding(withAllowedCharacters: allowed) ?? keyOrURL
         return URL(string: "\(base)/gateway/read-file?key=\(encoded)")
     }
 }

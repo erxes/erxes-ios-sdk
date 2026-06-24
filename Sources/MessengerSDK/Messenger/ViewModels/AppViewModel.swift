@@ -50,6 +50,12 @@ public final class AppViewModel: ObservableObject {
         // Reset persisted identity if the integration changed, so we don't reuse the
         // previous integration's customerId (which would surface its tickets/chats).
         SessionManager.shared.bind(integrationId: config.integrationId)
+        // A host-provided cachedCustomerId (e.g. for testing, or to re-identify a
+        // known customer without the requireAuth form) seeds the session so the
+        // connect mutation below re-identifies that exact customer.
+        if let cid = config.cachedCustomerId, !cid.isEmpty {
+            SessionManager.shared.cachedCustomerId = cid
+        }
         self.visitorId = SessionManager.shared.visitorId
         self.activeConversationId = SessionManager.shared.lastConversationId
         // A host-provided email/phone, or a contact captured on a previous launch,
@@ -57,10 +63,12 @@ public final class AppViewModel: ObservableObject {
         self.isIdentified = SessionManager.shared.isIdentified
             || (user?.email?.isEmpty == false)
             || (user?.phone?.isEmpty == false)
+            || (config.cachedCustomerId?.isEmpty == false)
         self.isConnected = true   // show UI immediately; colours fill in after network
 
         do {
             let response = try await performConnect(config: config, user: user)
+            SDKLogger.debug("connect → customerId=\(response.customerId ?? "nil") visitorId=\(response.visitorId ?? "nil")")
             if let cid = response.customerId {
                 SessionManager.shared.cachedCustomerId = cid
                 self.customerId = cid

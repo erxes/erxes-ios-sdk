@@ -10,6 +10,11 @@ public struct Conversation: Identifiable, Codable, Hashable {
 
     public var lastMessage: Message? { messages.last }
 
+    /// Timestamp used to order the "Recent" list: the newest message's time, or
+    /// the conversation's creation time when it has no messages yet. Sorting by
+    /// this (not `createdAt`) keeps freshly-replied conversations at the top.
+    public var lastActivityAt: Date { lastMessage?.createdAt ?? createdAt }
+
     public var unreadCount: Int {
         messages.filter { !$0.isFromCustomer && !(($0.isCustomerRead) ?? false) }.count
     }

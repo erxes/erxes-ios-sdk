@@ -13,7 +13,9 @@ struct AttachmentItemView: View {
     @State private var presentedURL: URL?
 
     private var url: URL? {
-        AttachmentURL.resolve(attachment.url, fileEndpoint: fileEndpoint)
+        let resolved = AttachmentURL.resolve(attachment.url, fileEndpoint: fileEndpoint)
+        SDKLogger.debug("Attachment URL — key=\"\(attachment.url)\" endpoint=\"\(fileEndpoint)\" full=\(resolved?.absoluteString ?? "nil")")
+        return resolved
     }
 
     /// Image when the API type says so, or when the URL/name has an image extension.

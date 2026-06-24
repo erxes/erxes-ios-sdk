@@ -51,8 +51,10 @@ final class ConversationListViewModel: ObservableObject {
             field: "widgetsConversations"
         )
 
+        // Order by latest activity (newest message), not creation time — an old
+        // conversation with a fresh reply must rank above a newer but idle one.
         return list.compactMap { parseConversation($0) }
-            .sorted { $0.createdAt > $1.createdAt }
+            .sorted { $0.lastActivityAt > $1.lastActivityAt }
     }
 
     // MARK: - Parsers
@@ -89,7 +91,14 @@ final class ConversationListViewModel: ObservableObject {
 
     private func parseMessage(_ d: [String: Any]) -> Message? {
         guard let mid = d["_id"] as? String else { return nil }
-        let content = d["content"] as? String ?? ""
+        // Bot messages have `content: null` and carry their text in `botData`
+        // (`[{ type, text }]`) — fall back to it so list previews aren't blank.
+        var content = d["content"] as? String ?? ""
+        if content.isEmpty, let botData = d["botData"] as? [[String: Any]] {
+            content = botData
+                .compactMap { $0["text"] as? String }
+                .joined(separator: "\n")
+        }
         let customerId = d["customerId"] as? String
         let userId = d["userId"] as? String
         let isFromCustomer = customerId != nil && !(customerId?.isEmpty ?? true)

@@ -6,6 +6,8 @@ struct ConversationRowView: View {
     var compact: Bool = false
 
     private var isBot: Bool { conversation.lastMessage?.fromBot == true }
+    /// True when the most recent message was sent by the customer (me).
+    private var lastFromMe: Bool { conversation.lastMessage?.isFromCustomer == true }
     private var avatarSize: CGFloat { compact ? 32 : 44 }
     private var avatarCornerRadius: CGFloat { compact ? 10 : 14 }
 
@@ -17,10 +19,14 @@ struct ConversationRowView: View {
 
             // ── Text content ──────────────────────────────────────────────────
             VStack(alignment: .leading, spacing: 4) {
-                HStack(alignment: .firstTextBaseline) {
+                HStack(alignment: .center, spacing: 6) {
                     Text(displayName)
                         .font(compact ? .system(size: 15, weight: .medium) : .subheadline.weight(.semibold))
                         .lineLimit(1)
+                    // Combined "AI Bot · Automated" badge next to the title.
+                    if isBot {
+                        botBadge
+                    }
                     Spacer()
                     Text(timeAgo)
                         .font(.caption)
@@ -30,12 +36,11 @@ struct ConversationRowView: View {
                 Text(previewText)
                     .font(compact ? .caption : .subheadline)
                     .foregroundStyle(.secondary)
+                    // Dim the preview when the last message is one I sent — it's
+                    // awaiting a reply, so it reads as less prominent than an
+                    // incoming message.
+                    .opacity(lastFromMe ? 0.5 : 1)
                     .lineLimit(1)
-
-                // Bot badge
-                if isBot {
-                    botBadge
-                }
             }
 
         }
@@ -46,17 +51,18 @@ struct ConversationRowView: View {
 
     // MARK: - Bot badge
 
+    /// Combined "AI Bot · Automated" pill shown next to the title.
     private var botBadge: some View {
         let primary = Color(appVM.effectivePrimaryColor)
         return HStack(spacing: 4) {
             Image(systemName: "circle.dotted")
+                .font(.system(size: 10, weight: .medium))
+            Text("AI Bot · Automated")
                 .font(.system(size: 11, weight: .medium))
-            Text("AI Agent · Automated")
-                .font(.caption.weight(.medium))
         }
         .foregroundStyle(primary)
-        .padding(.horizontal, 8)
-        .padding(.vertical, 3)
+        .padding(.horizontal, 7)
+        .padding(.vertical, 2)
         .background(primary.opacity(0.12), in: Capsule())
     }
 
@@ -141,12 +147,15 @@ struct ConversationRowView: View {
     private var timeAgo: String {
         let ref = conversation.lastMessage?.createdAt ?? conversation.createdAt
         let diff = Date().timeIntervalSince(ref)
+        let day = 86_400.0
         switch diff {
-        case ..<60:            return "just now"
-        case ..<3_600:         return "\(Int(diff / 60))m ago"
-        case ..<86_400:        return "\(Int(diff / 3_600))h ago"
-        case ..<(86_400 * 7): return "\(Int(diff / 86_400))d ago"
-        default:               return Self.dateFmt.string(from: ref)
+        case ..<60:           return "just now"
+        case ..<3_600:        return "\(Int(diff / 60))m ago"
+        case ..<day:          return "\(Int(diff / 3_600))h ago"
+        case ..<(day * 30):   return "\(Int(diff / day))d ago"
+        case ..<(day * 365):  return "\(Int(diff / (day * 30)))mo ago"
+        // Older than a year — relative loses meaning, show the full date.
+        default:              return Self.dateFmt.string(from: ref)
         }
     }
 
