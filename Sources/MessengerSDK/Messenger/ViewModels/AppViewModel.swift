@@ -50,6 +50,11 @@ public final class AppViewModel: ObservableObject {
         // Reset persisted identity if the integration changed, so we don't reuse the
         // previous integration's customerId (which would surface its tickets/chats).
         SessionManager.shared.bind(integrationId: config.integrationId)
+        // Reset the cached customer when the host connects with a different email/phone,
+        // otherwise the stale cachedCustomerId re-identifies the previous person and
+        // surfaces their old conversations. Runs before the host-provided cachedCustomerId
+        // is seeded below so an explicit override still wins.
+        SessionManager.shared.bind(email: user?.email, phone: user?.phone)
         // A host-provided cachedCustomerId (e.g. for testing, or to re-identify a
         // known customer without the requireAuth form) seeds the session so the
         // connect mutation below re-identifies that exact customer.

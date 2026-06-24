@@ -54,9 +54,13 @@ public final class MessengerSDK: ObservableObject {
         shared.currentUser = user
     }
 
-    /// Clear the current user (e.g. on logout).
+    /// Clear the current user on logout. Drops the in-memory user *and* the persisted
+    /// identity (cachedCustomerId, conversation, visitorId, …) so the next connect
+    /// starts as a fresh anonymous visitor rather than re-identifying the logged-out
+    /// customer and surfacing their old conversations.
     public static func clearUser() {
         shared.currentUser = nil
+        SessionManager.shared.clearIdentity()
     }
 
     // MARK: - Floating launcher (native overlay)
