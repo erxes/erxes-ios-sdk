@@ -364,8 +364,10 @@ struct MessengerChatModeView: View {
                         Divider().padding(.horizontal, 16).padding(.vertical, 8)
                     }
 
-                    // Conversation list
-                    if listVM.isLoading {
+                    // Conversation list. Only show the spinner on the very first
+                    // load (no rows yet) — a refresh-on-open keeps the existing
+                    // rows visible while the new fetch runs, so it doesn't blank.
+                    if listVM.isLoading && listVM.conversations.isEmpty {
                         ProgressView().padding(.top, 24).frame(maxWidth: .infinity)
                     } else if listVM.conversations.isEmpty {
                         Text("No conversations yet")
@@ -546,6 +548,17 @@ struct MessengerChatModeView: View {
 
     private func setDrawer(_ open: Bool) {
         dismissKeyboard()
+        // Opening "Recent": cache the active conversation's live VM (so tapping
+        // its row reuses the same WS-subscribed VM) and refresh the list. The
+        // first send assigns the conversation id asynchronously, so the list last
+        // loaded on connect won't yet include a just-started conversation —
+        // reloading here makes it appear without having to reopen the messenger.
+        if open {
+            if let vm = activeVM, !vm.conversationId.isEmpty {
+                chatVMCache[vm.conversationId] = vm
+            }
+            listVM.load(appVM: appVM)
+        }
         withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
             drawerOpen = open
             dragTranslation = 0
