@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.source           = {
     :git => 'https://github.com/erxes/erxes-ios-sdk.git',
-    :tag => "v#{s.version}"
+    :tag => s.version.to_s
   }
 
   s.ios.deployment_target = '16.0'
