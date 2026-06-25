@@ -3,7 +3,7 @@ name: Publish CocoaPods
 on:
   push:
     tags:
-      - "ErxesMessengerSDK-*"
+      - "v*"
   release:
     types: [published]
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
           if [ "${{ github.event_name }}" = "release" ]; then
             TAG_NAME="${{ github.event.release.tag_name }}"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            TAG_NAME="${POD_NAME}-${{ inputs.version }}"
+            TAG_NAME="v${{ inputs.version }}"
           else
             TAG_NAME="${GITHUB_REF_NAME}"
           fi
@@ -59,7 +59,7 @@ jobs:
           git checkout --detach "${TAG_NAME}"
 
           SPEC_VERSION="$(ruby -e "require 'cocoapods'; puts Pod::Specification.from_file(ENV.fetch('PODSPEC_PATH')).version")"
-          EXPECTED_TAG="${POD_NAME}-${SPEC_VERSION}"
+          EXPECTED_TAG="v${SPEC_VERSION}"
 
           echo "Podspec version: ${SPEC_VERSION}"
           echo "Release tag: ${TAG_NAME}"

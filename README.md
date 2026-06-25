@@ -137,11 +137,11 @@ CocoaPods publishing is automated with GitHub Actions. Add a repository secret n
 To publish a version, update `ErxesMessengerSDK.podspec`, create a matching tag, and push it:
 
 ```sh
-git tag ErxesMessengerSDK-0.30.14
-git push origin ErxesMessengerSDK-0.30.14
+git tag v0.30.14
+git push origin v0.30.14
 ```
 
-The workflow also runs when a GitHub Release is published with the same tag name. The tag must match the podspec version exactly: `ErxesMessengerSDK-<version>`.
+The workflow also runs when a GitHub Release is published with the same tag name. The tag must match the podspec version exactly: `v<version>`.
 
 ## Getting Started
 
