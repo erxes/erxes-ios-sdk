@@ -2,7 +2,7 @@ import Foundation
 
 extension Bundle {
     static var messengerSDKResources: Bundle {
-        #if SWIFT_PACKAGE
+        #if SWIFT_PACKAGE && SWIFT_MODULE_RESOURCE_BUNDLE_AVAILABLE
         return .module
         #else
         let candidates = [
