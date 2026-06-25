@@ -1,0 +1,91 @@
+name: Publish CocoaPods
+
+on:
+  push:
+    tags:
+      - "ErxesMessengerSDK-*"
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish, for example 0.30.14"
+        required: true
+        type: string
+
+jobs:
+  publish:
+    name: Publish ErxesMessengerSDK
+    runs-on: macos-15
+    permissions:
+      contents: read
+
+    env:
+      PODSPEC_PATH: ErxesMessengerSDK.podspec
+      POD_NAME: ErxesMessengerSDK
+      COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: |
+          if [ -d /Applications/Xcode_16.3.app ]; then
+            sudo xcode-select -s /Applications/Xcode_16.3.app
+          fi
+          xcodebuild -version
+
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods --no-document
+          pod --version
+
+      - name: Validate release version
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "release" ]; then
+            TAG_NAME="${{ github.event.release.tag_name }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG_NAME="${POD_NAME}-${{ inputs.version }}"
+          else
+            TAG_NAME="${GITHUB_REF_NAME}"
+          fi
+
+          git fetch --tags origin
+          git checkout --detach "${TAG_NAME}"
+
+          SPEC_VERSION="$(ruby -e "require 'cocoapods'; puts Pod::Specification.from_file(ENV.fetch('PODSPEC_PATH')).version")"
+          EXPECTED_TAG="${POD_NAME}-${SPEC_VERSION}"
+
+          echo "Podspec version: ${SPEC_VERSION}"
+          echo "Release tag: ${TAG_NAME}"
+          echo "Expected tag: ${EXPECTED_TAG}"
+
+          if [ "${TAG_NAME}" != "${EXPECTED_TAG}" ]; then
+            echo "Tag must match podspec version: ${EXPECTED_TAG}" >&2
+            exit 1
+          fi
+
+          git rev-parse "${EXPECTED_TAG}^{commit}" >/dev/null
+
+      - name: Build Swift package
+        run: xcodebuild -scheme MessengerSDK -destination generic/platform=iOS build
+
+      - name: Lint podspec
+        run: pod lib lint "$PODSPEC_PATH" --allow-warnings
+
+      - name: Publish podspec
+        run: |
+          set -euo pipefail
+
+          if [ -z "${COCOAPODS_TRUNK_TOKEN:-}" ]; then
+            echo "Missing COCOAPODS_TRUNK_TOKEN repository secret." >&2
+            exit 1
+          fi
+
+          pod trunk me
+          pod trunk push "$PODSPEC_PATH" --allow-warnings

@@ -114,7 +114,7 @@ Add the SDK to your app target in `ios/Podfile`:
 target 'Runner' do
   use_frameworks!
 
-  pod 'ErxesSDK', '~> 0.30.14'
+  pod 'ErxesMessengerSDK', '0.30.14'
 end
 ```
 
@@ -129,6 +129,19 @@ Import the SDK the same way for both dependency managers:
 ```swift
 import MessengerSDK
 ```
+
+### Publishing CocoaPods
+
+CocoaPods publishing is automated with GitHub Actions. Add a repository secret named `COCOAPODS_TRUNK_TOKEN` using a CocoaPods trunk account that owns `ErxesMessengerSDK`.
+
+To publish a version, update `ErxesMessengerSDK.podspec`, create a matching tag, and push it:
+
+```sh
+git tag ErxesMessengerSDK-0.30.14
+git push origin ErxesMessengerSDK-0.30.14
+```
+
+The workflow also runs when a GitHub Release is published with the same tag name. The tag must match the podspec version exactly: `ErxesMessengerSDK-<version>`.
 
 ## Getting Started
 

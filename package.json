@@ -7,7 +7,7 @@
   "files": [
     "src",
     "ios",
-    "react-native-erxes-sdk.podspec",
+    "ErxesMessengerSDK.podspec",
     "!ios/build"
   ],
   "keywords": ["react-native", "ios", "erxes", "messenger", "chat"],
