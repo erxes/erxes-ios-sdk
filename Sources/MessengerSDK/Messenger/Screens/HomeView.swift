@@ -306,7 +306,7 @@ struct HomeView: View {
                                 UIApplication.shared.open(url)
                             }
                         } label: {
-                            Image(pair.name, bundle: .module)
+                            Image(pair.name, bundle: .messengerSDKResources)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 28, height: 28)
@@ -318,7 +318,7 @@ struct HomeView: View {
                 // Fallback: show all icons greyed out when no links configured
                 HStack(spacing: 14) {
                     ForEach(["facebook", "instagram", "x", "youtube"], id: \.self) { name in
-                        Image(name, bundle: .module)
+                        Image(name, bundle: .messengerSDKResources)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 28, height: 28)

@@ -19,6 +19,9 @@ erxes iOS SDK is a secure, lightweight, and customizable iOS SDK that lets you e
   <a href="#">
     <img alt="SPM Compatible" src="https://img.shields.io/badge/SPM-compatible-brightgreen">
   </a>
+  <a href="#">
+    <img alt="CocoaPods Compatible" src="https://img.shields.io/badge/CocoaPods-compatible-brightgreen">
+  </a>
   <a href="https://discord.com/invite/aaGzy3gQK5">
     <img alt="Discord" src="https://img.shields.io/badge/Discord-Community-blueviolet">
   </a>
@@ -63,15 +66,23 @@ erxes iOS SDK is a secure, lightweight, and customizable iOS SDK that lets you e
 **Swift:**
 - Swift 5.9+
 
-**Dependencies (resolved via SPM):**
-- [Apollo iOS](https://github.com/apollographql/apollo-ios) `>= 1.0.0`
-- [SDWebImageSwiftUI](https://github.com/SDWebImage/SDWebImageSwiftUI) `>= 3.0.0`
+**Dependency managers:**
+- Swift Package Manager
+- CocoaPods
 
 **erxes backend:**
 - A running erxes instance with a configured Messenger integration
 - Your `integrationId` and server URL from the erxes admin panel
 
 ## Installation
+
+This SDK supports both Swift Package Manager and CocoaPods.
+
+For new Flutter projects using Flutter 3.44 or newer, Swift Package Manager is used automatically.
+
+For existing Flutter projects that still use CocoaPods, no migration is required. The SDK also provides CocoaPods support.
+
+You do not need to run `pod deintegrate` unless you intentionally want to migrate your whole iOS project to Swift Package Manager.
 
 ### Swift Package Manager
 
@@ -93,6 +104,30 @@ targets: [
         dependencies: ["MessengerSDK"]
     )
 ]
+```
+
+### CocoaPods
+
+Add the SDK to your app target in `ios/Podfile`:
+
+```ruby
+target 'Runner' do
+  use_frameworks!
+
+  pod 'ErxesSDK', '~> 0.30.14'
+end
+```
+
+Then install pods from the `ios` directory:
+
+```sh
+pod install
+```
+
+Import the SDK the same way for both dependency managers:
+
+```swift
+import MessengerSDK
 ```
 
 ## Getting Started

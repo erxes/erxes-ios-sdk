@@ -19,7 +19,7 @@ struct WelcomeMessageView: View {
                 )
                 .frame(width: 32, height: 32)
                 .overlay {
-                    Image("bot", bundle: .module)
+                    Image("bot", bundle: .messengerSDKResources)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 20, height: 20)

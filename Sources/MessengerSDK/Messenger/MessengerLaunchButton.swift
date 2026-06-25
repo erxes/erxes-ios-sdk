@@ -69,7 +69,7 @@ public struct MessengerLaunchButton: View {
                     .frame(width: size, height: size)
 
                 // Glyph at ~55 % of the button size so it has breathing room
-                Image("glyph", bundle: .module)
+                Image("glyph", bundle: .messengerSDKResources)
                     .resizable()
                     .scaledToFit()
                     .frame(width: size * 0.55, height: size * 0.55)
