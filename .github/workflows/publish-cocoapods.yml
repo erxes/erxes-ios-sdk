@@ -33,8 +33,11 @@ jobs:
 
       - name: Select Xcode
         run: |
-          if [ -d /Applications/Xcode_16.3.app ]; then
-            sudo xcode-select -s /Applications/Xcode_16.3.app
+          # LiquidGlass.swift references the iOS 26 SDK (glassEffect / GlassEffectContainer),
+          # so the build must use Xcode 26 even though those APIs are runtime-gated.
+          XCODE_APP="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -n1)"
+          if [ -n "$XCODE_APP" ]; then
+            sudo xcode-select -s "$XCODE_APP"
           fi
           xcodebuild -version
 
